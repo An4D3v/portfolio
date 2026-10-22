@@ -658,8 +658,14 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     if (modo === 'visual') aoMostrarVisual(id, painel);
   }
 
-  function renderEditor() {
+  // Fechar ou reordenar outra aba não pode recriar o conteúdo aberto: a
+  // página da extensão refaria o fade de entrada e recarregaria o avatar.
+  let conteudoNaTela = '';
+  function renderEditor({ forcar = false } = {}) {
     const id = estado.ativa;
+    const chave = id ? `${id}|${modoDe(id)}|${estado.dividido}` : 'vazio';
+    if (!forcar && chave === conteudoNaTela) return;
+    conteudoNaTela = chave;
     esconderDica();
     if (!id) {
       renderVazio();
@@ -1138,13 +1144,13 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     estado.minimapa = !estado.minimapa;
     guarda.gravar('ana-minimapa', estado.minimapa ? 'on' : 'off');
     atualizarMinimapa();
-    if (estado.ativa === 'config') renderEditor();
+    if (estado.ativa === 'config') renderEditor({ forcar: true });
     if (!mq.largo.matches) notificar({ texto: 'O minimapa aparece no código em telas a partir de 1100 px de largura.' });
   }
 
   function alternarQuebra() {
     estado.quebra = !quebraAtiva();
-    if (estado.ativa === 'config') renderEditor();
+    if (estado.ativa === 'config') renderEditor({ forcar: true });
     el.editor.classList.toggle('quebra', el.editor.dataset.modo === 'codigo' && quebraAtiva());
     atualizarMinimapa();
   }
@@ -1847,7 +1853,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     estado.tema = t;
     guarda.gravar('ana-tema', t);
     if (mudou) registrar(`tema de cores: ${TEMAS[t].nome}`);
-    if (estado.ativa === 'config') renderEditor();
+    if (estado.ativa === 'config') renderEditor({ forcar: true });
   }
   const itensTema = () => [
     ...Object.entries(TEMAS).map(([k, t]) => ({ rotulo: t.nome, check: estado.tema === k, fn: () => aplicarTema(k) })),
