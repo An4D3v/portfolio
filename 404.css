@@ -1,0 +1,95 @@
+/* Página 404 no visual do VS Code (Dark Modern), para links quebrados do portfólio */
+:root {
+  --fundo: #1f1f1f;
+  --barra: #181818;
+  --borda: #2b2b2b;
+  --texto: #cccccc;
+  --texto-fraco: #9d9d9d;
+  --marca: #6d59c0;
+  --botao: #0078d4;
+  --botao-hover: #026ec1;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  display: grid;
+  grid-template-rows: 35px 35px 1fr 22px;
+  background: var(--fundo);
+  color: var(--texto);
+  font: 13px/1.5 "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+.barra {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px 0 0;
+  background: var(--barra);
+  border-bottom: 1px solid var(--borda);
+}
+.logo { display: grid; place-items: center; width: 46px; height: 35px; }
+.logo svg { width: 22px; height: 22px; }
+.floco { stroke: #8be9fd; }
+.floco-centro { fill: #6b3fd4; }
+.busca {
+  margin: 0 auto;
+  width: min(420px, 60vw);
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+  color: var(--texto-fraco);
+  background: #222222;
+}
+.abas { display: flex; background: var(--barra); border-bottom: 1px solid var(--borda); }
+.aba {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  background: var(--fundo);
+  border-top: 1px solid var(--botao);
+  font-style: italic;
+}
+.aba svg { width: 16px; height: 16px; }
+.editor { display: grid; place-items: center; padding: 24px 16px; }
+.mensagem { max-width: 560px; text-align: center; }
+.titulo { margin: 0 0 6px; font-size: 14px; }
+.caminho { margin: 0 0 18px; color: var(--texto-fraco); }
+code { font: 13px "Cascadia Code", Consolas, monospace; color: #ce9178; word-break: break-all; }
+.botoes { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.botao {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 12px;
+  border-radius: 2px;
+  background: #313131;
+  color: var(--texto);
+  text-decoration: none;
+}
+.botao:hover { background: #3c3c3c; }
+.botao.primario { background: var(--botao); color: #ffffff; }
+.botao.primario:hover { background: var(--botao-hover); }
+.botao:focus-visible,
+.logo:focus-visible { outline: 1px solid #0078d4; outline-offset: 2px; }
+.status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px 0 0;
+  background: var(--barra);
+  border-top: 1px solid var(--borda);
+  color: var(--texto-fraco);
+  font-size: 12px;
+}
+.remoto {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 0 10px;
+  background: var(--marca);
+  color: #ffffff;
+  font-weight: 600;
+}

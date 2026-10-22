@@ -1293,6 +1293,10 @@ textarea.campo { height: auto; min-height: 60px; resize: vertical; line-height: 
 .cartao-links a { display: inline-flex; align-items: center; gap: 4px; }
 .cartao-links .ic { width: 14px; height: 14px; }
 
+/* a dica da prévia muda conforme o aparelho: mouse ou dedo (não a largura da tela) */
+@media (hover: hover) { .so-toque { display: none; } }
+@media (hover: none) { .so-mouse { display: none; } }
+
 /* prévia do app no cartão: o vídeo fica atrás do conteúdo, com uma sombra que sobe de baixo */
 .cartao { position: relative; overflow: hidden; isolation: isolate; }
 .cartao-previa {
