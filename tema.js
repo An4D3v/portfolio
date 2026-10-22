@@ -10,3 +10,20 @@
     }
   } catch (e) { /* armazenamento bloqueado: fica o Dark Modern */ }
 })();
+
+// Idioma: ?lang= no endereço > escolha salva > idioma do navegador (pt → português, o resto → inglês).
+(function () {
+  var idioma = null;
+  try {
+    var pedido = new URLSearchParams(location.search).get('lang');
+    if (pedido === 'en' || pedido === 'pt') {
+      idioma = pedido;
+      localStorage.setItem('ana-idioma', pedido);
+    } else {
+      idioma = localStorage.getItem('ana-idioma');
+    }
+  } catch (e) { /* armazenamento bloqueado: decide pelo navegador */ }
+  if (idioma !== 'en' && idioma !== 'pt') idioma = /^pt\b/i.test(navigator.language || '') ? 'pt' : 'en';
+  document.documentElement.setAttribute('data-idioma', idioma);
+  document.documentElement.setAttribute('lang', idioma === 'en' ? 'en' : 'pt-BR');
+})();

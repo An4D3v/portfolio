@@ -21,6 +21,9 @@
   };
   const norm = (s) => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   const normPorChar = (s) => s.split('').map((c) => norm(c)[0] || c).join('');
+  // Idioma da página (o tema.js decide antes de pintar): cada texto visível vem em par.
+  const EN = html.dataset.idioma === 'en';
+  const L = (pt, en) => (EN ? en : pt);
 
   const CURVA = 'cubic-bezier(0.2, 0, 0, 1)';
   const CURVA_SAI = 'cubic-bezier(0.4, 0, 1, 1)';
@@ -296,6 +299,7 @@ export function conversar(): void {
 {
   "workbench.colorTheme": "${TEMAS[estado.tema].nome}",
   "workbench.iconTheme": "material-icon-theme",
+  "workbench.displayLanguage": "pt-br",
   "editor.fontFamily": "Cascadia Code, Consolas, monospace",
   "editor.minimap.enabled": ${estado.minimapa},
   "editor.wordWrap": "${quebraAtiva() ? 'on' : 'off'}",
@@ -339,8 +343,235 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     pacote: { dependencies: 'Zero dependências: este portfólio é HTML, CSS e JavaScript puros, sem framework.' },
     config: {
       'workbench.colorTheme': 'Dá para trocar pela paleta: Ctrl+Shift+P → Preferências: Tema de Cores.',
+      'workbench.displayLanguage': 'Troque entre português e inglês pela barra de status (canto inferior direito) ou pela paleta.',
       'editor.minimap.enabled': 'O minimapa aparece no código em telas largas: clique ou arraste nele para rolar.',
       'terminal.integrated.defaultProfile.windows': 'O terminal deste portfólio imita um PowerShell: abra com Ctrl+J e digite help.',
+    },
+  };
+
+  // Versão em inglês do código-fonte de cada arquivo (o FONTES acima é o português).
+  const FONTES_EN = {
+    sobre: () => `# Ana Neves
+
+> **Backend, data and AI in production.**
+> Software Developer with her own products live · São Paulo, Brazil · [ana@dev](https://github.com/An4D3v)
+
+I build pipelines that move millions of records, AI bots that
+answer in Teams and apps that real people use every day.
+I like systems that explain themselves: idempotent, measured and
+with tests that know how to fail.
+
+## Numbers
+
+- **4.5M+** records processed by the pipelines I maintain
+- **70+** people using the apps I built and run
+- **28** integration tests against a real SQL Server, in .NET microservices
+- **−91%** API quota errors with smart load orchestration
+
+## Live products
+
+- **Rumo** — routine companion (PWA, 40+ users): https://rumo-amber.vercel.app
+- **AlienFinanças** — personal finance with AI receipt reading (20+ users): https://financas-app-ruby.vercel.app
+- **Notas Fiscais** — .NET microservices on Azure, 28 tests: https://notas-fiscais-ana.vercel.app
+- **Vale do Trevo** — 2D game in plain canvas: https://vale-do-trevo.vercel.app
+
+## Tabs in this editor
+
+1. \`projects.tsx\` — the products, with links
+2. \`experience.cs\` — career path and behind the scenes
+3. \`stack.json\` — what I work with
+4. \`contact.ts\` — let's talk?
+
+[GitHub](https://github.com/An4D3v) · [LinkedIn](https://www.linkedin.com/in/anad3v/) · [Email](mailto:ana-neves98@outlook.com)
+
+<!-- while (true) { learn(); build(); ship(); } -->`,
+
+    projetos: () => `// projects.tsx — built, shipped and run by me, from database to deploy.
+
+type Project = {
+  name: string;
+  status: 'in production' | 'open source' | 'playable';
+  summary: string;
+  users?: string;
+  tests?: number;
+  stack: string[];
+  links: Record<string, string>;
+};
+
+export const projects: Project[] = [
+  {
+    name: 'Rumo',
+    status: 'in production',
+    summary: 'Routine companion: Web Push, MFA (TOTP) and its own admin panel.',
+    users: '40+',
+    stack: ['React', 'TypeScript', 'Supabase', 'Vercel'],
+    links: { app: 'https://rumo-amber.vercel.app' },
+  },
+  {
+    name: 'AlienFinanças',
+    status: 'in production',
+    summary: 'Personal finance: a photo of the receipt becomes AI-categorized items.',
+    users: '20+',
+    stack: ['React', 'TypeScript', 'Supabase', 'AI (LLM)'],
+    links: { app: 'https://financas-app-ruby.vercel.app' },
+  },
+  {
+    name: 'Notas Fiscais — microservices',
+    status: 'in production',
+    summary: 'Two .NET services: atomic UPDATE, idempotency and failure recovery.',
+    tests: 28,
+    stack: ['C# / .NET 8', 'Angular', 'EF Core', 'SQL Server'],
+    links: { app: 'https://notas-fiscais-ana.vercel.app', code: 'https://github.com/An4D3v/notas-fiscais-microsservicos' },
+  },
+  {
+    name: 'Vale do Trevo',
+    status: 'playable',
+    summary: 'Top-down 2D game in plain canvas, no engine. Art by my friend, code by me.',
+    stack: ['TypeScript', 'Vite', 'Canvas'],
+    links: {
+      play: 'https://vale-do-trevo.vercel.app',
+      code: 'https://github.com/An4D3v/vale-do-trevo',
+    },
+  },
+];
+
+export function Projects() {
+  return (
+    <Grid>
+      {projects.map((p) => (
+        <Card key={p.name} {...p} />
+      ))}
+    </Grid>
+  );
+}`,
+
+    experiencia: () => `// experience.cs — from data collection to owning the platform.
+
+namespace AnaNeves.Portfolio;
+
+public record Stage(string Where, string Role, string Summary);
+public record Delivery(string Name, string Result);
+
+public static class Experience
+{
+    public static readonly Stage[] Path =
+    {
+        new("Law firm, São Paulo", "first and only developer",
+            "Platform built from scratch: legal ERP integration, data-collection robots and AI bots."),
+        new("Own products", "in parallel",
+            "Three apps live: PWA, Web Push, MFA, RLS, AI document reading."),
+        new("Jusbrasil", "data",
+            "Large-scale data collection with crawlers."),
+    };
+
+    // private code, public results
+    public static readonly Delivery[] BehindTheScenes =
+    {
+        new("Integration pipelines", "7+ incremental loads · 4.5M+ records · idempotent MERGE"),
+        new("Load orchestration", "−66% API calls · −91% quota errors"),
+        new("AI bots in Teams", "SSO with Entra ID · Adaptive Cards · real users"),
+        new("AI classification", "LLM in production · accuracy measured against a human answer key"),
+        new("Migration to Azure SQL", "~292k records · zero mismatches"),
+        new("Automation & RPA", "Python + Selenium · −65% manual effort"),
+    };
+
+    public static string Mentoring => "I mentor an intern on the technical side";
+}`,
+
+    stack: () => `{
+  "backend": ["C#", ".NET 8", "Python", "REST APIs", "OAuth2", "EF Core"],
+  "cloud": [
+    "Azure App Service", "Azure SQL", "Azure Automation",
+    "Key Vault", "Application Insights", "Entra ID", "Microsoft Graph"
+  ],
+  "data": ["SQL Server", "T-SQL", "PostgreSQL", "Supabase", "incremental ETL", "reconciliation"],
+  "front": ["Angular", "React", "TypeScript", "Vite", "PWA"],
+  "ai": ["LLMs in production", "Bot Framework", "prompt engineering", "accuracy measurement"],
+  "automation": ["Python", "Selenium", "runbooks"],
+  "devops": ["GitHub Actions", "OIDC", "CI/CD with test gates", "Vercel", "observability"]
+}`,
+
+    contato: () => `// contact.ts — to talk about .NET backend, data and applied AI.
+
+export const contact = {
+  email: 'ana-neves98@outlook.com',
+  github: 'https://github.com/An4D3v',
+  linkedin: 'https://www.linkedin.com/in/anad3v/',
+  base: 'São Paulo, Brazil',
+} as const;
+
+export function talk(): void {
+  window.location.href = \`mailto:\${contact.email}\`;
+}
+
+// while (true) { learn(); build(); ship(); }`,
+
+    pacote: () => `{
+  "name": "portfolio-ana-neves",
+  "version": "1.0.0",
+  "description": "A portfolio shaped like a code editor.",
+  "author": "Ana Neves <ana-neves98@outlook.com>",
+  "homepage": "https://github.com/An4D3v",
+  "scripts": {
+    "dev": "learn",
+    "build": "build",
+    "deploy": "ship"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}`,
+
+    config: () => `// .vscode/settings.json — this editor's preferences
+{
+  "workbench.colorTheme": "${TEMAS[estado.tema].nome}",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.displayLanguage": "en",
+  "editor.fontFamily": "Cascadia Code, Consolas, monospace",
+  "editor.minimap.enabled": ${estado.minimapa},
+  "editor.wordWrap": "${quebraAtiva() ? 'on' : 'off'}",
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "ana.focus": [".NET backend", "data", "applied AI"]
+}`,
+
+    atalhos: () => `# Keyboard shortcuts
+
+They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
+
+- \`Ctrl+Shift+P\` or \`F1\` — command palette
+- \`Ctrl+P\` — open a file by name
+- \`Ctrl+J\` — show or hide the terminal
+- \`Ctrl+B\` — show or hide the side bar
+- \`Ctrl+Shift+E\` — file explorer
+- \`Ctrl+Shift+F\` — search across all files
+- \`Ctrl+Shift+G\` — source control (repositories and a message)
+- \`Ctrl+Shift+X\` — extensions (the stack)
+- \`Alt+1\` to \`Alt+5\` — jump straight to each tab
+- \`Alt+Z\` — word wrap in code
+- \`F5\` — run and debug
+- \`Esc\` — closes the palette, menus and drawer
+
+## In the terminal
+
+- \`help\` lists the commands
+- \`Tab\` completes, \`↑\` and \`↓\` walk the history, \`Esc\` leaves the terminal`,
+  };
+
+  const DICAS_EN = {
+    projetos: {
+      users: 'Real accounts registered in the app.',
+      tests: 'Integration tests that run against a real SQL Server.',
+    },
+    experiencia: {
+      BehindTheScenes: 'Work projects: the code is private, so only the results show up.',
+      Mentoring: 'Day-to-day technical mentoring of an intern.',
+    },
+    contato: { talk: "Opens your email client with Ana's address already filled in." },
+    pacote: { dependencies: 'Zero dependencies: this portfolio is plain HTML, CSS and JavaScript, no framework.' },
+    config: {
+      'workbench.colorTheme': 'You can switch it from the palette: Ctrl+Shift+P → Preferences: Color Theme.',
+      'workbench.displayLanguage': 'Switch between English and Portuguese from the status bar (bottom right) or the palette.',
+      'editor.minimap.enabled': 'The minimap shows up in code on wide screens: click or drag it to scroll.',
+      'terminal.integrated.defaultProfile.windows': "This portfolio's terminal mimics PowerShell: open it with Ctrl+J and type help.",
     },
   };
 
@@ -350,6 +581,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     { nome: 'image-collector', ling: 'Python', desc: 'Integração com Unsplash e Google Drive via OAuth 2.0' },
     { nome: 'An4D3v', ling: 'Markdown', desc: 'README do perfil no GitHub' },
   ];
+  const REPOS_EN = ['Brazilian invoices: .NET microservices + Angular', '2D game in plain canvas', 'Unsplash and Google Drive integration via OAuth 2.0', 'GitHub profile README'];
 
   const EXTENSOES = [
     { ic: 'cs', nome: 'C# / .NET 8', desc: 'Pipelines de integração, APIs e microsserviços.' },
@@ -513,19 +745,175 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       privado: true,
     },
   };
+  // Inglês das extensões: o que muda de idioma em EXTENSOES e DETALHES_TEC.
+  const TEC_EN = {
+    cs: {
+      desc: 'Integration pipelines, APIs and microservices.',
+      uso: [
+        ['database', 'Integration pipelines', '7+ incremental loads from a legal ERP into Azure SQL, with idempotent MERGE and watermark.', 'experiencia|Integration pipelines'],
+        ['server', 'Notas Fiscais — microservices', 'Stock and Billing in .NET 8: atomic UPDATE against concurrency, idempotency and failure recovery. Live on Azure App Service.', 'projetos#pj-notas'],
+      ],
+      numeros: [
+        { alvo: 4.5, casas: 1, depois: 'M+', final: '4.5M+', texto: 'records in the integration pipelines', ir: 'experiencia|4.5M+ records' },
+        { alvo: 28, final: '28', texto: 'integration tests against a real SQL Server', ir: 'projetos#pj-notas' },
+      ],
+      recursos: ['.NET 8', 'ASP.NET Core Minimal APIs', 'Entity Framework Core', 'Polly (HTTP resilience)', 'FluentValidation', 'Serilog', 'xUnit', 'Swagger / OpenAPI', 'REST APIs', 'OAuth2'],
+      links: [['Open Notas Fiscais', APPS.notas], ['Code on GitHub', REPO_NOTAS]],
+    },
+    az: {
+      desc: 'App Service, Azure SQL, Automation, Key Vault, Application Insights.',
+      uso: [
+        ['server', 'Notas Fiscais live', 'Both services run on App Service and talk to Azure SQL through a managed identity, with no password.', 'projetos#pj-notas'],
+        ['database', 'Integration pipelines', '7+ incremental loads from a legal ERP into Azure SQL.', 'experiencia|Integration pipelines'],
+        ['sync', 'Migration to Azure SQL', '~292k records migrated with source = target reconciliation.', 'experiencia|Migration to Azure SQL'],
+      ],
+      numeros: [
+        { alvo: 292, antes: '~', depois: 'k', final: '~292k', texto: 'records migrated to Azure SQL', ir: 'experiencia|Migration to Azure SQL' },
+        { alvo: 0, final: '0', texto: 'mismatches in the migration reconciliation', ir: 'experiencia|zero mismatches' },
+      ],
+      recursos: ['App Service', 'Azure SQL', 'Azure Automation', 'Key Vault', 'Application Insights', 'Entra ID', 'Microsoft Graph', 'managed identity'],
+      links: [['Open Notas Fiscais', APPS.notas]],
+    },
+    sql: {
+      desc: 'Idempotent MERGE, watermark and reconciliation.',
+      categorias: ['Data'],
+      uso: [
+        ['database', 'Integration pipelines', 'Idempotent MERGE with watermark: reprocessing a load never duplicates a record.', 'experiencia|Integration pipelines'],
+        ['sync', 'Migration to Azure SQL', '~292k records with source = target reconciliation: zero mismatches.', 'experiencia|Migration to Azure SQL'],
+        ['server', 'Notas Fiscais — microservices', 'Stock checked and deducted in the same UPDATE: with 8 simultaneous orders on a stock of 1, only one goes through.', 'projetos#pj-notas'],
+      ],
+      numeros: [
+        { alvo: 4.5, casas: 1, depois: 'M+', final: '4.5M+', texto: 'records in the incremental loads', ir: 'experiencia|4.5M+ records' },
+        { alvo: 292, antes: '~', depois: 'k', final: '~292k', texto: 'records migrated with no mismatches', ir: 'experiencia|Migration to Azure SQL' },
+      ],
+      recursos: ['SQL Server', 'T-SQL', 'Azure SQL', 'MERGE', 'incremental ETL', 'watermark', 'reconciliation', 'PostgreSQL'],
+      links: [['Microservices code', REPO_NOTAS]],
+    },
+    py: {
+      desc: 'Selenium robots and data scripts.',
+      categorias: ['Automation'],
+      uso: [
+        ['sync', 'Automation & RPA', 'Python + Selenium robots collecting regulatory reports for multiple clients.', 'experiencia|Automation'],
+      ],
+      numeros: [
+        { alvo: 65, antes: '−', depois: '%', final: '−65%', texto: 'manual effort with the robots', ir: 'experiencia|−65%' },
+      ],
+    },
+    ia: {
+      nome: 'LLMs in production',
+      desc: 'Legal notice classifier and receipt reading.',
+      categorias: ['AI'],
+      uso: [
+        ['sparkle', 'Legal notice classification', 'LLM classifier in production, with accuracy measured against a human answer key and shadow runs before promoting a new model.', 'experiencia|AI classification'],
+        ['comment-discussion', 'AI bots in Teams', 'Company-wide AI hub with SSO (Entra ID) and legal case lookup with Adaptive Cards, with real users.', 'experiencia|AI bots in Teams'],
+        ['rocket', 'AlienFinanças', 'A photo of the receipt becomes AI-categorized items.', 'projetos#pj-alien'],
+        ['server', 'Notas Fiscais', 'Build an invoice from text: the AI suggests catalog items, the server checks every code and the person decides. Without an API key, an offline mode kicks in.', 'projetos#pj-notas'],
+      ],
+      recursos: ['LLMs in production', 'Bot Framework', 'Adaptive Cards', 'prompt engineering', 'structured output (JSON)', 'accuracy measurement', 'shadow runs', 'Gemini'],
+      links: [['Open AlienFinanças', APPS.alien], ['Open Notas Fiscais', APPS.notas]],
+    },
+    id: {
+      desc: 'SSO in the bots and passwordless authentication.',
+      categorias: ['Identity', 'Cloud'],
+      uso: [
+        ['comment-discussion', 'AI bots in Teams', 'SSO with Entra ID: anyone already in Teams gets into the bot with no extra sign-in.', 'experiencia|AI bots in Teams'],
+        ['sync', 'Migration to Azure SQL', 'Passwordless authentication via Entra ID.', 'experiencia|Migration to Azure SQL'],
+        ['server', 'Notas Fiscais live', 'Each service signs in to the database with its own managed identity, with no password in configuration.', 'projetos#pj-notas'],
+      ],
+      numeros: [
+        { alvo: 0, final: '0', texto: 'database passwords in the Notas Fiscais configuration', ir: 'projetos#pj-notas' },
+      ],
+      recursos: ['Entra ID', 'SSO', 'managed identity', 'Microsoft Graph', 'OAuth2', 'OIDC'],
+      links: [['Microservices code', REPO_NOTAS]],
+    },
+    ng: {
+      desc: 'Front end of the invoicing system.',
+      categorias: ['Front end'],
+      uso: [
+        ['server', 'Notas Fiscais — front end', 'Angular 22 without zone.js: screen state lives in signals.', 'projetos#pj-notas'],
+        ['search', 'Product search', 'RxJS with debounceTime, distinctUntilChanged and switchMap: typing fast does not fire one search per letter.', 'projetos#pj-notas'],
+        ['pass', 'Live service health', 'An RxJS timer polls both services and lights up the indicator at the top when one of them goes down.', 'projetos#pj-notas'],
+      ],
+      recursos: ['Angular 22', 'signals', 'RxJS', 'Angular Material', 'HTTP interceptors', 'TypeScript'],
+      links: [['Open Notas Fiscais', APPS.notas], ['Code on GitHub', REPO_NOTAS]],
+    },
+    re: {
+      desc: 'Rumo and AlienFinanças.',
+      categorias: ['Front end'],
+      uso: [
+        ['rocket', 'Rumo', 'Routine companion: PWA with Web Push, MFA (TOTP) and its own admin panel. 40+ users.', 'projetos#pj-rumo'],
+        ['rocket', 'AlienFinanças', 'Personal finance with AI receipt reading. 20+ users.', 'projetos#pj-alien'],
+        ['play', 'Vale do Trevo', '2D game in TypeScript and plain canvas, no engine.', 'projetos#pj-trevo'],
+      ],
+      numeros: [
+        { alvo: 70, depois: '+', final: '70+', texto: 'people using Rumo and AlienFinanças', ir: 'projetos#pj-rumo, #pj-alien' },
+        { alvo: 3, final: '3', texto: 'TypeScript apps live', ir: 'projetos#pj-rumo, #pj-alien, #pj-trevo' },
+      ],
+      links: [['Open Rumo', APPS.rumo], ['Open AlienFinanças', APPS.alien], ['Play Vale do Trevo', APPS.trevo]],
+    },
+    sb: {
+      desc: 'Auth with MFA and Row Level Security in my own apps.',
+      categorias: ['Data', 'Auth'],
+      uso: [
+        ['rocket', 'Rumo', 'Sign-in with MFA (TOTP) through Supabase Auth.', 'projetos#pj-rumo'],
+        ['rocket', 'AlienFinanças', 'Row Level Security: each person only sees their own data.', 'projetos#pj-alien'],
+      ],
+      numeros: [
+        { alvo: 70, depois: '+', final: '70+', texto: 'people with accounts in the two apps', ir: 'projetos#pj-rumo, #pj-alien' },
+      ],
+      links: [['Open Rumo', APPS.rumo], ['Open AlienFinanças', APPS.alien]],
+    },
+    gh: {
+      desc: 'CI/CD with OIDC and a test gate.',
+      uso: [
+        ['database', 'Integration pipelines', 'CI/CD with OIDC: deploying to the cloud does not depend on a secret stored in the repository.', 'experiencia|Integration pipelines'],
+        ['pass', 'Test gate', 'Deploys only go ahead with green tests.', 'experiencia|Integration pipelines'],
+      ],
+      recursos: ['GitHub Actions', 'OIDC', 'CI/CD with test gates', 'Vercel', 'observability'],
+      links: [['Repositories on GitHub', GITHUB]],
+    },
+  };
+
+  // Versão em inglês: nomes de arquivo, textos e fontes trocados antes de montar a tela.
+  if (EN) {
+    ARQUIVOS.projetos.nome = 'projects.tsx';
+    ARQUIVOS.experiencia.nome = 'experience.cs';
+    ARQUIVOS.contato.nome = 'contact.ts';
+    ARQUIVOS.atalhos.nome = 'shortcuts.md';
+    ARQUIVOS.config.rotulo = 'JSON with Comments';
+    ARQUIVOS['img-programando'].rotulo = 'Animated WebP · 256 × 256';
+    ARQUIVOS['img-mini'].alt = "Ana's small pixel art avatar";
+    ARQUIVOS['img-acenando'].alt = 'Pixel art illustration of Ana waving';
+    ARQUIVOS['img-programando'].alt = 'Pixel art illustration of Ana coding and waving';
+    Object.assign(FONTES, FONTES_EN);
+    Object.assign(DICAS, DICAS_EN);
+    REPOS.forEach((r, i) => { r.desc = REPOS_EN[i]; });
+    EXTENSOES.forEach((x) => {
+      const { nome = x.nome, desc, ...detalhes } = TEC_EN[x.ic];
+      Object.assign(x, { nome, desc });
+      Object.assign(DETALHES_TEC[x.ic], detalhes);
+    });
+    // textos fixos do index.html: o inglês vem em data-en (conteúdo) e em data-en-<atributo>
+    $$('[data-en]').forEach((n) => { n.innerHTML = n.dataset.en; });
+    ['aria-label', 'title', 'placeholder', 'content', 'data-cmd'].forEach((attr) => {
+      $$(`[data-en-${attr}]`).forEach((n) => n.setAttribute(attr, n.getAttribute(`data-en-${attr}`)));
+    });
+  }
+
   // cada tecnologia vira um "arquivo" com visualização (a página) e código (o README.md dela)
+  const PASTA_EXT = L('extensoes', 'extensions');
   EXTENSOES.forEach((x) => {
     const id = `ext-${x.ic}`;
-    ARQUIVOS[id] = { nome: 'README.md', pasta: `extensoes/${DETALHES_TEC[x.ic].slug}`, icone: 'f-markdown', ling: 'md', rotulo: 'Markdown', inicial: 'visual', extensao: true, tecnologia: x.ic, titulo: x.nome };
+    ARQUIVOS[id] = { nome: 'README.md', pasta: `${PASTA_EXT}/${DETALHES_TEC[x.ic].slug}`, icone: 'f-markdown', ling: 'md', rotulo: 'Markdown', inicial: 'visual', extensao: true, tecnologia: x.ic, titulo: x.nome };
     FONTES[id] = () => mdTecnologia(x.ic);
   });
 
   const TITULOS_VISTA = {
-    explorer: 'Explorador',
-    busca: 'Pesquisar',
-    scm: 'Controle do Código-Fonte',
-    depurar: 'Executar e Depurar',
-    extensoes: 'Extensões',
+    explorer: L('Explorador', 'Explorer'),
+    busca: L('Pesquisar', 'Search'),
+    scm: L('Controle do Código-Fonte', 'Source Control'),
+    depurar: L('Executar e Depurar', 'Run and Debug'),
+    extensoes: L('Extensões', 'Extensions'),
   };
 
   /* ======================================================================
@@ -610,9 +998,9 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const curto = mq.celular.matches;
     if (modo === 'visual' && a.extensao) {
       const titulo = a.titulo || 'Ana Neves';
-      return { icone: 'f-extension', texto: curto ? titulo : `Extensão: ${titulo}`, it: true };
+      return { icone: 'f-extension', texto: curto ? titulo : `${L('Extensão', 'Extension')}: ${titulo}`, it: true };
     }
-    if (modo === 'visual' && !curto) return { icone: 'open-preview', texto: `Visualizar ${a.nome}` };
+    if (modo === 'visual' && !curto) return { icone: 'open-preview', texto: `${L('Visualizar', 'Preview')} ${a.nome}` };
     return { icone: a.icone, texto: a.nome };
   }
 
@@ -783,7 +1171,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
         const nova = idsAbas.length && !idsAbas.includes(id);
         return `<div class="aba${nova ? ' nova' : ''}" data-id="${id}" draggable="true">`
           + `<button class="aba-bt" type="button" data-id="${id}" title="${esc(caminho(id))}">${ic(r.icone)}<span class="rot${r.it ? ' it' : ''}">${esc(r.texto)}</span></button>`
-          + `<button class="aba-x" type="button" data-fechar="${id}" aria-label="Fechar ${esc(r.texto)}" title="Fechar"><span>${ic('close')}</span></button></div>`;
+          + `<button class="aba-x" type="button" data-fechar="${id}" aria-label="${L('Fechar', 'Close')} ${esc(r.texto)}" title="${L('Fechar', 'Close')}"><span>${ic('close')}</span></button></div>`;
       }).join('');
       $$('.aba', el.abas).forEach((a, i) => a.style.setProperty('--i', i));
       assinaturaAbas = assinatura;
@@ -813,12 +1201,12 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       painel.innerHTML = htmlTecnologia(a.tecnologia);
       painel.classList.remove('quebra');
     } else if (modo === 'visual') {
-      const tpl = d.getElementById(a.tpl);
+      const tpl = d.getElementById(EN ? `${a.tpl}-en` : a.tpl);
       painel.replaceChildren(tpl.content.cloneNode(true));
       painel.classList.remove('quebra');
     } else if (modo === 'imagem') {
       const src = mq.calmo.matches && a.parada ? a.parada : a.imagem;
-      painel.innerHTML = `<div class="visor"><img src="${src}" alt="${esc(a.alt)}" title="Clique para ampliar"></div>`;
+      painel.innerHTML = `<div class="visor"><img src="${src}" alt="${esc(a.alt)}" title="${L('Clique para ampliar', 'Click to zoom in')}"></div>`;
       painel.classList.remove('quebra');
     } else {
       painel.innerHTML = htmlCodigo(id);
@@ -856,12 +1244,12 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     el.btModo.setAttribute('aria-disabled', String(estado.dividido));
     const vendoCodigo = modo === 'codigo';
     el.btModo.innerHTML = ic(vendoCodigo ? 'open-preview' : 'go-to-file');
-    el.btModo.setAttribute('aria-label', vendoCodigo ? 'Abrir visualização' : 'Mostrar código-fonte');
-    el.btModo.title = vendoCodigo ? 'Abrir Visualização' : 'Mostrar Código-Fonte';
+    el.btModo.setAttribute('aria-label', vendoCodigo ? L('Abrir visualização', 'Open preview') : L('Mostrar código-fonte', 'Show source'));
+    el.btModo.title = vendoCodigo ? L('Abrir Visualização', 'Open Preview') : L('Mostrar Código-Fonte', 'Show Source');
     el.btDividir.hidden = false;
     el.btDividir.setAttribute('aria-disabled', String(!temVisual(id)));
     el.btDividir.setAttribute('aria-pressed', String(lado));
-    el.btDividir.title = temVisual(id) ? 'Abrir Visualização ao Lado' : 'Este arquivo não tem visualização';
+    el.btDividir.title = temVisual(id) ? L('Abrir Visualização ao Lado', 'Open Preview to the Side') : L('Este arquivo não tem visualização', 'This file has no preview');
     marcarLinha(1, 1);
     if (modo === 'imagem') el.stPos.textContent = '';
     atualizarMinimapa();
@@ -870,7 +1258,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
 
   function renderVazio() {
     el.editor.dataset.modo = 'vazio';
-    el.editor.setAttribute('aria-label', 'Editor vazio');
+    el.editor.setAttribute('aria-label', L('Editor vazio', 'Empty editor'));
     el.grupoLado.hidden = true;
     el.minimapa.hidden = true;
     el.btModo.hidden = true;
@@ -878,11 +1266,11 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     el.editor.innerHTML = `<div class="vazio">
       <svg class="vazio-logo" viewBox="-70 -70 140 140" aria-hidden="true"><path d="M0 -10L0 -62M-12 -26L0 -38L12 -26M-7 -49L0 -56L7 -49M8.66 -5L53.69 -31M16.52 -23.39L32.91 -19L28.52 -2.61M38.94 -30.56L48.5 -28L45.94 -18.44M8.66 5L53.69 31M28.52 2.61L32.91 19L16.52 23.39M45.94 18.44L48.5 28L38.94 30.56M0 10L0 62M12 26L0 38L-12 26M7 49L0 56L-7 49M-8.66 5L-53.69 31M-16.52 23.39L-32.91 19L-28.52 2.61M-38.94 30.56L-48.5 28L-45.94 18.44M-8.66 -5L-53.69 -31M-28.52 -2.61L-32.91 -19L-16.52 -23.39M-45.94 -18.44L-48.5 -28L-38.94 -30.56" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle r="6" fill="currentColor"/></svg>
       <dl>
-        <dt>Mostrar Todos os Comandos</dt><dd><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></dd>
-        <dt>Ir para o Arquivo</dt><dd><kbd>Ctrl</kbd>+<kbd>P</kbd></dd>
-        <dt>Alternar Terminal</dt><dd><kbd>Ctrl</kbd>+<kbd>J</kbd></dd>
+        <dt>${L('Mostrar Todos os Comandos', 'Show All Commands')}</dt><dd><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></dd>
+        <dt>${L('Ir para o Arquivo', 'Go to File')}</dt><dd><kbd>Ctrl</kbd>+<kbd>P</kbd></dd>
+        <dt>${L('Alternar Terminal', 'Toggle Terminal')}</dt><dd><kbd>Ctrl</kbd>+<kbd>J</kbd></dd>
       </dl>
-      <button class="botao" type="button" data-acao="reabrir">Reabrir as abas</button>
+      <button class="botao" type="button" data-acao="reabrir">${L('Reabrir as abas', 'Reopen the tabs')}</button>
     </div>`;
     el.estrutura.innerHTML = '';
   }
@@ -961,7 +1349,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   function itensMigalha(tipo, pasta) {
     let ids;
     if (tipo === 'raiz') ids = ARVORE.flatMap((n) => (typeof n === 'string' ? [n] : n.filhos));
-    else if (pasta.startsWith('extensoes')) ids = Object.keys(ARQUIVOS).filter((k) => ARQUIVOS[k].tecnologia);
+    else if (pasta.startsWith(PASTA_EXT)) ids = Object.keys(ARQUIVOS).filter((k) => ARQUIVOS[k].tecnologia);
     else if (pasta) ids = (ARVORE.find((n) => n.pasta === pasta) || { filhos: [] }).filhos;
     else ids = ARVORE.filter((n) => typeof n === 'string');
     return ids.map((k) => ({
@@ -1015,7 +1403,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   function renderStatus() {
     const id = estado.ativa;
     el.stLing.textContent = id ? ARQUIVOS[id].rotulo : '';
-    el.stEsp.textContent = `Espaços: ${id && ARQUIVOS[id].ling === 'cs' ? 4 : 2}`;
+    el.stEsp.textContent = `${L('Espaços', 'Spaces')}: ${id && ARQUIVOS[id].ling === 'cs' ? 4 : 2}`;
     el.app.classList.toggle('vendo-imagem', Boolean(id && ARQUIVOS[id].imagem));
   }
 
@@ -1066,7 +1454,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     }
     el.estrutura.innerHTML = itens.length
       ? itens.map((it) => `<li><button class="arvore-item ${it.sub ? 'n1' : 'n0'}" type="button" data-simbolo="${it.alvo}"><span class="sem-gira"></span>${ic('list-tree')}<span class="nome">${esc(it.nome)}</span></button></li>`).join('')
-      : '<li><p class="vazio-msg">Nenhum símbolo neste arquivo.</p></li>';
+      : `<li><p class="vazio-msg">${L('Nenhum símbolo neste arquivo.', 'No symbols found in this file.')}</p></li>`;
   }
   el.estrutura.addEventListener('click', (e) => {
     const b = e.target.closest('[data-simbolo]');
@@ -1078,7 +1466,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       if (alvo) rolarAte(el.editor, alvo);
     }
   });
-  el.linhaTempo.innerHTML = '<li><p class="vazio-msg">A linha do tempo da Ana está em <button class="link-bt" type="button" data-abrir="experiencia">experiencia.cs</button>.</p></li>';
+  el.linhaTempo.innerHTML = `<li><p class="vazio-msg">${L('A linha do tempo da Ana está em', "Ana's timeline is in")} <button class="link-bt" type="button" data-abrir="experiencia">${ARQUIVOS.experiencia.nome}</button>.</p></li>`;
 
   function rolarAte(conteiner, alvo) {
     const topo = alvo.getBoundingClientRect().top - conteiner.getBoundingClientRect().top + conteiner.scrollTop - 12;
@@ -1104,7 +1492,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     }
     render();
     if (linha) irParaLinha(linha, coluna || 1);
-    if (mudou) registrar(`aba aberta: ${caminho(id)}`);
+    if (mudou) registrar(`${L('aba aberta', 'tab opened')}: ${caminho(id)}`);
     if (mq.celular.matches) fecharGaveta();
   }
 
@@ -1331,7 +1719,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const foto = e.target.closest('.visor img');
     if (foto) {
       const ampliada = foto.parentElement.classList.toggle('zoom');
-      foto.title = ampliada ? 'Clique para reduzir' : 'Clique para ampliar';
+      foto.title = ampliada ? L('Clique para reduzir', 'Click to zoom out') : L('Clique para ampliar', 'Click to zoom in');
       return;
     }
     const ln = e.target.closest('.ln');
@@ -1450,7 +1838,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     guarda.gravar('ana-minimapa', estado.minimapa ? 'on' : 'off');
     atualizarMinimapa();
     if (estado.ativa === 'config') renderEditor({ forcar: true });
-    if (!mq.largo.matches) notificar({ texto: 'O minimapa aparece no código em telas a partir de 1100 px de largura.' });
+    if (!mq.largo.matches) notificar({ texto: L('O minimapa aparece no código em telas a partir de 1100 px de largura.', 'The minimap shows up in code on screens at least 1100 px wide.') });
   }
 
   function alternarQuebra() {
@@ -1465,7 +1853,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
      ====================================================================== */
   function aoMostrarVisual(id, raiz) {
     if ((id === 'sobre' || ARQUIVOS[id].tecnologia) && typeof window.iniciarExtensao === 'function') {
-      try { window.iniciarExtensao($('.ext', raiz) || raiz); } catch (erro) { registrar(`extensão: ${erro.message}`); }
+      try { window.iniciarExtensao($('.ext', raiz) || raiz); } catch (erro) { registrar(`${L('extensão', 'extension')}: ${erro.message}`); }
     }
     if (id === 'projetos') {
       checarApps(raiz);
@@ -1529,24 +1917,24 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   }
 
   /* ---------- página de extensão de cada tecnologia ---------- */
-  const botaoIr = (destino, rotulo) => `<button type="button" class="ext-ir" data-ir="${esc(destino)}" aria-label="${esc(rotulo)}: ver de onde vem" title="Ver de onde vem">${ic('go-to-file')}</button>`;
-  const linkFora = (rotulo, url, cls, icone = '') => `<a class="${cls}" href="${url}" target="_blank" rel="noopener">${icone}${esc(rotulo)}<span class="ext-sr"> (abre em nova aba)</span></a>`;
+  const botaoIr = (destino, rotulo) => `<button type="button" class="ext-ir" data-ir="${esc(destino)}" aria-label="${esc(rotulo)}: ${L('ver de onde vem', 'see where it comes from')}" title="${L('Ver de onde vem', 'See where it comes from')}">${ic('go-to-file')}</button>`;
+  const linkFora = (rotulo, url, cls, icone = '') => `<a class="${cls}" href="${url}" target="_blank" rel="noopener">${icone}${esc(rotulo)}<span class="ext-sr"> ${L('(abre em nova aba)', '(opens in a new tab)')}</span></a>`;
 
   function htmlTecnologia(k) {
     const x = EXTENSOES.find((e) => e.ic === k);
     const t = DETALHES_TEC[k];
-    const usos = `${t.uso.length} ${t.uso.length === 1 ? 'uso' : 'usos'}`;
+    const usos = `${t.uso.length} ${t.uso.length === 1 ? L('uso', 'use') : L('usos', 'uses')}`;
     const [principal, ...outros] = t.links;
     const acaoPrincipal = principal
       ? linkFora(principal[0], principal[1], 'ext-btn ext-btn-primario')
-      : '<button type="button" class="ext-btn ext-btn-primario" data-abrir="experiencia">Ver em experiencia.cs</button>';
+      : `<button type="button" class="ext-btn ext-btn-primario" data-abrir="experiencia">${L('Ver em', 'See in')} ${ARQUIVOS.experiencia.nome}</button>`;
     const numeros = t.numeros.length
-      ? `<h3 class="ext-md-h2">Números</h3><ul class="ext-numeros" role="list">${t.numeros.map((n) => `<li class="ext-num">`
+      ? `<h3 class="ext-md-h2">${L('Números', 'Numbers')}</h3><ul class="ext-numeros" role="list">${t.numeros.map((n) => `<li class="ext-num">`
         + `<span class="ext-num-valor" aria-hidden="true" data-ext-contar data-ext-alvo="${n.alvo}"${n.casas ? ` data-ext-casas="${n.casas}"` : ''}${n.antes ? ` data-ext-antes="${esc(n.antes)}"` : ''}${n.depois ? ` data-ext-depois="${esc(n.depois)}"` : ''}>${esc(n.final)}</span>`
         + `<span class="ext-sr">${esc(n.final)}</span><span class="ext-num-rotulo">${esc(n.texto)}</span>${n.ir ? botaoIr(n.ir, `${n.final} ${n.texto}`) : ''}</li>`).join('')}</ul>`
       : '';
     const nota = t.privado
-      ? `<p class="ext-nota">${ic('info')}<span>Parte disso é código privado do trabalho: aparecem só os resultados, como em <button type="button" class="ext-arquivo" data-abrir="experiencia">experiencia.cs</button>.</span></p>`
+      ? `<p class="ext-nota">${ic('info')}<span>${L('Parte disso é código privado do trabalho: aparecem só os resultados, como em', 'Part of this is private work code: only the results show up, as in')} <button type="button" class="ext-arquivo" data-abrir="experiencia">${ARQUIVOS.experiencia.nome}</button>.</span></p>`
       : '';
     return `<div class="ext">
   <header class="ext-cabecalho">
@@ -1554,7 +1942,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     <div class="ext-info">
       <h1 class="ext-titulo">${esc(x.nome)}</h1>
       <div class="ext-subtitulo">
-        <span class="ext-sub-item ext-publisher"><span class="ext-publisher-nome">ana@dev</span><svg class="ic ext-verificado" role="img" aria-label="verificado"><use href="#i-verified-filled"/></svg></span>
+        <span class="ext-sub-item ext-publisher"><span class="ext-publisher-nome">ana@dev</span><svg class="ic ext-verificado" role="img" aria-label="${L('verificado', 'verified')}"><use href="#i-verified-filled"/></svg></span>
         <span class="ext-sub-item">${ic('rocket')}<span>${usos}</span></span>
       </div>
       <p class="ext-descricao">${esc(x.desc)}</p>
@@ -1565,37 +1953,37 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     </div>
   </header>
   <div class="ext-navbar">
-    <div class="ext-abas" role="tablist" aria-label="Seções">
-      <button type="button" class="ext-aba" role="tab" id="ext-aba-detalhes" aria-selected="true" aria-controls="ext-painel-detalhes">Detalhes</button>
-      <button type="button" class="ext-aba" role="tab" id="ext-aba-recursos" aria-selected="false" aria-controls="ext-painel-recursos" tabindex="-1">Recursos</button>
+    <div class="ext-abas" role="tablist" aria-label="${L('Seções', 'Sections')}">
+      <button type="button" class="ext-aba" role="tab" id="ext-aba-detalhes" aria-selected="true" aria-controls="ext-painel-detalhes">${L('Detalhes', 'Details')}</button>
+      <button type="button" class="ext-aba" role="tab" id="ext-aba-recursos" aria-selected="false" aria-controls="ext-painel-recursos" tabindex="-1">${L('Recursos', 'Features')}</button>
     </div>
   </div>
   <div class="ext-painel" role="tabpanel" id="ext-painel-detalhes" aria-labelledby="ext-aba-detalhes" tabindex="0">
     <div class="ext-detalhes">
       <article class="ext-md">
-        <h2 class="ext-md-h1">Onde eu uso</h2>
+        <h2 class="ext-md-h1">${L('Onde eu uso', 'Where I use it')}</h2>
         <ul class="ext-recursos" role="list">${t.uso.map(([icone, titulo, texto, destino]) => `<li class="ext-recurso"><span class="ext-recurso-icone" aria-hidden="true">${ic(icone)}</span><div class="ext-recurso-texto"><h3 class="ext-recurso-titulo">${esc(titulo)}</h3><p class="ext-recurso-prova">${esc(texto)}</p></div>${destino ? botaoIr(destino, titulo) : ''}</li>`).join('')}</ul>
         ${numeros}
         ${nota}
       </article>
-      <aside class="ext-lateral" aria-label="Mais informações">
+      <aside class="ext-lateral" aria-label="${L('Mais informações', 'More information')}">
         <section class="ext-lat-secao">
-          <h2 class="ext-lat-titulo">Instalação</h2>
+          <h2 class="ext-lat-titulo">${L('Instalação', 'Installation')}</h2>
           <table class="ext-tabela"><tbody>
-            <tr><th scope="row">Identificador</th><td>ana-neves.${t.slug}</td></tr>
-            <tr><th scope="row">Publicado por</th><td>ana@dev</td></tr>
+            <tr><th scope="row">${L('Identificador', 'Identifier')}</th><td>ana-neves.${t.slug}</td></tr>
+            <tr><th scope="row">${L('Publicado por', 'Published by')}</th><td>ana@dev</td></tr>
           </tbody></table>
         </section>
         <section class="ext-lat-secao">
-          <h2 class="ext-lat-titulo">Categorias</h2>
+          <h2 class="ext-lat-titulo">${L('Categorias', 'Categories')}</h2>
           <ul class="ext-chips" role="list">${t.categorias.map((c) => `<li class="ext-chip">${esc(c)}</li>`).join('')}</ul>
         </section>
         <section class="ext-lat-secao">
           <h2 class="ext-lat-titulo">Links</h2>
           <ul class="ext-lat-links" role="list">
             ${outros.map(([rotulo, url]) => `<li>${linkFora(rotulo, url, 'ext-lat-link', ic('link-external'))}</li>`).join('')}
-            <li><button type="button" class="ext-lat-link" data-abrir="projetos">${ic('rocket')}Projetos</button></li>
-            <li><button type="button" class="ext-lat-link" data-abrir="experiencia">${ic('history')}Experiência</button></li>
+            <li><button type="button" class="ext-lat-link" data-abrir="projetos">${ic('rocket')}${L('Projetos', 'Projects')}</button></li>
+            <li><button type="button" class="ext-lat-link" data-abrir="experiencia">${ic('history')}${L('Experiência', 'Experience')}</button></li>
           </ul>
         </section>
       </aside>
@@ -1603,7 +1991,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   </div>
   <div class="ext-painel" role="tabpanel" id="ext-painel-recursos" aria-labelledby="ext-aba-recursos" tabindex="0" hidden>
     <div class="ext-md ext-md-largo">
-      <h2 class="ext-md-h1">Ferramentas e bibliotecas</h2>
+      <h2 class="ext-md-h1">${L('Ferramentas e bibliotecas', 'Tools and libraries')}</h2>
       <ul class="ext-chips ext-chips-grandes" role="list">${t.recursos.map((r) => `<li class="ext-chip">${esc(r)}</li>`).join('')}</ul>
     </div>
   </div>
@@ -1617,14 +2005,14 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       `# ${x.nome}`,
       '',
       `> ${x.desc}`,
-      '> Publicado por [ana@dev](https://github.com/An4D3v)',
+      `> ${L('Publicado por', 'Published by')} [ana@dev](https://github.com/An4D3v)`,
       '',
-      '## Onde eu uso',
+      `## ${L('Onde eu uso', 'Where I use it')}`,
       '',
       ...t.uso.map(([, titulo, texto]) => `- **${titulo}** — ${texto}`),
-      ...(t.numeros.length ? ['', '## Números', '', ...t.numeros.map((n) => `- **${n.final}** ${n.texto}`)] : []),
+      ...(t.numeros.length ? ['', `## ${L('Números', 'Numbers')}`, '', ...t.numeros.map((n) => `- **${n.final}** ${n.texto}`)] : []),
       '',
-      '## Recursos',
+      `## ${L('Recursos', 'Tools and libraries')}`,
       '',
       t.recursos.map((r) => `\`${r}\``).join(' · '),
       ...(t.links.length ? ['', '## Links', '', ...t.links.map(([rotulo, url]) => `- [${rotulo}](${url})`)] : []),
@@ -1636,14 +2024,14 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       const st = estado.statusApps[s.dataset.status];
       const txt = $('.vivo-txt', s);
       s.classList.remove('no-ar', 'sem-resposta');
-      if (!st || st.estado === 'checando') txt.textContent = 'verificando…';
+      if (!st || st.estado === 'checando') txt.textContent = L('verificando…', 'checking…');
       else if (st.estado === 'no-ar') {
         s.classList.add('no-ar');
-        txt.textContent = `no ar · ${st.ms} ms`;
-        s.title = `Respondeu em ${st.ms} ms agora há pouco, medido do seu navegador.`;
+        txt.textContent = `${L('no ar', 'live')} · ${st.ms} ms`;
+        s.title = L(`Respondeu em ${st.ms} ms agora há pouco, medido do seu navegador.`, `Responded in ${st.ms} ms just now, measured from your browser.`);
       } else {
         s.classList.add('sem-resposta');
-        txt.textContent = 'sem resposta agora';
+        txt.textContent = L('sem resposta agora', 'not responding right now');
       }
     });
   }
@@ -1659,11 +2047,11 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       fetch(APPS[chave], { mode: 'no-cors', cache: 'no-store', signal: ctl ? ctl.signal : undefined })
         .then(() => {
           estado.statusApps[chave] = { estado: 'no-ar', ms: Math.round(performance.now() - ini) };
-          registrar(`${APPS[chave].replace('https://', '')} respondeu em ${estado.statusApps[chave].ms} ms`);
+          registrar(`${APPS[chave].replace('https://', '')} ${L('respondeu em', 'responded in')} ${estado.statusApps[chave].ms} ms`);
         })
         .catch(() => {
           estado.statusApps[chave] = { estado: 'sem-resposta' };
-          registrar(`${APPS[chave].replace('https://', '')} não respondeu`);
+          registrar(`${APPS[chave].replace('https://', '')} ${L('não respondeu', 'did not respond')}`);
         })
         .finally(() => {
           clearTimeout(limite);
@@ -1689,15 +2077,15 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       ta.remove();
     }
     if (!ok) {
-      notificar({ texto: `Não consegui copiar sozinho. O e-mail é ${EMAIL}` });
+      notificar({ texto: `${L('Não consegui copiar sozinho. O e-mail é', "Couldn't copy it automatically. The email is")} ${EMAIL}` });
       return;
     }
-    notificar({ tipo: 'ok', texto: `E-mail copiado: ${EMAIL}` });
-    registrar('e-mail copiado');
+    notificar({ tipo: 'ok', texto: `${L('E-mail copiado', 'Email copied')}: ${EMAIL}` });
+    registrar(L('e-mail copiado', 'email copied'));
     const rotulo = bt && bt.querySelector && bt.querySelector('span:not(.marca-check)');
     if (rotulo && bt.closest('.editor')) {
       const antes = rotulo.textContent;
-      rotulo.textContent = 'Copiado';
+      rotulo.textContent = L('Copiado', 'Copied');
       setTimeout(() => { rotulo.textContent = antes; }, 1800);
     }
   }
@@ -1818,7 +2206,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const termo = q.trim();
     if (termo.length < 2) {
       res.innerHTML = '';
-      resumo.textContent = termo ? 'Digite pelo menos 2 caracteres.' : '';
+      resumo.textContent = termo ? L('Digite pelo menos 2 caracteres.', 'Type at least 2 characters.') : '';
       return;
     }
     const nq = norm(termo);
@@ -1843,9 +2231,10 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
         + achados.map((x) => `<li><button class="res-linha" type="button" data-ir="${id}" data-ln="${x.n}" data-col="${x.p + 1}">${trecho(x.l, x.p, nq.length)}</button></li>`).join('')
         + '</ul></div>';
     });
+    const pl = (n) => (n > 1 ? 's' : '');
     resumo.textContent = total
-      ? `${total} resultado${total > 1 ? 's' : ''} em ${arquivos} arquivo${arquivos > 1 ? 's' : ''}`
-      : 'Nenhum resultado encontrado.';
+      ? L(`${total} resultado${pl(total)} em ${arquivos} arquivo${pl(arquivos)}`, `${total} result${pl(total)} in ${arquivos} file${pl(arquivos)}`)
+      : L('Nenhum resultado encontrado.', 'No results found.');
     res.innerHTML = h;
   }
   let esperaBusca = 0;
@@ -1879,13 +2268,13 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const campo = $('#commit-msg');
     const msg = campo.value.trim();
     if (!msg) {
-      notificar({ tipo: 'aviso', texto: 'Escreva uma mensagem antes do commit: ela vira o corpo do e-mail.' });
+      notificar({ tipo: 'aviso', texto: L('Escreva uma mensagem antes do commit: ela vira o corpo do e-mail.', 'Write a message before committing: it becomes the body of the email.') });
       campo.focus();
       return;
     }
-    registrar('commit: abrindo o cliente de e-mail');
-    notificar({ tipo: 'ok', texto: 'Abrindo o seu cliente de e-mail com a mensagem. É só enviar.' });
-    location.href = `mailto:${EMAIL}?subject=${encodeURIComponent('Contato pelo portfólio')}&body=${encodeURIComponent(msg)}`;
+    registrar(L('commit: abrindo o cliente de e-mail', 'commit: opening the email client'));
+    notificar({ tipo: 'ok', texto: L('Abrindo o seu cliente de e-mail com a mensagem. É só enviar.', 'Opening your email client with the message. Just hit send.') });
+    location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(L('Contato pelo portfólio', 'Contact from the portfolio'))}&body=${encodeURIComponent(msg)}`;
   }
   $('#form-commit').addEventListener('submit', (e) => {
     e.preventDefault();
@@ -1904,7 +2293,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const lista = EXTENSOES.filter((x) => !q || norm(`${x.nome} ${x.desc}`).includes(q));
     $('#ext-cont').textContent = String(lista.length);
     $('#ext-lista').innerHTML = lista.map((x) => `<button class="ext-item" type="button" data-abrir="ext-${x.ic}"><span class="ext-ic px" aria-hidden="true"><svg class="px-ic"><use href="#i-px-${x.ic}"/></svg></span><span class="ext-nome">${esc(x.nome)}</span><span class="ext-desc">${esc(x.desc)}</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`).join('')
-      + (lista.length ? '' : '<p class="vazio-msg">Nenhuma extensão encontrada.</p>');
+      + (lista.length ? '' : `<p class="vazio-msg">${L('Nenhuma extensão encontrada.', 'No extensions found.')}</p>`);
     marcarExtensao();
   }
   // A extensão aberta fica marcada na lista, como no VS Code. Abrir um arquivo
@@ -1926,16 +2315,16 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   function depurar() {
     if (depurando) return;
     const passos = [
-      ['learn()', 'C#, .NET 8, Azure, LLMs em produção'],
-      ['build()', '3 apps no ar · 7+ cargas incrementais · bots com IA'],
-      ['ship()', 'em produção, com usuários reais'],
+      ['learn()', L('C#, .NET 8, Azure, LLMs em produção', 'C#, .NET 8, Azure, LLMs in production')],
+      ['build()', L('3 apps no ar · 7+ cargas incrementais · bots com IA', '3 apps live · 7+ incremental loads · AI bots')],
+      ['ship()', L('em produção, com usuários reais', 'in production, with real users')],
     ];
     logDepuracao.length = 0;
-    logDepuracao.push({ cls: 'term-dim', txt: 'Iniciando: while (true) { learn(); build(); ship(); }' });
+    logDepuracao.push({ cls: 'term-dim', txt: `${L('Iniciando', 'Starting')}: while (true) { learn(); build(); ship(); }` });
     el.app.classList.add('depurando');
     $('#barra-depuracao').hidden = false;
     mostrarPainel('depuracao');
-    registrar('depuração iniciada');
+    registrar(L('depuração iniciada', 'debugging started'));
     let i = 0;
     const passo = () => {
       if (i < passos.length) {
@@ -1945,7 +2334,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
         depurando = setTimeout(passo, mq.calmo.matches ? 0 : 700);
         return;
       }
-      logDepuracao.push({ cls: 'term-dim', txt: 'Iteração concluída. O loop continua: é while (true).' });
+      logDepuracao.push({ cls: 'term-dim', txt: L('Iteração concluída. O loop continua: é while (true).', "Iteration finished. The loop goes on: it's while (true).") });
       renderPainel();
       depurando = setTimeout(pararDepuracao, mq.calmo.matches ? 0 : 1200);
     };
@@ -1963,7 +2352,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
      ====================================================================== */
   const logSaida = [];
   function registrar(msg) {
-    const hora = new Date().toLocaleTimeString('pt-BR', { hour12: false });
+    const hora = new Date().toLocaleTimeString(L('pt-BR', 'en-US'), { hour12: false });
     logSaida.push({ hora, msg });
     if (logSaida.length > 300) logSaida.shift();
     if (estado.painel && estado.painelAba === 'saida') renderPainel();
@@ -1978,10 +2367,10 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     { porta: 4200, app: 'notas', nome: 'Notas Fiscais', cmd: 'npm start' },
   ];
   function htmlPortas() {
-    return '<table class="portas"><thead><tr><th>Porta</th><th>Endereço Encaminhado</th><th>Processo em Execução</th><th>Visibilidade</th><th>Origem</th></tr></thead><tbody>'
+    return `<table class="portas"><thead><tr><th>${L('Porta', 'Port')}</th><th>${L('Endereço Encaminhado', 'Forwarded Address')}</th><th>${L('Processo em Execução', 'Running Process')}</th><th>${L('Visibilidade', 'Visibility')}</th><th>${L('Origem', 'Origin')}</th></tr></thead><tbody>`
       + PORTAS.map((p) => `<tr><td>${p.porta}</td><td>${linkar(esc(APPS[p.app]))}</td>`
-        + `<td>${esc(p.nome)} (${p.cmd})<span class="vivo" data-status="${p.app}"><span class="vivo-ponto"></span><span class="vivo-txt">verificando…</span></span></td>`
-        + '<td>Pública</td><td>Vercel</td></tr>').join('')
+        + `<td>${esc(p.nome)} (${p.cmd})<span class="vivo" data-status="${p.app}"><span class="vivo-ponto"></span><span class="vivo-txt">${L('verificando…', 'checking…')}</span></span></td>`
+        + `<td>${L('Pública', 'Public')}</td><td>Vercel</td></tr>`).join('')
       + '</tbody></table>';
   }
 
@@ -2008,7 +2397,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     el.painelOutro.setAttribute('role', 'tabpanel');
     el.painelOutro.setAttribute('aria-labelledby', `pa-${estado.painelAba}`);
     if (estado.painelAba === 'problemas') {
-      el.painelOutro.innerHTML = `<p class="problemas-ok">${ic('pass')}Nenhum problema foi detectado no workspace.</p>`;
+      el.painelOutro.innerHTML = `<p class="problemas-ok">${ic('pass')}${L('Nenhum problema foi detectado no workspace.', 'No problems have been detected in the workspace.')}</p>`;
     } else if (estado.painelAba === 'saida') {
       el.painelOutro.innerHTML = logSaida.map((l) => `<div class="saida-linha"><span class="hora">[${l.hora}]</span> ${esc(l.msg)}</div>`).join('');
     } else if (estado.painelAba === 'portas') {
@@ -2017,7 +2406,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     } else {
       el.painelOutro.innerHTML = logDepuracao.length
         ? logDepuracao.map((l) => `<div class="term-linha ${l.cls}">${esc(l.txt)}${l.ok ? `  <span class="term-ok">✓ ${esc(l.ok)}</span>` : ''}</div>`).join('')
-        : '<p class="problemas-ok">Use Executar e Depurar (F5) para rodar o loop da Ana.</p>';
+        : `<p class="problemas-ok">${L('Use Executar e Depurar (F5) para rodar o loop da Ana.', "Use Run and Debug (F5) to run Ana's loop.")}</p>`;
     }
     el.painelOutro.scrollTop = el.painelOutro.scrollHeight;
   }
@@ -2071,7 +2460,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   // No computador a dica fica em itálico depois do cursor, como a do VS Code;
   // no celular ela não cabe ali e vira uma linha de texto.
   function boasVindas() {
-    if (mq.celular.matches) linhaTerm('Terminal do portfólio. Digite <span class="term-dest">help</span> ou toque num comando acima.', 'term-dim');
+    if (mq.celular.matches) linhaTerm(L('Terminal do portfólio. Digite <span class="term-dest">help</span> ou toque num comando acima.', 'Portfolio terminal. Type <span class="term-dest">help</span> or tap a command above.'), 'term-dim');
     el.termForm.classList.toggle('com-dica', !term.dispensada);
   }
   function atualizarCampo() {
@@ -2095,40 +2484,55 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   const estreito = () => mq.celular.matches;
   const linkArq = (id) => `<a href="#${id}" data-abrir="${id}">${esc(caminho(id))}</a>`;
 
+  // Os comandos têm nome no idioma da página (projetos/projects, abrir/open...).
+  const CMD = {
+    sobre: L('sobre', 'about'),
+    projetos: L('projetos', 'projects'),
+    experiencia: L('experiencia', 'experience'),
+    contato: L('contato', 'contact'),
+    abrir: L('abrir', 'open'),
+    tema: L('tema', 'theme'),
+    idioma: L('idioma', 'lang'),
+  };
   const CMDS = {
     help: {
-      desc: 'lista os comandos',
+      desc: L('lista os comandos', 'lists the commands'),
       fn: () => linhaTerm(Object.entries(CMDS).filter(([, c]) => c.desc).map(([n, c]) => (estreito()
         ? `<span class="term-dest">${n}</span>  ${esc(c.desc)}`
         : `  <span class="term-dest">${n.padEnd(12)}</span>${esc(c.desc)}`)).join('\n')),
     },
-    whoami: { desc: 'quem é a Ana', fn: () => linhaTerm('Ana Neves — Software Developer · backend, dados e IA · São Paulo, Brasil') },
-    sobre: {
-      desc: 'resumo em três linhas',
-      fn: () => linhaTerm('Primeira e única dev de um escritório jurídico: pipelines com 4,5M+ registros,\nbots com IA no Teams e classificador LLM em produção.\nFora do expediente: 3 apps próprios no ar, com 70+ pessoas usando.'),
+    whoami: { desc: L('quem é a Ana', 'who Ana is'), fn: () => linhaTerm(L('Ana Neves — Software Developer · backend, dados e IA · São Paulo, Brasil', 'Ana Neves — Software Developer · backend, data and AI · São Paulo, Brazil')) },
+    [CMD.sobre]: {
+      desc: L('resumo em três linhas', 'summary in three lines'),
+      fn: () => linhaTerm(L(
+        'Primeira e única dev de um escritório jurídico: pipelines com 4,5M+ registros,\nbots com IA no Teams e classificador LLM em produção.\nFora do expediente: 3 apps próprios no ar, com 70+ pessoas usando.',
+        'First and only developer at a law firm: pipelines with 4.5M+ records,\nAI bots in Teams and an LLM classifier in production.\nAfter hours: 3 apps of my own live, with 70+ people using them.',
+      )),
     },
-    projetos: {
-      desc: 'os produtos, com links',
+    [CMD.projetos]: {
+      desc: L('os produtos, com links', 'the products, with links'),
       fn: () => linhaTerm([
-        ['Rumo', 'orientador de rotinas · PWA · 40+ usuários', APPS.rumo],
-        ['AlienFinanças', 'finanças com leitura de nota fiscal por IA · 20+ usuários', APPS.alien],
-        ['Notas Fiscais', 'microsserviços .NET no Azure · 28 testes de integração', APPS.notas],
-        ['Vale do Trevo', 'jogo 2D em canvas puro', APPS.trevo],
+        ['Rumo', L('orientador de rotinas · PWA · 40+ usuários', 'routine companion · PWA · 40+ users'), APPS.rumo],
+        ['AlienFinanças', L('finanças com leitura de nota fiscal por IA · 20+ usuários', 'personal finance with AI receipt reading · 20+ users'), APPS.alien],
+        ['Notas Fiscais', L('microsserviços .NET no Azure · 28 testes de integração', '.NET microservices on Azure · 28 integration tests'), APPS.notas],
+        ['Vale do Trevo', L('jogo 2D em canvas puro', '2D game in plain canvas'), APPS.trevo],
       ].map(([n, dsc, url]) => (estreito()
         ? `<span class="term-dest">${esc(n)}</span>\n  ${esc(dsc)}\n  ${linkar(esc(url))}`
         : `<span class="term-dest">${esc(n.padEnd(15))}</span>${esc(dsc)}\n${' '.repeat(15)}${linkar(esc(url))}`)).join('\n')),
     },
-    experiencia: {
-      desc: 'trajetória e bastidores',
+    [CMD.experiencia]: {
+      desc: L('trajetória e bastidores', 'career path and behind the scenes'),
       fn: () => {
         linhaTerm(estreito()
-          ? 'hoje: primeira e única dev · escritório jurídico, São Paulo\nem paralelo: 3 produtos próprios no ar\ninício: dados · Jusbrasil'
-          : 'hoje      primeira e única dev · escritório jurídico, São Paulo\nparalelo  3 produtos próprios no ar\ninício    dados · Jusbrasil');
-        linhaTerm(`detalhes: ${linkArq('experiencia')}`, 'term-dim');
+          ? L('hoje: primeira e única dev · escritório jurídico, São Paulo\nem paralelo: 3 produtos próprios no ar\ninício: dados · Jusbrasil',
+            'today: first and only developer · law firm, São Paulo\nin parallel: 3 products of my own live\nstart: data · Jusbrasil')
+          : L('hoje      primeira e única dev · escritório jurídico, São Paulo\nparalelo  3 produtos próprios no ar\ninício    dados · Jusbrasil',
+            'today     first and only developer · law firm, São Paulo\nparallel  3 products of my own live\nstart     data · Jusbrasil'));
+        linhaTerm(`${L('detalhes', 'details')}: ${linkArq('experiencia')}`, 'term-dim');
       },
     },
     stack: {
-      desc: 'com o que ela trabalha',
+      desc: L('com o que ela trabalha', 'what she works with'),
       fn: () => {
         const s = JSON.parse(fonte('stack'));
         linhaTerm(Object.entries(s).map(([k, v]) => (estreito()
@@ -2136,58 +2540,71 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
           : `<span class="term-dest">${esc(k.padEnd(10))}</span>${esc(v.join(' · '))}`)).join('\n'));
       },
     },
-    contato: {
-      desc: 'e-mail, GitHub e LinkedIn',
+    [CMD.contato]: {
+      desc: L('e-mail, GitHub e LinkedIn', 'email, GitHub and LinkedIn'),
       fn: () => {
-        linhaTerm(`e-mail    ${linkar(EMAIL)}\ngithub    ${linkar(GITHUB)}\nlinkedin  ${linkar(LINKEDIN)}`);
-        linhaTerm('para falar de backend .NET, dados e IA aplicada.', 'term-dim');
+        linhaTerm(`${L('e-mail    ', 'email     ')}${linkar(EMAIL)}\ngithub    ${linkar(GITHUB)}\nlinkedin  ${linkar(LINKEDIN)}`);
+        linhaTerm(L('para falar de backend .NET, dados e IA aplicada.', 'to talk about .NET backend, data and applied AI.'), 'term-dim');
       },
     },
-    ls: { desc: 'lista os arquivos', fn: () => linhaTerm(Object.keys(NOMES_ARQ).filter((k) => k !== 'atalhos.md').map((k) => linkArq(NOMES_ARQ[k])).join('  ')) },
-    abrir: {
-      desc: 'abre um arquivo (abrir projetos.tsx)',
+    ls: { desc: L('lista os arquivos', 'lists the files'), fn: () => linhaTerm(Object.keys(NOMES_ARQ).filter((k) => NOMES_ARQ[k] !== 'atalhos').map((k) => linkArq(NOMES_ARQ[k])).join('  ')) },
+    [CMD.abrir]: {
+      desc: L('abre um arquivo (abrir projetos.tsx)', 'opens a file (open projects.tsx)'),
       args: 'arquivo',
       fn: (arg) => {
         const id = acharArquivo(arg);
-        if (!arg) linhaTerm('uso: abrir &lt;arquivo&gt;   ex.: abrir projetos.tsx', 'term-dim');
-        else if (!id) linhaTerm(`abrir: ${esc(arg)}: arquivo não encontrado`, 'term-erro');
+        if (!arg) linhaTerm(L('uso: abrir &lt;arquivo&gt;   ex.: abrir projetos.tsx', 'usage: open &lt;file&gt;   e.g. open projects.tsx'), 'term-dim');
+        else if (!id) linhaTerm(`${CMD.abrir}: ${esc(arg)}: ${L('arquivo não encontrado', 'file not found')}`, 'term-erro');
         else {
           abrir(id);
-          linhaTerm(`abrindo ${esc(caminho(id))}…`, 'term-dim');
+          linhaTerm(`${L('abrindo', 'opening')} ${esc(caminho(id))}…`, 'term-dim');
         }
       },
     },
     cat: {
-      desc: 'mostra o conteúdo de um arquivo',
+      desc: L('mostra o conteúdo de um arquivo', 'prints the contents of a file'),
       args: 'arquivo',
       fn: (arg) => {
         const id = acharArquivo(arg);
-        if (!id) linhaTerm(arg ? `cat: ${esc(arg)}: arquivo não encontrado` : 'uso: cat &lt;arquivo&gt;', 'term-erro');
-        else if (ARQUIVOS[id].imagem) linhaTerm(`cat: ${esc(caminho(id))}: é uma imagem; abra com <span class="term-dest">abrir ${esc(caminho(id))}</span>`, 'term-dim');
+        if (!id) linhaTerm(arg ? `cat: ${esc(arg)}: ${L('arquivo não encontrado', 'file not found')}` : L('uso: cat &lt;arquivo&gt;', 'usage: cat &lt;file&gt;'), 'term-erro');
+        else if (ARQUIVOS[id].imagem) linhaTerm(`cat: ${esc(caminho(id))}: ${L('é uma imagem; abra com', "it's an image; open it with")} <span class="term-dest">${CMD.abrir} ${esc(caminho(id))}</span>`, 'term-dim');
         else linhaTerm(linkar(esc(fonte(id))));
       },
     },
-    tema: {
-      desc: 'troca o tema (tema light-modern)',
+    [CMD.tema]: {
+      desc: L('troca o tema (tema light-modern)', 'changes the theme (theme light-modern)'),
       args: 'tema',
       fn: (arg) => {
         const t = arg.trim().toLowerCase();
         if (TEMAS[t]) {
           aplicarTema(t);
-          linhaTerm(`tema aplicado: ${esc(TEMAS[t].nome)}`, 'term-ok');
+          linhaTerm(`${L('tema aplicado', 'theme applied')}: ${esc(TEMAS[t].nome)}`, 'term-ok');
         } else {
-          linhaTerm(`temas: ${Object.keys(TEMAS).map((k) => `<span class="term-dest">${k}</span>`).join('  ')}`);
+          linhaTerm(`${L('temas', 'themes')}: ${Object.keys(TEMAS).map((k) => `<span class="term-dest">${k}</span>`).join('  ')}`);
         }
       },
     },
-    date: { desc: 'data e hora', fn: () => linhaTerm(esc(new Date().toLocaleString('pt-BR', { dateStyle: 'full', timeStyle: 'short' }))) },
-    echo: { desc: 'repete o texto', fn: (arg) => linhaTerm(esc(arg)) },
-    history: { desc: 'histórico de comandos', fn: () => linhaTerm(term.hist.map((c, i) => `${String(i + 1).padStart(4)}  ${esc(c)}`).join('\n')) },
-    clear: { desc: 'limpa o terminal', fn: limparTerminal },
-    exit: { desc: 'fecha o painel', fn: () => alternarPainel(false) },
-    sudo: { fn: () => linhaTerm('ana não está no arquivo sudoers. Este incidente será reportado. (brincadeira)', 'term-erro') },
-    code: { alias: 'abrir' },
-    open: { alias: 'abrir' },
+    [CMD.idioma]: {
+      desc: L('troca o idioma (idioma en)', 'switches the language (lang pt)'),
+      args: 'idioma',
+      fn: (arg) => {
+        const lingua = arg.trim().toLowerCase().slice(0, 2);
+        if (IDIOMAS[lingua] && lingua !== html.dataset.idioma) {
+          linhaTerm(`${L('trocando para', 'switching to')} ${IDIOMAS[lingua]}…`, 'term-ok');
+          trocarIdioma(lingua);
+        } else {
+          linhaTerm(`${L('idiomas', 'languages')}: ${Object.keys(IDIOMAS).map((k) => `<span class="term-dest">${k}</span>`).join('  ')}   ${L('atual', 'current')}: ${html.dataset.idioma}`);
+        }
+      },
+    },
+    date: { desc: L('data e hora', 'date and time'), fn: () => linhaTerm(esc(new Date().toLocaleString(L('pt-BR', 'en-US'), { dateStyle: 'full', timeStyle: 'short' }))) },
+    echo: { desc: L('repete o texto', 'prints the text back'), fn: (arg) => linhaTerm(esc(arg)) },
+    history: { desc: L('histórico de comandos', 'command history'), fn: () => linhaTerm(term.hist.map((c, i) => `${String(i + 1).padStart(4)}  ${esc(c)}`).join('\n')) },
+    clear: { desc: L('limpa o terminal', 'clears the terminal'), fn: limparTerminal },
+    exit: { desc: L('fecha o painel', 'closes the panel'), fn: () => alternarPainel(false) },
+    sudo: { fn: () => linhaTerm(L('ana não está no arquivo sudoers. Este incidente será reportado. (brincadeira)', 'ana is not in the sudoers file. This incident will be reported. (just kidding)'), 'term-erro') },
+    code: { alias: CMD.abrir },
+    [L('open', 'abrir')]: { alias: CMD.abrir },
   };
 
   function executar(bruto) {
@@ -2216,10 +2633,10 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const id = acharArquivo(txt);
     if (id) {
       abrir(id);
-      linhaTerm(`abrindo ${esc(caminho(id))}…`, 'term-dim');
+      linhaTerm(`${L('abrindo', 'opening')} ${esc(caminho(id))}…`, 'term-dim');
       return;
     }
-    linhaTerm(`${esc(nome)}: comando não encontrado. Digite <span class="term-dest">help</span>.`, 'term-erro');
+    linhaTerm(`${esc(nome)}: ${L('comando não encontrado. Digite', 'command not found. Type')} <span class="term-dest">help</span>.`, 'term-erro');
   }
 
   function completar() {
@@ -2236,7 +2653,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       let c = CMDS[partes[0].toLowerCase()];
       if (c && c.alias) c = CMDS[c.alias];
       if (!c || !c.args) return;
-      opcoes = c.args === 'tema' ? Object.keys(TEMAS) : Object.keys(NOMES_ARQ);
+      opcoes = c.args === 'tema' ? Object.keys(TEMAS) : c.args === 'idioma' ? Object.keys(IDIOMAS) : Object.keys(NOMES_ARQ);
       prefixo = partes.slice(1).join(' ');
       base = `${partes[0]} `;
     }
@@ -2314,7 +2731,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     n.className = `notif ${tipo}`;
     if (chave) n.dataset.chave = chave;
     const icone = tipo === 'ok' ? 'pass' : tipo === 'aviso' ? 'warning' : 'info';
-    n.innerHTML = `${ic(icone)}<p class="notif-txt">${esc(texto)}</p><button class="icone-bt" type="button" data-sair aria-label="Fechar notificação">${ic('close')}</button>`
+    n.innerHTML = `${ic(icone)}<p class="notif-txt">${esc(texto)}</p><button class="icone-bt" type="button" data-sair aria-label="${L('Fechar notificação', 'Close notification')}">${ic('close')}</button>`
       + (acoes.length ? `<div class="notif-acoes">${acoes.map((a, i) => `<button class="botao${a.sec ? ' sec' : ''}" type="button" data-i="${i}">${esc(a.rotulo)}</button>`).join('')}</div>` : '');
     const sair = () => {
       if (n.classList.contains('saindo')) return;
@@ -2345,18 +2762,18 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   function atualizarSino() {
     const tem = Boolean($('.notif[data-chave]', el.notifs));
     $('use', el.stSino).setAttribute('href', `#i-${tem ? 'bell-dot' : 'bell'}`);
-    el.stSino.setAttribute('aria-label', tem ? 'Notificações: 1 nova' : 'Notificações');
+    el.stSino.setAttribute('aria-label', tem ? L('Notificações: 1 nova', 'Notifications: 1 new') : L('Notificações', 'Notifications'));
   }
   function notificarDica() {
     const visto = () => guarda.gravarSessao('ana-notif', '1');
     const acoes = [
-      { rotulo: 'Ver atalhos', sec: true, fn: () => { visto(); abrir('atalhos'); } },
-      { rotulo: 'Abrir terminal', fn: () => { visto(); mostrarPainel('terminal'); } },
+      { rotulo: L('Ver atalhos', 'See shortcuts'), sec: true, fn: () => { visto(); abrir('atalhos'); } },
+      { rotulo: L('Abrir terminal', 'Open terminal'), fn: () => { visto(); mostrarPainel('terminal'); } },
     ];
     acoes.onFechar = visto;
     const texto = mq.celular.matches
-      ? 'Dica: deslize o dedo para os lados para trocar de aba. A barra de baixo abre arquivos, pesquisa, terminal e links.'
-      : 'Dica: isto é um editor de verdade. Ctrl+Shift+P abre a paleta de comandos e Ctrl+J, o terminal.';
+      ? L('Dica: deslize o dedo para os lados para trocar de aba. A barra de baixo abre arquivos, pesquisa, terminal e links.', 'Tip: swipe sideways to switch tabs. The bottom bar opens files, search, terminal and links.')
+      : L('Dica: isto é um editor de verdade. Ctrl+Shift+P abre a paleta de comandos e Ctrl+J, o terminal.', 'Tip: this is a real editor. Ctrl+Shift+P opens the command palette and Ctrl+J, the terminal.');
     notificar({ texto, acoes, fixa: true, chave: 'dica' });
   }
   el.stSino.addEventListener('click', () => {
@@ -2384,71 +2801,89 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const mudou = estado.tema !== t;
     estado.tema = t;
     guarda.gravar('ana-tema', t);
-    if (mudou) registrar(`tema de cores: ${TEMAS[t].nome}`);
+    if (mudou) registrar(`${L('tema de cores', 'color theme')}: ${TEMAS[t].nome}`);
     if (estado.ativa === 'config') renderEditor({ forcar: true });
   }
   const itensTema = () => [
     ...Object.entries(TEMAS).map(([k, t]) => ({ rotulo: t.nome, check: estado.tema === k, fn: () => aplicarTema(k) })),
     '-',
-    { rotulo: 'Escolher com Visualização…', fn: () => abrirPaleta('', 'tema') },
+    { rotulo: L('Escolher com Visualização…', 'Browse with Preview…'), fn: () => abrirPaleta('', 'tema') },
   ];
+
+  /* ======================================================================
+     Idioma: português ou inglês. A troca recarrega a janela, como no VS Code.
+     ====================================================================== */
+  const IDIOMAS = { pt: 'Português (Brasil)', en: 'English' };
+  function trocarIdioma(lingua) {
+    if (!IDIOMAS[lingua] || lingua === html.dataset.idioma) return;
+    guarda.gravar('ana-idioma', lingua);
+    // a escolha fica salva e o ?lang= sai do endereço; sem armazenamento, ela segue no ?lang=
+    const busca = new URLSearchParams(location.search);
+    busca.delete('lang');
+    if (guarda.ler('ana-idioma') !== lingua) busca.set('lang', lingua);
+    const q = busca.toString() ? `?${busca}` : '';
+    if (q === location.search) location.reload();
+    else location.replace(`${location.pathname}${q}${location.hash}`);
+  }
+  $('#st-idioma').addEventListener('click', () => trocarIdioma(EN ? 'pt' : 'en'));
 
   /* ======================================================================
      Menus (barra de menus, contas, gerenciar, "...")
      ====================================================================== */
   const MENUS = [
-    { rotulo: 'Arquivo', itens: () => [
-      { rotulo: 'Abrir Arquivo…', tecla: 'Ctrl+P', fn: () => abrirPaleta('') },
-      { rotulo: 'Reabrir Todas as Abas', fn: reabrirTodas },
+    { rotulo: L('Arquivo', 'File'), itens: () => [
+      { rotulo: L('Abrir Arquivo…', 'Open File…'), tecla: 'Ctrl+P', fn: () => abrirPaleta('') },
+      { rotulo: L('Reabrir Todas as Abas', 'Reopen All Tabs'), fn: reabrirTodas },
       '-',
-      { rotulo: 'Fechar Editor', fn: () => estado.ativa && fecharAba(estado.ativa), off: !estado.ativa },
-      { rotulo: 'Fechar Todos os Editores', fn: fecharTodas, off: !estado.abertas.length },
+      { rotulo: L('Fechar Editor', 'Close Editor'), fn: () => estado.ativa && fecharAba(estado.ativa), off: !estado.ativa },
+      { rotulo: L('Fechar Todos os Editores', 'Close All Editors'), fn: fecharTodas, off: !estado.abertas.length },
       '-',
-      { rotulo: 'Preferências: Tema de Cores…', fn: () => abrirPaleta('', 'tema') },
+      { rotulo: L('Preferências: Tema de Cores…', 'Preferences: Color Theme…'), fn: () => abrirPaleta('', 'tema') },
+      { rotulo: L('Preferências: Idioma de Exibição…', 'Preferences: Display Language…'), fn: () => abrirPaleta('', 'idioma') },
     ] },
-    { rotulo: 'Editar', itens: () => [
-      { rotulo: 'Localizar nos Arquivos', tecla: 'Ctrl+Shift+F', fn: () => mostrarVista('busca', { alternar: false }) },
-      { rotulo: 'Copiar E-mail da Ana', fn: copiarEmail },
+    { rotulo: L('Editar', 'Edit'), itens: () => [
+      { rotulo: L('Localizar nos Arquivos', 'Find in Files'), tecla: 'Ctrl+Shift+F', fn: () => mostrarVista('busca', { alternar: false }) },
+      { rotulo: L('Copiar E-mail da Ana', "Copy Ana's Email"), fn: copiarEmail },
     ] },
-    { rotulo: 'Seleção', itens: () => [
-      { rotulo: 'Selecionar Tudo no Editor', tecla: 'Ctrl+A', fn: selecionarTudo, off: !estado.ativa },
+    { rotulo: L('Seleção', 'Selection'), itens: () => [
+      { rotulo: L('Selecionar Tudo no Editor', 'Select All in Editor'), tecla: 'Ctrl+A', fn: selecionarTudo, off: !estado.ativa },
     ] },
-    { rotulo: 'Exibir', itens: () => [
-      { rotulo: 'Paleta de Comandos…', tecla: 'Ctrl+Shift+P', fn: () => abrirPaleta('>') },
+    { rotulo: L('Exibir', 'View'), itens: () => [
+      { rotulo: L('Paleta de Comandos…', 'Command Palette…'), tecla: 'Ctrl+Shift+P', fn: () => abrirPaleta('>') },
       '-',
-      { rotulo: 'Explorador', tecla: 'Ctrl+Shift+E', fn: () => mostrarVista('explorer', { alternar: false }) },
-      { rotulo: 'Pesquisar', tecla: 'Ctrl+Shift+F', fn: () => mostrarVista('busca', { alternar: false }) },
-      { rotulo: 'Controle do Código-Fonte', tecla: 'Ctrl+Shift+G', fn: () => mostrarVista('scm', { alternar: false }) },
-      { rotulo: 'Executar e Depurar', tecla: 'Ctrl+Shift+D', fn: () => mostrarVista('depurar', { alternar: false }) },
-      { rotulo: 'Extensões', tecla: 'Ctrl+Shift+X', fn: () => mostrarVista('extensoes', { alternar: false }) },
+      { rotulo: L('Explorador', 'Explorer'), tecla: 'Ctrl+Shift+E', fn: () => mostrarVista('explorer', { alternar: false }) },
+      { rotulo: L('Pesquisar', 'Search'), tecla: 'Ctrl+Shift+F', fn: () => mostrarVista('busca', { alternar: false }) },
+      { rotulo: L('Controle do Código-Fonte', 'Source Control'), tecla: 'Ctrl+Shift+G', fn: () => mostrarVista('scm', { alternar: false }) },
+      { rotulo: L('Executar e Depurar', 'Run and Debug'), tecla: 'Ctrl+Shift+D', fn: () => mostrarVista('depurar', { alternar: false }) },
+      { rotulo: L('Extensões', 'Extensions'), tecla: 'Ctrl+Shift+X', fn: () => mostrarVista('extensoes', { alternar: false }) },
       '-',
       { rotulo: 'Terminal', tecla: 'Ctrl+J', check: estado.painel, fn: () => alternarPainel() },
-      { rotulo: 'Minimapa', check: estado.minimapa, fn: alternarMinimapa },
-      { rotulo: 'Quebra de Linha', tecla: 'Alt+Z', check: quebraAtiva(), fn: alternarQuebra },
-      { rotulo: 'Modo Zen', check: estado.zen, fn: () => alternarZen() },
+      { rotulo: L('Minimapa', 'Minimap'), check: estado.minimapa, fn: alternarMinimapa },
+      { rotulo: L('Quebra de Linha', 'Word Wrap'), tecla: 'Alt+Z', check: quebraAtiva(), fn: alternarQuebra },
+      { rotulo: L('Modo Zen', 'Zen Mode'), check: estado.zen, fn: () => alternarZen() },
     ] },
-    { rotulo: 'Ir', itens: () => [
-      { rotulo: 'Voltar', fn: () => navegar(-1), off: estado.posHist <= 0 },
-      { rotulo: 'Avançar', fn: () => navegar(1), off: estado.posHist >= estado.historico.length - 1 },
+    { rotulo: L('Ir', 'Go'), itens: () => [
+      { rotulo: L('Voltar', 'Back'), fn: () => navegar(-1), off: estado.posHist <= 0 },
+      { rotulo: L('Avançar', 'Forward'), fn: () => navegar(1), off: estado.posHist >= estado.historico.length - 1 },
       '-',
       ...SECOES.map((id, i) => ({ rotulo: ARQUIVOS[id].nome, tecla: `Alt+${i + 1}`, fn: () => abrir(id) })),
       '-',
-      { rotulo: 'Ir para o Arquivo…', tecla: 'Ctrl+P', fn: () => abrirPaleta('') },
+      { rotulo: L('Ir para o Arquivo…', 'Go to File…'), tecla: 'Ctrl+P', fn: () => abrirPaleta('') },
     ] },
-    { rotulo: 'Executar', itens: () => [
-      { rotulo: 'Iniciar Depuração', tecla: 'F5', fn: depurar, off: Boolean(depurando) },
-      { rotulo: 'Parar Depuração', fn: pararDepuracao, off: !depurando },
+    { rotulo: L('Executar', 'Run'), itens: () => [
+      { rotulo: L('Iniciar Depuração', 'Start Debugging'), tecla: 'F5', fn: depurar, off: Boolean(depurando) },
+      { rotulo: L('Parar Depuração', 'Stop Debugging'), fn: pararDepuracao, off: !depurando },
     ] },
     { rotulo: 'Terminal', itens: () => [
-      { rotulo: 'Novo Terminal', tecla: 'Ctrl+J', fn: () => mostrarPainel('terminal') },
-      { rotulo: 'Limpar Terminal', fn: () => { mostrarPainel('terminal'); limparTerminal(); } },
+      { rotulo: L('Novo Terminal', 'New Terminal'), tecla: 'Ctrl+J', fn: () => mostrarPainel('terminal') },
+      { rotulo: L('Limpar Terminal', 'Clear Terminal'), fn: () => { mostrarPainel('terminal'); limparTerminal(); } },
     ] },
-    { rotulo: 'Ajuda', itens: () => [
-      { rotulo: 'Atalhos de Teclado', fn: () => abrir('atalhos') },
-      { rotulo: 'Sobre Este Portfólio', fn: () => abrir('pacote') },
+    { rotulo: L('Ajuda', 'Help'), itens: () => [
+      { rotulo: L('Atalhos de Teclado', 'Keyboard Shortcuts'), fn: () => abrir('atalhos') },
+      { rotulo: L('Sobre Este Portfólio', 'About This Portfolio'), fn: () => abrir('pacote') },
       '-',
-      { rotulo: 'Perfil no GitHub', fn: () => abrirFora(GITHUB) },
-      { rotulo: 'Perfil no LinkedIn', fn: () => abrirFora(LINKEDIN) },
+      { rotulo: L('Perfil no GitHub', 'GitHub Profile'), fn: () => abrirFora(GITHUB) },
+      { rotulo: L('Perfil no LinkedIn', 'LinkedIn Profile'), fn: () => abrirFora(LINKEDIN) },
     ] },
   ];
 
@@ -2574,32 +3009,33 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     { rotulo: 'Ana Neves — GitHub', fn: () => abrirFora(GITHUB) },
     { rotulo: 'Ana Neves — LinkedIn', fn: () => abrirFora(LINKEDIN) },
     '-',
-    { rotulo: 'Enviar E-mail', fn: () => { location.href = `mailto:${EMAIL}`; } },
-    { rotulo: 'Copiar E-mail', fn: copiarEmail },
+    { rotulo: L('Enviar E-mail', 'Send Email'), fn: () => { location.href = `mailto:${EMAIL}`; } },
+    { rotulo: L('Copiar E-mail', 'Copy Email'), fn: copiarEmail },
   ], e.currentTarget, { lado: celular() ? 'cima' : 'direita', focar: e.detail === 0 }));
   $('#bt-gerenciar').addEventListener('click', (e) => alternarMenu([
-    { rotulo: 'Paleta de Comandos…', tecla: 'Ctrl+Shift+P', fn: () => abrirPaleta('>') },
-    { rotulo: 'Configurações', fn: () => abrir('config') },
-    { rotulo: 'Atalhos de Teclado', fn: () => abrir('atalhos') },
+    { rotulo: L('Paleta de Comandos…', 'Command Palette…'), tecla: 'Ctrl+Shift+P', fn: () => abrirPaleta('>') },
+    { rotulo: L('Configurações', 'Settings'), fn: () => abrir('config') },
+    { rotulo: L('Atalhos de Teclado', 'Keyboard Shortcuts'), fn: () => abrir('atalhos') },
+    { rotulo: L('Idioma de Exibição…', 'Display Language…'), fn: () => abrirPaleta('', 'idioma') },
     '-',
     ...itensTema(),
   ], e.currentTarget, { lado: 'direita', focar: e.detail === 0 }));
   $('#bt-layout-mais').addEventListener('click', (e) => alternarMenu([
-    { rotulo: 'Painel Lateral', tecla: 'Ctrl+B', check: estado.lateral, fn: () => alternarLateral() },
-    { rotulo: 'Painel', tecla: 'Ctrl+J', check: estado.painel, fn: () => alternarPainel() },
-    { rotulo: 'Minimapa', check: estado.minimapa, fn: alternarMinimapa },
+    { rotulo: L('Painel Lateral', 'Side Bar'), tecla: 'Ctrl+B', check: estado.lateral, fn: () => alternarLateral() },
+    { rotulo: L('Painel', 'Panel'), tecla: 'Ctrl+J', check: estado.painel, fn: () => alternarPainel() },
+    { rotulo: L('Minimapa', 'Minimap'), check: estado.minimapa, fn: alternarMinimapa },
     '-',
-    { rotulo: 'Modo Zen', check: estado.zen, fn: () => alternarZen() },
-    { rotulo: 'Tela Inteira', check: Boolean(d.fullscreenElement), fn: telaCheia },
+    { rotulo: L('Modo Zen', 'Zen Mode'), check: estado.zen, fn: () => alternarZen() },
+    { rotulo: L('Tela Inteira', 'Full Screen'), check: Boolean(d.fullscreenElement), fn: telaCheia },
   ], e.currentTarget, { focar: e.detail === 0 }));
   $('#bt-editor-mais').addEventListener('click', (e) => alternarMenu([
-    { rotulo: 'Fechar Outros', fn: fecharOutras, off: estado.abertas.length < 2 },
-    { rotulo: 'Fechar Todos', fn: fecharTodas, off: !estado.abertas.length },
-    { rotulo: 'Reabrir Todas as Abas', fn: reabrirTodas },
+    { rotulo: L('Fechar Outros', 'Close Others'), fn: fecharOutras, off: estado.abertas.length < 2 },
+    { rotulo: L('Fechar Todos', 'Close All'), fn: fecharTodas, off: !estado.abertas.length },
+    { rotulo: L('Reabrir Todas as Abas', 'Reopen All Tabs'), fn: reabrirTodas },
     '-',
-    { rotulo: 'Quebra de Linha', tecla: 'Alt+Z', check: quebraAtiva(), fn: alternarQuebra },
-    { rotulo: 'Minimapa', check: estado.minimapa, fn: alternarMinimapa },
-    { rotulo: 'Visualização ao Lado', check: estado.dividido, fn: alternarDivisao, off: !temVisual() },
+    { rotulo: L('Quebra de Linha', 'Word Wrap'), tecla: 'Alt+Z', check: quebraAtiva(), fn: alternarQuebra },
+    { rotulo: L('Minimapa', 'Minimap'), check: estado.minimapa, fn: alternarMinimapa },
+    { rotulo: L('Visualização ao Lado', 'Preview to the Side'), check: estado.dividido, fn: alternarDivisao, off: !temVisual() },
   ], e.currentTarget, { focar: e.detail === 0 }));
   $('#bt-lat-mais').addEventListener('click', (e) => alternarMenu(
     Object.entries(TITULOS_VISTA).map(([v, t]) => ({ rotulo: t, check: estado.vista === v, fn: () => mostrarVista(v, { alternar: false }) })),
@@ -2610,48 +3046,49 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   function alternarZen(forcar) {
     estado.zen = typeof forcar === 'boolean' ? forcar : !estado.zen;
     el.app.classList.toggle('zen', estado.zen);
-    if (estado.zen) notificar({ texto: 'Modo zen: só o editor. Esc para sair.' });
+    if (estado.zen) notificar({ texto: L('Modo zen: só o editor. Esc para sair.', 'Zen mode: just the editor. Esc to leave.') });
     requestAnimationFrame(sincronizarMinimapa);
   }
   function telaCheia() {
     if (d.fullscreenElement) d.exitFullscreen().catch(() => {});
-    else if (html.requestFullscreen) html.requestFullscreen().catch(() => notificar({ texto: 'O navegador não liberou a tela cheia agora.' }));
+    else if (html.requestFullscreen) html.requestFullscreen().catch(() => notificar({ texto: L('O navegador não liberou a tela cheia agora.', "The browser didn't allow full screen right now.") }));
   }
   $('#bt-minimizar').addEventListener('click', () => alternarZen());
   $('#bt-maximizar').addEventListener('click', telaCheia);
   $('#bt-fechar').addEventListener('click', () => notificar({
-    texto: 'Este editor não fecha por aqui. Antes de sair, que tal levar o contato?',
-    acoes: [{ rotulo: 'Ficar', sec: true }, { rotulo: 'Copiar e-mail', fn: copiarEmail }],
+    texto: L('Este editor não fecha por aqui. Antes de sair, que tal levar o contato?', "This editor doesn't close from here. Before you go, how about taking the contact?"),
+    acoes: [{ rotulo: L('Ficar', 'Stay'), sec: true }, { rotulo: L('Copiar e-mail', 'Copy email'), fn: copiarEmail }],
   }));
 
   /* ======================================================================
      Paleta de comandos
      ====================================================================== */
   const COMANDOS = () => [
-    { rotulo: 'Exibir: Alternar Terminal', tecla: 'Ctrl+J', fn: () => alternarPainel() },
-    { rotulo: 'Exibir: Alternar Painel Lateral', tecla: 'Ctrl+B', fn: () => alternarLateral() },
-    { rotulo: 'Exibir: Mostrar Explorador', tecla: 'Ctrl+Shift+E', fn: () => mostrarVista('explorer', { alternar: false }) },
-    { rotulo: 'Exibir: Mostrar Pesquisa', tecla: 'Ctrl+Shift+F', fn: () => mostrarVista('busca', { alternar: false }) },
-    { rotulo: 'Exibir: Mostrar Controle do Código-Fonte', tecla: 'Ctrl+Shift+G', fn: () => mostrarVista('scm', { alternar: false }) },
-    { rotulo: 'Exibir: Mostrar Extensões', tecla: 'Ctrl+Shift+X', fn: () => mostrarVista('extensoes', { alternar: false }) },
-    { rotulo: 'Exibir: Alternar Minimapa', fn: alternarMinimapa },
-    { rotulo: 'Exibir: Alternar Quebra de Linha', tecla: 'Alt+Z', fn: alternarQuebra },
-    { rotulo: 'Exibir: Alternar Modo Zen', fn: () => alternarZen() },
-    { rotulo: 'Exibir: Alternar Tela Inteira', fn: telaCheia },
-    { rotulo: 'Exibir: Mostrar Saída', fn: () => mostrarPainel('saida') },
-    { rotulo: 'Exibir: Mostrar Problemas', fn: () => mostrarPainel('problemas') },
-    { rotulo: 'Editor: Alternar Código ↔ Visualização', fn: alternarModo, off: !temVisual() || estado.dividido },
-    { rotulo: 'Editor: Abrir Visualização ao Lado', fn: alternarDivisao, off: !temVisual() },
-    { rotulo: 'Preferências: Tema de Cores', fn: () => setTimeout(() => abrirPaleta('', 'tema'), 0) },
-    { rotulo: 'Preferências: Abrir Configurações', fn: () => abrir('config') },
-    { rotulo: 'Ajuda: Atalhos de Teclado', fn: () => abrir('atalhos') },
-    { rotulo: 'Depurar: Iniciar Depuração', tecla: 'F5', fn: depurar },
-    { rotulo: 'Ana: Copiar E-mail', fn: copiarEmail },
-    { rotulo: 'Ana: Enviar E-mail', fn: () => { location.href = `mailto:${EMAIL}`; } },
-    { rotulo: 'Ana: Abrir GitHub', fn: () => abrirFora(GITHUB) },
-    { rotulo: 'Ana: Abrir LinkedIn', fn: () => abrirFora(LINKEDIN) },
-    { rotulo: 'Abas: Reabrir Todas', fn: reabrirTodas },
-    { rotulo: 'Abas: Fechar Todas', fn: fecharTodas },
+    { rotulo: L('Exibir: Alternar Terminal', 'View: Toggle Terminal'), tecla: 'Ctrl+J', fn: () => alternarPainel() },
+    { rotulo: L('Exibir: Alternar Painel Lateral', 'View: Toggle Side Bar'), tecla: 'Ctrl+B', fn: () => alternarLateral() },
+    { rotulo: L('Exibir: Mostrar Explorador', 'View: Show Explorer'), tecla: 'Ctrl+Shift+E', fn: () => mostrarVista('explorer', { alternar: false }) },
+    { rotulo: L('Exibir: Mostrar Pesquisa', 'View: Show Search'), tecla: 'Ctrl+Shift+F', fn: () => mostrarVista('busca', { alternar: false }) },
+    { rotulo: L('Exibir: Mostrar Controle do Código-Fonte', 'View: Show Source Control'), tecla: 'Ctrl+Shift+G', fn: () => mostrarVista('scm', { alternar: false }) },
+    { rotulo: L('Exibir: Mostrar Extensões', 'View: Show Extensions'), tecla: 'Ctrl+Shift+X', fn: () => mostrarVista('extensoes', { alternar: false }) },
+    { rotulo: L('Exibir: Alternar Minimapa', 'View: Toggle Minimap'), fn: alternarMinimapa },
+    { rotulo: L('Exibir: Alternar Quebra de Linha', 'View: Toggle Word Wrap'), tecla: 'Alt+Z', fn: alternarQuebra },
+    { rotulo: L('Exibir: Alternar Modo Zen', 'View: Toggle Zen Mode'), fn: () => alternarZen() },
+    { rotulo: L('Exibir: Alternar Tela Inteira', 'View: Toggle Full Screen'), fn: telaCheia },
+    { rotulo: L('Exibir: Mostrar Saída', 'View: Show Output'), fn: () => mostrarPainel('saida') },
+    { rotulo: L('Exibir: Mostrar Problemas', 'View: Show Problems'), fn: () => mostrarPainel('problemas') },
+    { rotulo: L('Editor: Alternar Código ↔ Visualização', 'Editor: Toggle Code ↔ Preview'), fn: alternarModo, off: !temVisual() || estado.dividido },
+    { rotulo: L('Editor: Abrir Visualização ao Lado', 'Editor: Open Preview to the Side'), fn: alternarDivisao, off: !temVisual() },
+    { rotulo: L('Preferências: Tema de Cores', 'Preferences: Color Theme'), fn: () => setTimeout(() => abrirPaleta('', 'tema'), 0) },
+    { rotulo: L('Configurar Idioma de Exibição', 'Configure Display Language'), fn: () => setTimeout(() => abrirPaleta('', 'idioma'), 0) },
+    { rotulo: L('Preferências: Abrir Configurações', 'Preferences: Open Settings'), fn: () => abrir('config') },
+    { rotulo: L('Ajuda: Atalhos de Teclado', 'Help: Keyboard Shortcuts'), fn: () => abrir('atalhos') },
+    { rotulo: L('Depurar: Iniciar Depuração', 'Debug: Start Debugging'), tecla: 'F5', fn: depurar },
+    { rotulo: L('Ana: Copiar E-mail', 'Ana: Copy Email'), fn: copiarEmail },
+    { rotulo: L('Ana: Enviar E-mail', 'Ana: Send Email'), fn: () => { location.href = `mailto:${EMAIL}`; } },
+    { rotulo: L('Ana: Abrir GitHub', 'Ana: Open GitHub'), fn: () => abrirFora(GITHUB) },
+    { rotulo: L('Ana: Abrir LinkedIn', 'Ana: Open LinkedIn'), fn: () => abrirFora(LINKEDIN) },
+    { rotulo: L('Abas: Reabrir Todas', 'Tabs: Reopen All'), fn: reabrirTodas },
+    { rotulo: L('Abas: Fechar Todas', 'Tabs: Close All'), fn: fecharTodas },
   ].filter((c) => !c.off);
 
   const pal = { modo: 'arquivos', itens: [], ativo: 0, devolver: null, temaAntes: null };
@@ -2685,9 +3122,10 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     el.paleta.hidden = false;
     el.app.inert = true;
     el.palIn.value = inicial;
-    el.palIn.placeholder = modo === 'tema'
-      ? 'Selecione o Tema de Cores (Setas Acima/Abaixo para Visualizar)'
-      : 'Pesquisar arquivos pelo nome (digite > para comandos)';
+    el.palIn.placeholder = {
+      tema: L('Selecione o Tema de Cores (Setas Acima/Abaixo para Visualizar)', 'Select Color Theme (Up/Down Keys to Preview)'),
+      idioma: L('Selecione o Idioma de Exibição', 'Select Display Language'),
+    }[modo] || L('Pesquisar arquivos pelo nome (digite > para comandos)', 'Search files by name (type > for commands)');
     filtrarPaleta();
     el.palIn.focus();
   }
@@ -2705,7 +3143,9 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const v = el.palIn.value;
     let itens = [];
     if (pal.modo === 'tema') {
-      itens = Object.entries(TEMAS).map(([k, t]) => ({ tipo: 'tema', chave: k, rotulo: t.nome, det: k === pal.temaAntes ? 'atual' : '', fn: () => aplicarTema(k) }));
+      itens = Object.entries(TEMAS).map(([k, t]) => ({ tipo: 'tema', chave: k, rotulo: t.nome, det: k === pal.temaAntes ? L('atual', 'current') : '', fn: () => aplicarTema(k) }));
+    } else if (pal.modo === 'idioma') {
+      itens = Object.entries(IDIOMAS).map(([k, nome]) => ({ tipo: 'idioma', chave: k, rotulo: nome, det: k === html.dataset.idioma ? L('atual', 'current') : '', fn: () => trocarIdioma(k) }));
     } else if (v.startsWith('>')) {
       itens = COMANDOS().map((c) => ({ ...c, tipo: 'cmd' }));
     } else {
@@ -2717,14 +3157,14 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       .map((it) => ({ ...it, casa: casar(it.rotulo, q) }))
       .filter((it) => it.casa)
       .sort((a, b) => (q ? b.casa.pontos - a.casa.pontos : 0));
-    if (pal.modo === 'tema') pal.ativo = Math.max(0, pal.itens.findIndex((it) => it.chave === estado.tema));
-    else pal.ativo = 0;
+    const atual = { tema: estado.tema, idioma: html.dataset.idioma }[pal.modo];
+    pal.ativo = atual ? Math.max(0, pal.itens.findIndex((it) => it.chave === atual)) : 0;
     renderPaleta();
   }
 
   function renderPaleta() {
     if (!pal.itens.length) {
-      el.palLista.innerHTML = '<li class="pal-vazio" role="presentation">Nenhum resultado correspondente</li>';
+      el.palLista.innerHTML = `<li class="pal-vazio" role="presentation">${L('Nenhum resultado correspondente', 'No matching results')}</li>`;
       el.palIn.removeAttribute('aria-activedescendant');
       return;
     }
@@ -2732,11 +3172,11 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     el.palLista.innerHTML = pal.itens.map((it, i) => {
       let h = '';
       if (pal.modo === 'arquivos' && it.tipo !== grupoAnterior && el.palIn.value.trim() && !el.palIn.value.startsWith('>')) {
-        h += `<li class="pal-grupo" role="presentation">${it.tipo === 'arq' ? 'arquivos' : 'comandos'}</li>`;
+        h += `<li class="pal-grupo" role="presentation">${it.tipo === 'arq' ? L('arquivos', 'files') : L('comandos', 'commands')}</li>`;
         grupoAnterior = it.tipo;
       }
       const teclas = it.tecla ? `<span class="lado">${it.tecla.split('+').map((t) => `<kbd>${esc(t)}</kbd>`).join('')}</span>` : '';
-      const icone = it.tipo === 'arq' ? ic(it.icone) : it.tipo === 'tema' ? ic('color-mode') : '';
+      const icone = it.tipo === 'arq' ? ic(it.icone) : it.tipo === 'tema' ? ic('color-mode') : it.tipo === 'idioma' ? ic('globe') : '';
       return `${h}<li class="pal-item${i === pal.ativo ? ' ativo' : ''}" id="pal-op-${i}" role="option" aria-selected="${i === pal.ativo}" data-i="${i}">${icone}<span class="rot">${realcar(it.rotulo, it.casa.marcas)}</span>${it.det ? `<span class="det">${esc(it.det)}</span>` : ''}${teclas}</li>`;
     }).join('');
     el.palIn.setAttribute('aria-activedescendant', `pal-op-${pal.ativo}`);
@@ -2758,7 +3198,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     it.fn();
   }
   el.palIn.addEventListener('input', () => {
-    if (pal.modo === 'tema' && el.palIn.value.startsWith('>')) pal.modo = 'arquivos';
+    if (pal.modo !== 'arquivos' && el.palIn.value.startsWith('>')) pal.modo = 'arquivos';
     filtrarPaleta();
   });
   el.palIn.addEventListener('keydown', (e) => {
@@ -2808,7 +3248,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
      ====================================================================== */
   const ACOES = {
     tema: (bt) => alternarMenu(itensTema(), bt, { focar: true }),
-    'novo-arquivo': () => notificar({ texto: 'Este workspace é somente leitura, mas o terminal aceita comandos: Ctrl+J e digite help.' }),
+    'novo-arquivo': () => notificar({ texto: L('Este workspace é somente leitura, mas o terminal aceita comandos: Ctrl+J e digite help.', 'This workspace is read-only, but the terminal takes commands: Ctrl+J and type help.') }),
     recolher: () => {
       estado.pastas = {};
       renderArvore();
@@ -2826,14 +3266,14 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     'term-perfis': (bt) => alternarMenu([
       { rotulo: 'pwsh', check: true, fn: ACOES['term-novo'] },
       '-',
-      { rotulo: 'Configurar Perfil Padrão do Terminal', fn: () => abrir('config') },
+      { rotulo: L('Configurar Perfil Padrão do Terminal', 'Select Default Profile'), fn: () => abrir('config') },
     ], bt, { focar: true }),
     'term-mais': (bt) => alternarMenu([
-      { rotulo: 'Novo Terminal', fn: ACOES['term-novo'] },
-      { rotulo: 'Limpar Terminal', tecla: 'Ctrl+L', fn: () => { limparTerminal(); el.termIn.focus(); } },
+      { rotulo: L('Novo Terminal', 'New Terminal'), fn: ACOES['term-novo'] },
+      { rotulo: L('Limpar Terminal', 'Clear Terminal'), tecla: 'Ctrl+L', fn: () => { limparTerminal(); el.termIn.focus(); } },
       '-',
-      { rotulo: 'Histórico de Comandos', fn: () => { executar('history'); el.termIn.focus(); } },
-      { rotulo: 'Configurações do Terminal', fn: () => abrir('config') },
+      { rotulo: L('Histórico de Comandos', 'Command History'), fn: () => { executar('history'); el.termIn.focus(); } },
+      { rotulo: L('Configurações do Terminal', 'Terminal Settings'), fn: () => abrir('config') },
     ], bt, { focar: true }),
     'term-limpar': () => {
       if (estado.painelAba === 'terminal') limparTerminal();
@@ -2848,7 +3288,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     'painel-max': (bt) => {
       const max = el.painel.classList.toggle('max');
       $('use', bt).setAttribute('href', `#i-${max ? 'screen-normal' : 'screen-full'}`);
-      bt.setAttribute('aria-label', max ? 'Restaurar painel' : 'Maximizar painel');
+      bt.setAttribute('aria-label', max ? L('Restaurar painel', 'Restore panel') : L('Maximizar painel', 'Maximize panel'));
       requestAnimationFrame(sincronizarMinimapa);
     },
     'painel-fechar': () => alternarPainel(false),
@@ -2975,8 +3415,8 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     renderArvore();
     render();
     aplicarLateral();
-    registrar(`workbench pronto em ${Math.round(performance.now())} ms`);
-    registrar(`tema de cores: ${TEMAS[estado.tema].nome}`);
+    registrar(`${L('workbench pronto em', 'workbench ready in')} ${Math.round(performance.now())} ms`);
+    registrar(`${L('tema de cores', 'color theme')}: ${TEMAS[estado.tema].nome}`);
     if (!guarda.lerSessao('ana-notif')) setTimeout(notificarDica, 4500);
   }
 

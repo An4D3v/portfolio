@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://rumo-amber.vercel.app https://financas-app-ruby.vercel.app https://vale-do-trevo.vercel.app https://notas-fiscais-ana.vercel.app; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>Ana Neves · Software Developer</title>
-<meta name="description" content="Ana Neves — desenvolvedora de software em São Paulo: backend, dados e IA em produção. Um portfólio que é um editor de código: abra as abas para ver projetos no ar, experiência, stack e contato.">
+<meta name="description" data-en-content="Ana Neves — software developer in São Paulo: backend, data and AI in production. A portfolio that is a code editor: open the tabs to see live projects, experience, stack and contact." content="Ana Neves — desenvolvedora de software em São Paulo: backend, dados e IA em produção. Um portfólio que é um editor de código: abra as abas para ver projetos no ar, experiência, stack e contato.">
 <meta name="author" content="Ana Neves">
 <meta name="theme-color" content="#1f1f1f">
 <meta property="og:type" content="website">
@@ -97,6 +97,7 @@
 <symbol id="i-map" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 3.5L5.5 1.5L10.5 3.5L14.5 1.5V12.5L10.5 14.5L5.5 12.5L1.5 14.5Z"/><path d="M5.5 1.5V12.5M10.5 3.5V14.5"/></g></symbol>
 <symbol id="i-minimap" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="1.5" width="13" height="13" rx="1"/><path d="M10.5 1.5V14.5"/><path d="M3.5 4.5H8.5M3.5 6.5H7M3.5 8.5H8.5M3.5 10.5H6"/><rect x="11" y="3" width="3" height="4" fill="currentColor" stroke="none" opacity="0.55"/></g></symbol>
 <symbol id="i-color-mode" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 1.5A6.5 6.5 0 0 1 8 14.5Z" fill="currentColor" stroke="none"/></g></symbol>
+<symbol id="i-globe" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 1.5C5.2 4.6 5.2 11.4 8 14.5M8 1.5C10.8 4.6 10.8 11.4 8 14.5"/><path d="M1.5 8H14.5M2.6 4.75H13.4M2.6 11.25H13.4"/></g></symbol>
 <symbol id="i-keyboard" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="3.5" width="12" height="9" rx="1"/><path d="M4.5 10.5H10.5"/><path d="M3 5h1v1H3ZM5 5h1v1H5ZM7 5h1v1H7ZM9 5h1v1H9ZM11 5h1v1H11ZM3 7h1v1H3ZM5 7h1v1H5ZM7 7h1v1H7ZM9 7h1v1H9ZM11 7h1v1H11Z" fill="currentColor" stroke="none"/></g></symbol>
 <symbol id="i-collapse-all" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="4.5" width="10" height="10"/><path d="M4 9.5H9"/><path d="M4.5 4.5V1.5H14.5V11.5H11.5"/></g></symbol>
 <symbol id="i-new-file" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 14.5H2.5V1.5H8.5L12.5 5.5V8"/><path d="M8.5 1.5V5.5H12.5"/><path d="M12.5 10V15M10 12.5H15"/></g></symbol>
@@ -137,7 +138,7 @@
 </svg>
 <!--sprite:fim-->
 
-<a class="pular" href="#editor">Pular para o conteúdo</a>
+<a class="pular" href="#editor" data-en="Skip to content">Pular para o conteúdo</a>
 
 <noscript>
   <div class="md">
@@ -147,54 +148,55 @@
       <a href="https://github.com/An4D3v">GitHub</a> ·
       <a href="https://www.linkedin.com/in/anad3v/">LinkedIn</a> ·
       <a href="mailto:ana-neves98@outlook.com">ana-neves98@outlook.com</a></p>
+    <p lang="en">Software Developer — backend, data and AI in production. This portfolio is an interactive code editor and needs JavaScript; the links above work in the meantime.</p>
   </div>
 </noscript>
 
 <div class="app" id="app">
 
   <header class="titulo">
-    <button class="logo" id="bt-logo" type="button" aria-label="Abrir Extensão: Ana Neves" title="Extensão: Ana Neves">
+    <button class="logo" id="bt-logo" type="button" aria-label="Abrir Extensão: Ana Neves" data-en-aria-label="Open Extension: Ana Neves" title="Extensão: Ana Neves" data-en-title="Extension: Ana Neves">
       <svg viewBox="-70 -70 140 140" aria-hidden="true"><path class="floco-bracos" d="M0 -10L0 -62M-12 -26L0 -38L12 -26M-7 -49L0 -56L7 -49M8.66 -5L53.69 -31M16.52 -23.39L32.91 -19L28.52 -2.61M38.94 -30.56L48.5 -28L45.94 -18.44M8.66 5L53.69 31M28.52 2.61L32.91 19L16.52 23.39M45.94 18.44L48.5 28L38.94 30.56M0 10L0 62M12 26L0 38L-12 26M7 49L0 56L-7 49M-8.66 5L-53.69 31M-16.52 23.39L-32.91 19L-28.52 2.61M-38.94 30.56L-48.5 28L-45.94 18.44M-8.66 -5L-53.69 -31M-28.52 -2.61L-32.91 -19L-16.52 -23.39M-45.94 -18.44L-48.5 -28L-38.94 -30.56" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle class="floco-centro" r="7"/></svg>
     </button>
-    <nav class="menus" id="menus" aria-label="Menu do aplicativo"></nav>
+    <nav class="menus" id="menus" aria-label="Menu do aplicativo" data-en-aria-label="Application menu"></nav>
     <div class="centro-titulo">
-      <button class="nav-bt" id="bt-voltar" type="button" aria-label="Voltar para a aba anterior" aria-disabled="true"><svg class="ic" aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
-      <button class="nav-bt" id="bt-avancar" type="button" aria-label="Avançar para a próxima aba" aria-disabled="true"><svg class="ic" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
-      <button class="comando-central" id="bt-central" type="button" aria-label="portfolio-ana-neves: pesquisar arquivos e comandos (Ctrl+P)">
+      <button class="nav-bt" id="bt-voltar" type="button" aria-label="Voltar para a aba anterior" data-en-aria-label="Go back to the previous tab" aria-disabled="true"><svg class="ic" aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+      <button class="nav-bt" id="bt-avancar" type="button" aria-label="Avançar para a próxima aba" data-en-aria-label="Go forward to the next tab" aria-disabled="true"><svg class="ic" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+      <button class="comando-central" id="bt-central" type="button" aria-label="portfolio-ana-neves: pesquisar arquivos e comandos (Ctrl+P)" data-en-aria-label="portfolio-ana-neves: search files and commands (Ctrl+P)">
         <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg><span>portfolio-ana-neves</span>
       </button>
     </div>
     <div class="layout-bts">
-      <button class="layout-bt" id="bt-layout-lateral" type="button" aria-label="Mostrar ou esconder o painel lateral (Ctrl+B)" aria-pressed="true"><svg class="ic" aria-hidden="true"><use href="#i-layout-sidebar-left"/></svg></button>
-      <button class="layout-bt" id="bt-layout-painel" type="button" aria-label="Mostrar ou esconder o painel inferior (Ctrl+J)" aria-pressed="false"><svg class="ic" aria-hidden="true"><use href="#i-layout-panel"/></svg></button>
-      <button class="layout-bt" id="bt-layout-mais" type="button" aria-label="Personalizar layout"><svg class="ic" aria-hidden="true"><use href="#i-layout"/></svg></button>
+      <button class="layout-bt" id="bt-layout-lateral" type="button" aria-label="Mostrar ou esconder o painel lateral (Ctrl+B)" data-en-aria-label="Show or hide the side bar (Ctrl+B)" aria-pressed="true"><svg class="ic" aria-hidden="true"><use href="#i-layout-sidebar-left"/></svg></button>
+      <button class="layout-bt" id="bt-layout-painel" type="button" aria-label="Mostrar ou esconder o painel inferior (Ctrl+J)" data-en-aria-label="Show or hide the bottom panel (Ctrl+J)" aria-pressed="false"><svg class="ic" aria-hidden="true"><use href="#i-layout-panel"/></svg></button>
+      <button class="layout-bt" id="bt-layout-mais" type="button" aria-label="Personalizar layout" data-en-aria-label="Customize layout"><svg class="ic" aria-hidden="true"><use href="#i-layout"/></svg></button>
     </div>
     <div class="janela">
-      <button class="janela-bt" id="bt-minimizar" type="button" aria-label="Modo zen"><svg class="ic" aria-hidden="true"><use href="#i-chrome-minimize"/></svg></button>
-      <button class="janela-bt" id="bt-maximizar" type="button" aria-label="Tela cheia"><svg class="ic" aria-hidden="true"><use href="#i-chrome-maximize"/></svg></button>
-      <button class="janela-bt fechar" id="bt-fechar" type="button" aria-label="Fechar"><svg class="ic" aria-hidden="true"><use href="#i-chrome-close"/></svg></button>
+      <button class="janela-bt" id="bt-minimizar" type="button" aria-label="Modo zen" data-en-aria-label="Zen mode"><svg class="ic" aria-hidden="true"><use href="#i-chrome-minimize"/></svg></button>
+      <button class="janela-bt" id="bt-maximizar" type="button" aria-label="Tela cheia" data-en-aria-label="Full screen"><svg class="ic" aria-hidden="true"><use href="#i-chrome-maximize"/></svg></button>
+      <button class="janela-bt fechar" id="bt-fechar" type="button" aria-label="Fechar" data-en-aria-label="Close"><svg class="ic" aria-hidden="true"><use href="#i-chrome-close"/></svg></button>
     </div>
   </header>
 
   <div class="bancada">
 
-    <nav class="atividades" aria-label="Barra de atividades">
-      <button class="at-bt" type="button" data-vista="explorer" aria-pressed="true" aria-label="Arquivos: explorador (Ctrl+Shift+E)" title="Explorador (Ctrl+Shift+E)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-files"/></svg><span class="at-rot" aria-hidden="true">Arquivos</span></button>
-      <button class="at-bt" type="button" data-vista="busca" aria-pressed="false" aria-label="Pesquisa em todos os arquivos (Ctrl+Shift+F)" title="Pesquisar (Ctrl+Shift+F)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-search"/></svg><span class="at-rot" aria-hidden="true">Pesquisa</span></button>
-      <button class="at-bt" type="button" data-vista="scm" aria-pressed="false" aria-label="Git: repositórios e recado (Ctrl+Shift+G)" title="Controle do Código-Fonte (Ctrl+Shift+G)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-source-control"/></svg><span class="at-rot" aria-hidden="true">Git</span></button>
-      <button class="at-bt so-desktop" type="button" data-vista="depurar" aria-pressed="false" aria-label="Executar e depurar (Ctrl+Shift+D)" title="Executar e Depurar (Ctrl+Shift+D)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-debug-alt"/></svg><span class="at-rot" aria-hidden="true">Executar</span></button>
-      <button class="at-bt" type="button" data-vista="extensoes" aria-pressed="false" aria-label="Stack: extensões instaladas (Ctrl+Shift+X)" title="Extensões (Ctrl+Shift+X)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-extensions"/></svg><span class="at-rot" aria-hidden="true">Stack</span></button>
+    <nav class="atividades" aria-label="Barra de atividades" data-en-aria-label="Activity bar">
+      <button class="at-bt" type="button" data-vista="explorer" aria-pressed="true" aria-label="Arquivos: explorador (Ctrl+Shift+E)" data-en-aria-label="Files: explorer (Ctrl+Shift+E)" title="Explorador (Ctrl+Shift+E)" data-en-title="Explorer (Ctrl+Shift+E)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-files"/></svg><span class="at-rot" aria-hidden="true" data-en="Files">Arquivos</span></button>
+      <button class="at-bt" type="button" data-vista="busca" aria-pressed="false" aria-label="Pesquisa em todos os arquivos (Ctrl+Shift+F)" data-en-aria-label="Search across all files (Ctrl+Shift+F)" title="Pesquisar (Ctrl+Shift+F)" data-en-title="Search (Ctrl+Shift+F)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-search"/></svg><span class="at-rot" aria-hidden="true" data-en="Search">Pesquisa</span></button>
+      <button class="at-bt" type="button" data-vista="scm" aria-pressed="false" aria-label="Git: repositórios e recado (Ctrl+Shift+G)" data-en-aria-label="Git: repositories and a message (Ctrl+Shift+G)" title="Controle do Código-Fonte (Ctrl+Shift+G)" data-en-title="Source Control (Ctrl+Shift+G)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-source-control"/></svg><span class="at-rot" aria-hidden="true">Git</span></button>
+      <button class="at-bt so-desktop" type="button" data-vista="depurar" aria-pressed="false" aria-label="Executar e depurar (Ctrl+Shift+D)" data-en-aria-label="Run and debug (Ctrl+Shift+D)" title="Executar e Depurar (Ctrl+Shift+D)" data-en-title="Run and Debug (Ctrl+Shift+D)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-debug-alt"/></svg><span class="at-rot" aria-hidden="true" data-en="Run">Executar</span></button>
+      <button class="at-bt" type="button" data-vista="extensoes" aria-pressed="false" aria-label="Stack: extensões instaladas (Ctrl+Shift+X)" data-en-aria-label="Stack: installed extensions (Ctrl+Shift+X)" title="Extensões (Ctrl+Shift+X)" data-en-title="Extensions (Ctrl+Shift+X)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-extensions"/></svg><span class="at-rot" aria-hidden="true">Stack</span></button>
       <button class="at-bt so-celular" type="button" id="bt-at-terminal" aria-label="Terminal" title="Terminal"><svg class="ic ic-24" aria-hidden="true"><use href="#i-terminal"/></svg><span class="at-rot" aria-hidden="true">Terminal</span></button>
       <span class="at-espaco"></span>
-      <button class="at-bt" type="button" id="bt-conta" aria-label="Links da Ana: GitHub, LinkedIn e e-mail" title="Contas"><svg class="ic ic-24" aria-hidden="true"><use href="#i-account"/></svg><span class="at-rot" aria-hidden="true">Links</span></button>
-      <button class="at-bt so-desktop" type="button" id="bt-gerenciar" aria-label="Gerenciar: tema, atalhos e configurações" title="Gerenciar"><svg class="ic ic-24" aria-hidden="true"><use href="#i-settings-gear"/></svg></button>
+      <button class="at-bt" type="button" id="bt-conta" aria-label="Links da Ana: GitHub, LinkedIn e e-mail" title="Contas" data-en-aria-label="Ana's links: GitHub, LinkedIn and email" data-en-title="Accounts"><svg class="ic ic-24" aria-hidden="true"><use href="#i-account"/></svg><span class="at-rot" aria-hidden="true">Links</span></button>
+      <button class="at-bt so-desktop" type="button" id="bt-gerenciar" aria-label="Gerenciar: tema, idioma, atalhos e configurações" title="Gerenciar" data-en-aria-label="Manage: theme, language, shortcuts and settings" data-en-title="Manage"><svg class="ic ic-24" aria-hidden="true"><use href="#i-settings-gear"/></svg></button>
     </nav>
 
     <aside class="lateral" id="lateral" aria-labelledby="lat-titulo">
       <div class="lat-topo">
-        <h2 class="lat-titulo" id="lat-titulo">Explorador</h2>
-        <button class="icone-bt lat-fechar" id="bt-lat-fechar" type="button" aria-label="Fechar painel lateral"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
-        <button class="icone-bt" id="bt-lat-mais" type="button" aria-label="Mais ações"><svg class="ic" aria-hidden="true"><use href="#i-ellipsis"/></svg></button>
+        <h2 class="lat-titulo" id="lat-titulo" data-en="Explorer">Explorador</h2>
+        <button class="icone-bt lat-fechar" id="bt-lat-fechar" type="button" aria-label="Fechar painel lateral" data-en-aria-label="Close side bar"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
+        <button class="icone-bt" id="bt-lat-mais" type="button" aria-label="Mais ações" data-en-aria-label="More actions"><svg class="ic" aria-hidden="true"><use href="#i-ellipsis"/></svg></button>
       </div>
 
       <!-- Explorer -->
@@ -205,8 +207,8 @@
               <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">portfolio-ana-neves</span>
             </button>
             <span class="secao-acoes">
-              <button class="icone-bt" type="button" data-acao="novo-arquivo" aria-label="Novo arquivo"><svg class="ic" aria-hidden="true"><use href="#i-new-file"/></svg></button>
-              <button class="icone-bt" type="button" data-acao="recolher" aria-label="Recolher pastas"><svg class="ic" aria-hidden="true"><use href="#i-collapse-all"/></svg></button>
+              <button class="icone-bt" type="button" data-acao="novo-arquivo" aria-label="Novo arquivo" data-en-aria-label="New file"><svg class="ic" aria-hidden="true"><use href="#i-new-file"/></svg></button>
+              <button class="icone-bt" type="button" data-acao="recolher" aria-label="Recolher pastas" data-en-aria-label="Collapse folders"><svg class="ic" aria-hidden="true"><use href="#i-collapse-all"/></svg></button>
             </span>
           </div>
           <div class="secao-corpo" id="corpo-arquivos">
@@ -215,13 +217,13 @@
         </section>
         <section class="secao" id="sec-estrutura">
           <button class="secao-cab" type="button" aria-expanded="false" aria-controls="corpo-estrutura">
-            <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">Estrutura de Tópicos</span>
+            <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo" data-en="Outline">Estrutura de Tópicos</span>
           </button>
           <div class="secao-corpo" id="corpo-estrutura"><ul class="arvore" id="estrutura"></ul></div>
         </section>
         <section class="secao" id="sec-linha">
           <button class="secao-cab" type="button" aria-expanded="false" aria-controls="corpo-linha">
-            <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">Linha do Tempo</span>
+            <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo" data-en="Timeline">Linha do Tempo</span>
           </button>
           <div class="secao-corpo" id="corpo-linha"><ul class="arvore" id="linha-tempo"></ul></div>
         </section>
@@ -230,7 +232,7 @@
       <!-- Pesquisar -->
       <div class="vista" id="vista-busca" hidden>
         <div class="busca-caixa">
-          <input class="campo" id="busca-in" type="search" placeholder="Pesquisar" aria-label="Pesquisar em todos os arquivos" autocomplete="off" spellcheck="false">
+          <input class="campo" id="busca-in" type="search" placeholder="Pesquisar" aria-label="Pesquisar em todos os arquivos" data-en-placeholder="Search" data-en-aria-label="Search across all files" autocomplete="off" spellcheck="false">
         </div>
         <p class="busca-resumo" id="busca-resumo" aria-live="polite"></p>
         <div class="secao-corpo" id="busca-res"></div>
@@ -240,23 +242,23 @@
       <div class="vista" id="vista-scm" hidden>
         <section class="secao aberta">
           <button class="secao-cab" type="button" aria-expanded="true" aria-controls="corpo-commit">
-            <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">Mande um recado</span>
+            <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo" data-en="Send a message">Mande um recado</span>
           </button>
           <div class="secao-corpo" id="corpo-commit">
             <form class="scm" id="form-commit">
-              <label class="sr" for="commit-msg">Mensagem para a Ana</label>
-              <textarea class="campo" id="commit-msg" rows="3" placeholder="Mensagem (Ctrl+Enter para fazer commit em 'main')"></textarea>
+              <label class="sr" for="commit-msg" data-en="Message to Ana">Mensagem para a Ana</label>
+              <textarea class="campo" id="commit-msg" rows="3" placeholder="Mensagem (Ctrl+Enter para fazer commit em 'main')" data-en-placeholder="Message (Ctrl+Enter to commit on 'main')"></textarea>
               <button class="botao cheio" type="submit"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Commit</button>
-              <p class="scm-nota">O commit aqui vira e-mail: abre o seu cliente de e-mail com a mensagem já preenchida para a Ana.</p>
+              <p class="scm-nota" data-en="Committing here sends an email: it opens your email client with the message already filled in for Ana.">O commit aqui vira e-mail: abre o seu cliente de e-mail com a mensagem já preenchida para a Ana.</p>
             </form>
           </div>
         </section>
         <section class="secao aberta cresce">
           <button class="secao-cab" type="button" aria-expanded="true" aria-controls="corpo-repos">
-            <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">Repositórios públicos</span>
+            <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo" data-en="Public repositories">Repositórios públicos</span>
           </button>
           <div class="secao-corpo" id="corpo-repos"><ul class="arvore" id="repos"></ul>
-            <p class="vazio-msg">Os sistemas do trabalho e alguns apps pessoais são privados.</p>
+            <p class="vazio-msg" data-en="Work systems and some personal apps are private.">Os sistemas do trabalho e alguns apps pessoais são privados.</p>
           </div>
         </section>
       </div>
@@ -264,75 +266,75 @@
       <!-- Executar e depurar -->
       <div class="vista" id="vista-depurar" hidden>
         <div class="depurar">
-          <button class="botao cheio" type="button" data-acao="depurar">Executar e Depurar</button>
-          <p>Roda o <code>while (true)</code> da Ana: aprende, constrói e publica. A saída aparece no <strong>Debug Console</strong> e a barra de status muda de cor enquanto depura, como no VS Code.</p>
-          <p>Atalho: <kbd>F5</kbd></p>
+          <button class="botao cheio" type="button" data-acao="depurar" data-en="Run and Debug">Executar e Depurar</button>
+          <p data-en="Runs Ana's <code>while (true)</code>: learn, build and ship. The output shows up in the <strong>Debug Console</strong> and the status bar changes color while debugging, just like in VS Code.">Roda o <code>while (true)</code> da Ana: aprende, constrói e publica. A saída aparece no <strong>Debug Console</strong> e a barra de status muda de cor enquanto depura, como no VS Code.</p>
+          <p data-en="Shortcut: <kbd>F5</kbd>">Atalho: <kbd>F5</kbd></p>
         </div>
       </div>
 
       <!-- Extensões -->
       <div class="vista" id="vista-extensoes" hidden>
         <div class="busca-caixa">
-          <input class="campo" id="ext-in" type="search" placeholder="Pesquisar Extensões Instaladas" aria-label="Filtrar a stack" autocomplete="off" spellcheck="false">
+          <input class="campo" id="ext-in" type="search" placeholder="Pesquisar Extensões Instaladas" aria-label="Filtrar a stack" data-en-placeholder="Search Installed Extensions" data-en-aria-label="Filter the stack" autocomplete="off" spellcheck="false">
         </div>
         <section class="secao aberta cresce">
           <button class="secao-cab" type="button" aria-expanded="true" aria-controls="corpo-ext">
-            <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">Instaladas</span><span class="res-cont" id="ext-cont"></span>
+            <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo" data-en="Installed">Instaladas</span><span class="res-cont" id="ext-cont"></span>
           </button>
           <div class="secao-corpo" id="corpo-ext"><div id="ext-lista"></div></div>
         </section>
       </div>
 
-      <div class="sash" id="sash-lateral" role="separator" aria-orientation="vertical" aria-label="Redimensionar painel lateral"></div>
+      <div class="sash" id="sash-lateral" role="separator" aria-orientation="vertical" aria-label="Redimensionar painel lateral" data-en-aria-label="Resize side bar"></div>
     </aside>
 
     <main class="area" id="area">
       <div class="abas-linha">
-        <nav class="abas" id="abas" aria-label="Abas abertas"></nav>
+        <nav class="abas" id="abas" aria-label="Abas abertas" data-en-aria-label="Open tabs"></nav>
         <div class="acoes-editor">
-          <button class="acao-bt" id="bt-modo" type="button" aria-label="Mostrar código-fonte"><svg class="ic" aria-hidden="true"><use href="#i-go-to-file"/></svg></button>
-          <button class="acao-bt" id="bt-dividir" type="button" aria-pressed="false" aria-label="Abrir visualização ao lado"><svg class="ic" aria-hidden="true"><use href="#i-split-horizontal"/></svg></button>
-          <button class="acao-bt" id="bt-editor-mais" type="button" aria-label="Mais ações do editor"><svg class="ic" aria-hidden="true"><use href="#i-ellipsis"/></svg></button>
+          <button class="acao-bt" id="bt-modo" type="button" aria-label="Mostrar código-fonte" data-en-aria-label="Show source"><svg class="ic" aria-hidden="true"><use href="#i-go-to-file"/></svg></button>
+          <button class="acao-bt" id="bt-dividir" type="button" aria-pressed="false" aria-label="Abrir visualização ao lado" data-en-aria-label="Open preview to the side"><svg class="ic" aria-hidden="true"><use href="#i-split-horizontal"/></svg></button>
+          <button class="acao-bt" id="bt-editor-mais" type="button" aria-label="Mais ações do editor" data-en-aria-label="More editor actions"><svg class="ic" aria-hidden="true"><use href="#i-ellipsis"/></svg></button>
         </div>
       </div>
-      <div class="migalha" id="migalha" aria-label="Caminho do arquivo"></div>
+      <div class="migalha" id="migalha" aria-label="Caminho do arquivo" data-en-aria-label="File path"></div>
       <div class="grupos">
         <div class="grupo">
           <div class="editor" id="editor" tabindex="0" role="region" aria-label="Editor"></div>
           <div class="minimapa" id="minimapa" aria-hidden="true" hidden><div class="mm-conteudo" id="mm-conteudo"></div><div class="mm-janela" id="mm-janela"></div></div>
         </div>
         <div class="grupo" id="grupo-lado" hidden>
-          <div class="editor" id="editor-lado" tabindex="0" role="region" aria-label="Visualização ao lado"></div>
+          <div class="editor" id="editor-lado" tabindex="0" role="region" aria-label="Visualização ao lado" data-en-aria-label="Preview to the side"></div>
         </div>
       </div>
 
-      <section class="painel" id="painel" aria-label="Painel" hidden>
-        <div class="sash-h" id="sash-painel" role="separator" aria-orientation="horizontal" aria-label="Redimensionar painel"></div>
+      <section class="painel" id="painel" aria-label="Painel" data-en-aria-label="Panel" hidden>
+        <div class="sash-h" id="sash-painel" role="separator" aria-orientation="horizontal" aria-label="Redimensionar painel" data-en-aria-label="Resize panel"></div>
         <div class="painel-cab">
-          <div class="painel-abas" role="tablist" aria-label="Painel">
-            <button class="painel-aba" type="button" role="tab" id="pa-problemas" data-painel="problemas" aria-selected="false" aria-controls="painel-corpo">Problemas</button>
-            <button class="painel-aba" type="button" role="tab" id="pa-saida" data-painel="saida" aria-selected="false" aria-controls="painel-corpo">Saída</button>
-            <button class="painel-aba" type="button" role="tab" id="pa-depuracao" data-painel="depuracao" aria-selected="false" aria-controls="painel-corpo">Console de Depuração</button>
+          <div class="painel-abas" role="tablist" aria-label="Painel" data-en-aria-label="Panel">
+            <button class="painel-aba" type="button" role="tab" id="pa-problemas" data-painel="problemas" aria-selected="false" aria-controls="painel-corpo" data-en="Problems">Problemas</button>
+            <button class="painel-aba" type="button" role="tab" id="pa-saida" data-painel="saida" aria-selected="false" aria-controls="painel-corpo" data-en="Output">Saída</button>
+            <button class="painel-aba" type="button" role="tab" id="pa-depuracao" data-painel="depuracao" aria-selected="false" aria-controls="painel-corpo" data-en="Debug Console">Console de Depuração</button>
             <button class="painel-aba" type="button" role="tab" id="pa-terminal" data-painel="terminal" aria-selected="true" aria-controls="painel-corpo">Terminal</button>
-            <button class="painel-aba" type="button" role="tab" id="pa-portas" data-painel="portas" aria-selected="false" aria-controls="painel-outro">Portas<span class="painel-selo" aria-label="4 portas encaminhadas">4</span></button>
+            <button class="painel-aba" type="button" role="tab" id="pa-portas" data-painel="portas" aria-selected="false" aria-controls="painel-outro"><span data-en="Ports">Portas</span><span class="painel-selo" aria-label="4 portas encaminhadas" data-en-aria-label="4 forwarded ports">4</span></button>
           </div>
           <div class="painel-acoes">
             <span class="term-perfil so-terminal" title="pwsh"><svg class="ic" aria-hidden="true"><use href="#i-terminal"/></svg>pwsh</span>
-            <button class="icone-bt so-terminal" type="button" data-acao="term-novo" aria-label="Novo terminal" title="Novo Terminal"><svg class="ic" aria-hidden="true"><use href="#i-add"/></svg></button>
-            <button class="icone-bt icone-bt-seta so-terminal" type="button" data-acao="term-perfis" aria-label="Iniciar perfil do terminal" aria-haspopup="menu" aria-expanded="false" title="Iniciar Perfil..."><svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg></button>
-            <button class="icone-bt" type="button" data-acao="term-limpar" aria-label="Limpar" title="Limpar"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></button>
-            <button class="icone-bt so-terminal" type="button" data-acao="term-mais" aria-label="Mais ações do terminal" aria-haspopup="menu" aria-expanded="false" title="Mais Ações..."><svg class="ic" aria-hidden="true"><use href="#i-ellipsis"/></svg></button>
+            <button class="icone-bt so-terminal" type="button" data-acao="term-novo" aria-label="Novo terminal" title="Novo Terminal" data-en-aria-label="New terminal" data-en-title="New Terminal"><svg class="ic" aria-hidden="true"><use href="#i-add"/></svg></button>
+            <button class="icone-bt icone-bt-seta so-terminal" type="button" data-acao="term-perfis" aria-label="Iniciar perfil do terminal" aria-haspopup="menu" aria-expanded="false" title="Iniciar Perfil..." data-en-aria-label="Launch terminal profile" data-en-title="Launch Profile..."><svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg></button>
+            <button class="icone-bt" type="button" data-acao="term-limpar" aria-label="Limpar" title="Limpar" data-en-aria-label="Clear" data-en-title="Clear"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></button>
+            <button class="icone-bt so-terminal" type="button" data-acao="term-mais" aria-label="Mais ações do terminal" aria-haspopup="menu" aria-expanded="false" title="Mais Ações..." data-en-aria-label="More terminal actions" data-en-title="More Actions..."><svg class="ic" aria-hidden="true"><use href="#i-ellipsis"/></svg></button>
             <span class="painel-sep" aria-hidden="true"></span>
-            <button class="icone-bt" type="button" data-acao="painel-max" aria-label="Maximizar painel" title="Maximizar Tamanho do Painel"><svg class="ic" aria-hidden="true"><use href="#i-screen-full"/></svg></button>
-            <button class="icone-bt" type="button" data-acao="painel-fechar" aria-label="Fechar painel" title="Ocultar Painel"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
+            <button class="icone-bt" type="button" data-acao="painel-max" aria-label="Maximizar painel" title="Maximizar Tamanho do Painel" data-en-aria-label="Maximize panel" data-en-title="Maximize Panel Size"><svg class="ic" aria-hidden="true"><use href="#i-screen-full"/></svg></button>
+            <button class="icone-bt" type="button" data-acao="painel-fechar" aria-label="Fechar painel" title="Ocultar Painel" data-en-aria-label="Close panel" data-en-title="Hide Panel"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
           </div>
         </div>
-        <div class="term-chips" id="term-chips" aria-label="Comandos rápidos">
+        <div class="term-chips" id="term-chips" aria-label="Comandos rápidos" data-en-aria-label="Quick commands">
           <button class="chip" type="button" data-cmd="help">help</button>
           <button class="chip" type="button" data-cmd="whoami">whoami</button>
-          <button class="chip" type="button" data-cmd="projetos">projetos</button>
+          <button class="chip" type="button" data-cmd="projetos" data-en-data-cmd="projects" data-en="projects">projetos</button>
           <button class="chip" type="button" data-cmd="stack">stack</button>
-          <button class="chip" type="button" data-cmd="contato">contato</button>
+          <button class="chip" type="button" data-cmd="contato" data-en-data-cmd="contact" data-en="contact">contato</button>
           <button class="chip" type="button" data-cmd="clear">clear</button>
         </div>
         <div class="painel-corpo" id="painel-corpo" role="tabpanel" aria-labelledby="pa-terminal">
@@ -343,11 +345,11 @@
               <input id="term-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="send" aria-describedby="term-dica">
               <span class="term-cursor" aria-hidden="true"></span>
             </span>
-            <span class="term-sugestao" aria-hidden="true">Digite <kbd>help</kbd> e <kbd>Enter</kbd> para ver os comandos. Comece a digitar para descartar.</span>
-            <span class="sr" id="term-dica">Digite help para ver os comandos. Tab completa, setas navegam no histórico.</span>
+            <span class="term-sugestao" aria-hidden="true" data-en="Type <kbd>help</kbd> and <kbd>Enter</kbd> to see the commands. Start typing to dismiss.">Digite <kbd>help</kbd> e <kbd>Enter</kbd> para ver os comandos. Comece a digitar para descartar.</span>
+            <span class="sr" id="term-dica" data-en="Type help to see the commands. Tab completes, arrow keys walk the history.">Digite help para ver os comandos. Tab completa, setas navegam no histórico.</span>
           </form>
         </div>
-        <div class="term-lista" id="term-lista" role="list" aria-label="Terminais">
+        <div class="term-lista" id="term-lista" role="list" aria-label="Terminais" data-en-aria-label="Terminals">
           <button class="term-lista-item" type="button" role="listitem" data-acao="term-focar"><svg class="ic" aria-hidden="true"><use href="#i-terminal"/></svg>pwsh</button>
         </div>
         <div class="painel-corpo ui" id="painel-outro" hidden></div>
@@ -355,32 +357,33 @@
     </main>
   </div>
 
-  <footer class="status" id="status" aria-label="Barra de status">
-    <button class="st st-remoto" type="button" id="st-remoto" aria-label="ana@dev: abrir a paleta de comandos"><svg class="ic" aria-hidden="true"><use href="#i-remote"/></svg>ana@dev</button>
-    <button class="st" type="button" id="st-branch" aria-label="Branch main: ver repositórios"><svg class="ic" aria-hidden="true"><use href="#i-git-branch"/></svg>main<svg class="ic" aria-hidden="true"><use href="#i-sync"/></svg></button>
-    <button class="st" type="button" id="st-problemas"><svg class="ic" aria-hidden="true"><use href="#i-error"/></svg>0<span class="sr"> erros, </span><svg class="ic" aria-hidden="true"><use href="#i-warning"/></svg>0<span class="sr"> avisos: abrir o painel de problemas</span></button>
+  <footer class="status" id="status" aria-label="Barra de status" data-en-aria-label="Status bar">
+    <button class="st st-remoto" type="button" id="st-remoto" aria-label="ana@dev: abrir a paleta de comandos" data-en-aria-label="ana@dev: open the command palette"><svg class="ic" aria-hidden="true"><use href="#i-remote"/></svg>ana@dev</button>
+    <button class="st" type="button" id="st-branch" aria-label="Branch main: ver repositórios" data-en-aria-label="Branch main: see repositories"><svg class="ic" aria-hidden="true"><use href="#i-git-branch"/></svg>main<svg class="ic" aria-hidden="true"><use href="#i-sync"/></svg></button>
+    <button class="st" type="button" id="st-problemas"><svg class="ic" aria-hidden="true"><use href="#i-error"/></svg>0<span class="sr" data-en=" errors, "> erros, </span><svg class="ic" aria-hidden="true"><use href="#i-warning"/></svg>0<span class="sr" data-en=" warnings: open the problems panel"> avisos: abrir o painel de problemas</span></button>
     <span class="st-esp"></span>
     <span class="st st-ocultar" id="st-pos">Ln 1, Col 1</span>
-    <span class="st st-ocultar st-codigo" id="st-esp">Espaços: 2</span>
+    <span class="st st-ocultar st-codigo" id="st-esp" data-en="Spaces: 2">Espaços: 2</span>
     <span class="st st-ocultar st-codigo">UTF-8</span>
     <span class="st st-ocultar st-codigo">LF</span>
     <span class="st" id="st-ling"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg>Markdown</span>
-    <button class="st" type="button" id="st-sino" aria-label="Notificações"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg></button>
+    <button class="st" type="button" id="st-idioma" aria-label="Idioma PT: trocar para inglês" title="Trocar para inglês (English)" data-en-aria-label="Language EN: switch to Portuguese" data-en-title="Switch to Portuguese (Português)"><svg class="ic" aria-hidden="true"><use href="#i-globe"/></svg><span data-en="EN">PT</span></button>
+    <button class="st" type="button" id="st-sino" aria-label="Notificações" data-en-aria-label="Notifications"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg></button>
   </footer>
 </div>
 
 <div class="fundo" id="fundo" hidden></div>
 <div class="menu" id="menu" role="menu" hidden></div>
-<div class="paleta" id="paleta" role="dialog" aria-modal="true" aria-label="Paleta de comandos" hidden>
-  <input class="campo" id="pal-in" type="text" role="combobox" aria-expanded="true" aria-controls="pal-lista" aria-autocomplete="list" autocomplete="off" spellcheck="false" aria-label="Digite o nome de um arquivo, ou > para comandos">
-  <ul class="pal-lista" id="pal-lista" role="listbox" aria-label="Resultados"></ul>
+<div class="paleta" id="paleta" role="dialog" aria-modal="true" aria-label="Paleta de comandos" data-en-aria-label="Command palette" hidden>
+  <input class="campo" id="pal-in" type="text" role="combobox" aria-expanded="true" aria-controls="pal-lista" aria-autocomplete="list" autocomplete="off" spellcheck="false" aria-label="Digite o nome de um arquivo, ou > para comandos" data-en-aria-label="Type a file name, or > for commands">
+  <ul class="pal-lista" id="pal-lista" role="listbox" aria-label="Resultados" data-en-aria-label="Results"></ul>
 </div>
 <div class="dica" id="dica" role="tooltip" hidden></div>
-<div class="notificacoes" id="notificacoes" role="region" aria-label="Notificações" aria-live="polite"></div>
+<div class="notificacoes" id="notificacoes" role="region" aria-label="Notificações" data-en-aria-label="Notifications" aria-live="polite"></div>
 <div class="barra-depuracao" id="barra-depuracao" hidden>
   <span class="icone-bt" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg></span>
   <span class="icone-bt" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-refresh"/></svg></span>
-  <button class="icone-bt" type="button" data-acao="depurar-parar" aria-label="Parar depuração"><svg class="ic" aria-hidden="true"><use href="#i-debug-stop"/></svg></button>
+  <button class="icone-bt" type="button" data-acao="depurar-parar" aria-label="Parar depuração" data-en-aria-label="Stop debugging"><svg class="ic" aria-hidden="true"><use href="#i-debug-stop"/></svg></button>
 </div>
 
 <!-- ===================== visualizações das abas ===================== -->
@@ -782,6 +785,407 @@
     </ul>
     <pre><code><span class="t-ctl">while</span> (<span class="t-const">true</span>) { <span class="t-fn">learn</span>(); <span class="t-fn">build</span>(); <span class="t-fn">ship</span>(); }</code></pre>
     <p class="md-rodape">© 2026 Ana Flávia Oliveira das Neves · feito à mão com HTML, CSS e JavaScript puros — sem framework, sem dependências.</p>
+  </article>
+</template>
+
+<!-- ===================== versão em inglês das visualizações (o app.js escolhe pelo idioma) ===================== -->
+<template id="tpl-extensao-en">
+  <div class="ext">
+    <header class="ext-cabecalho">
+      <div class="ext-avatar">
+        <span class="ext-avatar-iniciais" aria-hidden="true">AN</span>
+        <picture>
+          <source media="(prefers-reduced-motion: reduce)" srcset="assets/ana-acenando.webp">
+          <img class="ext-foto" src="assets/ana-programando.webp" srcset="assets/ana-programando-128.webp 128w, assets/ana-programando.webp 256w" sizes="(max-width: 760px) 104px, 128px" fetchpriority="high" width="256" height="256" alt="Pixel art illustration of Ana coding and waving">
+        </picture>
+      </div>
+      <div class="ext-info">
+        <h1 class="ext-titulo">Ana Neves</h1>
+        <div class="ext-subtitulo">
+          <span class="ext-sub-item ext-publisher">
+            <span class="ext-publisher-nome">ana@dev</span>
+            <svg class="ic ext-verificado" role="img" aria-label="verified"><use href="#i-verified-filled"/></svg>
+            <a class="ext-sub-link" href="https://github.com/An4D3v" target="_blank" rel="noopener">github.com/An4D3v<span class="ext-sr"> (opens in a new tab)</span></a>
+          </span>
+          <span class="ext-sub-item" title="records processed by the pipelines she maintains">
+            <svg class="ic" aria-hidden="true"><use href="#i-cloud-download"/></svg>
+            <span>4.5M+ records</span>
+          </span>
+          <span class="ext-sub-item" title="people using the apps she built and runs">
+            <svg class="ic" aria-hidden="true"><use href="#i-person"/></svg>
+            <span>70+ users</span>
+          </span>
+        </div>
+        <p class="ext-descricao">Software Developer with her own products live.</p>
+        <div class="ext-acoes">
+          <a class="ext-btn ext-btn-primario" href="mailto:ana-neves98@outlook.com">Get in touch</a>
+          <a class="ext-btn ext-btn-secundario" href="https://github.com/An4D3v" target="_blank" rel="noopener">
+            <span class="ext-btn-rotulo"><svg class="ic" aria-hidden="true"><use href="#i-github"/></svg>GitHub</span>
+            <span class="ext-btn-extra" aria-hidden="true"><svg class="ic"><use href="#i-link-external"/></svg></span>
+            <span class="ext-sr"> (opens in a new tab)</span>
+          </a>
+          <a class="ext-btn ext-btn-secundario" href="https://www.linkedin.com/in/anad3v/" target="_blank" rel="noopener">
+            <span class="ext-btn-rotulo"><svg class="ic" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</span>
+            <span class="ext-btn-extra" aria-hidden="true"><svg class="ic"><use href="#i-link-external"/></svg></span>
+            <span class="ext-sr"> (opens in a new tab)</span>
+          </a>
+          <button type="button" class="ext-btn-icone" data-acao="tema" aria-label="Change color theme" title="Change color theme"><svg class="ic" aria-hidden="true"><use href="#i-settings-gear"/></svg></button>
+        </div>
+      </div>
+    </header>
+
+    <div class="ext-navbar">
+      <div class="ext-abas" role="tablist" aria-label="Sections">
+        <button type="button" class="ext-aba" role="tab" id="ext-aba-detalhes" aria-selected="true" aria-controls="ext-painel-detalhes">Details</button>
+        <button type="button" class="ext-aba" role="tab" id="ext-aba-recursos" aria-selected="false" aria-controls="ext-painel-recursos" tabindex="-1">Features</button>
+        <button type="button" class="ext-aba" role="tab" id="ext-aba-changelog" aria-selected="false" aria-controls="ext-painel-changelog" tabindex="-1">Changelog</button>
+      </div>
+    </div>
+
+    <div class="ext-painel" role="tabpanel" id="ext-painel-detalhes" aria-labelledby="ext-aba-detalhes" tabindex="0">
+      <div class="ext-detalhes">
+        <article class="ext-md">
+          <h2 class="ext-md-h1">Backend, data and AI <span class="ext-md-link">in&nbsp;production</span></h2>
+
+          <blockquote class="ext-md-citacao">
+            <p>I build pipelines that move millions of records, AI bots that answer in Teams and apps that real people use every day.</p>
+          </blockquote>
+
+          <p>I like systems that explain themselves: idempotent, measured and with tests that know how to fail.</p>
+
+          <h3 class="ext-md-h2">Numbers</h3>
+          <ul class="ext-numeros" role="list">
+            <li class="ext-num">
+              <span class="ext-num-valor" aria-hidden="true" data-ext-contar data-ext-alvo="4.5" data-ext-casas="1" data-ext-depois="M+">4.5M+</span>
+              <span class="ext-sr">4.5M+</span>
+              <span class="ext-num-rotulo">records processed by the pipelines I maintain</span>
+              <button type="button" class="ext-ir" data-ir="experiencia|4.5M+ records" aria-label="4.5M+ records processed: see where it comes from" title="See where it comes from"><svg class="ic" aria-hidden="true"><use href="#i-go-to-file"/></svg></button>
+            </li>
+            <li class="ext-num">
+              <span class="ext-num-valor" aria-hidden="true" data-ext-contar data-ext-alvo="70" data-ext-depois="+">70+</span>
+              <span class="ext-sr">70+</span>
+              <span class="ext-num-rotulo">people using the apps I built and run</span>
+              <button type="button" class="ext-ir" data-ir="projetos#pj-rumo, #pj-alien" aria-label="70+ people using the apps: see where it comes from" title="See where it comes from"><svg class="ic" aria-hidden="true"><use href="#i-go-to-file"/></svg></button>
+            </li>
+            <li class="ext-num">
+              <span class="ext-num-valor" aria-hidden="true" data-ext-contar data-ext-alvo="28">28</span>
+              <span class="ext-sr">28</span>
+              <span class="ext-num-rotulo">integration tests against a real SQL Server, in .NET microservices</span>
+              <button type="button" class="ext-ir" data-ir="projetos#pj-notas" aria-label="28 integration tests: see where it comes from" title="See where it comes from"><svg class="ic" aria-hidden="true"><use href="#i-go-to-file"/></svg></button>
+            </li>
+            <li class="ext-num">
+              <span class="ext-num-valor" aria-hidden="true" data-ext-contar data-ext-alvo="91" data-ext-antes="−" data-ext-depois="%">−91%</span>
+              <span class="ext-sr">−91%</span>
+              <span class="ext-num-rotulo">API quota errors, thanks to smart load orchestration</span>
+              <button type="button" class="ext-ir" data-ir="experiencia|−91%" aria-label="−91% quota errors: see where it comes from" title="See where it comes from"><svg class="ic" aria-hidden="true"><use href="#i-go-to-file"/></svg></button>
+            </li>
+          </ul>
+
+          <h3 class="ext-md-h2">Live products</h3>
+          <ul class="ext-produtos" role="list">
+            <li class="ext-produto">
+              <strong class="ext-produto-nome">Rumo</strong>
+              <span class="ext-produto-desc">personal routine companion (PWA, Web Push, MFA, 40+ users)</span>
+              <a class="ext-produto-link" href="https://rumo-amber.vercel.app" target="_blank" rel="noopener">open the app<span class="ext-sr"> Rumo (opens in a new tab)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
+            </li>
+            <li class="ext-produto">
+              <strong class="ext-produto-nome">AlienFinanças</strong>
+              <span class="ext-produto-desc">personal finance with AI receipt reading (20+ users)</span>
+              <a class="ext-produto-link" href="https://financas-app-ruby.vercel.app" target="_blank" rel="noopener">open the app<span class="ext-sr"> AlienFinanças (opens in a new tab)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
+            </li>
+            <li class="ext-produto">
+              <strong class="ext-produto-nome">Notas Fiscais</strong>
+              <span class="ext-produto-desc">two .NET microservices with 28 integration tests</span>
+              <a class="ext-produto-link" href="https://notas-fiscais-ana.vercel.app" target="_blank" rel="noopener">open the app<span class="ext-sr"> Notas Fiscais (opens in a new tab)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
+            </li>
+            <li class="ext-produto">
+              <strong class="ext-produto-nome">Vale do Trevo</strong>
+              <span class="ext-produto-desc">2D game in plain canvas, chapter 1 playable</span>
+              <a class="ext-produto-link" href="https://vale-do-trevo.vercel.app" target="_blank" rel="noopener">play<span class="ext-sr"> Vale do Trevo (opens in a new tab)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
+            </li>
+          </ul>
+          <p class="ext-ver-todos">
+            <button type="button" class="ext-link-botao" data-abrir="projetos">see them all in <span class="ext-mono">projects.tsx</span></button>
+          </p>
+
+          <figure class="ext-codigo">
+            <div class="ext-codigo-barra" aria-hidden="true">
+              <span class="ext-codigo-pontos"><span></span><span></span><span></span></span>
+              <span class="ext-codigo-arquivo">routine.cs</span>
+            </div>
+            <div class="ext-codigo-corpo">
+              <span class="ext-codigo-numeros" aria-hidden="true">1<br>2<br>3</span>
+              <pre class="ext-codigo-pre"><code><span class="ext-sx-k">while</span> <span class="ext-sx-p">(</span><span class="ext-sx-n">true</span><span class="ext-sx-p">)</span> <span class="ext-sx-p">{</span>
+    <span class="ext-sx-f">learn</span><span class="ext-sx-p">();</span> <span class="ext-sx-f">build</span><span class="ext-sx-p">();</span> <span class="ext-sx-f">ship</span><span class="ext-sx-p">();</span>
+  <span class="ext-sx-p">}</span></code></pre>
+            </div>
+          </figure>
+
+          <h3 class="ext-md-h2">Getting around</h3>
+          <ul class="ext-md-lista">
+            <li>The tabs up top are the sections: <button type="button" class="ext-arquivo" data-abrir="projetos">projects.tsx</button>, <button type="button" class="ext-arquivo" data-abrir="experiencia">experience.cs</button>, <button type="button" class="ext-arquivo" data-abrir="stack">stack.json</button> and <button type="button" class="ext-arquivo" data-abrir="contato">contact.ts</button>.</li>
+            <li>Every tab has a preview and source code: the button in the top-right corner switches between them.</li>
+            <li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> opens the command palette and <kbd>Ctrl</kbd>+<kbd>J</kbd> opens the terminal — just like the real VS Code.</li>
+          </ul>
+        </article>
+
+        <aside class="ext-lateral" aria-label="More information">
+          <section class="ext-lat-secao">
+            <h2 class="ext-lat-titulo">Installation</h2>
+            <table class="ext-tabela">
+              <tbody>
+                <tr><th scope="row">Identifier</th><td>ana-neves.software-developer</td></tr>
+                <tr><th scope="row">Version</th><td>2026.10</td></tr>
+                <tr><th scope="row">Based in</th><td>São Paulo, Brazil</td></tr>
+                <tr><th scope="row">Updated</th><td>Oct 2026</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="ext-lat-secao">
+            <h2 class="ext-lat-titulo">Categories</h2>
+            <ul class="ext-chips" role="list">
+              <li class="ext-chip">Backend</li>
+              <li class="ext-chip">.NET</li>
+              <li class="ext-chip">Azure</li>
+              <li class="ext-chip">Data</li>
+              <li class="ext-chip">AI</li>
+              <li class="ext-chip">Automation</li>
+            </ul>
+          </section>
+          <section class="ext-lat-secao">
+            <h2 class="ext-lat-titulo">Resources</h2>
+            <ul class="ext-lat-links" role="list">
+              <li><a class="ext-lat-link" href="https://github.com/An4D3v" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-github"/></svg>Repositories<span class="ext-sr"> on GitHub (opens in a new tab)</span></a></li>
+              <li><a class="ext-lat-link" href="https://www.linkedin.com/in/anad3v/" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn<span class="ext-sr"> (opens in a new tab)</span></a></li>
+              <li><a class="ext-lat-link" href="mailto:ana-neves98@outlook.com"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg>Email</a></li>
+              <li><button type="button" class="ext-lat-link" data-abrir="projetos"><svg class="ic" aria-hidden="true"><use href="#i-rocket"/></svg>Projects</button></li>
+              <li><button type="button" class="ext-lat-link" data-abrir="stack"><svg class="ic" aria-hidden="true"><use href="#i-server"/></svg>Stack</button></li>
+            </ul>
+          </section>
+        </aside>
+      </div>
+    </div>
+
+    <div class="ext-painel" role="tabpanel" id="ext-painel-recursos" aria-labelledby="ext-aba-recursos" tabindex="0" hidden>
+      <div class="ext-md ext-md-largo">
+        <h2 class="ext-sr">Features</h2>
+        <ul class="ext-recursos" role="list">
+          <li class="ext-recurso">
+            <span class="ext-recurso-icone" aria-hidden="true"><svg class="ic"><use href="#i-database"/></svg></span>
+            <div class="ext-recurso-texto">
+              <h3 class="ext-recurso-titulo">Integration pipelines</h3>
+              <p class="ext-recurso-prova">7+ incremental loads from a legal ERP into Azure SQL: 4.5M+ records, idempotent MERGE, watermark and CI/CD with OIDC.</p>
+            </div>
+            <button type="button" class="ext-ir" data-ir="experiencia|Integration pipelines" aria-label="Integration pipelines: see where it comes from" title="See where it comes from"><svg class="ic" aria-hidden="true"><use href="#i-go-to-file"/></svg></button>
+          </li>
+          <li class="ext-recurso">
+            <span class="ext-recurso-icone" aria-hidden="true"><svg class="ic"><use href="#i-history"/></svg></span>
+            <div class="ext-recurso-texto">
+              <h3 class="ext-recurso-titulo">Smart load orchestration</h3>
+              <p class="ext-recurso-prova">A scheduler that decides what to re-read and when, instead of fixed windows: −66% API calls and −91% quota errors.</p>
+            </div>
+            <button type="button" class="ext-ir" data-ir="experiencia|Smart load orchestration" aria-label="Smart load orchestration: see where it comes from" title="See where it comes from"><svg class="ic" aria-hidden="true"><use href="#i-go-to-file"/></svg></button>
+          </li>
+          <li class="ext-recurso">
+            <span class="ext-recurso-icone" aria-hidden="true"><svg class="ic"><use href="#i-comment-discussion"/></svg></span>
+            <div class="ext-recurso-texto">
+              <h3 class="ext-recurso-titulo">AI bots in Teams</h3>
+              <p class="ext-recurso-prova">Company-wide AI hub with SSO (Entra ID) and legal case lookup with Adaptive Cards, in production with real users.</p>
+            </div>
+            <button type="button" class="ext-ir" data-ir="experiencia|AI bots in Teams" aria-label="AI bots in Teams: see where it comes from" title="See where it comes from"><svg class="ic" aria-hidden="true"><use href="#i-go-to-file"/></svg></button>
+          </li>
+          <li class="ext-recurso">
+            <span class="ext-recurso-icone" aria-hidden="true"><svg class="ic"><use href="#i-sparkle"/></svg></span>
+            <div class="ext-recurso-texto">
+              <h3 class="ext-recurso-titulo">AI classification of legal notices</h3>
+              <p class="ext-recurso-prova">LLM classifier in production, with accuracy measured against a human answer key and shadow runs before promoting a new model.</p>
+            </div>
+            <button type="button" class="ext-ir" data-ir="experiencia|AI classification" aria-label="AI classification of legal notices: see where it comes from" title="See where it comes from"><svg class="ic" aria-hidden="true"><use href="#i-go-to-file"/></svg></button>
+          </li>
+          <li class="ext-recurso">
+            <span class="ext-recurso-icone" aria-hidden="true"><svg class="ic"><use href="#i-server"/></svg></span>
+            <div class="ext-recurso-texto">
+              <h3 class="ext-recurso-titulo">Migration to Azure SQL</h3>
+              <p class="ext-recurso-prova">~292k records migrated with source = target reconciliation: zero mismatches, passwordless authentication via Entra ID.</p>
+            </div>
+            <button type="button" class="ext-ir" data-ir="experiencia|Migration to Azure SQL" aria-label="Migration to Azure SQL: see where it comes from" title="See where it comes from"><svg class="ic" aria-hidden="true"><use href="#i-go-to-file"/></svg></button>
+          </li>
+          <li class="ext-recurso">
+            <span class="ext-recurso-icone" aria-hidden="true"><svg class="ic"><use href="#i-sync"/></svg></span>
+            <div class="ext-recurso-texto">
+              <h3 class="ext-recurso-titulo">Automation &amp; RPA</h3>
+              <p class="ext-recurso-prova">Python + Selenium robots collecting regulatory reports for multiple clients: −65% manual effort.</p>
+            </div>
+            <button type="button" class="ext-ir" data-ir="experiencia|Automation" aria-label="Automation and RPA: see where it comes from" title="See where it comes from"><svg class="ic" aria-hidden="true"><use href="#i-go-to-file"/></svg></button>
+          </li>
+        </ul>
+        <p class="ext-nota"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg><span>Private code, public results — details in <button type="button" class="ext-arquivo" data-abrir="experiencia">experience.cs</button></span></p>
+      </div>
+    </div>
+
+    <div class="ext-painel" role="tabpanel" id="ext-painel-changelog" aria-labelledby="ext-aba-changelog" tabindex="0" hidden>
+      <div class="ext-md ext-md-largo">
+        <h2 class="ext-md-h1">Changelog</h2>
+        <section class="ext-versao">
+          <h3 class="ext-md-h2"><span class="ext-versao-tag">[current]</span> — first and only developer · law firm, São Paulo</h3>
+          <ul class="ext-md-lista">
+            <li>Built from scratch the platform that ties together the legal ERP, the data-collection robots and the AI bots.</li>
+            <li>Technical mentor to an intern.</li>
+          </ul>
+        </section>
+        <section class="ext-versao">
+          <h3 class="ext-md-h2"><span class="ext-versao-tag">[parallel]</span> — own products</h3>
+          <ul class="ext-md-lista">
+            <li>I keep three products of my own live; it's where I first try what I later bring to work: PWA, Web Push, MFA, RLS, AI document reading.</li>
+          </ul>
+        </section>
+        <section class="ext-versao">
+          <h3 class="ext-md-h2"><span class="ext-versao-tag">[start]</span> — data · Jusbrasil</h3>
+          <ul class="ext-md-lista">
+            <li>Large-scale data collection with crawlers.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-projetos-en">
+  <article class="md">
+    <h1>Projects</h1>
+    <p class="md-sub">Built, shipped and run by me — from database to deploy.</p>
+    <p>Each app's badge is measured right now, from your browser: if it responds, it shows <strong>live</strong> with the response time. <span class="so-mouse">Hover over a card to see the app running.</span><span class="so-toque">Press and hold a card to see the app running.</span></p>
+    <div class="cartoes">
+      <section class="cartao" aria-labelledby="pj-rumo">
+        <video class="cartao-previa" src="assets/previas/rumo.mp4" poster="assets/previas/rumo.webp" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
+        <div class="cartao-topo">
+          <h2 id="pj-rumo">Rumo</h2>
+          <span class="vivo" data-status="rumo"><span class="vivo-ponto"></span><span class="vivo-txt">checking…</span></span>
+        </div>
+        <p class="cartao-tipo">PWA · in production</p>
+        <p>Personal routine companion with Web Push reminders, MFA (TOTP) sign-in and its own admin panel. <strong>40+ registered users.</strong></p>
+        <p class="cartao-stack"><code>React</code> <code>TypeScript</code> <code>Supabase</code> <code>Vercel</code></p>
+        <p class="cartao-links"><a href="https://rumo-amber.vercel.app" target="_blank" rel="noopener">Open the app<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a></p>
+      </section>
+      <section class="cartao" aria-labelledby="pj-alien">
+        <video class="cartao-previa" src="assets/previas/alien.mp4" poster="assets/previas/alien.webp" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
+        <div class="cartao-topo">
+          <h2 id="pj-alien">AlienFinanças</h2>
+          <span class="vivo" data-status="alien"><span class="vivo-ponto"></span><span class="vivo-txt">checking…</span></span>
+        </div>
+        <p class="cartao-tipo">full-stack · in production</p>
+        <p>Personal finance dashboard with AI receipt reading: a photo of the receipt becomes categorized items. Row Level Security and automatic deploys. <strong>20+ registered users.</strong></p>
+        <p class="cartao-stack"><code>React</code> <code>TypeScript</code> <code>Supabase</code> <code>AI (LLM)</code></p>
+        <p class="cartao-links"><a href="https://financas-app-ruby.vercel.app" target="_blank" rel="noopener">Open the app<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a></p>
+      </section>
+      <section class="cartao" aria-labelledby="pj-notas">
+        <video class="cartao-previa" src="assets/previas/notas.mp4" poster="assets/previas/notas.webp" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
+        <div class="cartao-topo">
+          <h2 id="pj-notas">Notas Fiscais — microservices</h2>
+          <span class="vivo" data-status="notas"><span class="vivo-ponto"></span><span class="vivo-txt">checking…</span></span>
+        </div>
+        <p class="cartao-tipo">C# / .NET 8 · Angular</p>
+        <p>Brazilian invoicing (<em>notas fiscais</em>) in two .NET microservices that never let stock go negative, even under contention: an atomic UPDATE, idempotency and failure recovery. <strong>28 integration tests</strong> against a real SQL Server.</p>
+        <p class="cartao-stack"><code>C#</code> <code>.NET 8</code> <code>Angular</code> <code>EF Core</code></p>
+        <p class="cartao-links"><a href="https://notas-fiscais-ana.vercel.app" target="_blank" rel="noopener">Open the app<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a> <a href="https://github.com/An4D3v/notas-fiscais-microsservicos" target="_blank" rel="noopener">View the code<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a></p>
+      </section>
+      <section class="cartao" aria-labelledby="pj-trevo">
+        <video class="cartao-previa" src="assets/previas/trevo.mp4" poster="assets/previas/trevo.webp" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
+        <div class="cartao-topo">
+          <h2 id="pj-trevo">Vale do Trevo</h2>
+          <span class="vivo" data-status="trevo"><span class="vivo-ponto"></span><span class="vivo-txt">checking…</span></span>
+        </div>
+        <p class="cartao-tipo">game · in the browser</p>
+        <p>Hand-drawn top-down 2D game in plain canvas, no engine — chapter 1 playable. Art by my friend, code by me.</p>
+        <p class="cartao-stack"><code>TypeScript</code> <code>Vite</code> <code>Canvas</code></p>
+        <p class="cartao-links">
+          <a href="https://vale-do-trevo.vercel.app" target="_blank" rel="noopener">Play<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
+          <a href="https://github.com/An4D3v/vale-do-trevo" target="_blank" rel="noopener">Code<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
+        </p>
+      </section>
+    </div>
+    <blockquote><p>Work systems are private — their results are in <a href="#experiencia" data-abrir="experiencia">experience.cs</a>.</p></blockquote>
+  </article>
+</template>
+
+<template id="tpl-experiencia-en">
+  <article class="md">
+    <h1>Experience</h1>
+    <p class="md-sub">From data collection to owning the platform.</p>
+    <h2>Career path</h2>
+    <ol class="trilha">
+      <li class="agora">
+        <h3>First and only developer · law firm, São Paulo</h3>
+        <p class="trilha-quando">today</p>
+        <p>I built from scratch the platform that ties together the legal ERP, the data-collection robots and the AI bots — and I'm the technical mentor of an intern.</p>
+      </li>
+      <li>
+        <h3>Own products</h3>
+        <p class="trilha-quando">in parallel</p>
+        <p>Three products live, built after hours. It's where I first try what I later bring to work: PWA, Web Push, MFA, RLS, AI document reading.</p>
+      </li>
+      <li>
+        <h3>Data · Jusbrasil</h3>
+        <p class="trilha-quando">start</p>
+        <p>Large-scale data collection with crawlers.</p>
+      </li>
+    </ol>
+    <h2>Behind the scenes</h2>
+    <p>Private code, public results.</p>
+    <ul class="entregas">
+      <li><h3>Integration pipelines</h3><p>7+ incremental loads from a legal ERP into Azure SQL: <strong>4.5M+ records</strong>, idempotent MERGE, watermark and CI/CD with OIDC.</p></li>
+      <li><h3>Smart load orchestration</h3><p>A scheduler that decides what to re-read and when, instead of fixed windows: <strong>−66% API calls</strong> and <strong>−91% quota errors</strong>.</p></li>
+      <li><h3>AI bots in Teams</h3><p>Company-wide AI hub with SSO (Entra ID) and legal case lookup with Adaptive Cards — in production, with real users.</p></li>
+      <li><h3>AI classification of legal notices</h3><p>LLM classifier in production, with accuracy measured against a human answer key and shadow runs before promoting a new model.</p></li>
+      <li><h3>Migration to Azure SQL</h3><p>~292k records migrated with source = target reconciliation: <strong>zero mismatches</strong>, passwordless authentication via Entra ID.</p></li>
+      <li><h3>Automation &amp; RPA</h3><p>Python + Selenium robots collecting regulatory reports for multiple clients: <strong>−65% manual effort</strong>.</p></li>
+    </ul>
+  </article>
+</template>
+
+<template id="tpl-stack-en">
+  <article class="md">
+    <h1>Stack</h1>
+    <p class="md-sub">What I work with every day.</p>
+    <div class="md-tabela">
+      <table>
+        <thead><tr><th scope="col">area</th><th scope="col">tools</th></tr></thead>
+        <tbody>
+          <tr><td>backend</td><td>C# · .NET 8 · Python · REST APIs · OAuth2 · EF Core</td></tr>
+          <tr><td>cloud</td><td>Azure App Service · Azure SQL · Azure Automation · Key Vault · Application Insights · Entra ID · Microsoft Graph</td></tr>
+          <tr><td>data</td><td>SQL Server · T-SQL · PostgreSQL · Supabase · incremental ETL · reconciliation</td></tr>
+          <tr><td>front</td><td>Angular · React · TypeScript · Vite · PWA</td></tr>
+          <tr><td>ai</td><td>LLMs in production · Bot Framework · prompt engineering · accuracy measurement</td></tr>
+          <tr><td>automation</td><td>Python · Selenium · runbooks</td></tr>
+          <tr><td>devops</td><td>GitHub Actions · OIDC · CI/CD with test gates · Vercel · observability</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Each item also shows up as an installed extension in the side bar — the blocks icon, on the left.</p>
+  </article>
+</template>
+
+<template id="tpl-contato-en">
+  <article class="md">
+    <h1>Let's talk</h1>
+    <p class="md-sub">About <strong>.NET backend</strong>, <strong>data</strong> and <strong>applied AI</strong>. São Paulo, Brazil.</p>
+    <div class="email-caixa">
+      <svg class="ic ic-20" aria-hidden="true"><use href="#i-mail"/></svg>
+      <a class="email" href="mailto:ana-neves98@outlook.com">ana-neves98@outlook.com</a>
+      <button class="botao sec" type="button" data-copiar="email"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button>
+    </div>
+    <p class="botoes">
+      <a class="botao marca" href="mailto:ana-neves98@outlook.com"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg>Send email</a>
+      <a class="botao sec" href="https://github.com/An4D3v" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
+      <a class="botao sec" href="https://www.linkedin.com/in/anad3v/" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
+    </p>
+    <h2>Other ways</h2>
+    <ul>
+      <li>In the left bar, the <strong>Source Control</strong> icon: write your message and <em>commit</em> — it opens your email already filled in.</li>
+      <li>In the terminal (<kbd>Ctrl</kbd>+<kbd>J</kbd>), type <code>contact</code>.</li>
+    </ul>
+    <pre><code><span class="t-ctl">while</span> (<span class="t-const">true</span>) { <span class="t-fn">learn</span>(); <span class="t-fn">build</span>(); <span class="t-fn">ship</span>(); }</code></pre>
+    <p class="md-rodape">© 2026 Ana Flávia Oliveira das Neves · handmade with plain HTML, CSS and JavaScript — no framework, no dependencies.</p>
   </article>
 </template>
 

@@ -10,6 +10,7 @@ Meu portfólio é um editor de código: a interface do VS Code recriada à mão 
 - **Pesquisa em todos os arquivos**, minimapa clicável, dicas de hover no código, estrutura de tópicos e painéis redimensionáveis.
 - **Status dos apps medido ao vivo:** a aba de projetos verifica do navegador de quem visita se cada app está no ar e quanto tempo levou para responder.
 - **Controle do código-fonte que vira contato:** a mensagem do "commit" abre o cliente de e-mail já preenchida.
+- **Português e inglês:** o site abre no idioma do navegador (português para quem usa português, inglês para o resto). A troca fica na barra de status, na paleta (`Configurar Idioma de Exibição`) e no terminal (`idioma en` / `lang pt`); como no VS Code, ela recarrega a janela e fica salva. O link `?lang=en` abre direto em inglês.
 
 ## Como é feito
 

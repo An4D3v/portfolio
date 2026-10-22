@@ -172,7 +172,9 @@
   function formatar(item, valor) {
     var fixo = valor.toFixed(item.casas);
     var antes = Number(fixo) === 0 ? '' : item.antes;
-    return antes + fixo.replace('.', ',') + item.depois;
+    // vírgula decimal só na página em português (4,5M+); em inglês fica 4.5M+
+    var decimal = document.documentElement.getAttribute('data-idioma') === 'en' ? fixo : fixo.replace('.', ',');
+    return antes + decimal + item.depois;
   }
 
   function mostrarFinal(itens) {
