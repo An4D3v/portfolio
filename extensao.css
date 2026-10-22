@@ -107,6 +107,22 @@
   border-radius: 50%;
 }
 
+/* página de cada tecnologia: o ícone em pixel art no lugar da foto (16x16 em 96px, 6x exato) */
+.ext-avatar-px {
+  border-radius: 16px;
+  background: #252526;
+}
+
+.ext-px-ic {
+  width: 96px;
+  height: 96px;
+}
+
+.ext-chips-grandes .ext-chip {
+  font-size: 13px;
+  padding: 4px 10px;
+}
+
 .ext-foto[hidden],
 .ext-foto:not([src]),
 .ext-foto[src=""] {
@@ -932,6 +948,11 @@
 
   .ext-avatar-iniciais {
     font-size: 28px;
+  }
+
+  .ext-avatar-px .ext-px-ic {
+    width: 64px;
+    height: 64px;
   }
 
   .ext-titulo {

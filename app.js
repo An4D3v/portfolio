@@ -352,17 +352,173 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   ];
 
   const EXTENSOES = [
-    { ic: 'cs', nome: 'C# / .NET 8', desc: 'Pipelines de integração, APIs e microsserviços.', busca: '"C#"' },
-    { ic: 'az', nome: 'Azure', desc: 'App Service, Azure SQL, Automation, Key Vault, Application Insights.', busca: '"Azure App Service"' },
-    { ic: 'sql', nome: 'SQL Server · T-SQL', desc: 'MERGE idempotente, watermark e reconciliação.', busca: '"SQL Server"' },
-    { ic: 'py', nome: 'Python', desc: 'Robôs com Selenium e scripts de dados.', busca: '"Python"' },
-    { ic: 'ia', nome: 'LLMs em produção', desc: 'Classificador de publicações e leitura de nota fiscal.', busca: '"LLMs em produção"' },
-    { ic: 'id', nome: 'Entra ID · Microsoft Graph', desc: 'SSO nos bots e autenticação sem senha.', busca: '"Entra ID"' },
-    { ic: 'ng', nome: 'Angular', desc: 'Front do sistema de notas fiscais.', busca: '"Angular"' },
-    { ic: 're', nome: 'React + TypeScript', desc: 'Rumo e AlienFinanças.', busca: '"React"' },
-    { ic: 'sb', nome: 'Supabase · PostgreSQL', desc: 'Auth com MFA e Row Level Security nos apps próprios.', busca: '"Supabase"' },
-    { ic: 'gh', nome: 'GitHub Actions', desc: 'CI/CD com OIDC e gate de testes.', busca: '"GitHub Actions"' },
+    { ic: 'cs', nome: 'C# / .NET 8', desc: 'Pipelines de integração, APIs e microsserviços.' },
+    { ic: 'az', nome: 'Azure', desc: 'App Service, Azure SQL, Automation, Key Vault, Application Insights.' },
+    { ic: 'sql', nome: 'SQL Server · T-SQL', desc: 'MERGE idempotente, watermark e reconciliação.' },
+    { ic: 'py', nome: 'Python', desc: 'Robôs com Selenium e scripts de dados.' },
+    { ic: 'ia', nome: 'LLMs em produção', desc: 'Classificador de publicações e leitura de nota fiscal.' },
+    { ic: 'id', nome: 'Entra ID · Microsoft Graph', desc: 'SSO nos bots e autenticação sem senha.' },
+    { ic: 'ng', nome: 'Angular', desc: 'Front do sistema de notas fiscais.' },
+    { ic: 're', nome: 'React + TypeScript', desc: 'Rumo e AlienFinanças.' },
+    { ic: 'sb', nome: 'Supabase · PostgreSQL', desc: 'Auth com MFA e Row Level Security nos apps próprios.' },
+    { ic: 'gh', nome: 'GitHub Actions', desc: 'CI/CD com OIDC e gate de testes.' },
   ];
+
+  // Página de extensão de cada tecnologia da Stack. Só fatos que já estão no
+  // portfólio (projetos.tsx, experiencia.cs, README) ou nos repositórios abertos.
+  const REPO_NOTAS = 'https://github.com/An4D3v/notas-fiscais-microsservicos';
+  const DETALHES_TEC = {
+    cs: {
+      slug: 'csharp',
+      categorias: ['Backend', '.NET'],
+      uso: [
+        ['database', 'Pipelines de integração', '7+ cargas incrementais de um ERP jurídico para Azure SQL, com MERGE idempotente e watermark.'],
+        ['server', 'Notas Fiscais — microsserviços', 'Estoque e Faturamento em .NET 8: UPDATE atômico contra concorrência, idempotência e recuperação de falha. No ar no Azure App Service.'],
+      ],
+      numeros: [
+        { alvo: 4.5, casas: 1, depois: 'M+', final: '4,5M+', texto: 'registros nos pipelines de integração' },
+        { alvo: 28, final: '28', texto: 'testes de integração contra SQL Server real' },
+      ],
+      recursos: ['.NET 8', 'ASP.NET Core Minimal APIs', 'Entity Framework Core', 'Polly (resiliência HTTP)', 'FluentValidation', 'Serilog', 'xUnit', 'Swagger / OpenAPI', 'APIs REST', 'OAuth2'],
+      links: [['Abrir Notas Fiscais', 'https://notas-fiscais-ana.vercel.app'], ['Código no GitHub', REPO_NOTAS]],
+      privado: true,
+    },
+    az: {
+      slug: 'azure',
+      categorias: ['Cloud'],
+      uso: [
+        ['server', 'Notas Fiscais no ar', 'Os dois serviços rodam no App Service e falam com o Azure SQL por identidade gerenciada, sem senha.'],
+        ['database', 'Pipelines de integração', '7+ cargas incrementais de um ERP jurídico para Azure SQL.'],
+        ['sync', 'Migração para Azure SQL', '~292 mil registros migrados com reconciliação origem = destino.'],
+      ],
+      numeros: [
+        { alvo: 292, antes: '~', depois: ' mil', final: '~292 mil', texto: 'registros migrados para o Azure SQL' },
+        { alvo: 0, final: '0', texto: 'divergências na reconciliação da migração' },
+      ],
+      recursos: ['App Service', 'Azure SQL', 'Azure Automation', 'Key Vault', 'Application Insights', 'Entra ID', 'Microsoft Graph', 'identidade gerenciada'],
+      links: [['Abrir Notas Fiscais', 'https://notas-fiscais-ana.vercel.app']],
+      privado: true,
+    },
+    sql: {
+      slug: 'sql-server',
+      categorias: ['Dados'],
+      uso: [
+        ['database', 'Pipelines de integração', 'MERGE idempotente com watermark: reprocessar uma carga não duplica registro.'],
+        ['sync', 'Migração para Azure SQL', '~292 mil registros com reconciliação origem = destino: zero divergência.'],
+        ['server', 'Notas Fiscais — microsserviços', 'Saldo conferido e baixado no mesmo UPDATE: com 8 pedidos simultâneos em saldo 1, só um passa.'],
+      ],
+      numeros: [
+        { alvo: 4.5, casas: 1, depois: 'M+', final: '4,5M+', texto: 'registros nas cargas incrementais' },
+        { alvo: 292, antes: '~', depois: ' mil', final: '~292 mil', texto: 'registros migrados sem divergência' },
+      ],
+      recursos: ['SQL Server', 'T-SQL', 'Azure SQL', 'MERGE', 'ETL incremental', 'watermark', 'reconciliação', 'PostgreSQL'],
+      links: [['Código dos microsserviços', REPO_NOTAS]],
+      privado: true,
+    },
+    py: {
+      slug: 'python',
+      categorias: ['Automação'],
+      uso: [
+        ['sync', 'Automação e RPA', 'Robôs Python + Selenium coletando relatórios regulatórios para múltiplos clientes.'],
+      ],
+      numeros: [
+        { alvo: 65, antes: '−', depois: '%', final: '−65%', texto: 'de esforço manual com os robôs' },
+      ],
+      recursos: ['Python', 'Selenium', 'runbooks'],
+      links: [],
+      privado: true,
+    },
+    ia: {
+      slug: 'llms',
+      categorias: ['IA'],
+      uso: [
+        ['sparkle', 'Classificação de publicações', 'Classificador LLM em produção, com acurácia medida contra gabarito humano e execução sombra antes de promover modelo novo.'],
+        ['comment-discussion', 'Bots com IA no Teams', 'Central de IA corporativa com SSO (Entra ID) e consulta processual com Adaptive Cards, com usuários reais.'],
+        ['rocket', 'AlienFinanças', 'A foto do cupom fiscal vira itens categorizados por IA.'],
+        ['server', 'Notas Fiscais', 'Montar nota por texto: a IA sugere itens do catálogo, o servidor confere cada código e a pessoa decide. Sem chave de API, entra um modo offline.'],
+      ],
+      numeros: [],
+      recursos: ['LLMs em produção', 'Bot Framework', 'Adaptive Cards', 'prompt engineering', 'saída estruturada (JSON)', 'medição de acurácia', 'execução sombra', 'Gemini'],
+      links: [['Abrir AlienFinanças', 'https://financas-app-ruby.vercel.app'], ['Abrir Notas Fiscais', 'https://notas-fiscais-ana.vercel.app']],
+      privado: true,
+    },
+    id: {
+      slug: 'entra-id',
+      categorias: ['Identidade', 'Cloud'],
+      uso: [
+        ['comment-discussion', 'Bots com IA no Teams', 'SSO com Entra ID: quem já está no Teams entra no bot sem outro login.'],
+        ['sync', 'Migração para Azure SQL', 'Autenticação sem senha via Entra ID.'],
+        ['server', 'Notas Fiscais no ar', 'Cada serviço entra no banco com a própria identidade gerenciada, sem senha em configuração.'],
+      ],
+      numeros: [
+        { alvo: 0, final: '0', texto: 'senhas de banco na configuração do Notas Fiscais' },
+      ],
+      recursos: ['Entra ID', 'SSO', 'identidade gerenciada', 'Microsoft Graph', 'OAuth2', 'OIDC'],
+      links: [['Código dos microsserviços', REPO_NOTAS]],
+      privado: true,
+    },
+    ng: {
+      slug: 'angular',
+      categorias: ['Front-end'],
+      uso: [
+        ['server', 'Notas Fiscais — front', 'Angular 22 sem zone.js: o estado da tela vive em signals.'],
+        ['search', 'Busca de produtos', 'RxJS com debounceTime, distinctUntilChanged e switchMap: digitar rápido não dispara uma busca por letra.'],
+        ['pass', 'Saúde dos serviços ao vivo', 'Um timer com RxJS consulta os dois serviços e acende o indicador do topo quando um deles cai.'],
+      ],
+      numeros: [],
+      recursos: ['Angular 22', 'signals', 'RxJS', 'Angular Material', 'interceptores HTTP', 'TypeScript'],
+      links: [['Abrir Notas Fiscais', 'https://notas-fiscais-ana.vercel.app'], ['Código no GitHub', REPO_NOTAS]],
+      privado: false,
+    },
+    re: {
+      slug: 'react',
+      categorias: ['Front-end'],
+      uso: [
+        ['rocket', 'Rumo', 'Orientador de rotinas: PWA com Web Push, MFA (TOTP) e painel admin próprio. 40+ usuários.'],
+        ['rocket', 'AlienFinanças', 'Finanças pessoais com leitura de cupom fiscal por IA. 20+ usuários.'],
+        ['play', 'Vale do Trevo', 'Jogo 2D em TypeScript e canvas puro, sem engine.'],
+      ],
+      numeros: [
+        { alvo: 70, depois: '+', final: '70+', texto: 'pessoas usando o Rumo e o AlienFinanças' },
+        { alvo: 3, final: '3', texto: 'apps em TypeScript no ar' },
+      ],
+      recursos: ['React', 'TypeScript', 'Vite', 'PWA', 'Web Push', 'Canvas'],
+      links: [['Abrir o Rumo', 'https://rumo-amber.vercel.app'], ['Abrir AlienFinanças', 'https://financas-app-ruby.vercel.app'], ['Jogar o Vale do Trevo', 'https://vale-do-trevo.vercel.app']],
+      privado: false,
+    },
+    sb: {
+      slug: 'supabase',
+      categorias: ['Dados', 'Auth'],
+      uso: [
+        ['rocket', 'Rumo', 'Login com MFA (TOTP) pelo Supabase Auth.'],
+        ['rocket', 'AlienFinanças', 'Row Level Security: cada pessoa só enxerga os próprios dados.'],
+      ],
+      numeros: [
+        { alvo: 70, depois: '+', final: '70+', texto: 'pessoas com conta nos dois apps' },
+      ],
+      recursos: ['Supabase Auth', 'MFA (TOTP)', 'Row Level Security', 'PostgreSQL'],
+      links: [['Abrir o Rumo', 'https://rumo-amber.vercel.app'], ['Abrir AlienFinanças', 'https://financas-app-ruby.vercel.app']],
+      privado: false,
+    },
+    gh: {
+      slug: 'github-actions',
+      categorias: ['DevOps'],
+      uso: [
+        ['database', 'Pipelines de integração', 'CI/CD com OIDC: o deploy na nuvem não depende de segredo guardado no repositório.'],
+        ['pass', 'Gate de testes', 'O deploy só segue com os testes verdes.'],
+      ],
+      numeros: [],
+      recursos: ['GitHub Actions', 'OIDC', 'CI/CD com gate de testes', 'Vercel', 'observabilidade'],
+      links: [['Repositórios no GitHub', 'https://github.com/An4D3v']],
+      privado: true,
+    },
+  };
+  // cada tecnologia vira um "arquivo" com visualização (a página) e código (o README.md dela)
+  EXTENSOES.forEach((x) => {
+    const id = `ext-${x.ic}`;
+    ARQUIVOS[id] = { nome: 'README.md', pasta: `extensoes/${DETALHES_TEC[x.ic].slug}`, icone: 'f-markdown', ling: 'md', rotulo: 'Markdown', inicial: 'visual', extensao: true, tecnologia: x.ic, titulo: x.nome };
+    FONTES[id] = () => mdTecnologia(x.ic);
+  });
 
   const TITULOS_VISTA = {
     explorer: 'Explorador',
@@ -441,7 +597,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     return (a.pasta ? a.pasta + '/' : '') + a.nome;
   };
   const fonte = (id) => FONTES[id]();
-  const temVisual = (id = estado.ativa) => Boolean(id && ARQUIVOS[id].tpl);
+  const temVisual = (id = estado.ativa) => Boolean(id && (ARQUIVOS[id].tpl || ARQUIVOS[id].tecnologia));
   const modoDe = (id) => {
     if (ARQUIVOS[id].imagem) return 'imagem';
     if (!temVisual(id)) return 'codigo';
@@ -451,7 +607,10 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   function rotuloAba(id, modo = modoDe(id)) {
     const a = ARQUIVOS[id];
     const curto = mq.celular.matches;
-    if (modo === 'visual' && a.extensao) return { icone: 'f-extension', texto: curto ? 'Ana Neves' : 'Extensão: Ana Neves', it: true };
+    if (modo === 'visual' && a.extensao) {
+      const titulo = a.titulo || 'Ana Neves';
+      return { icone: 'f-extension', texto: curto ? titulo : `Extensão: ${titulo}`, it: true };
+    }
     if (modo === 'visual' && !curto) return { icone: 'open-preview', texto: `Visualizar ${a.nome}` };
     return { icone: a.icone, texto: a.nome };
   }
@@ -648,7 +807,10 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
 
   function preencher(painel, id, modo) {
     const a = ARQUIVOS[id];
-    if (modo === 'visual') {
+    if (modo === 'visual' && a.tecnologia) {
+      painel.innerHTML = htmlTecnologia(a.tecnologia);
+      painel.classList.remove('quebra');
+    } else if (modo === 'visual') {
       const tpl = d.getElementById(a.tpl);
       painel.replaceChildren(tpl.content.cloneNode(true));
       painel.classList.remove('quebra');
@@ -1234,10 +1396,112 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
      Visualizações: efeitos por aba
      ====================================================================== */
   function aoMostrarVisual(id, raiz) {
-    if (id === 'sobre' && typeof window.iniciarExtensao === 'function') {
+    if ((id === 'sobre' || ARQUIVOS[id].tecnologia) && typeof window.iniciarExtensao === 'function') {
       try { window.iniciarExtensao($('.ext', raiz) || raiz); } catch (erro) { registrar(`extensão: ${erro.message}`); }
     }
     if (id === 'projetos') checarApps(raiz);
+  }
+
+  /* ---------- página de extensão de cada tecnologia ---------- */
+  const linkFora = (rotulo, url, cls, icone = '') => `<a class="${cls}" href="${url}" target="_blank" rel="noopener">${icone}${esc(rotulo)}<span class="ext-sr"> (abre em nova aba)</span></a>`;
+
+  function htmlTecnologia(k) {
+    const x = EXTENSOES.find((e) => e.ic === k);
+    const t = DETALHES_TEC[k];
+    const usos = `${t.uso.length} ${t.uso.length === 1 ? 'uso' : 'usos'}`;
+    const [principal, ...outros] = t.links;
+    const acaoPrincipal = principal
+      ? linkFora(principal[0], principal[1], 'ext-btn ext-btn-primario')
+      : '<button type="button" class="ext-btn ext-btn-primario" data-abrir="experiencia">Ver em experiencia.cs</button>';
+    const numeros = t.numeros.length
+      ? `<h3 class="ext-md-h2">Números</h3><ul class="ext-numeros" role="list">${t.numeros.map((n) => `<li class="ext-num">`
+        + `<span class="ext-num-valor" aria-hidden="true" data-ext-contar data-ext-alvo="${n.alvo}"${n.casas ? ` data-ext-casas="${n.casas}"` : ''}${n.antes ? ` data-ext-antes="${esc(n.antes)}"` : ''}${n.depois ? ` data-ext-depois="${esc(n.depois)}"` : ''}>${esc(n.final)}</span>`
+        + `<span class="ext-sr">${esc(n.final)}</span><span class="ext-num-rotulo">${esc(n.texto)}</span></li>`).join('')}</ul>`
+      : '';
+    const nota = t.privado
+      ? `<p class="ext-nota">${ic('info')}<span>Parte disso é código privado do trabalho: aparecem só os resultados, como em <button type="button" class="ext-arquivo" data-abrir="experiencia">experiencia.cs</button>.</span></p>`
+      : '';
+    return `<div class="ext">
+  <header class="ext-cabecalho">
+    <div class="ext-avatar ext-avatar-px" aria-hidden="true"><svg class="ext-px-ic"><use href="#i-px-${k}"/></svg></div>
+    <div class="ext-info">
+      <h1 class="ext-titulo">${esc(x.nome)}</h1>
+      <div class="ext-subtitulo">
+        <span class="ext-sub-item ext-publisher"><span class="ext-publisher-nome">ana@dev</span><svg class="ic ext-verificado" role="img" aria-label="verificado"><use href="#i-verified-filled"/></svg></span>
+        <span class="ext-sub-item">${ic('rocket')}<span>${usos}</span></span>
+      </div>
+      <p class="ext-descricao">${esc(x.desc)}</p>
+      <div class="ext-acoes">
+        ${acaoPrincipal}
+        <button type="button" class="ext-btn ext-btn-secundario" data-abrir="stack"><span class="ext-btn-rotulo">${ic('f-json')}stack.json</span><span class="ext-btn-extra" aria-hidden="true">${ic('go-to-file')}</span></button>
+      </div>
+    </div>
+  </header>
+  <div class="ext-navbar">
+    <div class="ext-abas" role="tablist" aria-label="Seções">
+      <button type="button" class="ext-aba" role="tab" id="ext-aba-detalhes" aria-selected="true" aria-controls="ext-painel-detalhes">Detalhes</button>
+      <button type="button" class="ext-aba" role="tab" id="ext-aba-recursos" aria-selected="false" aria-controls="ext-painel-recursos" tabindex="-1">Recursos</button>
+    </div>
+  </div>
+  <div class="ext-painel" role="tabpanel" id="ext-painel-detalhes" aria-labelledby="ext-aba-detalhes" tabindex="0">
+    <div class="ext-detalhes">
+      <article class="ext-md">
+        <h2 class="ext-md-h1">Onde eu uso</h2>
+        <ul class="ext-recursos" role="list">${t.uso.map(([icone, titulo, texto]) => `<li class="ext-recurso"><span class="ext-recurso-icone" aria-hidden="true">${ic(icone)}</span><div class="ext-recurso-texto"><h3 class="ext-recurso-titulo">${esc(titulo)}</h3><p class="ext-recurso-prova">${esc(texto)}</p></div></li>`).join('')}</ul>
+        ${numeros}
+        ${nota}
+      </article>
+      <aside class="ext-lateral" aria-label="Mais informações">
+        <section class="ext-lat-secao">
+          <h2 class="ext-lat-titulo">Instalação</h2>
+          <table class="ext-tabela"><tbody>
+            <tr><th scope="row">Identificador</th><td>ana-neves.${t.slug}</td></tr>
+            <tr><th scope="row">Publicado por</th><td>ana@dev</td></tr>
+          </tbody></table>
+        </section>
+        <section class="ext-lat-secao">
+          <h2 class="ext-lat-titulo">Categorias</h2>
+          <ul class="ext-chips" role="list">${t.categorias.map((c) => `<li class="ext-chip">${esc(c)}</li>`).join('')}</ul>
+        </section>
+        <section class="ext-lat-secao">
+          <h2 class="ext-lat-titulo">Links</h2>
+          <ul class="ext-lat-links" role="list">
+            ${outros.map(([rotulo, url]) => `<li>${linkFora(rotulo, url, 'ext-lat-link', ic('link-external'))}</li>`).join('')}
+            <li><button type="button" class="ext-lat-link" data-abrir="projetos">${ic('rocket')}Projetos</button></li>
+            <li><button type="button" class="ext-lat-link" data-abrir="experiencia">${ic('history')}Experiência</button></li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </div>
+  <div class="ext-painel" role="tabpanel" id="ext-painel-recursos" aria-labelledby="ext-aba-recursos" tabindex="0" hidden>
+    <div class="ext-md ext-md-largo">
+      <h2 class="ext-md-h1">Ferramentas e bibliotecas</h2>
+      <ul class="ext-chips ext-chips-grandes" role="list">${t.recursos.map((r) => `<li class="ext-chip">${esc(r)}</li>`).join('')}</ul>
+    </div>
+  </div>
+</div>`;
+  }
+
+  function mdTecnologia(k) {
+    const x = EXTENSOES.find((e) => e.ic === k);
+    const t = DETALHES_TEC[k];
+    return [
+      `# ${x.nome}`,
+      '',
+      `> ${x.desc}`,
+      '> Publicado por [ana@dev](https://github.com/An4D3v)',
+      '',
+      '## Onde eu uso',
+      '',
+      ...t.uso.map(([, titulo, texto]) => `- **${titulo}** — ${texto}`),
+      ...(t.numeros.length ? ['', '## Números', '', ...t.numeros.map((n) => `- **${n.final}** ${n.texto}`)] : []),
+      '',
+      '## Recursos',
+      '',
+      t.recursos.map((r) => `\`${r}\``).join(' · '),
+      ...(t.links.length ? ['', '## Links', '', ...t.links.map(([rotulo, url]) => `- [${rotulo}](${url})`)] : []),
+    ].join('\n');
   }
 
   function aplicarStatus(raiz) {
@@ -1516,16 +1780,10 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     $('#ext-lista').innerHTML = (dela
       ? `<button class="ext-item dela" type="button" data-abrir="sobre"><span class="ext-ic redondo" aria-hidden="true"><img src="assets/ana-64.webp" alt="" width="42" height="42"></span><span class="ext-nome">Ana Neves</span><span class="ext-desc">Software Developer — backend, dados e IA</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`
       : '')
-      + lista.map((x) => `<button class="ext-item" type="button" data-ext="${esc(x.busca)}"><span class="ext-ic px" aria-hidden="true"><svg class="px-ic"><use href="#i-px-${x.ic}"/></svg></span><span class="ext-nome">${esc(x.nome)}</span><span class="ext-desc">${esc(x.desc)}</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`).join('')
+      + lista.map((x) => `<button class="ext-item" type="button" data-abrir="ext-${x.ic}"><span class="ext-ic px" aria-hidden="true"><svg class="px-ic"><use href="#i-px-${x.ic}"/></svg></span><span class="ext-nome">${esc(x.nome)}</span><span class="ext-desc">${esc(x.desc)}</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`).join('')
       + (lista.length || dela ? '' : '<p class="vazio-msg">Nenhuma extensão encontrada.</p>');
   }
   $('#ext-in').addEventListener('input', renderExtensoes);
-  $('#ext-lista').addEventListener('click', (e) => {
-    const b = e.target.closest('[data-ext]');
-    if (!b) return;
-    const linha = fonte('stack').split('\n').findIndex((l) => l.includes(b.dataset.ext));
-    abrir('stack', { modo: 'codigo', linha: linha + 1 });
-  });
 
   /* ---------- executar e depurar ---------- */
   let depurando = null;
@@ -1665,7 +1923,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   /* ---------- terminal ---------- */
   const term = { hist: [], pos: 0, dispensada: false };
   const PROMPT = '<span class="term-ps">PS C:\\portfolio-ana-neves&gt;</span> ';
-  const NOMES_ARQ = Object.fromEntries(Object.keys(ARQUIVOS).map((id) => [caminho(id), id]));
+  const NOMES_ARQ = Object.fromEntries(Object.keys(ARQUIVOS).filter((id) => !ARQUIVOS[id].tecnologia).map((id) => [caminho(id), id]));
 
   function linhaTerm(conteudo, cls = '') {
     const div = d.createElement('div');
@@ -2316,7 +2574,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     } else if (v.startsWith('>')) {
       itens = COMANDOS().map((c) => ({ ...c, tipo: 'cmd' }));
     } else {
-      itens = Object.keys(ARQUIVOS).map((id) => ({ tipo: 'arq', id, rotulo: ARQUIVOS[id].nome, det: ARQUIVOS[id].pasta ? `portfolio-ana-neves/${ARQUIVOS[id].pasta}` : 'portfolio-ana-neves', icone: ARQUIVOS[id].icone, fn: () => abrir(id) }));
+      itens = Object.keys(ARQUIVOS).filter((id) => !ARQUIVOS[id].tecnologia).map((id) => ({ tipo: 'arq', id, rotulo: ARQUIVOS[id].nome, det: ARQUIVOS[id].pasta ? `portfolio-ana-neves/${ARQUIVOS[id].pasta}` : 'portfolio-ana-neves', icone: ARQUIVOS[id].icone, fn: () => abrir(id) }));
       if (v.trim()) itens = itens.concat(COMANDOS().map((c) => ({ ...c, tipo: 'cmd' })));
     }
     const q = (v.startsWith('>') ? v.slice(1) : v).trim();
