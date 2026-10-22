@@ -1269,6 +1269,8 @@ textarea.campo { height: auto; min-height: 60px; resize: vertical; line-height: 
 .md strong { color: var(--vsc-fg-strong); }
 .md a { color: var(--vsc-link); text-decoration: none; }
 .md a:hover { text-decoration: underline; color: var(--vsc-link-hover); }
+/* link no meio do texto vai sublinhado: só a cor não basta para diferenciar (WCAG 1.4.1) */
+.md :is(p, li):not(.cartao-links):not(.botoes) > a:not(.botao) { text-decoration: underline; text-underline-offset: 2px; }
 .md a:focus-visible { outline: 1px solid var(--vsc-focus); outline-offset: 1px; }
 .md code {
   font: 0.92em var(--vsc-font-mono);
