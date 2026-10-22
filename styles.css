@@ -241,6 +241,7 @@
   --vsc-fg-muted: #4f4f4f;
   --vsc-fg-faint: #5c5c5c;
   --vsc-title-bg: #f8f8f8;
+  --logo-floco: #1f6e85;
   --vsc-title-fg: #1e1e1e;
   --vsc-cc-bg: #ffffff;
   --vsc-cc-border: #d1d1d1;
@@ -555,6 +556,8 @@ kbd {
   place-items: center;
 }
 .logo svg { width: 18px; height: 18px; }
+.floco-bracos { stroke: var(--logo-floco, #8be9fd); }
+.floco-centro { fill: #6b3fd4; }
 
 .menus { display: flex; align-items: center; height: 100%; }
 .menu-bt {

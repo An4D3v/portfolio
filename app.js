@@ -706,7 +706,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     el.btModo.hidden = true;
     el.btDividir.hidden = true;
     el.editor.innerHTML = `<div class="vazio">
-      <svg class="vazio-logo" viewBox="0 0 32 32" aria-hidden="true"><path d="M12.5 10.5 7 16l5.5 5.5M19.5 10.5 25 16l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="vazio-logo" viewBox="-70 -70 140 140" aria-hidden="true"><path d="M0 -10L0 -62M-12 -26L0 -38L12 -26M-7 -49L0 -56L7 -49M8.66 -5L53.69 -31M16.52 -23.39L32.91 -19L28.52 -2.61M38.94 -30.56L48.5 -28L45.94 -18.44M8.66 5L53.69 31M28.52 2.61L32.91 19L16.52 23.39M45.94 18.44L48.5 28L38.94 30.56M0 10L0 62M12 26L0 38L-12 26M7 49L0 56L-7 49M-8.66 5L-53.69 31M-16.52 23.39L-32.91 19L-28.52 2.61M-38.94 30.56L-48.5 28L-45.94 18.44M-8.66 -5L-53.69 -31M-28.52 -2.61L-32.91 -19L-16.52 -23.39M-45.94 -18.44L-48.5 -28L-38.94 -30.56" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle r="6" fill="currentColor"/></svg>
       <dl>
         <dt>Mostrar Todos os Comandos</dt><dd><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></dd>
         <dt>Ir para o Arquivo</dt><dd><kbd>Ctrl</kbd>+<kbd>P</kbd></dd>
