@@ -135,14 +135,14 @@ que sabe falhar.
 
 - **4,5M+** registros processados pelos pipelines que mantenho
 - **70+** pessoas usando os apps que criei e opero
-- **28** testes de integração num único take-home de microsserviços
+- **28** testes de integração contra SQL Server real, em microsserviços .NET
 - **−91%** de erros de cota de API com orquestração inteligente de cargas
 
 ## Produtos no ar
 
 - **Rumo** — orientador de rotinas (PWA, 40+ usuários): https://rumo-amber.vercel.app
 - **AlienFinanças** — finanças com leitura de nota fiscal por IA (20+ usuários): https://financas-app-ruby.vercel.app
-- **Notas Fiscais** — microsserviços .NET, 28 testes: https://github.com/An4D3v/Korp_Teste_AnaNeves
+- **Notas Fiscais** — microsserviços .NET, 28 testes: https://github.com/An4D3v/notas-fiscais-microsservicos
 - **Vale do Trevo** — jogo 2D em canvas puro: https://vale-do-trevo.vercel.app
 
 ## Abas deste editor
@@ -191,7 +191,7 @@ export const projetos: Projeto[] = [
     resumo: 'Dois serviços .NET: UPDATE atômico, idempotência e recuperação de falha.',
     testes: 28,
     stack: ['C# / .NET 8', 'Angular', 'EF Core', 'SQL Server'],
-    links: { codigo: 'https://github.com/An4D3v/Korp_Teste_AnaNeves' },
+    links: { codigo: 'https://github.com/An4D3v/notas-fiscais-microsservicos' },
   },
   {
     nome: 'Vale do Trevo',
@@ -344,7 +344,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   };
 
   const REPOS = [
-    { nome: 'Korp_Teste_AnaNeves', ling: 'C#', desc: 'Notas fiscais: microsserviços .NET + Angular' },
+    { nome: 'notas-fiscais-microsservicos', ling: 'C#', desc: 'Notas fiscais: microsserviços .NET + Angular' },
     { nome: 'vale-do-trevo', ling: 'TypeScript', desc: 'Jogo 2D em canvas puro' },
     { nome: 'image-collector', ling: 'Python', desc: 'Integração com Unsplash e Google Drive via OAuth 2.0' },
     { nome: 'An4D3v', ling: 'Markdown', desc: 'README do perfil no GitHub' },
@@ -1717,7 +1717,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       fn: () => linhaTerm([
         ['Rumo', 'orientador de rotinas · PWA · 40+ usuários', APPS.rumo],
         ['AlienFinanças', 'finanças com leitura de nota fiscal por IA · 20+ usuários', APPS.alien],
-        ['Notas Fiscais', 'microsserviços .NET · 28 testes de integração', 'https://github.com/An4D3v/Korp_Teste_AnaNeves'],
+        ['Notas Fiscais', 'microsserviços .NET · 28 testes de integração', 'https://github.com/An4D3v/notas-fiscais-microsservicos'],
         ['Vale do Trevo', 'jogo 2D em canvas puro', APPS.trevo],
       ].map(([n, dsc, url]) => (estreito()
         ? `<span class="term-dest">${esc(n)}</span>\n  ${esc(dsc)}\n  ${linkar(esc(url))}`
