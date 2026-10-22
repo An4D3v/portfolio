@@ -241,6 +241,9 @@
   --vsc-fg-muted: #4f4f4f;
   --vsc-fg-faint: #5c5c5c;
   --vsc-title-bg: #f8f8f8;
+  --vsc-term-deco: rgba(0, 0, 0, 0.4);
+  --vsc-term-deco-ok: #2090d3;
+  --vsc-term-deco-erro: #e51400;
   --logo-floco: #1f6e85;
   --vsc-title-fg: #1e1e1e;
   --vsc-cc-bg: #ffffff;
@@ -1385,48 +1388,182 @@ textarea.campo { height: auto; min-height: 60px; resize: vertical; line-height: 
   align-items: center;
   gap: 4px;
   height: 35px;
-  padding: 0 8px 0 12px;
+  padding: 0 8px 0 8px;
   flex: 0 0 auto;
 }
-.painel-abas { display: flex; align-items: center; gap: 4px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.painel-abas { display: flex; align-items: center; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+/* como no VS Code: o sublinhado da aba ativa ocupa só a largura do texto */
 .painel-aba {
-  height: 27px;
-  padding: 0 6px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 35px;
+  padding: 0 10px;
   font-size: 11px;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--vsc-fg-faint);
-  border-bottom: 1px solid transparent;
   white-space: nowrap;
 }
+.painel-aba::after {
+  content: '';
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 4px;
+  height: 1px;
+  background: var(--vsc-panel-tab-active);
+  transform: scaleX(0);
+  transition: transform var(--rapido) var(--curva);
+}
 .painel-aba:hover { color: var(--vsc-fg); }
-.painel-aba[aria-selected="true"] { color: var(--vsc-fg); border-bottom-color: var(--vsc-panel-tab-active); }
+.painel-aba[aria-selected="true"] { color: var(--vsc-fg); }
+.painel-aba[aria-selected="true"]::after { transform: none; }
+.painel-aba:focus-visible { outline-offset: -6px; }
 .painel-aba .res-cont { display: inline-block; margin-left: 4px; }
-.painel-acoes { display: flex; gap: 2px; margin-left: auto; }
+.painel-selo {
+  display: inline-grid;
+  place-items: center;
+  min-width: 16px;
+  height: 16px;
+  margin-left: 6px;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: var(--vsc-badge-bg);
+  color: var(--vsc-badge-fg);
+  font-size: 10px;
+  letter-spacing: 0;
+}
+.painel-acoes { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+.painel-acoes .icone-bt { color: var(--vsc-fg); }
+.icone-bt-seta { width: 16px; margin-left: -2px; }
+.icone-bt-seta .ic { width: 14px; height: 14px; }
+.term-perfil {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 6px 0 4px;
+  font-size: 12px;
+  color: var(--vsc-fg);
+}
+.painel-sep { width: 1px; height: 16px; margin: 0 4px; background: var(--vsc-border-strong); }
+/* cada aba do painel mostra as próprias ações, como no VS Code */
+.painel:not([data-aba="terminal"]) .so-terminal,
+.painel[data-aba="problemas"] [data-acao="term-limpar"],
+.painel[data-aba="portas"] [data-acao="term-limpar"] { display: none; }
 .painel-corpo { flex: 1; min-height: 0; overflow: auto; padding: 4px 20px 8px; font: 13px/19px var(--vsc-font-mono); }
 .painel-corpo.ui { font-family: var(--vsc-font-ui); }
 .term-linha { white-space: pre-wrap; word-break: break-word; min-height: 19px; }
 .term-linha a { color: var(--vsc-link); }
-.term-prompt { color: var(--sx-function); }
-.term-cam { color: var(--sx-type); }
 .term-dim { color: var(--vsc-fg-faint); }
 .term-erro { color: var(--vsc-erro); }
 .term-ok { color: var(--vsc-ok); }
 .term-dest { color: var(--sx-keyword); }
-.term-form { display: flex; align-items: center; gap: 0; }
+.term-ps { color: var(--vsc-fg); }
+.term-form { position: relative; display: flex; align-items: center; gap: 0; }
 .term-form label { white-space: pre; }
+.term-campo { position: relative; display: flex; flex: 1; min-width: 40px; }
 #term-in {
   flex: 1;
-  min-width: 40px;
+  width: 100%;
+  min-width: 0;
   height: 19px;
+  padding: 0;
   background: none;
   border: 0;
   color: var(--vsc-fg);
   font: inherit;
-  caret-color: var(--vsc-fg);
+  caret-color: transparent;
 }
 #term-in:focus { outline: none; }
-.term-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 2px 20px 6px; flex: 0 0 auto; }
+/* cursor em bloco: o branco com "diferença" inverte o que está embaixo,
+   então vira bloco claro no tema escuro e bloco escuro no claro */
+.term-cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1ch;
+  height: 19px;
+  background: #ffffff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  transform: translateX(calc(var(--col, 0) * 1ch - var(--rolagem, 0px)));
+}
+.term-form:not(:focus-within) .term-cursor {
+  background: none;
+  mix-blend-mode: normal;
+  box-shadow: inset 0 0 0 1px var(--vsc-fg-faint);
+}
+/* a dica em itálico logo depois do cursor some quando a pessoa começa a digitar */
+.term-sugestao {
+  display: none;
+  min-width: 0;
+  margin-left: 0.6ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-style: italic;
+  color: var(--vsc-fg-faint);
+}
+.term-sugestao kbd { font: 11px/1.3 var(--vsc-font-mono); font-style: normal; padding: 0 4px; min-width: 0; }
+.term-form.com-dica .term-campo { flex: 0 0 1.2ch; min-width: 0; }
+.term-form.com-dica .term-sugestao { display: block; }
+/* decoração de comando: vazada na linha atual, azul se deu certo, vermelha se falhou */
+.term-linha.cmd { position: relative; }
+.term-form::before,
+.term-linha.cmd::before {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 1px solid var(--vsc-term-deco, rgba(255, 255, 255, 0.4));
+}
+.term-linha.cmd::before { border: 0; background: var(--vsc-term-deco-ok, #1b81a8); }
+.term-linha.cmd.falhou::before { background: var(--vsc-term-deco-erro, #f14c4c); }
+/* lista de terminais à direita, separada por uma linha */
+.term-lista {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  bottom: 0;
+  width: 128px;
+  padding-top: 2px;
+  border-left: 1px solid var(--vsc-panel-border);
+  background: var(--vsc-panel-bg);
+}
+.term-lista-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: 22px;
+  padding: 0 10px;
+  font-size: 13px;
+  color: var(--vsc-fg);
+  text-align: left;
+}
+.term-lista-item:hover { background: var(--vsc-hover-bg); }
+.painel[data-aba="terminal"] .painel-corpo { margin-right: 128px; }
+.term-chips { display: none; flex-wrap: wrap; gap: 6px; padding: 2px 20px 6px; flex: 0 0 auto; }
+/* portas: os apps no ar, como portas encaminhadas */
+.portas { width: 100%; border-collapse: collapse; font-size: 13px; }
+.portas th {
+  height: 24px;
+  padding: 0 10px;
+  text-align: left;
+  font-weight: 400;
+  color: var(--vsc-fg-muted);
+  border-bottom: 1px solid var(--vsc-border-strong);
+  white-space: nowrap;
+}
+.portas td { height: 24px; padding: 0 10px; white-space: nowrap; color: var(--vsc-fg); }
+.portas tr:hover td { background: var(--vsc-hover-bg); }
+.portas .vivo { margin-left: 8px; }
 .chip {
   height: 22px;
   padding: 0 9px;
@@ -1768,9 +1905,19 @@ button.st-remoto:hover { background: var(--marca-hover); }
   .sash-h { display: none; }
   #pa-problemas,
   #pa-depuracao,
-  .painel-acoes [data-acao="painel-max"] { display: none; }
-  .painel-corpo { padding: 4px 14px 8px; }
-  .term-chips { padding: 2px 14px 6px; }
+  #pa-portas,
+  .painel-acoes [data-acao="painel-max"],
+  .term-perfil,
+  .icone-bt-seta,
+  .painel-acoes [data-acao="term-mais"],
+  .painel-sep,
+  .term-lista,
+  .term-cursor,
+  .term-form.com-dica .term-sugestao { display: none; }
+  .painel[data-aba="terminal"] .painel-corpo { margin-right: 0; padding: 4px 14px 8px 22px; }
+  .term-form.com-dica .term-campo { flex: 1; min-width: 40px; }
+  #term-in { caret-color: var(--vsc-fg); }
+  .term-chips { display: flex; padding: 2px 14px 6px; }
 
   /* digitando no terminal: as barras saem para o teclado não cobrir a linha de comando */
   .app.digitando .atividades,

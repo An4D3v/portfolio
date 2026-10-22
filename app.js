@@ -298,6 +298,7 @@ export function conversar(): void {
   "editor.fontFamily": "Cascadia Code, Consolas, monospace",
   "editor.minimap.enabled": ${estado.minimapa},
   "editor.wordWrap": "${quebraAtiva() ? 'on' : 'off'}",
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
   "ana.foco": ["backend .NET", "dados", "IA aplicada"]
 }`,
 
@@ -338,6 +339,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     config: {
       'workbench.colorTheme': 'Dá para trocar pela paleta: Ctrl+Shift+P → Preferências: Tema de Cores.',
       'editor.minimap.enabled': 'O minimapa aparece no código em telas largas: clique ou arraste nele para rolar.',
+      'terminal.integrated.defaultProfile.windows': 'O terminal deste portfólio imita um PowerShell: abra com Ctrl+J e digite help.',
     },
   };
 
@@ -412,6 +414,9 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     painelOutro: $('#painel-outro'),
     termSaida: $('#term-saida'),
     termIn: $('#term-in'),
+    termForm: $('#term-form'),
+    termCursor: $('.term-cursor'),
+    termLista: $('#term-lista'),
     termChips: $('#term-chips'),
     stPos: $('#st-pos'),
     stLing: $('#st-ling'),
@@ -1271,6 +1276,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
         .finally(() => {
           clearTimeout(limite);
           [el.editor, el.editorLado].forEach((p) => p.dataset.modo === 'visual' && aplicarStatus(p));
+          if (estado.painel && estado.painelAba === 'portas') aplicarStatus(el.painelOutro);
         });
     });
   }
@@ -1569,6 +1575,21 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     if (estado.painel && estado.painelAba === 'saida') renderPainel();
   }
 
+  // Portas: cada app roda numa porta no computador da Ana e está "encaminhado"
+  // para o endereço público; o ponto mostra se ele respondeu agora há pouco.
+  const PORTAS = [
+    { porta: 5176, app: 'rumo', nome: 'Rumo' },
+    { porta: 5173, app: 'alien', nome: 'AlienFinanças' },
+    { porta: 5175, app: 'trevo', nome: 'Vale do Trevo' },
+  ];
+  function htmlPortas() {
+    return '<table class="portas"><thead><tr><th>Porta</th><th>Endereço Encaminhado</th><th>Processo em Execução</th><th>Visibilidade</th><th>Origem</th></tr></thead><tbody>'
+      + PORTAS.map((p) => `<tr><td>${p.porta}</td><td>${linkar(esc(APPS[p.app]))}</td>`
+        + `<td>${esc(p.nome)} (npm run dev)<span class="vivo" data-status="${p.app}"><span class="vivo-ponto"></span><span class="vivo-txt">verificando…</span></span></td>`
+        + '<td>Pública</td><td>Vercel</td></tr>').join('')
+      + '</tbody></table>';
+  }
+
   function renderPainel() {
     el.painel.hidden = !estado.painel;
     $('#bt-layout-painel').setAttribute('aria-pressed', String(estado.painel));
@@ -1579,9 +1600,11 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       b.setAttribute('aria-selected', String(on));
       b.tabIndex = on ? 0 : -1;
     });
+    el.painel.dataset.aba = estado.painelAba;
     const term = estado.painelAba === 'terminal';
     el.painelCorpo.hidden = !term;
     el.termChips.hidden = !term;
+    el.termLista.hidden = !term;
     el.painelOutro.hidden = term;
     if (term) {
       if (!el.termSaida.childElementCount) boasVindas();
@@ -1593,6 +1616,9 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       el.painelOutro.innerHTML = `<p class="problemas-ok">${ic('pass')}Nenhum problema foi detectado no workspace.</p>`;
     } else if (estado.painelAba === 'saida') {
       el.painelOutro.innerHTML = logSaida.map((l) => `<div class="saida-linha"><span class="hora">[${l.hora}]</span> ${esc(l.msg)}</div>`).join('');
+    } else if (estado.painelAba === 'portas') {
+      el.painelOutro.innerHTML = htmlPortas();
+      checarApps(el.painelOutro);
     } else {
       el.painelOutro.innerHTML = logDepuracao.length
         ? logDepuracao.map((l) => `<div class="term-linha ${l.cls}">${esc(l.txt)}${l.ok ? `  <span class="term-ok">✓ ${esc(l.ok)}</span>` : ''}</div>`).join('')
@@ -1635,8 +1661,8 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   });
 
   /* ---------- terminal ---------- */
-  const term = { hist: [], pos: 0 };
-  const PROMPT = '<span class="term-prompt">ana@dev</span> <span class="term-cam">~/portfolio</span> $ ';
+  const term = { hist: [], pos: 0, dispensada: false };
+  const PROMPT = '<span class="term-ps">PS C:\\portfolio-ana-neves&gt;</span> ';
   const NOMES_ARQ = Object.fromEntries(Object.keys(ARQUIVOS).map((id) => [caminho(id), id]));
 
   function linhaTerm(conteudo, cls = '') {
@@ -1645,9 +1671,23 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     div.innerHTML = conteudo;
     el.termSaida.appendChild(div);
     el.painelCorpo.scrollTop = el.painelCorpo.scrollHeight;
+    return div;
   }
+  // No computador a dica fica em itálico depois do cursor, como a do VS Code;
+  // no celular ela não cabe ali e vira uma linha de texto.
   function boasVindas() {
-    linhaTerm('Terminal do portfólio. Digite <span class="term-dest">help</span> ou toque num comando acima.', 'term-dim');
+    if (mq.celular.matches) linhaTerm('Terminal do portfólio. Digite <span class="term-dest">help</span> ou toque num comando acima.', 'term-dim');
+    el.termForm.classList.toggle('com-dica', !term.dispensada);
+  }
+  function atualizarCampo() {
+    const inp = el.termIn;
+    if (inp.value && !term.dispensada) {
+      term.dispensada = true;
+      el.termForm.classList.remove('com-dica');
+    }
+    const col = inp.selectionDirection === 'backward' ? inp.selectionStart : inp.selectionEnd;
+    el.termCursor.style.setProperty('--col', String(col ?? inp.value.length));
+    el.termCursor.style.setProperty('--rolagem', `${inp.scrollLeft}px`);
   }
   function limparTerminal() {
     el.termSaida.innerHTML = '';
@@ -1757,8 +1797,17 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
 
   function executar(bruto) {
     const txt = bruto.trim();
-    linhaTerm(PROMPT + esc(txt));
+    const eco = linhaTerm(PROMPT + esc(txt));
     if (!txt) return;
+    eco.classList.add('cmd');
+    rodar(txt);
+    // como no VS Code, a bolinha do comando fica azul se deu certo e vermelha se falhou
+    for (let n = eco.nextElementSibling; n; n = n.nextElementSibling) {
+      if (n.classList.contains('term-erro')) eco.classList.add('falhou');
+    }
+  }
+
+  function rodar(txt) {
     term.hist.push(txt);
     term.pos = term.hist.length;
     registrar(`terminal: ${txt}`);
@@ -1815,7 +1864,10 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const v = el.termIn.value;
     el.termIn.value = '';
     executar(v);
+    atualizarCampo();
   });
+  ['input', 'focus', 'click', 'select'].forEach((ev) => el.termIn.addEventListener(ev, atualizarCampo));
+  el.termIn.addEventListener('keydown', () => requestAnimationFrame(atualizarCampo));
   el.termIn.addEventListener('keydown', (e) => {
     if (e.key === 'Tab' && !e.shiftKey) {
       e.preventDefault();
@@ -2372,8 +2424,22 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     'term-novo': () => {
       mostrarPainel('terminal');
       limparTerminal();
+      term.dispensada = false;
       boasVindas();
     },
+    'term-focar': () => el.termIn.focus(),
+    'term-perfis': (bt) => alternarMenu([
+      { rotulo: 'pwsh', check: true, fn: ACOES['term-novo'] },
+      '-',
+      { rotulo: 'Configurar Perfil Padrão do Terminal', fn: () => abrir('config') },
+    ], bt, { focar: true }),
+    'term-mais': (bt) => alternarMenu([
+      { rotulo: 'Novo Terminal', fn: ACOES['term-novo'] },
+      { rotulo: 'Limpar Terminal', tecla: 'Ctrl+L', fn: () => { limparTerminal(); el.termIn.focus(); } },
+      '-',
+      { rotulo: 'Histórico de Comandos', fn: () => { executar('history'); el.termIn.focus(); } },
+      { rotulo: 'Configurações do Terminal', fn: () => abrir('config') },
+    ], bt, { focar: true }),
     'term-limpar': () => {
       if (estado.painelAba === 'terminal') limparTerminal();
       else if (estado.painelAba === 'saida') {
@@ -2386,7 +2452,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     },
     'painel-max': (bt) => {
       const max = el.painel.classList.toggle('max');
-      $('use', bt).setAttribute('href', `#i-${max ? 'chevron-down' : 'chevron-up'}`);
+      $('use', bt).setAttribute('href', `#i-${max ? 'screen-normal' : 'screen-full'}`);
       bt.setAttribute('aria-label', max ? 'Restaurar painel' : 'Maximizar painel');
       requestAnimationFrame(sincronizarMinimapa);
     },

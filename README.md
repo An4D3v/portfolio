@@ -6,7 +6,7 @@ Meu portfólio é um editor de código: a interface do VS Code recriada à mão 
 
 - **Abas de verdade:** abrir, fechar, arrastar para reordenar e alternar entre visualização e código-fonte (o código de cada aba tem realce de sintaxe próprio, por linha).
 - **Paleta de comandos** (`Ctrl+Shift+P`) com busca aproximada, e troca de tema com visualização ao vivo: Dark Modern (padrão), Dracula, Light Modern e Alto Contraste. A escolha fica salva no navegador.
-- **Terminal** (`Ctrl+J`) com `help`, `ls`, `cat`, `abrir`, `tema`, histórico e autocompletar com `Tab`.
+- **Terminal** (`Ctrl+J`) no estilo do PowerShell do VS Code, com `help`, `ls`, `cat`, `abrir`, `tema`, histórico, autocompletar com `Tab` e a marcação de cada comando (azul quando deu certo, vermelha quando falhou). Na aba **Portas**, os apps no ar aparecem como portas encaminhadas.
 - **Pesquisa em todos os arquivos**, minimapa clicável, dicas de hover no código, estrutura de tópicos e painéis redimensionáveis.
 - **Status dos apps medido ao vivo:** a aba de projetos verifica do navegador de quem visita se cada app está no ar e quanto tempo levou para responder.
 - **Controle do código-fonte que vira contato:** a mensagem do "commit" abre o cliente de e-mail já preenchida.
