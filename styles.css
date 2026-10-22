@@ -555,6 +555,8 @@ kbd {
   display: grid;
   place-items: center;
 }
+.logo:hover { background: var(--vsc-status-hover); }
+.logo:focus-visible { outline-offset: -2px; }
 .logo svg { width: 22px; height: 22px; }
 .floco-bracos { stroke: var(--logo-floco, #8be9fd); }
 .floco-centro { fill: #6b3fd4; }
@@ -1604,6 +1606,7 @@ button.st-remoto:hover { background: var(--marca-hover); }
 /* ==========================================================================
    Transições de estado (hover, seleção, foco)
    ========================================================================== */
+.logo,
 .menu-bt,
 .nav-bt,
 .comando-central,

@@ -1065,6 +1065,10 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   el.btDividir.addEventListener('click', alternarDivisao);
   $('#bt-voltar').addEventListener('click', () => navegar(-1));
   $('#bt-avancar').addEventListener('click', () => navegar(1));
+  $('#bt-logo').addEventListener('click', () => {
+    abrir('sobre', { modo: 'visual' });
+    el.editor.scrollTo({ top: 0, behavior: mq.calmo.matches ? 'auto' : 'smooth' });
+  });
 
   /* ======================================================================
      Editor: linha atual, dicas, minimapa, quebra
