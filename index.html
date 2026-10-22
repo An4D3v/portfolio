@@ -187,7 +187,7 @@
         <section class="secao aberta cresce" id="sec-arquivos">
           <div class="secao-linha">
             <button class="secao-cab" type="button" aria-expanded="true" aria-controls="corpo-arquivos">
-              <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg><span class="rotulo">portfolio-ana-neves</span>
+              <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">portfolio-ana-neves</span>
             </button>
             <span class="secao-acoes">
               <button class="icone-bt" type="button" data-acao="novo-arquivo" aria-label="Novo arquivo"><svg class="ic" aria-hidden="true"><use href="#i-new-file"/></svg></button>
@@ -200,13 +200,13 @@
         </section>
         <section class="secao" id="sec-estrutura">
           <button class="secao-cab" type="button" aria-expanded="false" aria-controls="corpo-estrutura">
-            <svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">Estrutura de Tópicos</span>
+            <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">Estrutura de Tópicos</span>
           </button>
           <div class="secao-corpo" id="corpo-estrutura"><ul class="arvore" id="estrutura"></ul></div>
         </section>
         <section class="secao" id="sec-linha">
           <button class="secao-cab" type="button" aria-expanded="false" aria-controls="corpo-linha">
-            <svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">Linha do Tempo</span>
+            <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">Linha do Tempo</span>
           </button>
           <div class="secao-corpo" id="corpo-linha"><ul class="arvore" id="linha-tempo"></ul></div>
         </section>
@@ -225,7 +225,7 @@
       <div class="vista" id="vista-scm" hidden>
         <section class="secao aberta">
           <button class="secao-cab" type="button" aria-expanded="true" aria-controls="corpo-commit">
-            <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg><span class="rotulo">Mande um recado</span>
+            <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">Mande um recado</span>
           </button>
           <div class="secao-corpo" id="corpo-commit">
             <form class="scm" id="form-commit">
@@ -238,7 +238,7 @@
         </section>
         <section class="secao aberta cresce">
           <button class="secao-cab" type="button" aria-expanded="true" aria-controls="corpo-repos">
-            <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg><span class="rotulo">Repositórios públicos</span>
+            <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">Repositórios públicos</span>
           </button>
           <div class="secao-corpo" id="corpo-repos"><ul class="arvore" id="repos"></ul>
             <p class="vazio-msg">Os sistemas do trabalho e alguns apps pessoais são privados.</p>
@@ -262,7 +262,7 @@
         </div>
         <section class="secao aberta cresce">
           <button class="secao-cab" type="button" aria-expanded="true" aria-controls="corpo-ext">
-            <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg><span class="rotulo">Instaladas</span><span class="res-cont" id="ext-cont"></span>
+            <svg class="ic seta" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">Instaladas</span><span class="res-cont" id="ext-cont"></span>
           </button>
           <div class="secao-corpo" id="corpo-ext"><div id="ext-lista"></div></div>
         </section>
@@ -334,9 +334,9 @@
     <button class="st" type="button" id="st-problemas" aria-label="Nenhum problema: abrir o painel de problemas"><svg class="ic" aria-hidden="true"><use href="#i-error"/></svg>0<svg class="ic" aria-hidden="true"><use href="#i-warning"/></svg>0</button>
     <span class="st-esp"></span>
     <span class="st st-ocultar" id="st-pos">Ln 1, Col 1</span>
-    <span class="st st-ocultar" id="st-esp">Espaços: 2</span>
-    <span class="st st-ocultar">UTF-8</span>
-    <span class="st st-ocultar">LF</span>
+    <span class="st st-ocultar st-codigo" id="st-esp">Espaços: 2</span>
+    <span class="st st-ocultar st-codigo">UTF-8</span>
+    <span class="st st-ocultar st-codigo">LF</span>
     <span class="st" id="st-ling"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg>Markdown</span>
     <button class="st" type="button" id="st-sino" aria-label="Notificações"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg></button>
   </footer>
@@ -382,7 +382,7 @@
           </span>
           <span class="ext-sub-item" title="pessoas usando os apps que ela criou e opera">
             <svg class="ic" aria-hidden="true"><use href="#i-person"/></svg>
-            <span>40+ usuários</span>
+            <span>70+ usuários</span>
           </span>
         </div>
         <p class="ext-descricao">Software Developer — backend .NET e Azure, com produto próprio em produção.</p>
@@ -398,7 +398,6 @@
             <span class="ext-btn-extra" aria-hidden="true"><svg class="ic"><use href="#i-link-external"/></svg></span>
             <span class="ext-sr"> (abre em nova aba)</span>
           </a>
-          <span class="ext-status"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Aberta a oportunidades</span>
           <button type="button" class="ext-btn-icone" data-acao="tema" aria-label="Trocar tema de cores" title="Trocar tema de cores"><svg class="ic" aria-hidden="true"><use href="#i-settings-gear"/></svg></button>
         </div>
       </div>
@@ -431,8 +430,8 @@
               <span class="ext-num-rotulo">registros processados pelos pipelines que mantenho</span>
             </li>
             <li class="ext-num">
-              <span class="ext-num-valor" aria-hidden="true" data-ext-contar data-ext-alvo="40" data-ext-depois="+">40+</span>
-              <span class="ext-sr">40+</span>
+              <span class="ext-num-valor" aria-hidden="true" data-ext-contar data-ext-alvo="70" data-ext-depois="+">70+</span>
+              <span class="ext-sr">70+</span>
               <span class="ext-num-rotulo">pessoas usando os apps que criei e opero</span>
             </li>
             <li class="ext-num">
@@ -506,10 +505,6 @@
                 <tr><th scope="row">Atualizado</th><td>out/2026</td></tr>
               </tbody>
             </table>
-          </section>
-          <section class="ext-lat-secao">
-            <h2 class="ext-lat-titulo">Disponibilidade</h2>
-            <p class="ext-lat-texto"><svg class="ic" aria-hidden="true"><use href="#i-pass"/></svg><span>Aberta a oportunidades em backend .NET, dados e IA aplicada.</span></p>
           </section>
           <section class="ext-lat-secao">
             <h2 class="ext-lat-titulo">Categorias</h2>
@@ -728,7 +723,7 @@
 <template id="tpl-contato">
   <article class="md">
     <h1>Vamos conversar?</h1>
-    <p class="md-sub">Aberta a oportunidades em <strong>backend .NET</strong>, <strong>dados</strong> e <strong>IA aplicada</strong>. São Paulo, Brasil.</p>
+    <p class="md-sub">Para falar de <strong>backend .NET</strong>, <strong>dados</strong> e <strong>IA aplicada</strong>. São Paulo, Brasil.</p>
     <div class="email-caixa">
       <svg class="ic ic-20" aria-hidden="true"><use href="#i-mail"/></svg>
       <a class="email" href="mailto:ana-neves98@outlook.com">ana-neves98@outlook.com</a>

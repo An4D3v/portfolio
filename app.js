@@ -22,6 +22,64 @@
   const norm = (s) => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   const normPorChar = (s) => s.split('').map((c) => norm(c)[0] || c).join('');
 
+  const CURVA = 'cubic-bezier(0.2, 0, 0, 1)';
+  const CURVA_SAI = 'cubic-bezier(0.4, 0, 1, 1)';
+  const semMovimento = () => mq.calmo.matches || typeof Element.prototype.animate !== 'function';
+
+  // Roda `depois` uma única vez: no fim da animação ou, se a página não
+  // estiver sendo pintada (aba em segundo plano), pelo relógio. Sem o relógio
+  // o fechamento nunca terminaria e a interface ficaria no meio do caminho.
+  function animar(alvo, quadros, opcoes, depois) {
+    const anim = alvo.animate(quadros, opcoes);
+    let feito = false;
+    const concluir = () => {
+      if (feito || anim.substituida) return;
+      feito = true;
+      if (depois) depois(anim);
+    };
+    anim.onfinish = concluir;
+    setTimeout(concluir, opcoes.duration + 120);
+    return anim;
+  }
+
+  // Anima a altura entre 0 e a natural. Ao fechar, segura o último quadro
+  // (fill) até `depois` esconder o elemento, para não piscar aberto.
+  function animarAltura(alvo, abrir, depois) {
+    if (alvo.animacao) {
+      alvo.animacao.substituida = true;
+      alvo.animacao.cancel();
+      alvo.animacao = null;
+    }
+    if (semMovimento()) {
+      if (depois) depois();
+      return;
+    }
+    const altura = alvo.offsetHeight;
+    const quadros = [
+      { height: '0px', opacity: 0, flexGrow: 0 },
+      { height: `${altura}px`, opacity: 1, flexGrow: 0 },
+    ];
+    alvo.style.overflow = 'hidden';
+    alvo.animacao = animar(alvo, abrir ? quadros : quadros.reverse(), {
+      duration: abrir ? 200 : 150,
+      easing: abrir ? CURVA : CURVA_SAI,
+      fill: abrir ? 'none' : 'forwards',
+    }, (anim) => {
+      alvo.animacao = null;
+      if (depois) depois();
+      anim.cancel();
+      alvo.style.overflow = '';
+    });
+  }
+
+  function sairSuave(alvo, quadroFinal, depois) {
+    if (semMovimento()) {
+      depois();
+      return;
+    }
+    animar(alvo, [{ opacity: 1, transform: 'none' }, { opacity: 0, ...quadroFinal }], { duration: 150, easing: CURVA_SAI, fill: 'forwards' }, depois);
+  }
+
   /* ======================================================================
      Dados
      ====================================================================== */
@@ -50,11 +108,15 @@
     pacote: { nome: 'package.json', icone: 'f-npm', ling: 'json', rotulo: 'JSON', inicial: 'codigo' },
     config: { nome: 'settings.json', pasta: '.vscode', icone: 'f-settings', ling: 'json', rotulo: 'JSON com Comentários', inicial: 'codigo' },
     atalhos: { nome: 'atalhos.md', icone: 'f-markdown', ling: 'md', rotulo: 'Markdown', inicial: 'codigo' },
+    'img-mini': { nome: 'ana-64.webp', pasta: 'assets', icone: 'f-image', ling: 'img', rotulo: 'WebP · 64 × 64', imagem: 'assets/ana-64.webp', alt: 'Avatar pequeno da Ana em pixel art' },
+    'img-acenando': { nome: 'ana-acenando.webp', pasta: 'assets', icone: 'f-image', ling: 'img', rotulo: 'WebP · 256 × 256', imagem: 'assets/ana-acenando.webp', alt: 'Ilustração em pixel art da Ana acenando' },
+    'img-programando': { nome: 'ana-programando.webp', pasta: 'assets', icone: 'f-image', ling: 'img', rotulo: 'WebP animado · 256 × 256', imagem: 'assets/ana-programando.webp', parada: 'assets/ana-acenando.webp', alt: 'Ilustração em pixel art da Ana programando e acenando' },
   };
   const SECOES = ['sobre', 'projetos', 'experiencia', 'stack', 'contato'];
   const ORDEM_BUSCA = ['sobre', 'projetos', 'experiencia', 'stack', 'contato', 'pacote', 'config', 'atalhos'];
   const ARVORE = [
     { pasta: '.vscode', fechada: 'folder-vscode', aberta: 'folder-vscode-open', filhos: ['config'] },
+    { pasta: 'assets', fechada: 'folder', aberta: 'folder-open', filhos: ['img-mini', 'img-acenando', 'img-programando'] },
     'contato', 'experiencia', 'pacote', 'projetos', 'sobre', 'stack',
   ];
 
@@ -72,7 +134,7 @@ que sabe falhar.
 ## Números
 
 - **4,5M+** registros processados pelos pipelines que mantenho
-- **40+** pessoas usando os apps que criei e opero
+- **70+** pessoas usando os apps que criei e opero
 - **28** testes de integração num único take-home de microsserviços
 - **−91%** de erros de cota de API com orquestração inteligente de cargas
 
@@ -199,7 +261,7 @@ public static class Experiencia
   "devops": ["GitHub Actions", "OIDC", "CI/CD com gate de testes", "Vercel", "observabilidade"]
 }`,
 
-    contato: () => `// contato.ts — aberta a oportunidades em backend .NET, dados e IA aplicada.
+    contato: () => `// contato.ts — para falar de backend .NET, dados e IA aplicada.
 
 export const contato = {
   email: 'ana-neves98@outlook.com',
@@ -236,7 +298,6 @@ export function conversar(): void {
   "editor.fontFamily": "Cascadia Code, Consolas, monospace",
   "editor.minimap.enabled": ${estado.minimapa},
   "editor.wordWrap": "${quebraAtiva() ? 'on' : 'off'}",
-  "ana.disponivel": true,
   "ana.foco": ["backend .NET", "dados", "IA aplicada"]
 }`,
 
@@ -324,7 +385,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     painelAba: 'terminal',
     dividido: false,
     zen: false,
-    pastas: { '.vscode': true },
+    pastas: { '.vscode': true, assets: true },
     historico: ['sobre'],
     posHist: 0,
     statusApps: {},
@@ -376,6 +437,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   const fonte = (id) => FONTES[id]();
   const temVisual = (id = estado.ativa) => Boolean(id && ARQUIVOS[id].tpl);
   const modoDe = (id) => {
+    if (ARQUIVOS[id].imagem) return 'imagem';
     if (!temVisual(id)) return 'codigo';
     if (estado.dividido) return 'codigo';
     return estado.modos[id] || ARQUIVOS[id].inicial;
@@ -535,23 +597,37 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   function render() {
     renderAbas();
     renderEditor();
-    renderArvore();
+    marcarArvore();
     renderMigalha();
     renderStatus();
     atualizarTitulo();
     atualizarNavegacao();
   }
 
+  let assinaturaAbas = '';
+  let idsAbas = [];
   function renderAbas() {
     const focoNasAbas = el.abas.contains(d.activeElement);
-    el.abas.innerHTML = estado.abertas.map((id) => {
-      const r = rotuloAba(id);
-      const ativa = id === estado.ativa;
-      return `<div class="aba${ativa ? ' ativa' : ''}" data-id="${id}" draggable="true">`
-        + `<button class="aba-bt" type="button" data-id="${id}"${ativa ? ' aria-current="page"' : ''} title="${esc(caminho(id))}">${ic(r.icone)}<span class="rot${r.it ? ' it' : ''}">${esc(r.texto)}</span></button>`
-        + `<button class="aba-x" type="button" data-fechar="${id}" aria-label="Fechar ${esc(r.texto)}" title="Fechar"><span>${ic('close')}</span></button></div>`;
-    }).join('');
-    $$('.aba', el.abas).forEach((a, i) => a.style.setProperty('--i', i));
+    const assinatura = estado.abertas.map((id) => `${id}:${rotuloAba(id).texto}`).join('|');
+    if (assinatura !== assinaturaAbas) {
+      el.abas.innerHTML = estado.abertas.map((id) => {
+        const r = rotuloAba(id);
+        const nova = idsAbas.length && !idsAbas.includes(id);
+        return `<div class="aba${nova ? ' nova' : ''}" data-id="${id}" draggable="true">`
+          + `<button class="aba-bt" type="button" data-id="${id}" title="${esc(caminho(id))}">${ic(r.icone)}<span class="rot${r.it ? ' it' : ''}">${esc(r.texto)}</span></button>`
+          + `<button class="aba-x" type="button" data-fechar="${id}" aria-label="Fechar ${esc(r.texto)}" title="Fechar"><span>${ic('close')}</span></button></div>`;
+      }).join('');
+      $$('.aba', el.abas).forEach((a, i) => a.style.setProperty('--i', i));
+      assinaturaAbas = assinatura;
+      idsAbas = [...estado.abertas];
+    }
+    $$('.aba', el.abas).forEach((a) => {
+      const on = a.dataset.id === estado.ativa;
+      a.classList.toggle('ativa', on);
+      const bt = $('.aba-bt', a);
+      if (on) bt.setAttribute('aria-current', 'page');
+      else bt.removeAttribute('aria-current');
+    });
     const ativa = $('.aba.ativa', el.abas);
     if (ativa) {
       const ini = ativa.offsetLeft;
@@ -567,6 +643,10 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     if (modo === 'visual') {
       const tpl = d.getElementById(a.tpl);
       painel.replaceChildren(tpl.content.cloneNode(true));
+      painel.classList.remove('quebra');
+    } else if (modo === 'imagem') {
+      const src = mq.calmo.matches && a.parada ? a.parada : a.imagem;
+      painel.innerHTML = `<div class="visor"><img src="${src}" alt="${esc(a.alt)}" title="Clique para ampliar"></div>`;
       painel.classList.remove('quebra');
     } else {
       painel.innerHTML = htmlCodigo(id);
@@ -605,6 +685,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     el.btDividir.setAttribute('aria-pressed', String(lado));
     el.btDividir.title = temVisual(id) ? 'Abrir Visualização ao Lado' : 'Este arquivo não tem visualização';
     marcarLinha(1, 1);
+    if (modo === 'imagem') el.stPos.textContent = '';
     atualizarMinimapa();
     renderEstrutura();
   }
@@ -631,19 +712,57 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   function renderArvore() {
     const item = (id, nivel) => {
       const a = ARQUIVOS[id];
-      const atual = id === estado.ativa;
-      return `<li><button class="arvore-item n${nivel}${atual ? ' atual' : ''}" type="button" data-abrir="${id}" title="${esc(caminho(id))}"${atual ? ' aria-current="true"' : ''}>`
+      return `<li><button class="arvore-item n${nivel}" type="button" data-abrir="${id}" title="${esc(caminho(id))}">`
         + `<span class="sem-gira"></span>${ic(a.icone)}<span class="nome">${esc(a.nome)}</span></button></li>`;
     };
     el.arvore.innerHTML = ARVORE.map((n) => {
       if (typeof n === 'string') return item(n, 0);
       const aberta = Boolean(estado.pastas[n.pasta]);
-      return `<li><button class="arvore-item n0" type="button" data-pasta="${esc(n.pasta)}" aria-expanded="${aberta}">`
-        + `<span class="gira">${ic(aberta ? 'chevron-down' : 'chevron-right')}</span>${ic(aberta ? n.aberta : n.fechada)}<span class="nome">${esc(n.pasta)}</span></button>`
-        + (aberta ? `<ul class="arvore">${n.filhos.map((f) => item(f, 1)).join('')}</ul>` : '')
+      return `<li><button class="arvore-item n0" type="button" data-pasta="${esc(n.pasta)}" aria-expanded="${aberta}" title="${esc(n.pasta)}">`
+        + `<span class="gira">${ic('chevron-right', 'seta')}</span><span class="icone-pasta">${ic(aberta ? n.aberta : n.fechada)}</span><span class="nome">${esc(n.pasta)}</span></button>`
+        + `<ul class="arvore filhos p0"${aberta ? '' : ' hidden'}>${n.filhos.map((f) => item(f, 1)).join('')}</ul>`
         + '</li>';
     }).join('');
     $$(':scope > li', el.arvore).forEach((li, i) => li.style.setProperty('--i', i));
+    marcarArvore();
+  }
+
+  function marcarArvore() {
+    $$('[data-abrir]', el.arvore).forEach((b) => {
+      const atual = b.dataset.abrir === estado.ativa;
+      b.classList.toggle('atual', atual);
+      if (atual) b.setAttribute('aria-current', 'true');
+      else b.removeAttribute('aria-current');
+    });
+    $$('.filhos', el.arvore).forEach((ul) => ul.classList.toggle('tem-atual', Boolean($('.atual', ul))));
+  }
+
+  function alternarPasta(bt) {
+    const nome = bt.dataset.pasta;
+    const abrir = !estado.pastas[nome];
+    estado.pastas[nome] = abrir;
+    bt.setAttribute('aria-expanded', String(abrir));
+    const no = ARVORE.find((n) => n.pasta === nome);
+    $('.icone-pasta use', bt).setAttribute('href', `#i-${abrir ? no.aberta : no.fechada}`);
+    const filhos = bt.nextElementSibling;
+    if (abrir) {
+      filhos.hidden = false;
+      animarAltura(filhos, true);
+    } else {
+      animarAltura(filhos, false, () => { filhos.hidden = true; });
+    }
+  }
+
+  function alternarSecao(sec, abrir) {
+    const cab = $('.secao-cab', sec);
+    const corpo = $('.secao-corpo', sec);
+    cab.setAttribute('aria-expanded', String(abrir));
+    if (abrir) sec.classList.add('aberta');
+    animarAltura(corpo, abrir, () => {
+      sec.classList.remove('animando');
+      if (!abrir) sec.classList.remove('aberta');
+    });
+    if (corpo.animacao) sec.classList.add('animando');
   }
 
   function renderMigalha() {
@@ -663,6 +782,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const id = estado.ativa;
     el.stLing.textContent = id ? ARQUIVOS[id].rotulo : '';
     el.stEsp.textContent = `Espaços: ${id && ARQUIVOS[id].ling === 'cs' ? 4 : 2}`;
+    el.app.classList.toggle('vendo-imagem', Boolean(id && ARQUIVOS[id].imagem));
   }
 
   function atualizarTitulo() {
@@ -693,7 +813,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       itens = $$('h1, h2', el.editor)
         .filter((h) => h.offsetParent !== null && h.textContent.trim())
         .map((h, i) => ({ nome: h.textContent.trim(), alvo: `h:${i}`, sub: h.tagName === 'H2' }));
-    } else {
+    } else if (RE_SIMBOLO[ARQUIVOS[id].ling]) {
       const re = RE_SIMBOLO[ARQUIVOS[id].ling];
       fonte(id).split('\n').forEach((l, i) => {
         const m = l.match(re);
@@ -790,12 +910,24 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     abrir(estado.historico[alvo], { historico: false });
   }
 
+  function fecharAbaSuave(aba, voltarFoco) {
+    const fim = () => {
+      fecharAba(aba.dataset.id);
+      if (voltarFoco) ($('.aba.ativa .aba-bt', el.abas) || el.editor).focus();
+    };
+    if (semMovimento() || aba.classList.contains('saindo')) {
+      fim();
+      return;
+    }
+    aba.classList.add('saindo');
+    aba.style.overflow = 'hidden';
+    animar(aba, [{ width: `${aba.offsetWidth}px`, opacity: 1 }, { width: '0px', opacity: 0 }], { duration: 150, easing: CURVA_SAI, fill: 'forwards' }, fim);
+  }
+
   el.abas.addEventListener('click', (e) => {
     const x = e.target.closest('[data-fechar]');
     if (x) {
-      const voltarFoco = el.abas.contains(d.activeElement);
-      fecharAba(x.dataset.fechar);
-      if (voltarFoco) ($('.aba.ativa .aba-bt', el.abas) || el.editor).focus();
+      fecharAbaSuave(x.closest('.aba'), el.abas.contains(d.activeElement));
       return;
     }
     const b = e.target.closest('.aba-bt');
@@ -806,7 +938,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const a = e.target.closest('.aba');
     if (a) {
       e.preventDefault();
-      fecharAba(a.dataset.id);
+      fecharAbaSuave(a, false);
     }
   });
   el.abas.addEventListener('keydown', (e) => {
@@ -854,6 +986,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   });
   el.abas.addEventListener('dragend', () => {
     arrastada = null;
+    $$('.aba', el.abas).forEach((a) => a.classList.remove('arrastando', 'alvo'));
     renderAbas();
   });
 
@@ -884,6 +1017,12 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   }
 
   el.editor.addEventListener('click', (e) => {
+    const foto = e.target.closest('.visor img');
+    if (foto) {
+      const ampliada = foto.parentElement.classList.toggle('zoom');
+      foto.title = ampliada ? 'Clique para reduzir' : 'Clique para ampliar';
+      return;
+    }
     const ln = e.target.closest('.ln');
     if (!ln || el.editor.dataset.modo !== 'codigo') return;
     let col = 1;
@@ -1165,28 +1304,33 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const cab = e.target.closest('.secao-cab');
     if (cab) {
       const sec = cab.closest('.secao');
-      const aberta = !sec.classList.contains('aberta');
-      sec.classList.toggle('aberta', aberta);
-      cab.setAttribute('aria-expanded', String(aberta));
-      const uso = $('use', cab);
-      if (uso) uso.setAttribute('href', `#i-${aberta ? 'chevron-down' : 'chevron-right'}`);
+      alternarSecao(sec, cab.getAttribute('aria-expanded') !== 'true');
       return;
     }
     const pasta = e.target.closest('[data-pasta]');
-    if (pasta) {
-      estado.pastas[pasta.dataset.pasta] = !estado.pastas[pasta.dataset.pasta];
-      renderArvore();
-      $(`[data-pasta="${pasta.dataset.pasta}"]`, el.arvore).focus();
-    }
+    if (pasta) alternarPasta(pasta);
   });
 
   el.arvore.addEventListener('keydown', (e) => {
-    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
-    const itens = $$('.arvore-item', el.arvore);
+    const itens = $$('.arvore-item', el.arvore).filter((b) => b.offsetParent !== null);
     const i = itens.indexOf(d.activeElement);
     if (i < 0) return;
-    e.preventDefault();
-    itens[Math.min(itens.length - 1, Math.max(0, i + (e.key === 'ArrowDown' ? 1 : -1)))].focus();
+    const atual = itens[i];
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      itens[Math.min(itens.length - 1, Math.max(0, i + (e.key === 'ArrowDown' ? 1 : -1)))].focus();
+    } else if (e.key === 'ArrowRight' && atual.dataset.pasta) {
+      e.preventDefault();
+      if (atual.getAttribute('aria-expanded') !== 'true') alternarPasta(atual);
+      else if (itens[i + 1]) itens[i + 1].focus();
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      if (atual.dataset.pasta && atual.getAttribute('aria-expanded') === 'true') alternarPasta(atual);
+      else {
+        const pai = atual.closest('.filhos');
+        if (pai) pai.previousElementSibling.focus();
+      }
+    }
   });
 
   /* ---------- pesquisar ---------- */
@@ -1222,7 +1366,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       arquivos += 1;
       total += achados.length;
       const a = ARQUIVOS[id];
-      h += `<div class="res-arq"><button class="res-arq-cab" type="button" aria-expanded="true">${ic('chevron-down')}${ic(a.icone)}<span>${esc(a.nome)}</span>${a.pasta ? `<span class="dim">${esc(a.pasta)}</span>` : ''}<span class="res-cont">${achados.length}</span></button><ul class="arvore">`
+      h += `<div class="res-arq"><button class="res-arq-cab" type="button" aria-expanded="true">${ic('chevron-right', 'seta')}${ic(a.icone)}<span>${esc(a.nome)}</span>${a.pasta ? `<span class="dim">${esc(a.pasta)}</span>` : ''}<span class="res-cont">${achados.length}</span></button><ul class="arvore">`
         + achados.map((x) => `<li><button class="res-linha" type="button" data-ir="${id}" data-ln="${x.n}" data-col="${x.p + 1}">${trecho(x.l, x.p, nq.length)}</button></li>`).join('')
         + '</ul></div>';
     });
@@ -1240,10 +1384,14 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const cab = e.target.closest('.res-arq-cab');
     if (cab) {
       const lista = cab.nextElementSibling;
-      const aberta = lista.hidden;
-      lista.hidden = !aberta;
-      cab.setAttribute('aria-expanded', String(aberta));
-      $('use', cab).setAttribute('href', `#i-${aberta ? 'chevron-down' : 'chevron-right'}`);
+      const abrir = cab.getAttribute('aria-expanded') !== 'true';
+      cab.setAttribute('aria-expanded', String(abrir));
+      if (abrir) {
+        lista.hidden = false;
+        animarAltura(lista, true);
+      } else {
+        animarAltura(lista, false, () => { lista.hidden = true; });
+      }
       return;
     }
     const r = e.target.closest('[data-ir]');
@@ -1385,7 +1533,17 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     if (estado.painelAba === 'terminal' && !mq.celular.matches) el.termIn.focus();
   }
   function alternarPainel(forcar) {
-    estado.painel = typeof forcar === 'boolean' ? forcar : !estado.painel;
+    const abrir = typeof forcar === 'boolean' ? forcar : !estado.painel;
+    if (!abrir && estado.painel) {
+      estado.painel = false;
+      $('#bt-layout-painel').setAttribute('aria-pressed', 'false');
+      sairSuave(el.painel, { transform: 'translateY(8px)' }, () => {
+        if (!estado.painel) renderPainel();
+        el.painel.getAnimations().forEach((a) => a.cancel());
+      });
+      return;
+    }
+    estado.painel = abrir;
     renderPainel();
     if (estado.painel && estado.painelAba === 'terminal' && !mq.celular.matches) el.termIn.focus();
   }
@@ -1431,7 +1589,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     whoami: { desc: 'quem é a Ana', fn: () => linhaTerm('Ana Neves — Software Developer · backend .NET e Azure · São Paulo, Brasil') },
     sobre: {
       desc: 'resumo em três linhas',
-      fn: () => linhaTerm('Primeira e única dev de um escritório jurídico: pipelines com 4,5M+ registros,\nbots com IA no Teams e classificador LLM em produção.\nFora do expediente: 3 apps próprios no ar, com 40+ pessoas usando.'),
+      fn: () => linhaTerm('Primeira e única dev de um escritório jurídico: pipelines com 4,5M+ registros,\nbots com IA no Teams e classificador LLM em produção.\nFora do expediente: 3 apps próprios no ar, com 70+ pessoas usando.'),
     },
     projetos: {
       desc: 'os produtos, com links',
@@ -1460,7 +1618,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       desc: 'e-mail, GitHub e LinkedIn',
       fn: () => {
         linhaTerm(`e-mail    ${linkar(EMAIL)}\ngithub    ${linkar(GITHUB)}\nlinkedin  ${linkar(LINKEDIN)}`);
-        linhaTerm('aberta a oportunidades em backend .NET, dados e IA aplicada.', 'term-dim');
+        linhaTerm('para falar de backend .NET, dados e IA aplicada.', 'term-dim');
       },
     },
     ls: { desc: 'lista os arquivos', fn: () => linhaTerm(Object.keys(NOMES_ARQ).filter((k) => k !== 'atalhos.md').map((k) => linkArq(NOMES_ARQ[k])).join('  ')) },
@@ -1483,6 +1641,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       fn: (arg) => {
         const id = acharArquivo(arg);
         if (!id) linhaTerm(arg ? `cat: ${esc(arg)}: arquivo não encontrado` : 'uso: cat &lt;arquivo&gt;', 'term-erro');
+        else if (ARQUIVOS[id].imagem) linhaTerm(`cat: ${esc(caminho(id))}: é uma imagem; abra com <span class="term-dest">abrir ${esc(caminho(id))}</span>`, 'term-dim');
         else linhaTerm(linkar(esc(fonte(id))));
       },
     },
@@ -1620,9 +1779,14 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     n.innerHTML = `${ic(icone)}<p class="notif-txt">${esc(texto)}</p><button class="icone-bt" type="button" data-sair aria-label="Fechar notificação">${ic('close')}</button>`
       + (acoes.length ? `<div class="notif-acoes">${acoes.map((a, i) => `<button class="botao${a.sec ? ' sec' : ''}" type="button" data-i="${i}">${esc(a.rotulo)}</button>`).join('')}</div>` : '');
     const sair = () => {
-      n.remove();
-      atualizarSino();
+      if (n.classList.contains('saindo')) return;
+      n.classList.add('saindo');
+      sairSuave(n, { transform: 'translateX(16px)' }, () => {
+        n.remove();
+        atualizarSino();
+      });
     };
+    n.sair = sair;
     n.addEventListener('click', (e) => {
       if (e.target.closest('[data-sair]')) {
         if (acoes.onFechar) acoes.onFechar();
@@ -1645,26 +1809,36 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     $('use', el.stSino).setAttribute('href', `#i-${tem ? 'bell-dot' : 'bell'}`);
     el.stSino.setAttribute('aria-label', tem ? 'Notificações: 1 nova' : 'Notificações');
   }
-  function notificarDisponivel() {
+  function notificarDica() {
+    const visto = () => guarda.gravarSessao('ana-notif', '1');
     const acoes = [
-      { rotulo: 'Ver contato.ts', sec: true, fn: () => { guarda.gravarSessao('ana-notif', '1'); abrir('contato'); } },
-      { rotulo: 'Entrar em contato', fn: () => { guarda.gravarSessao('ana-notif', '1'); location.href = `mailto:${EMAIL}`; } },
+      { rotulo: 'Ver atalhos', sec: true, fn: () => { visto(); abrir('atalhos'); } },
+      { rotulo: 'Abrir terminal', fn: () => { visto(); mostrarPainel('terminal'); } },
     ];
-    acoes.onFechar = () => guarda.gravarSessao('ana-notif', '1');
-    notificar({ texto: 'A Ana está aberta a oportunidades em backend .NET, dados e IA aplicada.', acoes, fixa: true, chave: 'disponivel' });
+    acoes.onFechar = visto;
+    const texto = mq.celular.matches
+      ? 'Dica: as abas lá em cima são as seções, e a barra de baixo abre o explorador, a pesquisa e o terminal.'
+      : 'Dica: isto é um editor de verdade. Ctrl+Shift+P abre a paleta de comandos e Ctrl+J, o terminal.';
+    notificar({ texto, acoes, fixa: true, chave: 'dica' });
   }
   el.stSino.addEventListener('click', () => {
-    const notifs = $$('.notif', el.notifs);
-    if (notifs.length) notifs.forEach((n) => n.remove());
-    else notificarDisponivel();
+    const notifs = $$('.notif:not(.saindo)', el.notifs);
+    if (notifs.length) notifs.forEach((n) => n.sair());
+    else notificarDica();
     atualizarSino();
   });
 
   /* ======================================================================
      Temas
      ====================================================================== */
+  let fimTrocaTema = 0;
   function aplicarTema(t, { salvar = true } = {}) {
     if (!TEMAS[t]) return;
+    if (!mq.calmo.matches && html.dataset.tema !== t) {
+      html.classList.add('trocando-tema');
+      clearTimeout(fimTrocaTema);
+      fimTrocaTema = setTimeout(() => html.classList.remove('trocando-tema'), 340);
+    }
     html.dataset.tema = t;
     const meta = $('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', TEMAS[t].fundo);
@@ -2191,8 +2365,10 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       e.preventDefault();
       sash.setPointerCapture(e.pointerId);
       sash.classList.add('ativo');
+      el.app.classList.add('redimensionando');
       const soltar = () => {
         sash.classList.remove('ativo');
+        el.app.classList.remove('redimensionando');
         sash.removeEventListener('pointermove', aoMover);
         if (aoSoltar) aoSoltar();
       };
@@ -2236,11 +2412,12 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       el.app.classList.add('abrindo');
       setTimeout(() => el.app.classList.remove('abrindo'), 1400);
     }
+    renderArvore();
     render();
     aplicarLateral();
     registrar(`workbench pronto em ${Math.round(performance.now())} ms`);
     registrar(`tema de cores: ${TEMAS[estado.tema].nome}`);
-    if (!guarda.lerSessao('ana-notif')) setTimeout(notificarDisponivel, 4500);
+    if (!guarda.lerSessao('ana-notif')) setTimeout(notificarDica, 4500);
   }
 
   window.addEventListener('hashchange', () => {
