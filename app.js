@@ -1995,6 +1995,14 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       fecharMenu();
     }
   });
+  // Botões de ícone funcionam como interruptor: o segundo clique fecha.
+  function alternarMenu(itens, ancora, opcoes) {
+    if (menuAberto && menuAberto.ancora === ancora) {
+      fecharMenu();
+      return;
+    }
+    abrirMenu(itens, ancora, opcoes);
+  }
   function abrirMenuBarra(bt, focar) {
     abrirMenu(MENUS[+bt.dataset.menu].itens(), bt, { barra: true, focar });
   }
@@ -2030,21 +2038,21 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   }
 
   const celular = () => mq.celular.matches;
-  $('#bt-conta').addEventListener('click', (e) => abrirMenu([
+  $('#bt-conta').addEventListener('click', (e) => alternarMenu([
     { rotulo: 'Ana Neves — GitHub', fn: () => abrirFora(GITHUB) },
     { rotulo: 'Ana Neves — LinkedIn', fn: () => abrirFora(LINKEDIN) },
     '-',
     { rotulo: 'Enviar E-mail', fn: () => { location.href = `mailto:${EMAIL}`; } },
     { rotulo: 'Copiar E-mail', fn: copiarEmail },
   ], e.currentTarget, { lado: celular() ? 'cima' : 'direita', focar: e.detail === 0 }));
-  $('#bt-gerenciar').addEventListener('click', (e) => abrirMenu([
+  $('#bt-gerenciar').addEventListener('click', (e) => alternarMenu([
     { rotulo: 'Paleta de Comandos…', tecla: 'Ctrl+Shift+P', fn: () => abrirPaleta('>') },
     { rotulo: 'Configurações', fn: () => abrir('config') },
     { rotulo: 'Atalhos de Teclado', fn: () => abrir('atalhos') },
     '-',
     ...itensTema(),
   ], e.currentTarget, { lado: 'direita', focar: e.detail === 0 }));
-  $('#bt-layout-mais').addEventListener('click', (e) => abrirMenu([
+  $('#bt-layout-mais').addEventListener('click', (e) => alternarMenu([
     { rotulo: 'Painel Lateral', tecla: 'Ctrl+B', check: estado.lateral, fn: () => alternarLateral() },
     { rotulo: 'Painel', tecla: 'Ctrl+J', check: estado.painel, fn: () => alternarPainel() },
     { rotulo: 'Minimapa', check: estado.minimapa, fn: alternarMinimapa },
@@ -2052,7 +2060,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     { rotulo: 'Modo Zen', check: estado.zen, fn: () => alternarZen() },
     { rotulo: 'Tela Inteira', check: Boolean(d.fullscreenElement), fn: telaCheia },
   ], e.currentTarget, { focar: e.detail === 0 }));
-  $('#bt-editor-mais').addEventListener('click', (e) => abrirMenu([
+  $('#bt-editor-mais').addEventListener('click', (e) => alternarMenu([
     { rotulo: 'Fechar Outros', fn: fecharOutras, off: estado.abertas.length < 2 },
     { rotulo: 'Fechar Todos', fn: fecharTodas, off: !estado.abertas.length },
     { rotulo: 'Reabrir Todas as Abas', fn: reabrirTodas },
@@ -2061,7 +2069,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     { rotulo: 'Minimapa', check: estado.minimapa, fn: alternarMinimapa },
     { rotulo: 'Visualização ao Lado', check: estado.dividido, fn: alternarDivisao, off: !temVisual() },
   ], e.currentTarget, { focar: e.detail === 0 }));
-  $('#bt-lat-mais').addEventListener('click', (e) => abrirMenu(
+  $('#bt-lat-mais').addEventListener('click', (e) => alternarMenu(
     Object.entries(TITULOS_VISTA).map(([v, t]) => ({ rotulo: t, check: estado.vista === v, fn: () => mostrarVista(v, { alternar: false }) })),
     e.currentTarget, { focar: e.detail === 0 },
   ));
@@ -2267,7 +2275,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
      Delegação global: data-abrir, data-acao, data-copiar
      ====================================================================== */
   const ACOES = {
-    tema: (bt) => abrirMenu(itensTema(), bt, { focar: true }),
+    tema: (bt) => alternarMenu(itensTema(), bt, { focar: true }),
     'novo-arquivo': () => notificar({ texto: 'Este workspace é somente leitura, mas o terminal aceita comandos: Ctrl+J e digite help.' }),
     recolher: () => {
       estado.pastas = {};
