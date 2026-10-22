@@ -903,28 +903,70 @@
 
 /* abaixo de ~520px o cabeçalho empilha */
 @container ext (width < 520px) {
+  /* foto à esquerda e nome ao lado, como numa loja de apps; ações em grade */
   .ext-cabecalho {
-    flex-direction: column;
-    gap: 14px;
-    padding: 16px 16px 12px;
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    grid-template-areas:
+      "foto titulo"
+      "foto sub"
+      "desc desc"
+      "acoes acoes";
+    column-gap: 14px;
+    row-gap: 2px;
+    padding: 18px 16px 14px;
+  }
+
+  .ext-info {
+    display: contents;
   }
 
   .ext-avatar {
-    width: 88px;
-    height: 88px;
+    grid-area: foto;
+    align-self: center;
+    width: 76px;
+    height: 76px;
   }
 
   .ext-avatar-iniciais {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .ext-titulo {
-    font-size: 24px;
-    line-height: 28px;
+    grid-area: titulo;
+    align-self: end;
+    font-size: 22px;
+    line-height: 27px;
   }
 
   .ext-subtitulo {
-    column-gap: 14px;
+    grid-area: sub;
+    align-self: start;
+    column-gap: 12px;
+    row-gap: 2px;
+    font-size: 13px;
+  }
+
+  .ext-descricao {
+    grid-area: desc;
+    margin-top: 12px;
+  }
+
+  .ext-acoes {
+    grid-area: acoes;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .ext-btn {
+    justify-content: center;
+  }
+
+  .ext-btn-primario {
+    grid-column: 1 / -1;
+    font-weight: 600;
   }
 
   .ext-sub-item + .ext-sub-item {

@@ -444,8 +444,9 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   };
   function rotuloAba(id, modo = modoDe(id)) {
     const a = ARQUIVOS[id];
-    if (modo === 'visual' && a.extensao) return { icone: 'f-extension', texto: 'Extensão: Ana Neves', it: true };
-    if (modo === 'visual') return { icone: 'open-preview', texto: `Visualizar ${a.nome}` };
+    const curto = mq.celular.matches;
+    if (modo === 'visual' && a.extensao) return { icone: 'f-extension', texto: curto ? 'Ana Neves' : 'Extensão: Ana Neves', it: true };
+    if (modo === 'visual' && !curto) return { icone: 'open-preview', texto: `Visualizar ${a.nome}` };
     return { icone: a.icone, texto: a.nome };
   }
 
@@ -636,6 +637,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       else if (fim > el.abas.scrollLeft + el.abas.clientWidth) el.abas.scrollLeft = fim - el.abas.clientWidth;
       if (focoNasAbas) $('.aba-bt', ativa).focus();
     }
+    atualizarBordaAbas();
   }
 
   function preencher(painel, id, modo) {
@@ -995,6 +997,69 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     $$('.aba', el.abas).forEach((a) => a.classList.remove('arrastando', 'alvo'));
     renderAbas();
   });
+
+  function atualizarBordaAbas() {
+    el.abas.classList.toggle('tem-mais', el.abas.scrollLeft + el.abas.clientWidth < el.abas.scrollWidth - 4);
+  }
+  el.abas.addEventListener('scroll', atualizarBordaAbas, { passive: true });
+
+  /* ---------- gestos no celular ---------- */
+  function rolaNaHorizontal(no, limite) {
+    for (let n = no; n && n !== limite; n = n.parentElement) {
+      if (n.scrollWidth > n.clientWidth + 2) {
+        const ox = getComputedStyle(n).overflowX;
+        if (ox === 'auto' || ox === 'scroll') return true;
+      }
+    }
+    return false;
+  }
+  function deslizarConteudo(sentido, quadros) {
+    const alvo = el.editor.firstElementChild;
+    if (!alvo || semMovimento()) return;
+    alvo.animate(quadros || [
+      { transform: `translateX(${sentido * 48}px)`, opacity: 0 },
+      { transform: 'none', opacity: 1 },
+    ], { duration: 240, easing: CURVA });
+  }
+
+  const toque = { ativo: false, x: 0, y: 0, t: 0 };
+  const grupos = $('.grupos');
+  grupos.addEventListener('touchstart', (e) => {
+    toque.ativo = e.touches.length === 1 && !rolaNaHorizontal(e.target, grupos);
+    if (!toque.ativo) return;
+    toque.x = e.touches[0].clientX;
+    toque.y = e.touches[0].clientY;
+    toque.t = Date.now();
+  }, { passive: true });
+  grupos.addEventListener('touchend', (e) => {
+    if (!toque.ativo) return;
+    toque.ativo = false;
+    const dx = e.changedTouches[0].clientX - toque.x;
+    const dy = e.changedTouches[0].clientY - toque.y;
+    if (Date.now() - toque.t > 650 || Math.abs(dx) < 70 || Math.abs(dy) > Math.abs(dx) * 0.55) return;
+    if (String(getSelection())) return;
+    const sentido = dx < 0 ? 1 : -1;
+    const i = estado.abertas.indexOf(estado.ativa);
+    const j = i + sentido;
+    if (i < 0 || j < 0 || j >= estado.abertas.length) {
+      deslizarConteudo(sentido, [{ transform: 'none' }, { transform: `translateX(${-sentido * 16}px)` }, { transform: 'none' }]);
+      return;
+    }
+    abrir(estado.abertas[j]);
+    deslizarConteudo(sentido);
+  }, { passive: true });
+
+  const toqueGaveta = { x: 0, y: 0 };
+  el.lateral.addEventListener('touchstart', (e) => {
+    toqueGaveta.x = e.touches[0].clientX;
+    toqueGaveta.y = e.touches[0].clientY;
+  }, { passive: true });
+  el.lateral.addEventListener('touchend', (e) => {
+    if (!el.app.classList.contains('gaveta')) return;
+    const dx = e.changedTouches[0].clientX - toqueGaveta.x;
+    const dy = e.changedTouches[0].clientY - toqueGaveta.y;
+    if (dx < -60 && Math.abs(dy) < Math.abs(dx) * 0.6) fecharGaveta();
+  }, { passive: true });
 
   el.btModo.addEventListener('click', alternarModo);
   el.btDividir.addEventListener('click', alternarDivisao);
@@ -1588,10 +1653,16 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const id = Object.keys(NOMES_ARQ).find((k) => k.toLowerCase() === n || k.split('/').pop().toLowerCase() === n);
     return id ? NOMES_ARQ[id] : null;
   }
+  const estreito = () => mq.celular.matches;
   const linkArq = (id) => `<a href="#${id}" data-abrir="${id}">${esc(caminho(id))}</a>`;
 
   const CMDS = {
-    help: { desc: 'lista os comandos', fn: () => linhaTerm(Object.entries(CMDS).filter(([, c]) => c.desc).map(([n, c]) => `  <span class="term-dest">${n.padEnd(12)}</span>${esc(c.desc)}`).join('\n')) },
+    help: {
+      desc: 'lista os comandos',
+      fn: () => linhaTerm(Object.entries(CMDS).filter(([, c]) => c.desc).map(([n, c]) => (estreito()
+        ? `<span class="term-dest">${n}</span>  ${esc(c.desc)}`
+        : `  <span class="term-dest">${n.padEnd(12)}</span>${esc(c.desc)}`)).join('\n')),
+    },
     whoami: { desc: 'quem é a Ana', fn: () => linhaTerm('Ana Neves — Software Developer · backend .NET e Azure · São Paulo, Brasil') },
     sobre: {
       desc: 'resumo em três linhas',
@@ -1604,12 +1675,16 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
         ['AlienFinanças', 'finanças com leitura de nota fiscal por IA · 20+ usuários', APPS.alien],
         ['Notas Fiscais', 'microsserviços .NET · 28 testes de integração', 'https://github.com/An4D3v/Korp_Teste_AnaNeves'],
         ['Vale do Trevo', 'jogo 2D em canvas puro', APPS.trevo],
-      ].map(([n, dsc, url]) => `<span class="term-dest">${esc(n.padEnd(15))}</span>${esc(dsc)}\n${' '.repeat(15)}${linkar(esc(url))}`).join('\n')),
+      ].map(([n, dsc, url]) => (estreito()
+        ? `<span class="term-dest">${esc(n)}</span>\n  ${esc(dsc)}\n  ${linkar(esc(url))}`
+        : `<span class="term-dest">${esc(n.padEnd(15))}</span>${esc(dsc)}\n${' '.repeat(15)}${linkar(esc(url))}`)).join('\n')),
     },
     experiencia: {
       desc: 'trajetória e bastidores',
       fn: () => {
-        linhaTerm('hoje      primeira e única dev · escritório jurídico, São Paulo\nparalelo  3 produtos próprios no ar\ninício    dados · Jusbrasil');
+        linhaTerm(estreito()
+          ? 'hoje: primeira e única dev · escritório jurídico, São Paulo\nem paralelo: 3 produtos próprios no ar\ninício: dados · Jusbrasil'
+          : 'hoje      primeira e única dev · escritório jurídico, São Paulo\nparalelo  3 produtos próprios no ar\ninício    dados · Jusbrasil');
         linhaTerm(`detalhes: ${linkArq('experiencia')}`, 'term-dim');
       },
     },
@@ -1617,7 +1692,9 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       desc: 'com o que ela trabalha',
       fn: () => {
         const s = JSON.parse(fonte('stack'));
-        linhaTerm(Object.entries(s).map(([k, v]) => `<span class="term-dest">${esc(k.padEnd(10))}</span>${esc(v.join(' · '))}`).join('\n'));
+        linhaTerm(Object.entries(s).map(([k, v]) => (estreito()
+          ? `<span class="term-dest">${esc(k)}</span>\n  ${esc(v.join(' · '))}`
+          : `<span class="term-dest">${esc(k.padEnd(10))}</span>${esc(v.join(' · '))}`)).join('\n'));
       },
     },
     contato: {
@@ -1759,6 +1836,10 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       limparTerminal();
     }
   });
+  el.termIn.addEventListener('focus', () => {
+    if (mq.celular.matches) el.app.classList.add('digitando');
+  });
+  el.termIn.addEventListener('blur', () => el.app.classList.remove('digitando'));
   el.painelCorpo.addEventListener('click', (e) => {
     if (e.target.closest('a, button') || String(getSelection())) return;
     el.termIn.focus();
@@ -1823,7 +1904,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     ];
     acoes.onFechar = visto;
     const texto = mq.celular.matches
-      ? 'Dica: as abas lá em cima são as seções, e a barra de baixo abre o explorador, a pesquisa e o terminal.'
+      ? 'Dica: deslize o dedo para os lados para trocar de aba. A barra de baixo abre arquivos, pesquisa, terminal e links.'
       : 'Dica: isto é um editor de verdade. Ctrl+Shift+P abre a paleta de comandos e Ctrl+J, o terminal.';
     notificar({ texto, acoes, fixa: true, chave: 'dica' });
   }
@@ -2440,6 +2521,8 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   });
   const aoMudarTela = () => {
     if (!mq.celular.matches) fecharGaveta();
+    renderAbas();
+    atualizarTitulo();
     if (estado.quebra === null && estado.ativa) el.editor.classList.toggle('quebra', el.editor.dataset.modo === 'codigo' && quebraAtiva());
     aplicarLateral();
     atualizarMinimapa();

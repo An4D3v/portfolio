@@ -36,7 +36,7 @@
   --vsc-cc-border: #44475a;
   --vsc-activity-bg: #343746;
   --vsc-activity-fg: #f8f8f2;
-  --vsc-activity-fg-inactive: #8a96c4;
+  --vsc-activity-fg-inactive: #9aa5d0;
   --vsc-activity-border-active: #ff79c6;
   --vsc-activity-badge-bg: #ff79c6;
   --vsc-activity-badge-fg: #191a21;
@@ -674,6 +674,7 @@ kbd {
 }
 .at-espaco { flex: 1; }
 .at-bt.so-celular { display: none; }
+.at-rot { display: none; }
 
 /* ---------- painel lateral ---------- */
 .lateral {
@@ -1658,39 +1659,67 @@ button.st-remoto:hover { background: var(--marca-hover); }
 }
 
 @media (max-width: 760px) {
-  :root { --h-titulo: 44px; }
-  .app { grid-template-rows: var(--h-titulo) minmax(0, 1fr) 50px var(--h-status); }
+  :root {
+    --h-titulo: 44px;
+    --h-barra: 56px;
+    --seguro-topo: env(safe-area-inset-top, 0px);
+    --seguro-baixo: env(safe-area-inset-bottom, 0px);
+    --base: calc(var(--h-barra) + var(--h-status) + var(--seguro-baixo));
+  }
+  .app {
+    grid-template-rows:
+      calc(var(--h-titulo) + var(--seguro-topo))
+      minmax(0, 1fr)
+      var(--h-barra)
+      calc(var(--h-status) + var(--seguro-baixo));
+  }
+  .titulo { grid-template-columns: auto minmax(0, 1fr) auto; padding-top: var(--seguro-topo); }
   .layout-bts { display: none; }
-  .titulo { grid-template-columns: auto minmax(0, 1fr) auto; }
   .comando-central { width: 100%; height: 30px; }
   .bancada,
   .app.sem-lateral .bancada,
   .app.zen .bancada { grid-template-columns: minmax(0, 1fr); }
-  .status { grid-row: 4; }
+  .status { grid-row: 4; padding-bottom: var(--seguro-baixo); }
+
+  /* a barra de atividades vira a barra de navegação do app, com nome sob o ícone */
   .atividades {
     position: fixed;
     left: 0;
     right: 0;
-    bottom: var(--h-status);
-    height: 50px;
+    bottom: calc(var(--h-status) + var(--seguro-baixo));
+    height: var(--h-barra);
     z-index: 61;
     flex-direction: row;
     justify-content: space-around;
+    padding: 0 4px;
     border-right: 0;
     border-top: 1px solid var(--vsc-border);
   }
-  .at-bt { width: 56px; height: 50px; }
-  .at-bt::before { left: 12px; right: 12px; top: auto; bottom: 0; width: auto; height: 2px; transform: scaleX(0); }
+  .at-bt {
+    flex: 1;
+    max-width: 76px;
+    height: var(--h-barra);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .at-bt .ic-24 { width: 22px; height: 22px; }
+  .at-rot { display: block; font-size: 10.5px; line-height: 1; }
+  .at-selo { display: none; }
+  .at-bt::before { left: 22%; right: 22%; top: 0; bottom: auto; width: auto; height: 2px; transform: scaleX(0); }
   .at-bt[aria-pressed="true"]::before { transform: none; }
   .at-espaco,
   .at-bt.so-desktop { display: none; }
-  .at-bt.so-celular { display: grid; }
+  .at-bt.so-celular { display: flex; }
+
   .lateral {
     position: fixed;
-    top: var(--h-titulo);
-    bottom: calc(50px + var(--h-status));
+    top: calc(var(--h-titulo) + var(--seguro-topo));
+    bottom: var(--base);
     left: 0;
-    width: min(360px, 92vw);
+    width: min(360px, 88vw);
     z-index: 60;
     transform: translateX(-105%);
     transition: transform 0.22s var(--curva), visibility 0s linear 0.22s;
@@ -1701,25 +1730,52 @@ button.st-remoto:hover { background: var(--marca-hover); }
   .lat-fechar { display: grid; width: 40px; height: 40px; }
   .sash { display: none; }
   .migalha { display: none; }
+
+  /* abas: nome curto, o × só na ativa e um degradê avisando que tem mais à direita */
+  .aba:not(.ativa) .aba-x { display: none; }
+  .aba-bt { padding: 0 12px; }
+  .aba.ativa .aba-bt { padding-right: 0; }
+  .abas.tem-mais {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+  }
+  #bt-dividir { display: none; }
+
   .md { padding: 14px 18px 72px; font-size: 15px; line-height: 23px; }
   .md h1 { font-size: 1.75em; }
   .codigo { font-size: 13px; line-height: 19px; }
   .ln { grid-template-columns: 40px minmax(0, 1fr); }
   .ln::before { padding-right: 12px; }
+
   .painel,
   .painel.max {
     position: fixed;
     left: 0;
     right: 0;
-    bottom: calc(50px + var(--h-status));
+    bottom: var(--base);
     height: 58vh;
     z-index: 58;
     box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
   }
   .sash-h { display: none; }
+  #pa-problemas,
+  #pa-depuracao,
+  .painel-acoes [data-acao="painel-max"] { display: none; }
+  .painel-corpo { padding: 4px 14px 8px; }
+  .term-chips { padding: 2px 14px 6px; }
+
+  /* digitando no terminal: as barras saem para o teclado não cobrir a linha de comando */
+  .app.digitando .atividades,
+  .app.digitando .status { display: none; }
+  .app.digitando .painel {
+    top: calc(var(--h-titulo) + var(--seguro-topo));
+    bottom: 0;
+    height: auto;
+  }
+
   .st-ocultar { display: none; }
-  .notificacoes { left: 8px; right: 8px; width: auto; bottom: calc(50px + var(--h-status) + 8px); }
-  .paleta { top: 8px; }
+  .notificacoes { left: 8px; right: 8px; width: auto; bottom: calc(var(--base) + 8px); }
+  .paleta { top: calc(8px + var(--seguro-topo)); }
 }
 
 @media (pointer: coarse) {
@@ -1735,6 +1791,25 @@ button.st-remoto:hover { background: var(--marca-hover); }
   .acao-bt { width: 40px; height: 40px; }
   .painel-aba { height: 40px; }
   .botao { min-height: 40px; }
+}
+
+/* toque: resposta visual no lugar do hover */
+@media (hover: none) {
+  * { -webkit-tap-highlight-color: transparent; }
+  .at-bt:active,
+  .aba-bt:active,
+  .arvore-item:active,
+  .res-linha:active,
+  .res-arq-cab:active,
+  .menu-item:active,
+  .pal-item:active,
+  .icone-bt:active,
+  .acao-bt:active,
+  .chip:active,
+  .ext-item:active,
+  .st:active { background: var(--vsc-hover-bg); }
+  .botao:active { filter: brightness(1.15); }
+  .cartao:hover { transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

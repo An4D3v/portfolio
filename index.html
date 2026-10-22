@@ -2,7 +2,7 @@
 <html lang="pt-BR" data-tema="dracula">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://rumo-amber.vercel.app https://financas-app-ruby.vercel.app https://vale-do-trevo.vercel.app; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>Ana Neves · Software Developer</title>
 <meta name="description" content="Ana Neves — desenvolvedora backend .NET e Azure em São Paulo. Um portfólio que é um editor de código: abra as abas para ver projetos no ar, experiência, stack e contato.">
@@ -164,14 +164,14 @@
   <div class="bancada">
 
     <nav class="atividades" aria-label="Barra de atividades">
-      <button class="at-bt" type="button" data-vista="explorer" aria-pressed="true" aria-label="Explorador (Ctrl+Shift+E)" title="Explorador (Ctrl+Shift+E)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-files"/></svg></button>
-      <button class="at-bt" type="button" data-vista="busca" aria-pressed="false" aria-label="Pesquisar (Ctrl+Shift+F)" title="Pesquisar (Ctrl+Shift+F)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-search"/></svg></button>
-      <button class="at-bt" type="button" data-vista="scm" aria-pressed="false" aria-label="Controle do código: repositórios e recado" title="Controle do Código-Fonte (Ctrl+Shift+G)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-source-control"/></svg></button>
-      <button class="at-bt so-desktop" type="button" data-vista="depurar" aria-pressed="false" aria-label="Executar e depurar" title="Executar e Depurar (Ctrl+Shift+D)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-debug-alt"/></svg></button>
-      <button class="at-bt" type="button" data-vista="extensoes" aria-pressed="false" aria-label="Extensões: a stack da Ana (Ctrl+Shift+X)" title="Extensões (Ctrl+Shift+X)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-extensions"/></svg><span class="at-selo" aria-hidden="true">1</span></button>
-      <button class="at-bt so-celular" type="button" id="bt-at-terminal" aria-label="Terminal" title="Terminal"><svg class="ic ic-24" aria-hidden="true"><use href="#i-terminal"/></svg></button>
+      <button class="at-bt" type="button" data-vista="explorer" aria-pressed="true" aria-label="Arquivos: explorador (Ctrl+Shift+E)" title="Explorador (Ctrl+Shift+E)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-files"/></svg><span class="at-rot" aria-hidden="true">Arquivos</span></button>
+      <button class="at-bt" type="button" data-vista="busca" aria-pressed="false" aria-label="Pesquisa em todos os arquivos (Ctrl+Shift+F)" title="Pesquisar (Ctrl+Shift+F)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-search"/></svg><span class="at-rot" aria-hidden="true">Pesquisa</span></button>
+      <button class="at-bt" type="button" data-vista="scm" aria-pressed="false" aria-label="Git: repositórios e recado (Ctrl+Shift+G)" title="Controle do Código-Fonte (Ctrl+Shift+G)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-source-control"/></svg><span class="at-rot" aria-hidden="true">Git</span></button>
+      <button class="at-bt so-desktop" type="button" data-vista="depurar" aria-pressed="false" aria-label="Executar e depurar (Ctrl+Shift+D)" title="Executar e Depurar (Ctrl+Shift+D)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-debug-alt"/></svg><span class="at-rot" aria-hidden="true">Executar</span></button>
+      <button class="at-bt" type="button" data-vista="extensoes" aria-pressed="false" aria-label="Stack: extensões instaladas (Ctrl+Shift+X)" title="Extensões (Ctrl+Shift+X)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-extensions"/></svg><span class="at-rot" aria-hidden="true">Stack</span><span class="at-selo" aria-hidden="true">1</span></button>
+      <button class="at-bt so-celular" type="button" id="bt-at-terminal" aria-label="Terminal" title="Terminal"><svg class="ic ic-24" aria-hidden="true"><use href="#i-terminal"/></svg><span class="at-rot" aria-hidden="true">Terminal</span></button>
       <span class="at-espaco"></span>
-      <button class="at-bt" type="button" id="bt-conta" aria-label="Contas: links da Ana" title="Contas"><svg class="ic ic-24" aria-hidden="true"><use href="#i-account"/></svg></button>
+      <button class="at-bt" type="button" id="bt-conta" aria-label="Links da Ana: GitHub, LinkedIn e e-mail" title="Contas"><svg class="ic ic-24" aria-hidden="true"><use href="#i-account"/></svg><span class="at-rot" aria-hidden="true">Links</span></button>
       <button class="at-bt so-desktop" type="button" id="bt-gerenciar" aria-label="Gerenciar: tema, atalhos e configurações" title="Gerenciar"><svg class="ic ic-24" aria-hidden="true"><use href="#i-settings-gear"/></svg></button>
     </nav>
 
