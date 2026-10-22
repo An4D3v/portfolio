@@ -906,7 +906,9 @@
   /* foto à esquerda e nome ao lado, como numa loja de apps; ações em grade */
   .ext-cabecalho {
     display: grid;
-    grid-template-columns: 76px minmax(0, 1fr);
+    /* a foto cresce com a tela: ~96px num celular de 360px, 104px nos maiores */
+    --ext-foto: clamp(84px, 27cqi, 104px);
+    grid-template-columns: var(--ext-foto) minmax(0, 1fr);
     grid-template-areas:
       "foto titulo"
       "foto sub"
@@ -924,8 +926,8 @@
   .ext-avatar {
     grid-area: foto;
     align-self: center;
-    width: 76px;
-    height: 76px;
+    width: var(--ext-foto);
+    height: var(--ext-foto);
   }
 
   .ext-avatar-iniciais {
@@ -945,6 +947,12 @@
     column-gap: 12px;
     row-gap: 2px;
     font-size: 13px;
+  }
+
+  /* em tela bem estreita o link do GitHub desce para a linha de baixo */
+  .ext-publisher {
+    flex-wrap: wrap;
+    row-gap: 2px;
   }
 
   .ext-descricao {
