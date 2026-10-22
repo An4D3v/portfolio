@@ -123,8 +123,8 @@
   const FONTES = {
     sobre: () => `# Ana Neves
 
-> Software Developer — backend **.NET** e **Azure**, com produto próprio em produção.
-> São Paulo, Brasil · [ana@dev](https://github.com/An4D3v)
+> **Backend, dados e IA em produção.**
+> Software Developer com produtos próprios no ar · São Paulo, Brasil · [ana@dev](https://github.com/An4D3v)
 
 Construo pipelines que movem milhões de registros, bots com IA que
 respondem no Teams e apps que pessoas de verdade usam todo dia.
@@ -1513,7 +1513,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const dela = !q || norm('Ana Neves Software Developer').includes(q);
     $('#ext-cont').textContent = String(lista.length + (dela ? 1 : 0));
     $('#ext-lista').innerHTML = (dela
-      ? `<button class="ext-item dela" type="button" data-abrir="sobre"><span class="ext-ic redondo" aria-hidden="true"><img src="assets/ana-64.webp" alt="" width="42" height="42"></span><span class="ext-nome">Ana Neves</span><span class="ext-desc">Software Developer — backend .NET e Azure</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`
+      ? `<button class="ext-item dela" type="button" data-abrir="sobre"><span class="ext-ic redondo" aria-hidden="true"><img src="assets/ana-64.webp" alt="" width="42" height="42"></span><span class="ext-nome">Ana Neves</span><span class="ext-desc">Software Developer — backend, dados e IA</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`
       : '')
       + lista.map((x) => `<button class="ext-item" type="button" data-ext="${esc(x.busca)}"><span class="ext-ic" aria-hidden="true">${esc(x.sigla)}</span><span class="ext-nome">${esc(x.nome)}</span><span class="ext-desc">${esc(x.desc)}</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`).join('')
       + (lista.length || dela ? '' : '<p class="vazio-msg">Nenhuma extensão encontrada.</p>');
@@ -1707,7 +1707,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
         ? `<span class="term-dest">${n}</span>  ${esc(c.desc)}`
         : `  <span class="term-dest">${n.padEnd(12)}</span>${esc(c.desc)}`)).join('\n')),
     },
-    whoami: { desc: 'quem é a Ana', fn: () => linhaTerm('Ana Neves — Software Developer · backend .NET e Azure · São Paulo, Brasil') },
+    whoami: { desc: 'quem é a Ana', fn: () => linhaTerm('Ana Neves — Software Developer · backend, dados e IA · São Paulo, Brasil') },
     sobre: {
       desc: 'resumo em três linhas',
       fn: () => linhaTerm('Primeira e única dev de um escritório jurídico: pipelines com 4,5M+ registros,\nbots com IA no Teams e classificador LLM em produção.\nFora do expediente: 3 apps próprios no ar, com 70+ pessoas usando.'),
