@@ -897,8 +897,6 @@ textarea.campo { height: auto; min-height: 60px; resize: vertical; line-height: 
   background: var(--vsc-button2-bg);
   color: var(--vsc-fg-strong);
 }
-.ext-ic.redondo { border-radius: 50%; overflow: hidden; background: var(--vsc-button-bg); color: var(--vsc-button-fg); }
-.ext-ic img { width: 100%; height: 100%; object-fit: cover; }
 /* pixel art das tecnologias: só o desenho, sem fundo, e grade 16x16 em 32px (2x exato) */
 .ext-ic.px { background: none; }
 .px-ic { width: 32px; height: 32px; }
@@ -1061,6 +1059,25 @@ textarea.campo { height: auto; min-height: 60px; resize: vertical; line-height: 
 .migalha .ic { margin-right: 4px; }
 .migalha .sep { width: 16px; height: 16px; }
 .migalha .atual { color: var(--vsc-fg); }
+.mg-bt {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 3px;
+  border-radius: 3px;
+  white-space: nowrap;
+  color: inherit;
+}
+.mg-bt:hover,
+.mg-bt[aria-expanded="true"] { color: var(--vsc-fg); background: var(--vsc-hover-bg); }
+.mg-bt:focus-visible { outline-offset: -1px; }
+
+/* destino de um cartão clicado: um contorno que acende e some */
+.piscando { animation: piscar 1.6s ease-out; }
+@keyframes piscar {
+  0%, 45% { box-shadow: 0 0 0 2px var(--vsc-focus); }
+  100% { box-shadow: 0 0 0 2px transparent; }
+}
 
 .grupos { display: flex; flex: 1; min-height: 0; }
 .grupo { position: relative; display: flex; flex: 1; min-width: 0; min-height: 0; }
@@ -1974,4 +1991,6 @@ button.st-remoto:hover { background: var(--marca-hover); }
   *,
   *::before,
   *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  /* sem animação, o destino de um cartão clicado fica contornado até a classe sair (1,7 s) */
+  .piscando { box-shadow: 0 0 0 2px var(--vsc-focus); }
 }

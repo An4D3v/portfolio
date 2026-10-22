@@ -118,6 +118,54 @@
   height: 128px;
 }
 
+/* cartões que levam a outra parte do portfólio: o botão cobre o cartão inteiro */
+.ext-num,
+.ext-recurso {
+  position: relative;
+}
+
+.ext-ir {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  border-radius: inherit;
+  background: none;
+  cursor: pointer;
+}
+
+.ext-ir .ic {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  opacity: 0;
+  color: var(--vsc-link);
+  transition: opacity var(--rapido) var(--curva);
+}
+
+.ext-recurso .ext-ir .ic {
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+}
+
+.ext-ir:hover .ic,
+.ext-ir:focus-visible .ic {
+  opacity: 1;
+}
+
+.ext-ir:focus-visible {
+  outline: 1px solid var(--vsc-focus);
+  outline-offset: -1px;
+}
+
+.ext-num:has(> .ext-ir:hover) {
+  border-color: var(--vsc-focus);
+}
+
+.ext-recurso:has(> .ext-ir:hover) .ext-recurso-titulo {
+  color: var(--vsc-link);
+}
+
 .ext-chips-grandes .ext-chip {
   font-size: 13px;
   padding: 4px 10px;

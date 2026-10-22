@@ -372,12 +372,12 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       slug: 'csharp',
       categorias: ['Backend', '.NET'],
       uso: [
-        ['database', 'Pipelines de integração', '7+ cargas incrementais de um ERP jurídico para Azure SQL, com MERGE idempotente e watermark.'],
-        ['server', 'Notas Fiscais — microsserviços', 'Estoque e Faturamento em .NET 8: UPDATE atômico contra concorrência, idempotência e recuperação de falha. No ar no Azure App Service.'],
+        ['database', 'Pipelines de integração', '7+ cargas incrementais de um ERP jurídico para Azure SQL, com MERGE idempotente e watermark.', 'experiencia|Pipelines de integração'],
+        ['server', 'Notas Fiscais — microsserviços', 'Estoque e Faturamento em .NET 8: UPDATE atômico contra concorrência, idempotência e recuperação de falha. No ar no Azure App Service.', 'projetos#pj-notas'],
       ],
       numeros: [
-        { alvo: 4.5, casas: 1, depois: 'M+', final: '4,5M+', texto: 'registros nos pipelines de integração' },
-        { alvo: 28, final: '28', texto: 'testes de integração contra SQL Server real' },
+        { alvo: 4.5, casas: 1, depois: 'M+', final: '4,5M+', texto: 'registros nos pipelines de integração', ir: 'experiencia|4,5M+ registros' },
+        { alvo: 28, final: '28', texto: 'testes de integração contra SQL Server real', ir: 'projetos#pj-notas' },
       ],
       recursos: ['.NET 8', 'ASP.NET Core Minimal APIs', 'Entity Framework Core', 'Polly (resiliência HTTP)', 'FluentValidation', 'Serilog', 'xUnit', 'Swagger / OpenAPI', 'APIs REST', 'OAuth2'],
       links: [['Abrir Notas Fiscais', 'https://notas-fiscais-ana.vercel.app'], ['Código no GitHub', REPO_NOTAS]],
@@ -387,13 +387,13 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       slug: 'azure',
       categorias: ['Cloud'],
       uso: [
-        ['server', 'Notas Fiscais no ar', 'Os dois serviços rodam no App Service e falam com o Azure SQL por identidade gerenciada, sem senha.'],
-        ['database', 'Pipelines de integração', '7+ cargas incrementais de um ERP jurídico para Azure SQL.'],
-        ['sync', 'Migração para Azure SQL', '~292 mil registros migrados com reconciliação origem = destino.'],
+        ['server', 'Notas Fiscais no ar', 'Os dois serviços rodam no App Service e falam com o Azure SQL por identidade gerenciada, sem senha.', 'projetos#pj-notas'],
+        ['database', 'Pipelines de integração', '7+ cargas incrementais de um ERP jurídico para Azure SQL.', 'experiencia|Pipelines de integração'],
+        ['sync', 'Migração para Azure SQL', '~292 mil registros migrados com reconciliação origem = destino.', 'experiencia|Migração para Azure SQL'],
       ],
       numeros: [
-        { alvo: 292, antes: '~', depois: ' mil', final: '~292 mil', texto: 'registros migrados para o Azure SQL' },
-        { alvo: 0, final: '0', texto: 'divergências na reconciliação da migração' },
+        { alvo: 292, antes: '~', depois: ' mil', final: '~292 mil', texto: 'registros migrados para o Azure SQL', ir: 'experiencia|Migração para Azure SQL' },
+        { alvo: 0, final: '0', texto: 'divergências na reconciliação da migração', ir: 'experiencia|zero divergência' },
       ],
       recursos: ['App Service', 'Azure SQL', 'Azure Automation', 'Key Vault', 'Application Insights', 'Entra ID', 'Microsoft Graph', 'identidade gerenciada'],
       links: [['Abrir Notas Fiscais', 'https://notas-fiscais-ana.vercel.app']],
@@ -403,13 +403,13 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       slug: 'sql-server',
       categorias: ['Dados'],
       uso: [
-        ['database', 'Pipelines de integração', 'MERGE idempotente com watermark: reprocessar uma carga não duplica registro.'],
-        ['sync', 'Migração para Azure SQL', '~292 mil registros com reconciliação origem = destino: zero divergência.'],
-        ['server', 'Notas Fiscais — microsserviços', 'Saldo conferido e baixado no mesmo UPDATE: com 8 pedidos simultâneos em saldo 1, só um passa.'],
+        ['database', 'Pipelines de integração', 'MERGE idempotente com watermark: reprocessar uma carga não duplica registro.', 'experiencia|Pipelines de integração'],
+        ['sync', 'Migração para Azure SQL', '~292 mil registros com reconciliação origem = destino: zero divergência.', 'experiencia|Migração para Azure SQL'],
+        ['server', 'Notas Fiscais — microsserviços', 'Saldo conferido e baixado no mesmo UPDATE: com 8 pedidos simultâneos em saldo 1, só um passa.', 'projetos#pj-notas'],
       ],
       numeros: [
-        { alvo: 4.5, casas: 1, depois: 'M+', final: '4,5M+', texto: 'registros nas cargas incrementais' },
-        { alvo: 292, antes: '~', depois: ' mil', final: '~292 mil', texto: 'registros migrados sem divergência' },
+        { alvo: 4.5, casas: 1, depois: 'M+', final: '4,5M+', texto: 'registros nas cargas incrementais', ir: 'experiencia|4,5M+ registros' },
+        { alvo: 292, antes: '~', depois: ' mil', final: '~292 mil', texto: 'registros migrados sem divergência', ir: 'experiencia|Migração para Azure SQL' },
       ],
       recursos: ['SQL Server', 'T-SQL', 'Azure SQL', 'MERGE', 'ETL incremental', 'watermark', 'reconciliação', 'PostgreSQL'],
       links: [['Código dos microsserviços', REPO_NOTAS]],
@@ -419,10 +419,10 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       slug: 'python',
       categorias: ['Automação'],
       uso: [
-        ['sync', 'Automação e RPA', 'Robôs Python + Selenium coletando relatórios regulatórios para múltiplos clientes.'],
+        ['sync', 'Automação e RPA', 'Robôs Python + Selenium coletando relatórios regulatórios para múltiplos clientes.', 'experiencia|Automação'],
       ],
       numeros: [
-        { alvo: 65, antes: '−', depois: '%', final: '−65%', texto: 'de esforço manual com os robôs' },
+        { alvo: 65, antes: '−', depois: '%', final: '−65%', texto: 'de esforço manual com os robôs', ir: 'experiencia|−65%' },
       ],
       recursos: ['Python', 'Selenium', 'runbooks'],
       links: [],
@@ -432,10 +432,10 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       slug: 'llms',
       categorias: ['IA'],
       uso: [
-        ['sparkle', 'Classificação de publicações', 'Classificador LLM em produção, com acurácia medida contra gabarito humano e execução sombra antes de promover modelo novo.'],
-        ['comment-discussion', 'Bots com IA no Teams', 'Central de IA corporativa com SSO (Entra ID) e consulta processual com Adaptive Cards, com usuários reais.'],
-        ['rocket', 'AlienFinanças', 'A foto do cupom fiscal vira itens categorizados por IA.'],
-        ['server', 'Notas Fiscais', 'Montar nota por texto: a IA sugere itens do catálogo, o servidor confere cada código e a pessoa decide. Sem chave de API, entra um modo offline.'],
+        ['sparkle', 'Classificação de publicações', 'Classificador LLM em produção, com acurácia medida contra gabarito humano e execução sombra antes de promover modelo novo.', 'experiencia|Classificação de publicações'],
+        ['comment-discussion', 'Bots com IA no Teams', 'Central de IA corporativa com SSO (Entra ID) e consulta processual com Adaptive Cards, com usuários reais.', 'experiencia|Bots com IA no Teams'],
+        ['rocket', 'AlienFinanças', 'A foto do cupom fiscal vira itens categorizados por IA.', 'projetos#pj-alien'],
+        ['server', 'Notas Fiscais', 'Montar nota por texto: a IA sugere itens do catálogo, o servidor confere cada código e a pessoa decide. Sem chave de API, entra um modo offline.', 'projetos#pj-notas'],
       ],
       numeros: [],
       recursos: ['LLMs em produção', 'Bot Framework', 'Adaptive Cards', 'prompt engineering', 'saída estruturada (JSON)', 'medição de acurácia', 'execução sombra', 'Gemini'],
@@ -446,12 +446,12 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       slug: 'entra-id',
       categorias: ['Identidade', 'Cloud'],
       uso: [
-        ['comment-discussion', 'Bots com IA no Teams', 'SSO com Entra ID: quem já está no Teams entra no bot sem outro login.'],
-        ['sync', 'Migração para Azure SQL', 'Autenticação sem senha via Entra ID.'],
-        ['server', 'Notas Fiscais no ar', 'Cada serviço entra no banco com a própria identidade gerenciada, sem senha em configuração.'],
+        ['comment-discussion', 'Bots com IA no Teams', 'SSO com Entra ID: quem já está no Teams entra no bot sem outro login.', 'experiencia|Bots com IA no Teams'],
+        ['sync', 'Migração para Azure SQL', 'Autenticação sem senha via Entra ID.', 'experiencia|Migração para Azure SQL'],
+        ['server', 'Notas Fiscais no ar', 'Cada serviço entra no banco com a própria identidade gerenciada, sem senha em configuração.', 'projetos#pj-notas'],
       ],
       numeros: [
-        { alvo: 0, final: '0', texto: 'senhas de banco na configuração do Notas Fiscais' },
+        { alvo: 0, final: '0', texto: 'senhas de banco na configuração do Notas Fiscais', ir: 'projetos#pj-notas' },
       ],
       recursos: ['Entra ID', 'SSO', 'identidade gerenciada', 'Microsoft Graph', 'OAuth2', 'OIDC'],
       links: [['Código dos microsserviços', REPO_NOTAS]],
@@ -461,9 +461,9 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       slug: 'angular',
       categorias: ['Front-end'],
       uso: [
-        ['server', 'Notas Fiscais — front', 'Angular 22 sem zone.js: o estado da tela vive em signals.'],
-        ['search', 'Busca de produtos', 'RxJS com debounceTime, distinctUntilChanged e switchMap: digitar rápido não dispara uma busca por letra.'],
-        ['pass', 'Saúde dos serviços ao vivo', 'Um timer com RxJS consulta os dois serviços e acende o indicador do topo quando um deles cai.'],
+        ['server', 'Notas Fiscais — front', 'Angular 22 sem zone.js: o estado da tela vive em signals.', 'projetos#pj-notas'],
+        ['search', 'Busca de produtos', 'RxJS com debounceTime, distinctUntilChanged e switchMap: digitar rápido não dispara uma busca por letra.', 'projetos#pj-notas'],
+        ['pass', 'Saúde dos serviços ao vivo', 'Um timer com RxJS consulta os dois serviços e acende o indicador do topo quando um deles cai.', 'projetos#pj-notas'],
       ],
       numeros: [],
       recursos: ['Angular 22', 'signals', 'RxJS', 'Angular Material', 'interceptores HTTP', 'TypeScript'],
@@ -474,13 +474,13 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       slug: 'react',
       categorias: ['Front-end'],
       uso: [
-        ['rocket', 'Rumo', 'Orientador de rotinas: PWA com Web Push, MFA (TOTP) e painel admin próprio. 40+ usuários.'],
-        ['rocket', 'AlienFinanças', 'Finanças pessoais com leitura de cupom fiscal por IA. 20+ usuários.'],
-        ['play', 'Vale do Trevo', 'Jogo 2D em TypeScript e canvas puro, sem engine.'],
+        ['rocket', 'Rumo', 'Orientador de rotinas: PWA com Web Push, MFA (TOTP) e painel admin próprio. 40+ usuários.', 'projetos#pj-rumo'],
+        ['rocket', 'AlienFinanças', 'Finanças pessoais com leitura de cupom fiscal por IA. 20+ usuários.', 'projetos#pj-alien'],
+        ['play', 'Vale do Trevo', 'Jogo 2D em TypeScript e canvas puro, sem engine.', 'projetos#pj-trevo'],
       ],
       numeros: [
-        { alvo: 70, depois: '+', final: '70+', texto: 'pessoas usando o Rumo e o AlienFinanças' },
-        { alvo: 3, final: '3', texto: 'apps em TypeScript no ar' },
+        { alvo: 70, depois: '+', final: '70+', texto: 'pessoas usando o Rumo e o AlienFinanças', ir: 'projetos#pj-rumo, #pj-alien' },
+        { alvo: 3, final: '3', texto: 'apps em TypeScript no ar', ir: 'projetos#pj-rumo, #pj-alien, #pj-trevo' },
       ],
       recursos: ['React', 'TypeScript', 'Vite', 'PWA', 'Web Push', 'Canvas'],
       links: [['Abrir o Rumo', 'https://rumo-amber.vercel.app'], ['Abrir AlienFinanças', 'https://financas-app-ruby.vercel.app'], ['Jogar o Vale do Trevo', 'https://vale-do-trevo.vercel.app']],
@@ -490,11 +490,11 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       slug: 'supabase',
       categorias: ['Dados', 'Auth'],
       uso: [
-        ['rocket', 'Rumo', 'Login com MFA (TOTP) pelo Supabase Auth.'],
-        ['rocket', 'AlienFinanças', 'Row Level Security: cada pessoa só enxerga os próprios dados.'],
+        ['rocket', 'Rumo', 'Login com MFA (TOTP) pelo Supabase Auth.', 'projetos#pj-rumo'],
+        ['rocket', 'AlienFinanças', 'Row Level Security: cada pessoa só enxerga os próprios dados.', 'projetos#pj-alien'],
       ],
       numeros: [
-        { alvo: 70, depois: '+', final: '70+', texto: 'pessoas com conta nos dois apps' },
+        { alvo: 70, depois: '+', final: '70+', texto: 'pessoas com conta nos dois apps', ir: 'projetos#pj-rumo, #pj-alien' },
       ],
       recursos: ['Supabase Auth', 'MFA (TOTP)', 'Row Level Security', 'PostgreSQL'],
       links: [['Abrir o Rumo', 'https://rumo-amber.vercel.app'], ['Abrir AlienFinanças', 'https://financas-app-ruby.vercel.app']],
@@ -504,8 +504,8 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       slug: 'github-actions',
       categorias: ['DevOps'],
       uso: [
-        ['database', 'Pipelines de integração', 'CI/CD com OIDC: o deploy na nuvem não depende de segredo guardado no repositório.'],
-        ['pass', 'Gate de testes', 'O deploy só segue com os testes verdes.'],
+        ['database', 'Pipelines de integração', 'CI/CD com OIDC: o deploy na nuvem não depende de segredo guardado no repositório.', 'experiencia|Pipelines de integração'],
+        ['pass', 'Gate de testes', 'O deploy só segue com os testes verdes.', 'experiencia|Pipelines de integração'],
       ],
       numeros: [],
       recursos: ['GitHub Actions', 'OIDC', 'CI/CD com gate de testes', 'Vercel', 'observabilidade'],
@@ -542,7 +542,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     lateral: true,
     painel: false,
     painelAba: 'terminal',
-    extMarcada: 'sobre',
+    extMarcada: null,
     dividido: false,
     zen: false,
     pastas: { '.vscode': true, assets: true },
@@ -950,11 +950,67 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       return;
     }
     const a = ARQUIVOS[id];
-    const partes = ['portfolio-ana-neves'];
-    if (a.pasta) partes.push(a.pasta);
-    el.migalha.innerHTML = partes.map((p) => `<span>${esc(p)}</span>${ic('chevron-right', 'sep')}`).join('')
-      + `${ic(a.icone)}<span class="atual">${esc(a.nome)}</span>`;
+    const partes = [{ rotulo: 'portfolio-ana-neves', tipo: 'raiz', pasta: '' }];
+    if (a.pasta) a.pasta.split('/').forEach((p, i, ps) => partes.push({ rotulo: p, tipo: 'pasta', pasta: ps.slice(0, i + 1).join('/') }));
+    const bt = (tipo, pasta, conteudo, cls = '') => `<button class="mg-bt${cls}" type="button" data-mg="${tipo}" data-pasta="${esc(pasta)}" aria-haspopup="menu" aria-expanded="false">${conteudo}</button>`;
+    el.migalha.innerHTML = partes.map((p) => bt(p.tipo, p.pasta, esc(p.rotulo)) + ic('chevron-right', 'sep')).join('')
+      + bt('arquivo', a.pasta || '', `${ic(a.icone)}${esc(a.nome)}`, ' atual');
   }
+  // Caminho no topo do editor: cada parte lista o que existe naquele nível,
+  // como no VS Code. Escolher um item abre o arquivo (ou a extensão).
+  function itensMigalha(tipo, pasta) {
+    let ids;
+    if (tipo === 'raiz') ids = ARVORE.flatMap((n) => (typeof n === 'string' ? [n] : n.filhos));
+    else if (pasta.startsWith('extensoes')) ids = Object.keys(ARQUIVOS).filter((k) => ARQUIVOS[k].tecnologia);
+    else if (pasta) ids = (ARVORE.find((n) => n.pasta === pasta) || { filhos: [] }).filhos;
+    else ids = ARVORE.filter((n) => typeof n === 'string');
+    return ids.map((k) => ({
+      rotulo: tipo === 'raiz' ? caminho(k) : (ARQUIVOS[k].titulo || ARQUIVOS[k].nome),
+      check: k === estado.ativa,
+      fn: () => abrir(k),
+    }));
+  }
+  el.migalha.addEventListener('click', (e) => {
+    const b = e.target.closest('.mg-bt');
+    if (b) alternarMenu(itensMigalha(b.dataset.mg, b.dataset.pasta), b, { focar: e.detail === 0 });
+  });
+
+  // Cartões e itens que levam a outra parte do portfólio: abre a aba e destaca
+  // de onde vem aquele número ou fato. Para voltar: ← na barra de título ou Alt+←.
+  // Destino: "id", "id#seletor" (um ou mais elementos) ou "id|texto" (primeiro trecho com o texto).
+  function irPara(destino) {
+    const corte = destino.search(/[|#]/);
+    const id = corte < 0 ? destino : destino.slice(0, corte);
+    abrir(id, { modo: 'visual' });
+    if (corte < 0) return;
+    // abrir() já montou a aba de destino, então o trecho pode ser procurado na hora
+    const resto = destino.slice(corte);
+    let alvos = [];
+    if (resto[0] === '#') alvos = $$(resto, el.editor);
+    else {
+      const andarilho = d.createTreeWalker(el.editor, NodeFilter.SHOW_TEXT);
+      while (andarilho.nextNode()) {
+        if (!andarilho.currentNode.nodeValue.includes(resto.slice(1))) continue;
+        const pai = andarilho.currentNode.parentElement;
+        alvos = [pai.closest('li, .cartao') || pai];
+        break;
+      }
+    }
+    if (!alvos.length) return;
+    alvos[0].scrollIntoView({ block: 'center', behavior: mq.calmo.matches ? 'auto' : 'smooth' });
+    alvos.forEach((alvo) => {
+      alvo.classList.remove('piscando');
+      void alvo.offsetWidth;
+      alvo.classList.add('piscando');
+      setTimeout(() => alvo.classList.remove('piscando'), 1700);
+    });
+  }
+  d.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-ir]');
+    if (!b) return;
+    e.preventDefault();
+    irPara(b.dataset.ir);
+  });
 
   function renderStatus() {
     const id = estado.ativa;
@@ -1405,6 +1461,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   }
 
   /* ---------- página de extensão de cada tecnologia ---------- */
+  const botaoIr = (destino, rotulo) => `<button type="button" class="ext-ir" data-ir="${esc(destino)}" aria-label="${esc(rotulo)}: ver de onde vem" title="Ver de onde vem">${ic('go-to-file')}</button>`;
   const linkFora = (rotulo, url, cls, icone = '') => `<a class="${cls}" href="${url}" target="_blank" rel="noopener">${icone}${esc(rotulo)}<span class="ext-sr"> (abre em nova aba)</span></a>`;
 
   function htmlTecnologia(k) {
@@ -1418,7 +1475,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     const numeros = t.numeros.length
       ? `<h3 class="ext-md-h2">Números</h3><ul class="ext-numeros" role="list">${t.numeros.map((n) => `<li class="ext-num">`
         + `<span class="ext-num-valor" aria-hidden="true" data-ext-contar data-ext-alvo="${n.alvo}"${n.casas ? ` data-ext-casas="${n.casas}"` : ''}${n.antes ? ` data-ext-antes="${esc(n.antes)}"` : ''}${n.depois ? ` data-ext-depois="${esc(n.depois)}"` : ''}>${esc(n.final)}</span>`
-        + `<span class="ext-sr">${esc(n.final)}</span><span class="ext-num-rotulo">${esc(n.texto)}</span></li>`).join('')}</ul>`
+        + `<span class="ext-sr">${esc(n.final)}</span><span class="ext-num-rotulo">${esc(n.texto)}</span>${n.ir ? botaoIr(n.ir, `${n.final} ${n.texto}`) : ''}</li>`).join('')}</ul>`
       : '';
     const nota = t.privado
       ? `<p class="ext-nota">${ic('info')}<span>Parte disso é código privado do trabalho: aparecem só os resultados, como em <button type="button" class="ext-arquivo" data-abrir="experiencia">experiencia.cs</button>.</span></p>`
@@ -1449,7 +1506,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     <div class="ext-detalhes">
       <article class="ext-md">
         <h2 class="ext-md-h1">Onde eu uso</h2>
-        <ul class="ext-recursos" role="list">${t.uso.map(([icone, titulo, texto]) => `<li class="ext-recurso"><span class="ext-recurso-icone" aria-hidden="true">${ic(icone)}</span><div class="ext-recurso-texto"><h3 class="ext-recurso-titulo">${esc(titulo)}</h3><p class="ext-recurso-prova">${esc(texto)}</p></div></li>`).join('')}</ul>
+        <ul class="ext-recursos" role="list">${t.uso.map(([icone, titulo, texto, destino]) => `<li class="ext-recurso"><span class="ext-recurso-icone" aria-hidden="true">${ic(icone)}</span><div class="ext-recurso-texto"><h3 class="ext-recurso-titulo">${esc(titulo)}</h3><p class="ext-recurso-prova">${esc(texto)}</p></div>${destino ? botaoIr(destino, titulo) : ''}</li>`).join('')}</ul>
         ${numeros}
         ${nota}
       </article>
@@ -1777,19 +1834,15 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   function renderExtensoes() {
     const q = norm($('#ext-in').value.trim());
     const lista = EXTENSOES.filter((x) => !q || norm(`${x.nome} ${x.desc}`).includes(q));
-    const dela = !q || norm('Ana Neves Software Developer').includes(q);
-    $('#ext-cont').textContent = String(lista.length + (dela ? 1 : 0));
-    $('#ext-lista').innerHTML = (dela
-      ? `<button class="ext-item dela" type="button" data-abrir="sobre"><span class="ext-ic redondo" aria-hidden="true"><img src="assets/ana-64.webp" alt="" width="42" height="42"></span><span class="ext-nome">Ana Neves</span><span class="ext-desc">Software Developer — backend, dados e IA</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`
-      : '')
-      + lista.map((x) => `<button class="ext-item" type="button" data-abrir="ext-${x.ic}"><span class="ext-ic px" aria-hidden="true"><svg class="px-ic"><use href="#i-px-${x.ic}"/></svg></span><span class="ext-nome">${esc(x.nome)}</span><span class="ext-desc">${esc(x.desc)}</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`).join('')
-      + (lista.length || dela ? '' : '<p class="vazio-msg">Nenhuma extensão encontrada.</p>');
+    $('#ext-cont').textContent = String(lista.length);
+    $('#ext-lista').innerHTML = lista.map((x) => `<button class="ext-item" type="button" data-abrir="ext-${x.ic}"><span class="ext-ic px" aria-hidden="true"><svg class="px-ic"><use href="#i-px-${x.ic}"/></svg></span><span class="ext-nome">${esc(x.nome)}</span><span class="ext-desc">${esc(x.desc)}</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`).join('')
+      + (lista.length ? '' : '<p class="vazio-msg">Nenhuma extensão encontrada.</p>');
     marcarExtensao();
   }
   // A extensão aberta fica marcada na lista, como no VS Code. Abrir um arquivo
   // comum não desmarca: a lista guarda a última extensão escolhida.
   function marcarExtensao() {
-    if (estado.ativa && ARQUIVOS[estado.ativa].extensao) estado.extMarcada = estado.ativa;
+    if (estado.ativa && ARQUIVOS[estado.ativa].tecnologia) estado.extMarcada = estado.ativa;
     $$('.ext-item', $('#ext-lista')).forEach((b) => {
       const on = b.dataset.abrir === estado.extMarcada;
       b.classList.toggle('selecionada', on);
