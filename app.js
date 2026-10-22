@@ -1025,6 +1025,16 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     if (id && location.hash.slice(1) !== id) {
       try { history.replaceState(null, '', '#' + id); } catch { /* file:// em alguns navegadores */ }
     }
+    contarVisita(id);
+  }
+
+  // Cada aba aberta conta como uma página na análise da Vercel (/sobre, /projetos,
+  // /ext-cs...): o site troca de aba pelo #, que a Vercel não acompanha sozinha.
+  let ultimaContada = '';
+  function contarVisita(id) {
+    if (!id || id === ultimaContada || typeof window.va !== 'function') return;
+    ultimaContada = id;
+    window.va('pageview', { route: `/${id}`, path: `/${id}` });
   }
 
   function atualizarNavegacao() {
