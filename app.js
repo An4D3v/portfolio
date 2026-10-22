@@ -542,6 +542,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     lateral: true,
     painel: false,
     painelAba: 'terminal',
+    extMarcada: 'sobre',
     dividido: false,
     zen: false,
     pastas: { '.vscode': true, assets: true },
@@ -768,6 +769,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     renderStatus();
     atualizarTitulo();
     atualizarNavegacao();
+    marcarExtensao();
   }
 
   let assinaturaAbas = '';
@@ -1782,6 +1784,18 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       : '')
       + lista.map((x) => `<button class="ext-item" type="button" data-abrir="ext-${x.ic}"><span class="ext-ic px" aria-hidden="true"><svg class="px-ic"><use href="#i-px-${x.ic}"/></svg></span><span class="ext-nome">${esc(x.nome)}</span><span class="ext-desc">${esc(x.desc)}</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`).join('')
       + (lista.length || dela ? '' : '<p class="vazio-msg">Nenhuma extensão encontrada.</p>');
+    marcarExtensao();
+  }
+  // A extensão aberta fica marcada na lista, como no VS Code. Abrir um arquivo
+  // comum não desmarca: a lista guarda a última extensão escolhida.
+  function marcarExtensao() {
+    if (estado.ativa && ARQUIVOS[estado.ativa].extensao) estado.extMarcada = estado.ativa;
+    $$('.ext-item', $('#ext-lista')).forEach((b) => {
+      const on = b.dataset.abrir === estado.extMarcada;
+      b.classList.toggle('selecionada', on);
+      if (on) b.setAttribute('aria-current', 'true');
+      else b.removeAttribute('aria-current');
+    });
   }
   $('#ext-in').addEventListener('input', renderExtensoes);
 

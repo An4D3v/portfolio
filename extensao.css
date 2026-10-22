@@ -107,15 +107,15 @@
   border-radius: 50%;
 }
 
-/* página de cada tecnologia: o ícone em pixel art no lugar da foto (16x16 em 96px, 6x exato) */
+/* página de cada tecnologia: o ícone em pixel art no lugar da foto, sem fundo (16x16 em 128px, 8x exato) */
 .ext-avatar-px {
-  border-radius: 16px;
-  background: #252526;
+  border-radius: 0;
+  background: none;
 }
 
 .ext-px-ic {
-  width: 96px;
-  height: 96px;
+  width: 128px;
+  height: 128px;
 }
 
 .ext-chips-grandes .ext-chip {
@@ -951,8 +951,8 @@
   }
 
   .ext-avatar-px .ext-px-ic {
-    width: 64px;
-    height: 64px;
+    width: 80px;
+    height: 80px;
   }
 
   .ext-titulo {
