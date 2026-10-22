@@ -6,8 +6,9 @@
    ========================================================================== */
 
 :root {
-  --marca: #8a70ff;
-  --marca-fg: #0b0716;
+  --marca: #6d59c0;
+  --marca-hover: #7562c6;
+  --marca-fg: #ffffff;
   --vsc-font-ui: "Segoe WPC", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Ubuntu", "Droid Sans", sans-serif;
   --vsc-font-mono: "Cascadia Code", Consolas, "SF Mono", Menlo, Monaco, "Ubuntu Mono", "Liberation Mono", monospace;
   --h-titulo: 35px;
@@ -887,7 +888,7 @@ textarea.campo { height: auto; min-height: 60px; resize: vertical; line-height: 
   background: var(--vsc-button2-bg);
   color: var(--vsc-fg-strong);
 }
-.ext-ic.redondo { border-radius: 50%; overflow: hidden; background: var(--vsc-button-bg); color: var(--vsc-button-fg); box-shadow: 0 0 0 2px var(--marca); }
+.ext-ic.redondo { border-radius: 50%; overflow: hidden; background: var(--vsc-button-bg); color: var(--vsc-button-fg); }
 .ext-ic img { width: 100%; height: 100%; object-fit: cover; }
 .ext-nome { font-weight: 600; font-size: 13px; color: var(--vsc-fg-strong); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .ext-desc { font-size: 12.5px; color: var(--vsc-fg-muted); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
@@ -921,7 +922,7 @@ textarea.campo { height: auto; min-height: 60px; resize: vertical; line-height: 
 .botao.sec { background: var(--vsc-button2-bg); color: var(--vsc-button2-fg); }
 .botao.sec:hover { background: var(--vsc-button2-hover-bg); }
 .botao.marca { background: var(--marca); color: var(--marca-fg); font-weight: 600; }
-.botao.marca:hover { background: #9d87ff; color: var(--marca-fg); }
+.botao.marca:hover { background: var(--marca-hover); color: var(--marca-fg); }
 .botao.cheio { width: 100%; }
 .botao:focus-visible { outline: 1px solid var(--vsc-focus); outline-offset: 2px; }
 
@@ -1461,7 +1462,7 @@ textarea.campo { height: auto; min-height: 60px; resize: vertical; line-height: 
 .st .ic { width: 14px; height: 14px; }
 button.st:hover { background: var(--vsc-status-hover); }
 .st-remoto { padding: 0 9px; background: var(--vsc-status-remote-bg, var(--marca)); color: var(--marca-fg); font-weight: 600; }
-button.st-remoto:hover { background: #9d87ff; }
+button.st-remoto:hover { background: var(--marca-hover); }
 .st-esp { flex: 1; }
 .app.vendo-imagem .st-codigo { display: none; }
 .st.girando .ic { animation: gira 1s linear infinite; }
