@@ -993,6 +993,10 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     if (estado.dividido) return 'codigo';
     return estado.modos[id] || ARQUIVOS[id].inicial;
   };
+  // As seções em código (projetos.tsx, experiencia.cs...) não têm "visualização" no VS Code:
+  // a página delas é o site rodando no navegador embutido, em localhost.
+  const ENDERECO = 'localhost:5198';
+  const rotaDe = (id) => ARQUIVOS[id].nome.replace(/\.\w+$/, '');
   function rotuloAba(id, modo = modoDe(id)) {
     const a = ARQUIVOS[id];
     const curto = mq.celular.matches;
@@ -1000,7 +1004,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       const titulo = a.titulo || 'Ana Neves';
       return { icone: 'f-extension', texto: curto ? titulo : `${L('Extensão', 'Extension')}: ${titulo}`, it: true };
     }
-    if (modo === 'visual' && !curto) return { icone: 'open-preview', texto: `${L('Visualizar', 'Preview')} ${a.nome}` };
+    if (modo === 'visual') return { icone: 'globe', texto: curto ? rotaDe(id) : `${ENDERECO}/${rotaDe(id)}` };
     return { icone: a.icone, texto: a.nome };
   }
 
@@ -1195,6 +1199,19 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     atualizarBordaAbas();
   }
 
+  // Barra do navegador embutido (como o Simple Browser do VS Code) por cima da página.
+  function barraNavegador(id) {
+    const url = `http://${ENDERECO}/${rotaDe(id)}`;
+    const bt = (acao, icone, rotulo, cls = '') => `<button class="navegador-bt${cls}" type="button" data-nav="${acao}" aria-label="${rotulo}" title="${rotulo}">${ic(icone)}</button>`;
+    return `<div class="navegador" role="toolbar" aria-label="${L('Navegador embutido', 'Built-in browser')}">`
+      + bt('voltar', 'arrow-left', L('Voltar', 'Back'), ' so-largo')
+      + bt('avancar', 'arrow-right', L('Avançar', 'Forward'), ' so-largo')
+      + bt('recarregar', 'refresh', L('Recarregar', 'Reload'))
+      + `<span class="navegador-url" title="${url}">${url}</span>`
+      + bt('fora', 'link-external', L('Abrir no navegador padrão', 'Open in default browser'))
+      + '</div>';
+  }
+
   function preencher(painel, id, modo) {
     const a = ARQUIVOS[id];
     if (modo === 'visual' && a.tecnologia) {
@@ -1202,7 +1219,8 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       painel.classList.remove('quebra');
     } else if (modo === 'visual') {
       const tpl = d.getElementById(EN ? `${a.tpl}-en` : a.tpl);
-      painel.replaceChildren(tpl.content.cloneNode(true));
+      painel.innerHTML = a.extensao ? '' : barraNavegador(id);
+      painel.appendChild(tpl.content.cloneNode(true));
       painel.classList.remove('quebra');
     } else if (modo === 'imagem') {
       const src = mq.calmo.matches && a.parada ? a.parada : a.imagem;
@@ -1243,13 +1261,18 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     el.btModo.hidden = !a.tpl;
     el.btModo.setAttribute('aria-disabled', String(estado.dividido));
     const vendoCodigo = modo === 'codigo';
-    el.btModo.innerHTML = ic(vendoCodigo ? 'open-preview' : 'go-to-file');
-    el.btModo.setAttribute('aria-label', vendoCodigo ? L('Abrir visualização', 'Open preview') : L('Mostrar código-fonte', 'Show source'));
-    el.btModo.title = vendoCodigo ? L('Abrir Visualização', 'Open Preview') : L('Mostrar Código-Fonte', 'Show Source');
+    // README e extensões têm visualização; os outros arquivos abrem no navegador embutido
+    const [icAbrir, rotAbrir, titAbrir] = a.extensao
+      ? ['open-preview', L('Abrir visualização', 'Open preview'), L('Abrir Visualização', 'Open Preview')]
+      : ['globe', L('Abrir no navegador', 'Open in browser'), L('Abrir no Navegador', 'Open in Browser')];
+    el.btModo.innerHTML = ic(vendoCodigo ? icAbrir : 'go-to-file');
+    el.btModo.setAttribute('aria-label', vendoCodigo ? rotAbrir : L('Mostrar código-fonte', 'Show source'));
+    el.btModo.title = vendoCodigo ? titAbrir : L('Mostrar Código-Fonte', 'Show Source');
     el.btDividir.hidden = false;
     el.btDividir.setAttribute('aria-disabled', String(!temVisual(id)));
     el.btDividir.setAttribute('aria-pressed', String(lado));
-    el.btDividir.title = temVisual(id) ? L('Abrir Visualização ao Lado', 'Open Preview to the Side') : L('Este arquivo não tem visualização', 'This file has no preview');
+    el.btDividir.title = !temVisual(id) ? L('Este arquivo não tem visualização', 'This file has no preview')
+      : a.extensao ? L('Abrir Visualização ao Lado', 'Open Preview to the Side') : L('Abrir no Navegador ao Lado', 'Open in Browser to the Side');
     marcarLinha(1, 1);
     if (modo === 'imagem') el.stPos.textContent = '';
     atualizarMinimapa();
@@ -1333,7 +1356,9 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
 
   function renderMigalha() {
     const id = estado.ativa;
-    if (!id) {
+    // no navegador embutido não há caminho de arquivo: a barra de endereço ocupa o lugar
+    el.migalha.hidden = Boolean(id) && modoDe(id) === 'visual' && !ARQUIVOS[id].extensao;
+    if (!id || el.migalha.hidden) {
       el.migalha.innerHTML = '';
       return;
     }
@@ -1405,11 +1430,15 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     el.stLing.textContent = id ? ARQUIVOS[id].rotulo : '';
     el.stEsp.textContent = `${L('Espaços', 'Spaces')}: ${id && ARQUIVOS[id].ling === 'cs' ? 4 : 2}`;
     el.app.classList.toggle('vendo-imagem', Boolean(id && ARQUIVOS[id].imagem));
+    // página (navegador ou extensão) não é texto: some linha, coluna, espaços e linguagem, como no VS Code
+    el.app.classList.toggle('vendo-pagina', Boolean(id) && modoDe(id) === 'visual');
   }
 
   function atualizarTitulo() {
     const id = estado.ativa;
-    d.title = id ? `${rotuloAba(id).texto} — Ana Neves · Software Developer` : 'Ana Neves · Software Developer';
+    // na aba do navegador embutido, o título da janela usa o nome do arquivo (e não localhost)
+    const r = id && rotuloAba(id);
+    d.title = id ? `${r.icone === 'globe' ? ARQUIVOS[id].nome : r.texto} — Ana Neves · Software Developer` : 'Ana Neves · Software Developer';
     if (id && location.hash.slice(1) !== id) {
       try { history.replaceState(null, '', '#' + id); } catch { /* file:// em alguns navegadores */ }
     }
@@ -1426,8 +1455,34 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
   }
 
   function atualizarNavegacao() {
-    $('#bt-voltar').setAttribute('aria-disabled', String(estado.posHist <= 0));
-    $('#bt-avancar').setAttribute('aria-disabled', String(estado.posHist >= estado.historico.length - 1));
+    const semVolta = String(estado.posHist <= 0);
+    const semIda = String(estado.posHist >= estado.historico.length - 1);
+    $('#bt-voltar').setAttribute('aria-disabled', semVolta);
+    $('#bt-avancar').setAttribute('aria-disabled', semIda);
+    $$('[data-nav="voltar"]').forEach((b) => b.setAttribute('aria-disabled', semVolta));
+    $$('[data-nav="avancar"]').forEach((b) => b.setAttribute('aria-disabled', semIda));
+  }
+
+  d.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-nav]');
+    if (!b || b.getAttribute('aria-disabled') === 'true') return;
+    const acao = b.dataset.nav;
+    if (acao === 'voltar') navegar(-1);
+    else if (acao === 'avancar') navegar(1);
+    else if (acao === 'fora') abrirFora(`${location.origin}${location.pathname}#${estado.ativa}`);
+    else recarregarPagina();
+  });
+  // Recarregar refaz a página (e, em projetos, mede de novo se cada app está no ar).
+  function recarregarPagina() {
+    if (estado.ativa === 'projetos') estado.statusApps = {};
+    renderEditor({ forcar: true });
+    atualizarNavegacao();
+    registrar(`${L('recarregado', 'reloaded')}: http://${ENDERECO}/${rotaDe(estado.ativa)}`);
+    if (semMovimento()) return;
+    [el.editor, el.editorLado].forEach((p) => {
+      const pagina = p.dataset.modo === 'visual' && $(':scope > :not(.navegador)', p);
+      if (pagina) pagina.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 220, easing: CURVA });
+    });
   }
 
   /* ---------- outline e linha do tempo ---------- */
@@ -1638,7 +1693,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     return false;
   }
   function deslizarConteudo(sentido, quadros) {
-    const alvo = el.editor.firstElementChild;
+    const alvo = $(':scope > :not(.navegador)', el.editor);
     if (!alvo || semMovimento()) return;
     alvo.animate(quadros || [
       { transform: `translateX(${sentido * 48}px)`, opacity: 0 },
@@ -2825,7 +2880,8 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     if (q === location.search) location.reload();
     else location.replace(`${location.pathname}${q}${location.hash}`);
   }
-  $('#st-idioma').addEventListener('click', () => trocarIdioma(EN ? 'pt' : 'en'));
+  // na barra de status (computador) e no topo (celular, onde a barra de status some)
+  ['#st-idioma', '#bt-idioma'].forEach((s) => $(s).addEventListener('click', () => trocarIdioma(EN ? 'pt' : 'en')));
 
   /* ======================================================================
      Menus (barra de menus, contas, gerenciar, "...")

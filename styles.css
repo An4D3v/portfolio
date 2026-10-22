@@ -561,6 +561,9 @@ kbd {
 .logo:hover { background: var(--vsc-status-hover); }
 .logo:focus-visible { outline-offset: -2px; }
 .logo svg { width: 22px; height: 22px; }
+.titulo-idioma { display: none; }
+.titulo-idioma:hover { background: var(--vsc-status-hover); }
+.titulo-idioma:focus-visible { outline-offset: -2px; }
 .floco-bracos { stroke: var(--logo-floco, #8be9fd); }
 .floco-centro { fill: #6b3fd4; }
 
@@ -1044,6 +1047,48 @@ textarea.campo { height: auto; min-height: 60px; resize: vertical; line-height: 
   overflow: hidden;
 }
 .migalha .ic { margin-right: 4px; }
+
+/* navegador embutido (como o Simple Browser do VS Code) por cima das páginas dos arquivos de código */
+.navegador {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 36px;
+  padding: 0 8px;
+  background: var(--vsc-editor-bg);
+  border-bottom: 1px solid var(--vsc-border-strong);
+}
+.navegador-bt {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  color: var(--vsc-fg);
+}
+.navegador-bt:hover:not([aria-disabled="true"]) { background: var(--vsc-status-hover); }
+.navegador-bt[aria-disabled="true"] { opacity: 0.4; cursor: default; }
+.navegador-url {
+  flex: 1;
+  min-width: 0;
+  height: 26px;
+  margin: 0 4px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--vsc-input-border);
+  border-radius: 4px;
+  background: var(--vsc-input-bg);
+  color: var(--vsc-input-fg);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .migalha .sep { width: 16px; height: 16px; }
 .migalha .atual { color: var(--vsc-fg); }
 .mg-bt {
@@ -1652,7 +1697,10 @@ button.st:hover { background: var(--vsc-status-hover); }
 .st-remoto { padding: 0 9px; background: var(--vsc-status-remote-bg, var(--marca)); color: var(--marca-fg); font-weight: 600; }
 button.st-remoto:hover { background: var(--marca-hover); }
 .st-esp { flex: 1; }
-.app.vendo-imagem .st-codigo { display: none; }
+.app.vendo-imagem .st-codigo,
+.app.vendo-pagina .st-codigo,
+.app.vendo-pagina #st-pos,
+.app.vendo-pagina #st-ling { display: none; }
 .st.girando .ic { animation: gira 1s linear infinite; }
 @keyframes gira { to { transform: rotate(360deg); } }
 
@@ -1852,36 +1900,47 @@ button.st-remoto:hover { background: var(--marca-hover); }
     --h-barra: 56px;
     --seguro-topo: env(safe-area-inset-top, 0px);
     --seguro-baixo: env(safe-area-inset-bottom, 0px);
-    --base: calc(var(--h-barra) + var(--h-status) + var(--seguro-baixo));
+    --base: calc(var(--h-barra) + var(--seguro-baixo));
   }
   .app {
     grid-template-rows:
       calc(var(--h-titulo) + var(--seguro-topo))
       minmax(0, 1fr)
-      var(--h-barra)
-      calc(var(--h-status) + var(--seguro-baixo));
+      calc(var(--h-barra) + var(--seguro-baixo));
   }
   .titulo { grid-template-columns: auto minmax(0, 1fr) auto; padding-top: var(--seguro-topo); }
   .logo { width: 46px; height: var(--h-titulo); }
   .logo svg { width: 26px; height: 26px; }
   .layout-bts { display: none; }
   .comando-central { width: 100%; height: 30px; }
+  .titulo-idioma {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: var(--h-titulo);
+    padding: 0 14px 0 4px;
+    color: var(--vsc-title-fg);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .titulo-idioma .ic { width: 16px; height: 16px; }
   .bancada,
   .app.sem-lateral .bancada,
   .app.zen .bancada { grid-template-columns: minmax(0, 1fr); }
-  .status { grid-row: 4; padding-bottom: var(--seguro-baixo); }
+  /* sem barra de status: a de baixo já leva aos mesmos lugares e o idioma fica no topo */
+  .status { display: none; }
 
   /* a barra de atividades vira a barra de navegação do app, com nome sob o ícone */
   .atividades {
     position: fixed;
     left: 0;
     right: 0;
-    bottom: calc(var(--h-status) + var(--seguro-baixo));
-    height: var(--h-barra);
+    bottom: 0;
+    height: calc(var(--h-barra) + var(--seguro-baixo));
     z-index: 61;
     flex-direction: row;
     justify-content: space-around;
-    padding: 0 4px;
+    padding: 0 4px var(--seguro-baixo);
     border-right: 0;
     border-top: 1px solid var(--vsc-border);
   }
@@ -1919,6 +1978,9 @@ button.st-remoto:hover { background: var(--marca-hover); }
   .lat-fechar { display: grid; width: 40px; height: 40px; }
   .sash { display: none; }
   .migalha { display: none; }
+  .navegador { height: 40px; padding: 0 6px 0 10px; }
+  .navegador-bt { width: 32px; height: 32px; }
+  .navegador-bt.so-largo { display: none; }
 
   /* abas: nome curto, o × só na ativa e um degradê avisando que tem mais à direita */
   .aba:not(.ativa) .aba-x { display: none; }
@@ -1964,15 +2026,13 @@ button.st-remoto:hover { background: var(--marca-hover); }
   .term-chips { display: flex; padding: 2px 14px 6px; }
 
   /* digitando no terminal: as barras saem para o teclado não cobrir a linha de comando */
-  .app.digitando .atividades,
-  .app.digitando .status { display: none; }
+  .app.digitando .atividades { display: none; }
   .app.digitando .painel {
     top: calc(var(--h-titulo) + var(--seguro-topo));
     bottom: 0;
     height: auto;
   }
 
-  .st-ocultar { display: none; }
   .notificacoes { left: 8px; right: 8px; width: auto; bottom: calc(var(--base) + 8px); }
   .paleta { top: calc(8px + var(--seguro-topo)); }
 }
