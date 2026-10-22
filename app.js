@@ -352,16 +352,16 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   ];
 
   const EXTENSOES = [
-    { sigla: 'C#', nome: 'C# / .NET 8', desc: 'Pipelines de integração, APIs e microsserviços.', busca: '"C#"' },
-    { sigla: 'Az', nome: 'Azure', desc: 'App Service, Azure SQL, Automation, Key Vault, Application Insights.', busca: '"Azure App Service"' },
-    { sigla: 'SQL', nome: 'SQL Server · T-SQL', desc: 'MERGE idempotente, watermark e reconciliação.', busca: '"SQL Server"' },
-    { sigla: 'Py', nome: 'Python', desc: 'Robôs com Selenium e scripts de dados.', busca: '"Python"' },
-    { sigla: 'IA', nome: 'LLMs em produção', desc: 'Classificador de publicações e leitura de nota fiscal.', busca: '"LLMs em produção"' },
-    { sigla: 'ID', nome: 'Entra ID · Microsoft Graph', desc: 'SSO nos bots e autenticação sem senha.', busca: '"Entra ID"' },
-    { sigla: 'Ng', nome: 'Angular', desc: 'Front do sistema de notas fiscais.', busca: '"Angular"' },
-    { sigla: 'Re', nome: 'React + TypeScript', desc: 'Rumo e AlienFinanças.', busca: '"React"' },
-    { sigla: 'SB', nome: 'Supabase · PostgreSQL', desc: 'Auth com MFA e Row Level Security nos apps próprios.', busca: '"Supabase"' },
-    { sigla: 'GH', nome: 'GitHub Actions', desc: 'CI/CD com OIDC e gate de testes.', busca: '"GitHub Actions"' },
+    { ic: 'cs', nome: 'C# / .NET 8', desc: 'Pipelines de integração, APIs e microsserviços.', busca: '"C#"' },
+    { ic: 'az', nome: 'Azure', desc: 'App Service, Azure SQL, Automation, Key Vault, Application Insights.', busca: '"Azure App Service"' },
+    { ic: 'sql', nome: 'SQL Server · T-SQL', desc: 'MERGE idempotente, watermark e reconciliação.', busca: '"SQL Server"' },
+    { ic: 'py', nome: 'Python', desc: 'Robôs com Selenium e scripts de dados.', busca: '"Python"' },
+    { ic: 'ia', nome: 'LLMs em produção', desc: 'Classificador de publicações e leitura de nota fiscal.', busca: '"LLMs em produção"' },
+    { ic: 'id', nome: 'Entra ID · Microsoft Graph', desc: 'SSO nos bots e autenticação sem senha.', busca: '"Entra ID"' },
+    { ic: 'ng', nome: 'Angular', desc: 'Front do sistema de notas fiscais.', busca: '"Angular"' },
+    { ic: 're', nome: 'React + TypeScript', desc: 'Rumo e AlienFinanças.', busca: '"React"' },
+    { ic: 'sb', nome: 'Supabase · PostgreSQL', desc: 'Auth com MFA e Row Level Security nos apps próprios.', busca: '"Supabase"' },
+    { ic: 'gh', nome: 'GitHub Actions', desc: 'CI/CD com OIDC e gate de testes.', busca: '"GitHub Actions"' },
   ];
 
   const TITULOS_VISTA = {
@@ -1516,7 +1516,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     $('#ext-lista').innerHTML = (dela
       ? `<button class="ext-item dela" type="button" data-abrir="sobre"><span class="ext-ic redondo" aria-hidden="true"><img src="assets/ana-64.webp" alt="" width="42" height="42"></span><span class="ext-nome">Ana Neves</span><span class="ext-desc">Software Developer — backend, dados e IA</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`
       : '')
-      + lista.map((x) => `<button class="ext-item" type="button" data-ext="${esc(x.busca)}"><span class="ext-ic" aria-hidden="true">${esc(x.sigla)}</span><span class="ext-nome">${esc(x.nome)}</span><span class="ext-desc">${esc(x.desc)}</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`).join('')
+      + lista.map((x) => `<button class="ext-item" type="button" data-ext="${esc(x.busca)}"><span class="ext-ic px" aria-hidden="true"><svg class="px-ic"><use href="#i-px-${x.ic}"/></svg></span><span class="ext-nome">${esc(x.nome)}</span><span class="ext-desc">${esc(x.desc)}</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`).join('')
       + (lista.length || dela ? '' : '<p class="vazio-msg">Nenhuma extensão encontrada.</p>');
   }
   $('#ext-in').addEventListener('input', renderExtensoes);
