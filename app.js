@@ -104,7 +104,9 @@
   };
 
   const ARQUIVOS = {
-    sobre: { nome: 'README.md', icone: 'f-markdown', ling: 'md', rotulo: 'Markdown', tpl: 'tpl-extensao', inicial: 'visual', extensao: true },
+    // a extensão "Ana Neves" instalada (este workspace é o projeto dela): é página, não arquivo
+    sobre: { nome: 'Ana Neves', titulo: 'Ana Neves', icone: 'f-extension', ling: 'md', rotulo: 'Markdown', tpl: 'tpl-extensao', inicial: 'visual', extensao: true, soPagina: true },
+    readme: { nome: 'README.md', icone: 'f-markdown', ling: 'md', rotulo: 'Markdown', inicial: 'visual' },
     projetos: { nome: 'projetos.tsx', icone: 'f-react-ts', ling: 'ts', rotulo: 'TypeScript JSX', tpl: 'tpl-projetos', inicial: 'visual' },
     experiencia: { nome: 'experiencia.cs', icone: 'f-csharp', ling: 'cs', rotulo: 'C#', tpl: 'tpl-experiencia', inicial: 'visual' },
     stack: { nome: 'stack.json', icone: 'f-json', ling: 'json', rotulo: 'JSON', tpl: 'tpl-stack', inicial: 'codigo' },
@@ -117,15 +119,15 @@
     'img-programando': { nome: 'ana-programando.webp', pasta: 'assets', icone: 'f-image', ling: 'img', rotulo: 'WebP animado · 256 × 256', imagem: 'assets/ana-programando.webp', parada: 'assets/ana-acenando.webp', alt: 'Ilustração em pixel art da Ana programando e acenando' },
   };
   const SECOES = ['sobre', 'projetos', 'experiencia', 'stack', 'contato'];
-  const ORDEM_BUSCA = ['sobre', 'projetos', 'experiencia', 'stack', 'contato', 'pacote', 'config', 'atalhos'];
+  const ORDEM_BUSCA = ['readme', 'projetos', 'experiencia', 'stack', 'contato', 'pacote', 'config', 'atalhos'];
   const ARVORE = [
     { pasta: '.vscode', fechada: 'folder-vscode', aberta: 'folder-vscode-open', filhos: ['config'] },
     { pasta: 'assets', fechada: 'folder', aberta: 'folder-open', filhos: ['img-mini', 'img-acenando', 'img-programando'] },
-    'contato', 'experiencia', 'pacote', 'projetos', 'sobre', 'stack',
+    'contato', 'experiencia', 'pacote', 'projetos', 'readme', 'stack',
   ];
 
   const FONTES = {
-    sobre: () => `# Ana Neves
+    readme: () => `# Ana Neves
 
 > **Backend, dados e IA em produção.**
 > Software Developer com produtos próprios no ar · São Paulo, Brasil · [ana@dev](https://github.com/An4D3v)
@@ -281,11 +283,16 @@ export function conversar(): void {
 // while (true) { learn(); build(); ship(); }`,
 
     pacote: () => `{
-  "name": "portfolio-ana-neves",
-  "version": "1.0.0",
-  "description": "Portfólio em forma de editor de código.",
+  "name": "software-developer",
+  "displayName": "Ana Neves",
+  "description": "Software Developer com produtos próprios no ar.",
+  "version": "2026.10.0",
+  "publisher": "ana-neves",
   "author": "Ana Neves <ana-neves98@outlook.com>",
   "homepage": "https://github.com/An4D3v",
+  "icon": "assets/ana-programando.webp",
+  "engines": { "vscode": "^1.100.0" },
+  "categories": ["Backend", ".NET", "Azure", "Dados", "IA", "Automação"],
   "scripts": {
     "dev": "learn",
     "build": "build",
@@ -340,7 +347,10 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       Mentoria: 'Orientação técnica de um estagiário no dia a dia.',
     },
     contato: { conversar: 'Abre o seu cliente de e-mail já com o endereço da Ana.' },
-    pacote: { dependencies: 'Zero dependências: este portfólio é HTML, CSS e JavaScript puros, sem framework.' },
+    pacote: {
+      displayName: 'O nome da aba Extensão: Ana Neves. Este workspace é o projeto dessa extensão, e o README.md é o texto dela.',
+      dependencies: 'Zero dependências: este portfólio é HTML, CSS e JavaScript puros, sem framework.',
+    },
     config: {
       'workbench.colorTheme': 'Dá para trocar pela paleta: Ctrl+Shift+P → Preferências: Tema de Cores.',
       'workbench.displayLanguage': 'Troque entre português e inglês pela barra de status (canto inferior direito) ou pela paleta.',
@@ -351,7 +361,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
 
   // Versão em inglês do código-fonte de cada arquivo (o FONTES acima é o português).
   const FONTES_EN = {
-    sobre: () => `# Ana Neves
+    readme: () => `# Ana Neves
 
 > **Backend, data and AI in production.**
 > Software Developer with her own products live · São Paulo, Brazil · [ana@dev](https://github.com/An4D3v)
@@ -507,11 +517,16 @@ export function talk(): void {
 // while (true) { learn(); build(); ship(); }`,
 
     pacote: () => `{
-  "name": "portfolio-ana-neves",
-  "version": "1.0.0",
-  "description": "A portfolio shaped like a code editor.",
+  "name": "software-developer",
+  "displayName": "Ana Neves",
+  "description": "Software Developer with her own products live.",
+  "version": "2026.10.0",
+  "publisher": "ana-neves",
   "author": "Ana Neves <ana-neves98@outlook.com>",
   "homepage": "https://github.com/An4D3v",
+  "icon": "assets/ana-programando.webp",
+  "engines": { "vscode": "^1.100.0" },
+  "categories": ["Backend", ".NET", "Azure", "Data", "AI", "Automation"],
   "scripts": {
     "dev": "learn",
     "build": "build",
@@ -566,7 +581,10 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       Mentoring: 'Day-to-day technical mentoring of an intern.',
     },
     contato: { talk: "Opens your email client with Ana's address already filled in." },
-    pacote: { dependencies: 'Zero dependencies: this portfolio is plain HTML, CSS and JavaScript, no framework.' },
+    pacote: {
+      displayName: "The name on the Extension: Ana Neves tab. This workspace is that extension's project, and README.md is its text.",
+      dependencies: 'Zero dependencies: this portfolio is plain HTML, CSS and JavaScript, no framework.',
+    },
     config: {
       'workbench.colorTheme': 'You can switch it from the palette: Ctrl+Shift+P → Preferences: Color Theme.',
       'workbench.displayLanguage': 'Switch between English and Portuguese from the status bar (bottom right) or the palette.',
@@ -986,9 +1004,10 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     return (a.pasta ? a.pasta + '/' : '') + a.nome;
   };
   const fonte = (id) => FONTES[id]();
-  const temVisual = (id = estado.ativa) => Boolean(id && (ARQUIVOS[id].tpl || ARQUIVOS[id].tecnologia));
+  const temVisual = (id = estado.ativa) => Boolean(id && (ARQUIVOS[id].tpl || ARQUIVOS[id].tecnologia || ARQUIVOS[id].ling === 'md'));
   const modoDe = (id) => {
     if (ARQUIVOS[id].imagem) return 'imagem';
+    if (ARQUIVOS[id].soPagina) return 'visual';
     if (!temVisual(id)) return 'codigo';
     if (estado.dividido) return 'codigo';
     return estado.modos[id] || ARQUIVOS[id].inicial;
@@ -1004,6 +1023,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       const titulo = a.titulo || 'Ana Neves';
       return { icone: 'f-extension', texto: curto ? titulo : `${L('Extensão', 'Extension')}: ${titulo}`, it: true };
     }
+    if (modo === 'visual' && a.ling === 'md') return { icone: 'open-preview', texto: curto ? a.nome : `${L('Visualizar', 'Preview')} ${a.nome}` };
     if (modo === 'visual') return { icone: 'globe', texto: curto ? rotaDe(id) : `${ENDERECO}/${rotaDe(id)}` };
     return { icone: a.icone, texto: a.nome };
   }
@@ -1136,6 +1156,72 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     return inlineMd(linha);
   }
 
+  // Visualização de Markdown, gerada do próprio arquivo (o subconjunto que os .md daqui usam):
+  // títulos, citação, listas, parágrafos, **negrito**, `código` (nome de arquivo vira link),
+  // [links](...) e endereços soltos.
+  const linkMd = (url, texto) => (url.startsWith('mailto:')
+    ? `<a href="${url}">${texto}</a>`
+    : `<a href="${url}" target="_blank" rel="noopener">${texto}</a>`);
+  function inlineHtml(t) {
+    return esc(t)
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/`([^`]+)`/g, (m, c) => {
+        const id = Object.keys(ARQUIVOS).find((k) => ARQUIVOS[k].nome === c && !ARQUIVOS[k].tecnologia);
+        return id ? `<a href="#${id}" data-abrir="${id}"><code>${c}</code></a>` : `<code>${c}</code>`;
+      })
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, texto, url) => linkMd(url, texto))
+      .replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g, (m, antes, url) => antes + linkMd(url, url));
+  }
+  function htmlMarkdown(md) {
+    const blocos = [];
+    let paragrafo = [];
+    let citacao = null;
+    let lista = null;
+    const fecharParagrafo = () => {
+      if (paragrafo.length) blocos.push(`<p>${inlineHtml(paragrafo.join(' '))}</p>`);
+      paragrafo = [];
+    };
+    const fecharCitacao = () => {
+      if (citacao) blocos.push(`<blockquote><p>${inlineHtml(citacao.join(' '))}</p></blockquote>`);
+      citacao = null;
+    };
+    const fecharLista = () => {
+      if (lista) blocos.push(`<${lista.tag}>${lista.itens.map((i) => `<li>${inlineHtml(i)}</li>`).join('')}</${lista.tag}>`);
+      lista = null;
+    };
+    md.split('\n').forEach((linha) => {
+      let m;
+      if (!linha.trim() || /^\s*<!--.*-->\s*$/.test(linha)) {
+        fecharParagrafo();
+        fecharCitacao();
+        fecharLista();
+      } else if ((m = linha.match(/^(#{1,6})\s+(.*)$/))) {
+        fecharParagrafo();
+        fecharCitacao();
+        fecharLista();
+        blocos.push(`<h${m[1].length}>${inlineHtml(m[2])}</h${m[1].length}>`);
+      } else if ((m = linha.match(/^>\s?(.*)$/))) {
+        fecharParagrafo();
+        fecharLista();
+        (citacao = citacao || []).push(m[1]);
+      } else if ((m = linha.match(/^\s*(?:[-*]|(\d+)\.)\s+(.*)$/))) {
+        fecharParagrafo();
+        fecharCitacao();
+        const tag = m[1] ? 'ol' : 'ul';
+        if (lista && lista.tag !== tag) fecharLista();
+        (lista = lista || { tag, itens: [] }).itens.push(m[2]);
+      } else {
+        fecharCitacao();
+        fecharLista();
+        paragrafo.push(linha.trim());
+      }
+    });
+    fecharParagrafo();
+    fecharCitacao();
+    fecharLista();
+    return blocos.join('');
+  }
+
   const cacheCodigo = {};
   function htmlCodigo(id) {
     if (cacheCodigo[id] && id !== 'config') return cacheCodigo[id];
@@ -1217,6 +1303,9 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     if (modo === 'visual' && a.tecnologia) {
       painel.innerHTML = htmlTecnologia(a.tecnologia);
       painel.classList.remove('quebra');
+    } else if (modo === 'visual' && !a.tpl) {
+      painel.innerHTML = `<article class="md">${htmlMarkdown(fonte(id))}</article>`;
+      painel.classList.remove('quebra');
     } else if (modo === 'visual') {
       const tpl = d.getElementById(EN ? `${a.tpl}-en` : a.tpl);
       painel.innerHTML = a.extensao ? '' : barraNavegador(id);
@@ -1254,25 +1343,25 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     preencher(el.editor, id, modo);
     el.editor.setAttribute('aria-label', `Editor: ${rotuloAba(id, modo).texto}`);
 
-    const lado = estado.dividido && temVisual(id);
+    const lado = estado.dividido && temVisual(id) && !a.soPagina;
     el.grupoLado.hidden = !lado;
     if (lado) preencher(el.editorLado, id, 'visual');
 
-    el.btModo.hidden = !a.tpl;
+    el.btModo.hidden = !temVisual(id) || Boolean(a.extensao);
     el.btModo.setAttribute('aria-disabled', String(estado.dividido));
     const vendoCodigo = modo === 'codigo';
-    // README e extensões têm visualização; os outros arquivos abrem no navegador embutido
-    const [icAbrir, rotAbrir, titAbrir] = a.extensao
+    // Markdown tem visualização; os outros arquivos abrem no navegador embutido
+    const [icAbrir, rotAbrir, titAbrir] = a.ling === 'md'
       ? ['open-preview', L('Abrir visualização', 'Open preview'), L('Abrir Visualização', 'Open Preview')]
       : ['globe', L('Abrir no navegador', 'Open in browser'), L('Abrir no Navegador', 'Open in Browser')];
     el.btModo.innerHTML = ic(vendoCodigo ? icAbrir : 'go-to-file');
     el.btModo.setAttribute('aria-label', vendoCodigo ? rotAbrir : L('Mostrar código-fonte', 'Show source'));
     el.btModo.title = vendoCodigo ? titAbrir : L('Mostrar Código-Fonte', 'Show Source');
     el.btDividir.hidden = false;
-    el.btDividir.setAttribute('aria-disabled', String(!temVisual(id)));
+    el.btDividir.setAttribute('aria-disabled', String(!temVisual(id) || Boolean(a.soPagina)));
     el.btDividir.setAttribute('aria-pressed', String(lado));
     el.btDividir.title = !temVisual(id) ? L('Este arquivo não tem visualização', 'This file has no preview')
-      : a.extensao ? L('Abrir Visualização ao Lado', 'Open Preview to the Side') : L('Abrir no Navegador ao Lado', 'Open in Browser to the Side');
+      : a.ling === 'md' ? L('Abrir Visualização ao Lado', 'Open Preview to the Side') : L('Abrir no Navegador ao Lado', 'Open in Browser to the Side');
     marcarLinha(1, 1);
     if (modo === 'imagem') el.stPos.textContent = '';
     atualizarMinimapa();
@@ -1357,7 +1446,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
   function renderMigalha() {
     const id = estado.ativa;
     // no navegador embutido não há caminho de arquivo: a barra de endereço ocupa o lugar
-    el.migalha.hidden = Boolean(id) && modoDe(id) === 'visual' && !ARQUIVOS[id].extensao;
+    el.migalha.hidden = Boolean(id) && ((modoDe(id) === 'visual' && !ARQUIVOS[id].extensao) || Boolean(ARQUIVOS[id].soPagina));
     if (!id || el.migalha.hidden) {
       el.migalha.innerHTML = '';
       return;
@@ -1579,13 +1668,13 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
 
   function alternarModo() {
     const id = estado.ativa;
-    if (!temVisual(id) || estado.dividido) return;
+    if (!temVisual(id) || estado.dividido || ARQUIVOS[id].soPagina) return;
     estado.modos[id] = modoDe(id) === 'visual' ? 'codigo' : 'visual';
     render();
   }
 
   function alternarDivisao() {
-    if (!temVisual()) return;
+    if (!temVisual() || ARQUIVOS[estado.ativa].soPagina) return;
     estado.dividido = !estado.dividido;
     render();
   }
@@ -1728,17 +1817,18 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     deslizarConteudo(sentido);
   }, { passive: true });
 
+  // no celular o cabeçalho faz parte da gaveta: arrastar nele para a esquerda também fecha
   const toqueGaveta = { x: 0, y: 0 };
-  el.lateral.addEventListener('touchstart', (e) => {
+  [el.lateral, $('.titulo')].forEach((alvo) => alvo.addEventListener('touchstart', (e) => {
     toqueGaveta.x = e.touches[0].clientX;
     toqueGaveta.y = e.touches[0].clientY;
-  }, { passive: true });
-  el.lateral.addEventListener('touchend', (e) => {
+  }, { passive: true }));
+  [el.lateral, $('.titulo')].forEach((alvo) => alvo.addEventListener('touchend', (e) => {
     if (!el.app.classList.contains('gaveta')) return;
     const dx = e.changedTouches[0].clientX - toqueGaveta.x;
     const dy = e.changedTouches[0].clientY - toqueGaveta.y;
     if (dx < -60 && Math.abs(dy) < Math.abs(dx) * 0.6) fecharGaveta();
-  }, { passive: true });
+  }, { passive: true }));
 
   el.btModo.addEventListener('click', alternarModo);
   el.btDividir.addEventListener('click', alternarDivisao);
@@ -2343,18 +2433,24 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
   });
 
   /* ---------- extensões (a stack) ---------- */
+  // A extensão da Ana vem primeiro (é a extensão deste workspace), com o avatar como ícone.
+  const EXT_ANA = { id: 'sobre', nome: 'Ana Neves', desc: L('Software Developer com produtos próprios no ar.', 'Software Developer with her own products live.') };
   function renderExtensoes() {
     const q = norm($('#ext-in').value.trim());
-    const lista = EXTENSOES.filter((x) => !q || norm(`${x.nome} ${x.desc}`).includes(q));
+    const itens = [
+      { ...EXT_ANA, icone: '<span class="ext-ic ext-ic-foto" aria-hidden="true"><img src="assets/ana-64.webp" alt="" width="42" height="42"></span>' },
+      ...EXTENSOES.map((x) => ({ id: `ext-${x.ic}`, nome: x.nome, desc: x.desc, icone: `<span class="ext-ic px" aria-hidden="true"><svg class="px-ic"><use href="#i-px-${x.ic}"/></svg></span>` })),
+    ];
+    const lista = itens.filter((x) => !q || norm(`${x.nome} ${x.desc}`).includes(q));
     $('#ext-cont').textContent = String(lista.length);
-    $('#ext-lista').innerHTML = lista.map((x) => `<button class="ext-item" type="button" data-abrir="ext-${x.ic}"><span class="ext-ic px" aria-hidden="true"><svg class="px-ic"><use href="#i-px-${x.ic}"/></svg></span><span class="ext-nome">${esc(x.nome)}</span><span class="ext-desc">${esc(x.desc)}</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`).join('')
+    $('#ext-lista').innerHTML = lista.map((x) => `<button class="ext-item" type="button" data-abrir="${x.id}">${x.icone}<span class="ext-nome">${esc(x.nome)}</span><span class="ext-desc">${esc(x.desc)}</span><span class="ext-pub">${ic('verified-filled')}ana@dev</span></button>`).join('')
       + (lista.length ? '' : `<p class="vazio-msg">${L('Nenhuma extensão encontrada.', 'No extensions found.')}</p>`);
     marcarExtensao();
   }
   // A extensão aberta fica marcada na lista, como no VS Code. Abrir um arquivo
   // comum não desmarca: a lista guarda a última extensão escolhida.
   function marcarExtensao() {
-    if (estado.ativa && ARQUIVOS[estado.ativa].tecnologia) estado.extMarcada = estado.ativa;
+    if (estado.ativa && ARQUIVOS[estado.ativa].extensao) estado.extMarcada = estado.ativa;
     $$('.ext-item', $('#ext-lista')).forEach((b) => {
       const on = b.dataset.abrir === estado.extMarcada;
       b.classList.toggle('selecionada', on);
@@ -2502,7 +2598,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
   /* ---------- terminal ---------- */
   const term = { hist: [], pos: 0, dispensada: false };
   const PROMPT = '<span class="term-ps">PS C:\\portfolio-ana-neves&gt;</span> ';
-  const NOMES_ARQ = Object.fromEntries(Object.keys(ARQUIVOS).filter((id) => !ARQUIVOS[id].tecnologia).map((id) => [caminho(id), id]));
+  const NOMES_ARQ = Object.fromEntries(Object.keys(ARQUIVOS).filter((id) => !ARQUIVOS[id].tecnologia && !ARQUIVOS[id].soPagina).map((id) => [caminho(id), id]));
 
   function linhaTerm(conteudo, cls = '') {
     const div = d.createElement('div');
@@ -2922,7 +3018,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       { rotulo: L('Voltar', 'Back'), fn: () => navegar(-1), off: estado.posHist <= 0 },
       { rotulo: L('Avançar', 'Forward'), fn: () => navegar(1), off: estado.posHist >= estado.historico.length - 1 },
       '-',
-      ...SECOES.map((id, i) => ({ rotulo: ARQUIVOS[id].nome, tecla: `Alt+${i + 1}`, fn: () => abrir(id) })),
+      ...SECOES.map((id, i) => ({ rotulo: ARQUIVOS[id].soPagina ? `${L('Extensão', 'Extension')}: Ana Neves` : ARQUIVOS[id].nome, tecla: `Alt+${i + 1}`, fn: () => abrir(id) })),
       '-',
       { rotulo: L('Ir para o Arquivo…', 'Go to File…'), tecla: 'Ctrl+P', fn: () => abrirPaleta('') },
     ] },
@@ -3139,6 +3235,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     { rotulo: L('Preferências: Abrir Configurações', 'Preferences: Open Settings'), fn: () => abrir('config') },
     { rotulo: L('Ajuda: Atalhos de Teclado', 'Help: Keyboard Shortcuts'), fn: () => abrir('atalhos') },
     { rotulo: L('Depurar: Iniciar Depuração', 'Debug: Start Debugging'), tecla: 'F5', fn: depurar },
+    { rotulo: L('Ana: Abrir a Extensão', 'Ana: Open the Extension'), fn: () => abrir('sobre') },
     { rotulo: L('Ana: Copiar E-mail', 'Ana: Copy Email'), fn: copiarEmail },
     { rotulo: L('Ana: Enviar E-mail', 'Ana: Send Email'), fn: () => { location.href = `mailto:${EMAIL}`; } },
     { rotulo: L('Ana: Abrir GitHub', 'Ana: Open GitHub'), fn: () => abrirFora(GITHUB) },
@@ -3205,7 +3302,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     } else if (v.startsWith('>')) {
       itens = COMANDOS().map((c) => ({ ...c, tipo: 'cmd' }));
     } else {
-      itens = Object.keys(ARQUIVOS).filter((id) => !ARQUIVOS[id].tecnologia).map((id) => ({ tipo: 'arq', id, rotulo: ARQUIVOS[id].nome, det: ARQUIVOS[id].pasta ? `portfolio-ana-neves/${ARQUIVOS[id].pasta}` : 'portfolio-ana-neves', icone: ARQUIVOS[id].icone, fn: () => abrir(id) }));
+      itens = Object.keys(ARQUIVOS).filter((id) => !ARQUIVOS[id].tecnologia && !ARQUIVOS[id].soPagina).map((id) => ({ tipo: 'arq', id, rotulo: ARQUIVOS[id].nome, det: ARQUIVOS[id].pasta ? `portfolio-ana-neves/${ARQUIVOS[id].pasta}` : 'portfolio-ana-neves', icone: ARQUIVOS[id].icone, fn: () => abrir(id) }));
       if (v.trim()) itens = itens.concat(COMANDOS().map((c) => ({ ...c, tipo: 'cmd' })));
     }
     const q = (v.startsWith('>') ? v.slice(1) : v).trim();
