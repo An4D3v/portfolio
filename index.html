@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="pt-BR" data-tema="dracula">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://rumo-amber.vercel.app https://financas-app-ruby.vercel.app https://vale-do-trevo.vercel.app; base-uri 'none'; form-action 'none'; object-src 'none'">
+<title>Ana Neves · Software Developer</title>
+<meta name="description" content="Ana Neves — desenvolvedora backend .NET e Azure em São Paulo. Um portfólio que é um editor de código: abra as abas para ver projetos no ar, experiência, stack e contato.">
+<meta name="author" content="Ana Neves">
+<meta name="theme-color" content="#282a36">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Ana Neves · Software Developer">
+<meta property="og:description" content="Backend .NET e Azure, com produto próprio em produção. Um portfólio que é um editor de código — abra as abas.">
+<meta property="og:url" content="https://ana-neves.vercel.app/">
+<meta property="og:image" content="https://ana-neves.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="O portfólio da Ana Neves aberto como uma extensão no VS Code, com o avatar em pixel art.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ana-neves.vercel.app/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="extensao.css">
+<script src="tema.js"></script>
+<script src="extensao.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<!--sprite:inicio-->
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" focusable="false">
+<symbol id="i-files" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 1.5H10.5L13.5 4.5V11.5H5.5Z"/><path d="M10.5 1.5V4.5H13.5"/><path d="M5.5 4.5H2.5V14.5H10.5V11.5"/></g></symbol>
+<symbol id="i-search" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.5" cy="6.5" r="5"/><path d="M5.96 10.04L1.5 14.5"/></g></symbol>
+<symbol id="i-source-control" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="4.5" cy="3.5" r="2"/><circle cx="4.5" cy="12.5" r="2"/><circle cx="11.5" cy="5.5" r="2"/><path d="M4.5 5.5V10.5"/><path d="M11.5 7.5C11.5 10.2 4.5 8 4.5 10.5"/></g></symbol>
+<symbol id="i-debug-alt" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 6.5V1.5L14.5 8L8.6 12.26"/><path d="M2.75 9.25A1.25 1.25 0 0 1 5.25 9.25Z" fill="currentColor" stroke="none"/><ellipse cx="4" cy="12.25" rx="2" ry="2.5" fill="currentColor" stroke="none"/><path d="M0.75 11H2M6 11H7.25M0.75 13.5H2M6 13.5H7.25"/></g></symbol>
+<symbol id="i-extensions" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 4.5H6.5V9.5H11.5V14.5H1.5Z"/><path d="M1.5 9.5H6.5V14.5"/><rect x="8.5" y="2.5" width="5" height="5"/></g></symbol>
+<symbol id="i-account" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><circle cx="8" cy="6" r="2.25"/><path d="M3.6 12.8C4.3 11.2 6 10.3 8 10.3C10 10.3 11.7 11.2 12.4 12.8"/></g></symbol>
+<symbol id="i-settings-gear" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12.4 6.66 L14.38 6.76 L14.38 9.24 L12.4 9.34 L12.06 10.16 L13.39 11.63 L11.63 13.39 L10.16 12.06 L9.34 12.4 L9.24 14.38 L6.76 14.38 L6.66 12.4 L5.84 12.06 L4.37 13.39 L2.61 11.63 L3.94 10.16 L3.6 9.34 L1.62 9.24 L1.62 6.76 L3.6 6.66 L3.94 5.84 L2.61 4.37 L4.37 2.61 L5.84 3.94 L6.66 3.6 L6.76 1.62 L9.24 1.62 L9.34 3.6 L10.16 3.94 L11.63 2.61 L13.39 4.37 L12.06 5.84 Z"/><circle cx="8" cy="8" r="1.75"/></g></symbol>
+<symbol id="i-remote" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 1.5L7 6L2.5 10.5"/><path d="M13.5 5.5L9 10L13.5 14.5"/></g></symbol>
+<symbol id="i-git-branch" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="4.5" cy="3.5" r="2"/><circle cx="4.5" cy="12.5" r="2"/><circle cx="11.5" cy="3.5" r="2"/><path d="M4.5 5.5V10.5"/><path d="M11.5 5.5V6C11.5 7.38 10.38 8.5 9 8.5H7C5.62 8.5 4.5 9.12 4.5 10.5"/></g></symbol>
+<symbol id="i-sync" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8A5.5 5.5 0 0 1 11.9 4.1L13.5 5.5"/><path d="M13.5 2V5.5H10"/><path d="M13.5 8A5.5 5.5 0 0 1 4.1 11.9L2.5 10.5"/><path d="M2.5 14V10.5H6"/></g></symbol>
+<symbol id="i-error" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M5.5 5.5L10.5 10.5M10.5 5.5L5.5 10.5"/></g></symbol>
+<symbol id="i-warning" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.5L14.5 13.5H1.5Z"/><path d="M8 5.5V9.5"/><circle cx="8" cy="11.5" r="0.75" fill="currentColor" stroke="none"/></g></symbol>
+<symbol id="i-bell" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5V6.5A4.5 4.5 0 0 1 12.5 6.5V9.5C12.5 10.8 13 11.8 14 12.5H2C3 11.8 3.5 10.8 3.5 9.5Z"/><path d="M6.5 12.5A1.5 1.5 0 0 0 9.5 12.5"/></g></symbol>
+<symbol id="i-bell-dot" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M9.26 2.18 A4.5 4.5 0 0 0 3.5 6.5V9.5C3.5 10.8 3 11.8 2 12.5H14C13 11.8 12.5 10.8 12.5 9.5V7"/><path d="M6.5 12.5A1.5 1.5 0 0 0 9.5 12.5"/><circle cx="12.5" cy="3.5" r="2" fill="currentColor" stroke="none"/></g></symbol>
+<symbol id="i-close" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4L12 12M12 4L4 12"/></g></symbol>
+<symbol id="i-chevron-right" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 3.5L10 8L5.5 12.5"/></g></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5.5L8 10L12.5 5.5"/></g></symbol>
+<symbol id="i-chevron-left" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 3.5L6 8L10.5 12.5"/></g></symbol>
+<symbol id="i-chevron-up" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5L8 6L12.5 10.5"/></g></symbol>
+<symbol id="i-ellipsis" viewBox="0 0 16 16"><circle cx="3" cy="8" r="1" fill="currentColor"/><circle cx="8" cy="8" r="1" fill="currentColor"/><circle cx="13" cy="8" r="1" fill="currentColor"/></symbol>
+<symbol id="i-menu" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 4.5H14.5M1.5 8.5H14.5M1.5 12.5H14.5"/></g></symbol>
+<symbol id="i-split-horizontal" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="12" height="11" rx="0.5"/><path d="M8.5 2.5V13.5"/></g></symbol>
+<symbol id="i-layout-sidebar-left" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="11" rx="0.5"/><path d="M2 3H6V13H2Z" fill="currentColor" stroke="none"/></g></symbol>
+<symbol id="i-layout-panel" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="11" rx="0.5"/><path d="M2 9H14V13H2Z" fill="currentColor" stroke="none"/></g></symbol>
+<symbol id="i-layout-sidebar-right" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="11" rx="0.5"/><path d="M10 3H14V13H10Z" fill="currentColor" stroke="none"/></g></symbol>
+<symbol id="i-layout" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="11" rx="0.5"/><path d="M5.5 2.5V13.5M5.5 9.5H14.5"/></g></symbol>
+<symbol id="i-arrow-left" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 7.5H2.5"/><path d="M7 3L2.5 7.5L7 12"/></g></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5H13.5"/><path d="M9 3L13.5 7.5L9 12"/></g></symbol>
+<symbol id="i-chrome-minimize" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5H12.5"/></g></symbol>
+<symbol id="i-chrome-maximize" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="9" height="9"/></g></symbol>
+<symbol id="i-chrome-restore" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="7" height="7"/><path d="M5.5 5.5V3.5H12.5V10.5H10.5"/></g></symbol>
+<symbol id="i-chrome-close" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 3.5L12.5 12.5M12.5 3.5L3.5 12.5"/></g></symbol>
+<symbol id="i-terminal" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="11" rx="1"/><path d="M4 5.5L6.5 8L4 10.5"/><path d="M8 10.5H12"/></g></symbol>
+<symbol id="i-trash" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5H12.5"/><path d="M5.5 3.5V1.5H9.5V3.5"/><path d="M3.5 3.5V14.5H11.5V3.5"/><path d="M5.5 5.5V12.5M7.5 5.5V12.5M9.5 5.5V12.5"/></g></symbol>
+<symbol id="i-add" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 1.5V13.5M1.5 7.5H13.5"/></g></symbol>
+<symbol id="i-check" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8.5L6 12L13.5 4.5"/></g></symbol>
+<symbol id="i-verified-filled" viewBox="0 0 16 16"><path fill="currentColor" fill-rule="evenodd" d="M15 8 L14.9 8.45 L14.62 8.87 L14.23 9.24 L13.82 9.56 L13.48 9.86 L13.27 10.18 L13.19 10.56 L13.22 11.01 L13.28 11.53 L13.3 12.06 L13.2 12.56 L12.95 12.95 L12.56 13.2 L12.06 13.3 L11.53 13.28 L11.01 13.22 L10.56 13.19 L10.18 13.27 L9.86 13.48 L9.56 13.82 L9.24 14.23 L8.87 14.62 L8.45 14.9 L8 15 L7.55 14.9 L7.13 14.62 L6.76 14.23 L6.44 13.82 L6.14 13.48 L5.82 13.27 L5.44 13.19 L4.99 13.22 L4.47 13.28 L3.94 13.3 L3.44 13.2 L3.05 12.95 L2.8 12.56 L2.7 12.06 L2.72 11.53 L2.78 11.01 L2.81 10.56 L2.73 10.18 L2.52 9.86 L2.18 9.56 L1.77 9.24 L1.38 8.87 L1.1 8.45 L1 8 L1.1 7.55 L1.38 7.13 L1.77 6.76 L2.18 6.44 L2.52 6.14 L2.73 5.82 L2.81 5.44 L2.78 4.99 L2.72 4.47 L2.7 3.94 L2.8 3.44 L3.05 3.05 L3.44 2.8 L3.94 2.7 L4.47 2.72 L4.99 2.78 L5.44 2.81 L5.82 2.73 L6.14 2.52 L6.44 2.18 L6.76 1.77 L7.13 1.38 L7.55 1.1 L8 1 L8.45 1.1 L8.87 1.38 L9.24 1.77 L9.56 2.18 L9.86 2.52 L10.18 2.73 L10.56 2.81 L11.01 2.78 L11.53 2.72 L12.06 2.7 L12.56 2.8 L12.95 3.05 L13.2 3.44 L13.3 3.94 L13.28 4.47 L13.22 4.99 L13.19 5.44 L13.27 5.82 L13.48 6.14 L13.82 6.44 L14.23 6.76 L14.62 7.13 L14.9 7.55 Z M4.41 8.59 L7.11 11.3 L11.61 6.58 L10.59 5.62 L7.09 9.3 L5.39 7.61 Z"/></symbol>
+<symbol id="i-cloud-download" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 11.5H3.75A2.75 2.75 0 0 1 3.75 6A3.75 3.75 0 0 1 11.25 6A2.75 2.75 0 0 1 11.25 11.5H10.5"/><path d="M7.5 7.5V14"/><path d="M5.5 12L7.5 14L9.5 12"/></g></symbol>
+<symbol id="i-link-external" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M6 1.5H1.5V14.5H14.5V10"/><path d="M8.5 1.5H14.5V7.5"/><path d="M14.5 1.5L7 9"/></g></symbol>
+<symbol id="i-mail" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="3.5" width="13" height="9" rx="1"/><path d="M2 4L8 8.5L14 4"/></g></symbol>
+<symbol id="i-copy" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 3.5H10L13.5 7V14.5H4.5Z"/><path d="M2.5 12V1.5H9"/></g></symbol>
+<symbol id="i-open-preview" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V1.5H1.5V12.5H7.5"/><path d="M7.5 1.5V12.5"/><circle cx="11.25" cy="10" r="1.75"/><path d="M12.49 11.24L14.5 13.25"/></g></symbol>
+<symbol id="i-go-to-file" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 4V1.5H11.5L14.5 4.5V14.5H5.5V11"/><path d="M11.5 1.5V4.5H14.5"/><path d="M1.5 7.5H9.5"/><path d="M7 5L9.5 7.5L7 10"/></g></symbol>
+<symbol id="i-book" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4C6 3 4 2.5 1.5 2.5V12.5C4 12.5 6 13 7.5 14C9 13 11 12.5 13.5 12.5V2.5C11 2.5 9 3 7.5 4Z"/><path d="M7.5 4V14"/></g></symbol>
+<symbol id="i-location" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14.5C8 14.5 3 9.6 3 6.5A5 5 0 0 1 13 6.5C13 9.6 8 14.5 8 14.5Z"/><circle cx="8" cy="6.5" r="1.75"/></g></symbol>
+<symbol id="i-person" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="4.5" r="3"/><path d="M2.5 14.5V13A2.5 2.5 0 0 1 5 10.5H11A2.5 2.5 0 0 1 13.5 13V14.5"/></g></symbol>
+<symbol id="i-organization" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="4" r="1.75"/><circle cx="3" cy="5.5" r="1.25"/><circle cx="13" cy="5.5" r="1.25"/><path d="M4.5 13.5V11A2.5 2.5 0 0 1 7 8.5H9A2.5 2.5 0 0 1 11.5 11V13.5"/><path d="M1 12V10.5A1.75 1.75 0 0 1 2.75 8.75H3.25"/><path d="M15 12V10.5A1.75 1.75 0 0 0 13.25 8.75H12.75"/></g></symbol>
+<symbol id="i-rocket" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 8 8)"><path d="M8 1.5C10 3 10.75 5.25 10.75 7.5V11H5.25V7.5C5.25 5.25 6 3 8 1.5Z"/><circle cx="8" cy="6.25" r="1.25"/><path d="M5.25 8.5L3.25 10.5V12.5L5.25 11"/><path d="M10.75 8.5L12.75 10.5V12.5L10.75 11"/><path d="M7 12.75L8 14.5L9 12.75"/></g></g></symbol>
+<symbol id="i-database" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="8" cy="3.5" rx="5.5" ry="2"/><path d="M2.5 3.5V12.5A5.5 2 0 0 0 13.5 12.5V3.5"/><path d="M2.5 8A5.5 2 0 0 0 13.5 8"/></g></symbol>
+<symbol id="i-server" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="4" rx="1"/><rect x="1.5" y="9.5" width="13" height="4" rx="1"/><circle cx="4.5" cy="4.5" r="0.75" fill="currentColor" stroke="none"/><circle cx="4.5" cy="11.5" r="0.75" fill="currentColor" stroke="none"/><path d="M7.5 4.5H11.5M7.5 11.5H11.5"/></g></symbol>
+<symbol id="i-sparkle" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5 Q8.1 7.9 12.5 9 Q8.1 10.1 7 14.5 Q5.9 10.1 1.5 9 Q5.9 7.9 7 3.5 Z"/><path d="M12.5 1 Q12.95 3.05 15 3.5 Q12.95 3.95 12.5 6 Q12.05 3.95 10 3.5 Q12.05 3.05 12.5 1 Z" fill="currentColor" stroke="none"/></g></symbol>
+<symbol id="i-history" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8A5.5 5.5 0 1 0 8 2.5C6.5 2.5 5.1 3.1 4.1 4.1L2.5 5.5"/><path d="M2.5 2V5.5H6"/><path d="M8 5V8L10.5 9.5"/></g></symbol>
+<symbol id="i-list-tree" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 2.5H14.5"/><path d="M3.5 2.5V12.5"/><path d="M3.5 7.5H5M3.5 12.5H5"/><path d="M7 7.5H14.5M7 12.5H14.5"/></g></symbol>
+<symbol id="i-play" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 2.5V13.5L12.5 8Z"/></g></symbol>
+<symbol id="i-debug-stop" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="11" height="11"/></g></symbol>
+<symbol id="i-refresh" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 8A5.5 5.5 0 1 1 11.9 4.1L13.5 5.5"/><path d="M13.5 2V5.5H10"/></g></symbol>
+<symbol id="i-info" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 7V11.5"/><circle cx="8" cy="5" r="0.75" fill="currentColor" stroke="none"/></g></symbol>
+<symbol id="i-comment-discussion" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5V2.5H14.5V9.5H13.5V11.5L11.5 9.5H10.5"/><path d="M1.5 4.5H10.5V11.5H6.5L4 14V11.5H1.5Z"/></g></symbol>
+<symbol id="i-circle-filled" viewBox="0 0 16 16"><circle cx="8" cy="8" r="4" fill="currentColor"/></symbol>
+<symbol id="i-word-wrap" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 3.5H14.5"/><path d="M1.5 7.5H11.5C13.16 7.5 14.5 8.62 14.5 10C14.5 11.38 13.16 12.5 11.5 12.5H8.5"/><path d="M10 11L8.5 12.5L10 14"/><path d="M1.5 12.5H5.5"/></g></symbol>
+<symbol id="i-map" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 3.5L5.5 1.5L10.5 3.5L14.5 1.5V12.5L10.5 14.5L5.5 12.5L1.5 14.5Z"/><path d="M5.5 1.5V12.5M10.5 3.5V14.5"/></g></symbol>
+<symbol id="i-minimap" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="1.5" width="13" height="13" rx="1"/><path d="M10.5 1.5V14.5"/><path d="M3.5 4.5H8.5M3.5 6.5H7M3.5 8.5H8.5M3.5 10.5H6"/><rect x="11" y="3" width="3" height="4" fill="currentColor" stroke="none" opacity="0.55"/></g></symbol>
+<symbol id="i-color-mode" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 1.5A6.5 6.5 0 0 1 8 14.5Z" fill="currentColor" stroke="none"/></g></symbol>
+<symbol id="i-keyboard" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="3.5" width="12" height="9" rx="1"/><path d="M4.5 10.5H10.5"/><path d="M3 5h1v1H3ZM5 5h1v1H5ZM7 5h1v1H7ZM9 5h1v1H9ZM11 5h1v1H11ZM3 7h1v1H3ZM5 7h1v1H5ZM7 7h1v1H7ZM9 7h1v1H9ZM11 7h1v1H11Z" fill="currentColor" stroke="none"/></g></symbol>
+<symbol id="i-collapse-all" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="4.5" width="10" height="10"/><path d="M4 9.5H9"/><path d="M4.5 4.5V1.5H14.5V11.5H11.5"/></g></symbol>
+<symbol id="i-new-file" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 14.5H2.5V1.5H8.5L12.5 5.5V8"/><path d="M8.5 1.5V5.5H12.5"/><path d="M12.5 10V15M10 12.5H15"/></g></symbol>
+<symbol id="i-new-folder" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 13.5H1.5V2.5H6.5L8.5 4.5H14.5V8"/><path d="M1.5 6.5H6.5L8.5 4.5"/><path d="M12.5 10V15M10 12.5H15"/></g></symbol>
+<symbol id="i-filter" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 2.5H14.5L9.5 8.5V14L6.5 12.5V8.5Z"/></g></symbol>
+<symbol id="i-clear-all" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 3.5H14.5M1.5 6.5H14.5M1.5 9.5H8.5M1.5 12.5H8.5"/><path d="M10.5 9.5L13.5 12.5M13.5 9.5L10.5 12.5"/></g></symbol>
+<symbol id="i-pass" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M4.5 8.5L6.5 10.5L11 6"/></g></symbol>
+<symbol id="i-repo" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13.5A1.5 1.5 0 0 1 2.5 12V3A1.5 1.5 0 0 1 4 1.5H13.5V13.5H9.5"/><path d="M2.5 12A1.5 1.5 0 0 1 4 10.5H13.5"/><path d="M5.5 12.5H8V15.25L6.75 14.25L5.5 15.25Z" fill="currentColor" stroke="none"/></g></symbol>
+<symbol id="i-output" viewBox="0 0 16 16"><g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="1.5" width="13" height="13" rx="1"/><path d="M4 5.5H12M4 8.5H12M4 11.5H9"/></g></symbol>
+<symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" fill-rule="evenodd" transform="matrix(.875 0 0 .875 1 1)" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></symbol>
+<symbol id="i-linkedin" viewBox="0 0 16 16"><path fill="currentColor" fill-rule="evenodd" d="M2.5 1H13.5A1.5 1.5 0 0 1 15 2.5V13.5A1.5 1.5 0 0 1 13.5 15H2.5A1.5 1.5 0 0 1 1 13.5V2.5A1.5 1.5 0 0 1 2.5 1Z M3.5 4.6 A1.1 1.1 0 1 0 5.7 4.6 A1.1 1.1 0 1 0 3.5 4.6 Z M3.6 6.4H5.6V12.6H3.6Z M7.1 6.4H9V7.3C9.4 6.7 10.1 6.25 11.1 6.25C12.8 6.25 13.4 7.3 13.4 9.1V12.6H11.45V9.5C11.45 8.6 11.25 7.9 10.35 7.9C9.5 7.9 9.05 8.5 9.05 9.6V12.6H7.1Z"/></symbol>
+<symbol id="i-f-markdown" viewBox="0 0 16 16"><path fill="#42a5f5" d="M1 4H2.75L4.5 6.2L6.25 4H8V12H6.25V7.3L4.5 9.5L2.75 7.3V12H1Z M11 4H13V8.5H14.5L12 12L9.5 8.5H11Z"/></symbol>
+<symbol id="i-f-typescript" viewBox="0 0 16 16"><path fill="#0288d1" fill-rule="evenodd" d="M2 1H14A1 1 0 0 1 15 2V14A1 1 0 0 1 14 15H2A1 1 0 0 1 1 14V2A1 1 0 0 1 2 1Z M3.5 6.5H9V8H7V14H5.5V8H3.5Z M10 6.5H14V8H11.5V9.5H14V14H10V12.5H12.5V11H10Z"/></symbol>
+<symbol id="i-f-react-ts" viewBox="0 0 16 16"><g fill="none" stroke="#00bcd4" stroke-width="1"><ellipse cx="8" cy="8" rx="6.5" ry="2.5"/><ellipse cx="8" cy="8" rx="6.5" ry="2.5" transform="rotate(60 8 8)"/><ellipse cx="8" cy="8" rx="6.5" ry="2.5" transform="rotate(120 8 8)"/></g><circle cx="8" cy="8" r="1.4" fill="#00bcd4"/></symbol>
+<symbol id="i-f-csharp" viewBox="0 0 16 16"><path fill="none" stroke="#9575cd" stroke-width="2" d="M7.9 5.35A3.75 3.75 0 1 0 7.9 10.65"/><path fill="none" stroke="#9575cd" stroke-width="1.5" d="M11.25 4.5V11.5M13.75 4.5V11.5M9.75 6.75H15.25M9.75 9.25H15.25"/></symbol>
+<symbol id="i-f-json" viewBox="0 0 16 16"><path fill="none" stroke="#f9a825" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M5.5 2.25H5C4.2 2.25 3.75 2.75 3.75 3.5V6.5C3.75 7.35 3.2 8 2.25 8C3.2 8 3.75 8.65 3.75 9.5V12.5C3.75 13.25 4.2 13.75 5 13.75H5.5M10.5 2.25H11C11.8 2.25 12.25 2.75 12.25 3.5V6.5C12.25 7.35 12.8 8 13.75 8C12.8 8 12.25 8.65 12.25 9.5V12.5C12.25 13.25 11.8 13.75 11 13.75H10.5"/></symbol>
+<symbol id="i-f-npm" viewBox="0 0 16 16"><path fill="#cb3837" fill-rule="evenodd" d="M1 1H15V15H1Z M3 3V13H8V5.5H10.5V13H13V3Z"/></symbol>
+<symbol id="i-f-html" viewBox="0 0 16 16"><path fill="#e44d26" fill-rule="evenodd" d="M1.81 1 L14.19 1 L13.07 13.64 L8 15.04 L2.93 13.64 Z M8 12.36 L11.17 11.48 L11.6 6.72 L5.96 6.72 L5.82 5.13 L11.74 5.13 L11.9 3.58 L4.1 3.58 L4.54 8.27 L9.91 8.27 L9.73 10.28 L8 10.75 L6.27 10.28 L6.16 8.99 L4.6 8.99 L4.83 11.48 Z"/></symbol>
+<symbol id="i-f-git" viewBox="0 0 16 16"><path fill="#f4511e" fill-rule="evenodd" d="M7.1 1.9Q8 1 8.9 1.9L14.1 7.1Q15 8 14.1 8.9L8.9 14.1Q8 15 7.1 14.1L1.9 8.9Q1 8 1.9 7.1Z M7 5.25 A1.25 1.25 0 1 0 9.5 5.25 A1.25 1.25 0 1 0 7 5.25 Z M9.75 8 A1.25 1.25 0 1 0 12.25 8 A1.25 1.25 0 1 0 9.75 8 Z M7 11.25 A1.25 1.25 0 1 0 9.5 11.25 A1.25 1.25 0 1 0 7 11.25 Z M5.68 3.32 L7.11 4.74 A1.25 1.25 0 0 1 7.74 4.11 L6.32 2.68 Z M8.76 6.39 L9.86 7.49 A1.25 1.25 0 0 1 10.49 6.86 L9.39 5.76 A1.25 1.25 0 0 1 8.76 6.39 Z M7.8 6.42 L7.8 10.08 A1.25 1.25 0 0 1 8.7 10.08 L8.7 6.42 A1.25 1.25 0 0 1 7.8 6.42 Z"/></symbol>
+<symbol id="i-f-settings" viewBox="0 0 16 16"><path fill="#42a5f5" fill-rule="evenodd" d="M13.2 9.04 L14.61 10.31 A7 7 0 0 1 13.31 12.56 L11.5 11.98 A5.3 5.3 0 0 1 9.7 13.02 L9.3 14.88 A7 7 0 0 1 6.7 14.88 L6.3 13.02 A5.3 5.3 0 0 1 4.5 11.98 L2.69 12.56 A7 7 0 0 1 1.39 10.31 L2.8 9.04 A5.3 5.3 0 0 1 2.8 6.96 L1.39 5.69 A7 7 0 0 1 2.69 3.44 L4.5 4.02 A5.3 5.3 0 0 1 6.3 2.98 L6.7 1.12 A7 7 0 0 1 9.3 1.12 L9.7 2.98 A5.3 5.3 0 0 1 11.5 4.02 L13.31 3.44 A7 7 0 0 1 14.61 5.69 L13.2 6.96 A5.3 5.3 0 0 1 13.2 9.04 Z M5.8 8 A2.2 2.2 0 1 0 10.2 8 A2.2 2.2 0 1 0 5.8 8 Z"/></symbol>
+<symbol id="i-f-extension" viewBox="0 0 16 16"><path fill="currentColor" d="M2 4H5.64A1.75 1.75 0 1 1 8.36 4H12V7.64A1.75 1.75 0 1 1 12 10.36V14H2Z"/></symbol>
+<symbol id="i-folder" viewBox="0 0 16 16"><path fill="#90a4ae" d="M6.5 2H2.5C1.67 2 1 2.67 1 3.5V12.5C1 13.33 1.67 14 2.5 14H13.5C14.33 14 15 13.33 15 12.5V5.5C15 4.67 14.33 4 13.5 4H8.5Z"/></symbol>
+<symbol id="i-folder-open" viewBox="0 0 16 16"><path fill="#90a4ae" d="M13 14H2.5C1.67 14 1 13.33 1 12.5V3.5C1 2.67 1.67 2 2.5 2H6.5L8.5 4H12.5C13.33 4 14 4.67 14 5.5H2.5V12.5L4 7H15.8L14.4 12.9C14.2 13.55 13.65 14 13 14Z"/></symbol>
+<symbol id="i-folder-vscode" viewBox="0 0 16 16"><path fill="#42a5f5" d="M6.5 2H2.5C1.67 2 1 2.67 1 3.5V12.5C1 13.33 1.67 14 2.5 14H13.5C14.33 14 15 13.33 15 12.5V5.5C15 4.67 14.33 4 13.5 4H8.5Z"/><path fill="#bbdefb" fill-rule="evenodd" d="M14.09 10.77 L14.78 11.38 A3.4 3.4 0 0 1 13.9 12.9 L13.03 12.6 A2.6 2.6 0 0 1 12.56 12.88 L12.38 13.78 A3.4 3.4 0 0 1 10.62 13.78 L10.44 12.88 A2.6 2.6 0 0 1 9.97 12.6 L9.1 12.9 A3.4 3.4 0 0 1 8.22 11.38 L8.91 10.77 A2.6 2.6 0 0 1 8.91 10.23 L8.22 9.62 A3.4 3.4 0 0 1 9.1 8.1 L9.97 8.4 A2.6 2.6 0 0 1 10.44 8.12 L10.62 7.22 A3.4 3.4 0 0 1 12.38 7.22 L12.56 8.12 A2.6 2.6 0 0 1 13.03 8.4 L13.9 8.1 A3.4 3.4 0 0 1 14.78 9.62 L14.09 10.23 A2.6 2.6 0 0 1 14.09 10.77 Z M10.4 10.5 A1.1 1.1 0 1 0 12.6 10.5 A1.1 1.1 0 1 0 10.4 10.5 Z"/></symbol>
+<symbol id="i-folder-vscode-open" viewBox="0 0 16 16"><path fill="#42a5f5" d="M13 14H2.5C1.67 14 1 13.33 1 12.5V3.5C1 2.67 1.67 2 2.5 2H6.5L8.5 4H12.5C13.33 4 14 4.67 14 5.5H2.5V12.5L4 7H15.8L14.4 12.9C14.2 13.55 13.65 14 13 14Z"/><path fill="#bbdefb" fill-rule="evenodd" d="M14.09 10.77 L14.78 11.38 A3.4 3.4 0 0 1 13.9 12.9 L13.03 12.6 A2.6 2.6 0 0 1 12.56 12.88 L12.38 13.78 A3.4 3.4 0 0 1 10.62 13.78 L10.44 12.88 A2.6 2.6 0 0 1 9.97 12.6 L9.1 12.9 A3.4 3.4 0 0 1 8.22 11.38 L8.91 10.77 A2.6 2.6 0 0 1 8.91 10.23 L8.22 9.62 A3.4 3.4 0 0 1 9.1 8.1 L9.97 8.4 A2.6 2.6 0 0 1 10.44 8.12 L10.62 7.22 A3.4 3.4 0 0 1 12.38 7.22 L12.56 8.12 A2.6 2.6 0 0 1 13.03 8.4 L13.9 8.1 A3.4 3.4 0 0 1 14.78 9.62 L14.09 10.23 A2.6 2.6 0 0 1 14.09 10.77 Z M10.4 10.5 A1.1 1.1 0 1 0 12.6 10.5 A1.1 1.1 0 1 0 10.4 10.5 Z"/></symbol>
+<symbol id="i-f-image" viewBox="0 0 16 16"><rect x="1.75" y="2.75" width="12.5" height="10.5" rx="1.5" fill="none" stroke="#26a69a" stroke-width="1.5"/><circle cx="5.5" cy="6.25" r="1.5" fill="#26a69a"/><path fill="#26a69a" d="M2.5 12.5L6.5 8.5L9 11L11 9L13.5 11.5V12.5Z"/></symbol>
+<symbol id="i-f-file" viewBox="0 0 16 16"><path fill="#90a4ae" fill-rule="evenodd" d="M4 1C3.17 1 2.5 1.67 2.5 2.5V13.5C2.5 14.33 3.17 15 4 15H12C12.83 15 13.5 14.33 13.5 13.5V5.5L9 1Z M8.5 1.77V6H12.73Z"/></symbol>
+</svg>
+<!--sprite:fim-->
+
+<a class="pular" href="#editor">Pular para o conteúdo</a>
+
+<noscript>
+  <div class="md">
+    <h1>Ana Neves</h1>
+    <p>Software Developer — backend .NET e Azure, com produto próprio em produção. São Paulo, Brasil.</p>
+    <p>Este portfólio é um editor de código interativo e precisa de JavaScript. Enquanto isso:
+      <a href="https://github.com/An4D3v">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/anad3v/">LinkedIn</a> ·
+      <a href="mailto:ana-neves98@outlook.com">ana-neves98@outlook.com</a></p>
+  </div>
+</noscript>
+
+<div class="app" id="app">
+
+  <header class="titulo">
+    <span class="logo" aria-hidden="true">
+      <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#8a70ff"/><path d="M12.5 10.5 7 16l5.5 5.5M19.5 10.5 25 16l-5.5 5.5" fill="none" stroke="#0b0716" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    <nav class="menus" id="menus" aria-label="Menu do aplicativo"></nav>
+    <div class="centro-titulo">
+      <button class="nav-bt" id="bt-voltar" type="button" aria-label="Voltar para a aba anterior" aria-disabled="true"><svg class="ic" aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+      <button class="nav-bt" id="bt-avancar" type="button" aria-label="Avançar para a próxima aba" aria-disabled="true"><svg class="ic" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+      <button class="comando-central" id="bt-central" type="button" aria-label="Pesquisar arquivos e comandos (Ctrl+P)">
+        <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg><span>portfolio-ana-neves</span>
+      </button>
+    </div>
+    <div class="layout-bts">
+      <button class="layout-bt" id="bt-layout-lateral" type="button" aria-label="Mostrar ou esconder o painel lateral (Ctrl+B)" aria-pressed="true"><svg class="ic" aria-hidden="true"><use href="#i-layout-sidebar-left"/></svg></button>
+      <button class="layout-bt" id="bt-layout-painel" type="button" aria-label="Mostrar ou esconder o painel inferior (Ctrl+J)" aria-pressed="false"><svg class="ic" aria-hidden="true"><use href="#i-layout-panel"/></svg></button>
+      <button class="layout-bt" id="bt-layout-mais" type="button" aria-label="Personalizar layout"><svg class="ic" aria-hidden="true"><use href="#i-layout"/></svg></button>
+    </div>
+    <div class="janela">
+      <button class="janela-bt" id="bt-minimizar" type="button" aria-label="Modo zen"><svg class="ic" aria-hidden="true"><use href="#i-chrome-minimize"/></svg></button>
+      <button class="janela-bt" id="bt-maximizar" type="button" aria-label="Tela cheia"><svg class="ic" aria-hidden="true"><use href="#i-chrome-maximize"/></svg></button>
+      <button class="janela-bt fechar" id="bt-fechar" type="button" aria-label="Fechar"><svg class="ic" aria-hidden="true"><use href="#i-chrome-close"/></svg></button>
+    </div>
+  </header>
+
+  <div class="bancada">
+
+    <nav class="atividades" aria-label="Barra de atividades">
+      <button class="at-bt" type="button" data-vista="explorer" aria-pressed="true" aria-label="Explorador (Ctrl+Shift+E)" title="Explorador (Ctrl+Shift+E)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-files"/></svg></button>
+      <button class="at-bt" type="button" data-vista="busca" aria-pressed="false" aria-label="Pesquisar (Ctrl+Shift+F)" title="Pesquisar (Ctrl+Shift+F)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-search"/></svg></button>
+      <button class="at-bt" type="button" data-vista="scm" aria-pressed="false" aria-label="Controle do código: repositórios e recado" title="Controle do Código-Fonte (Ctrl+Shift+G)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-source-control"/></svg></button>
+      <button class="at-bt so-desktop" type="button" data-vista="depurar" aria-pressed="false" aria-label="Executar e depurar" title="Executar e Depurar (Ctrl+Shift+D)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-debug-alt"/></svg></button>
+      <button class="at-bt" type="button" data-vista="extensoes" aria-pressed="false" aria-label="Extensões: a stack da Ana (Ctrl+Shift+X)" title="Extensões (Ctrl+Shift+X)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-extensions"/></svg><span class="at-selo" aria-hidden="true">1</span></button>
+      <button class="at-bt so-celular" type="button" id="bt-at-terminal" aria-label="Terminal" title="Terminal"><svg class="ic ic-24" aria-hidden="true"><use href="#i-terminal"/></svg></button>
+      <span class="at-espaco"></span>
+      <button class="at-bt" type="button" id="bt-conta" aria-label="Contas: links da Ana" title="Contas"><svg class="ic ic-24" aria-hidden="true"><use href="#i-account"/></svg></button>
+      <button class="at-bt so-desktop" type="button" id="bt-gerenciar" aria-label="Gerenciar: tema, atalhos e configurações" title="Gerenciar"><svg class="ic ic-24" aria-hidden="true"><use href="#i-settings-gear"/></svg></button>
+    </nav>
+
+    <aside class="lateral" id="lateral" aria-labelledby="lat-titulo">
+      <div class="lat-topo">
+        <h2 class="lat-titulo" id="lat-titulo">Explorador</h2>
+        <button class="icone-bt lat-fechar" id="bt-lat-fechar" type="button" aria-label="Fechar painel lateral"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
+        <button class="icone-bt" id="bt-lat-mais" type="button" aria-label="Mais ações"><svg class="ic" aria-hidden="true"><use href="#i-ellipsis"/></svg></button>
+      </div>
+
+      <!-- Explorer -->
+      <div class="vista" id="vista-explorer">
+        <section class="secao aberta cresce" id="sec-arquivos">
+          <div class="secao-linha">
+            <button class="secao-cab" type="button" aria-expanded="true" aria-controls="corpo-arquivos">
+              <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg><span class="rotulo">portfolio-ana-neves</span>
+            </button>
+            <span class="secao-acoes">
+              <button class="icone-bt" type="button" data-acao="novo-arquivo" aria-label="Novo arquivo"><svg class="ic" aria-hidden="true"><use href="#i-new-file"/></svg></button>
+              <button class="icone-bt" type="button" data-acao="recolher" aria-label="Recolher pastas"><svg class="ic" aria-hidden="true"><use href="#i-collapse-all"/></svg></button>
+            </span>
+          </div>
+          <div class="secao-corpo" id="corpo-arquivos">
+            <ul class="arvore" id="arvore"></ul>
+          </div>
+        </section>
+        <section class="secao" id="sec-estrutura">
+          <button class="secao-cab" type="button" aria-expanded="false" aria-controls="corpo-estrutura">
+            <svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">Estrutura de Tópicos</span>
+          </button>
+          <div class="secao-corpo" id="corpo-estrutura"><ul class="arvore" id="estrutura"></ul></div>
+        </section>
+        <section class="secao" id="sec-linha">
+          <button class="secao-cab" type="button" aria-expanded="false" aria-controls="corpo-linha">
+            <svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg><span class="rotulo">Linha do Tempo</span>
+          </button>
+          <div class="secao-corpo" id="corpo-linha"><ul class="arvore" id="linha-tempo"></ul></div>
+        </section>
+      </div>
+
+      <!-- Pesquisar -->
+      <div class="vista" id="vista-busca" hidden>
+        <div class="busca-caixa">
+          <input class="campo" id="busca-in" type="search" placeholder="Pesquisar" aria-label="Pesquisar em todos os arquivos" autocomplete="off" spellcheck="false">
+        </div>
+        <p class="busca-resumo" id="busca-resumo" aria-live="polite"></p>
+        <div class="secao-corpo" id="busca-res"></div>
+      </div>
+
+      <!-- Controle do código -->
+      <div class="vista" id="vista-scm" hidden>
+        <section class="secao aberta">
+          <button class="secao-cab" type="button" aria-expanded="true" aria-controls="corpo-commit">
+            <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg><span class="rotulo">Mande um recado</span>
+          </button>
+          <div class="secao-corpo" id="corpo-commit">
+            <form class="scm" id="form-commit">
+              <label class="sr" for="commit-msg">Mensagem para a Ana</label>
+              <textarea class="campo" id="commit-msg" rows="3" placeholder="Mensagem (Ctrl+Enter para fazer commit em 'main')"></textarea>
+              <button class="botao cheio" type="submit"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Commit</button>
+              <p class="scm-nota">O commit aqui vira e-mail: abre o seu cliente de e-mail com a mensagem já preenchida para a Ana.</p>
+            </form>
+          </div>
+        </section>
+        <section class="secao aberta cresce">
+          <button class="secao-cab" type="button" aria-expanded="true" aria-controls="corpo-repos">
+            <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg><span class="rotulo">Repositórios públicos</span>
+          </button>
+          <div class="secao-corpo" id="corpo-repos"><ul class="arvore" id="repos"></ul>
+            <p class="vazio-msg">Os sistemas do trabalho e alguns apps pessoais são privados.</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Executar e depurar -->
+      <div class="vista" id="vista-depurar" hidden>
+        <div class="depurar">
+          <button class="botao cheio" type="button" data-acao="depurar">Executar e Depurar</button>
+          <p>Roda o <code>while (true)</code> da Ana: aprende, constrói e publica. A saída aparece no <strong>Debug Console</strong> e a barra de status muda de cor enquanto depura, como no VS Code.</p>
+          <p>Atalho: <kbd>F5</kbd></p>
+        </div>
+      </div>
+
+      <!-- Extensões -->
+      <div class="vista" id="vista-extensoes" hidden>
+        <div class="busca-caixa">
+          <input class="campo" id="ext-in" type="search" placeholder="Pesquisar Extensões Instaladas" aria-label="Filtrar a stack" autocomplete="off" spellcheck="false">
+        </div>
+        <section class="secao aberta cresce">
+          <button class="secao-cab" type="button" aria-expanded="true" aria-controls="corpo-ext">
+            <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg><span class="rotulo">Instaladas</span><span class="res-cont" id="ext-cont"></span>
+          </button>
+          <div class="secao-corpo" id="corpo-ext"><div id="ext-lista"></div></div>
+        </section>
+      </div>
+
+      <div class="sash" id="sash-lateral" role="separator" aria-orientation="vertical" aria-label="Redimensionar painel lateral" tabindex="-1"></div>
+    </aside>
+
+    <main class="area" id="area">
+      <div class="abas-linha">
+        <nav class="abas" id="abas" aria-label="Abas abertas"></nav>
+        <div class="acoes-editor">
+          <button class="acao-bt" id="bt-modo" type="button" aria-label="Mostrar código-fonte"><svg class="ic" aria-hidden="true"><use href="#i-go-to-file"/></svg></button>
+          <button class="acao-bt" id="bt-dividir" type="button" aria-pressed="false" aria-label="Abrir visualização ao lado"><svg class="ic" aria-hidden="true"><use href="#i-split-horizontal"/></svg></button>
+          <button class="acao-bt" id="bt-editor-mais" type="button" aria-label="Mais ações do editor"><svg class="ic" aria-hidden="true"><use href="#i-ellipsis"/></svg></button>
+        </div>
+      </div>
+      <div class="migalha" id="migalha" aria-label="Caminho do arquivo"></div>
+      <div class="grupos">
+        <div class="grupo">
+          <div class="editor" id="editor" tabindex="0" role="region" aria-label="Editor"></div>
+          <div class="minimapa" id="minimapa" aria-hidden="true" hidden><div class="mm-conteudo" id="mm-conteudo"></div><div class="mm-janela" id="mm-janela"></div></div>
+        </div>
+        <div class="grupo" id="grupo-lado" hidden>
+          <div class="editor" id="editor-lado" tabindex="0" role="region" aria-label="Visualização ao lado"></div>
+        </div>
+      </div>
+
+      <section class="painel" id="painel" aria-label="Painel" hidden>
+        <div class="sash-h" id="sash-painel" role="separator" aria-orientation="horizontal" aria-label="Redimensionar painel" tabindex="-1"></div>
+        <div class="painel-cab">
+          <div class="painel-abas" role="tablist" aria-label="Painel">
+            <button class="painel-aba" type="button" role="tab" id="pa-problemas" data-painel="problemas" aria-selected="false" aria-controls="painel-corpo">Problemas</button>
+            <button class="painel-aba" type="button" role="tab" id="pa-saida" data-painel="saida" aria-selected="false" aria-controls="painel-corpo">Saída</button>
+            <button class="painel-aba" type="button" role="tab" id="pa-depuracao" data-painel="depuracao" aria-selected="false" aria-controls="painel-corpo">Console de Depuração</button>
+            <button class="painel-aba" type="button" role="tab" id="pa-terminal" data-painel="terminal" aria-selected="true" aria-controls="painel-corpo">Terminal</button>
+          </div>
+          <div class="painel-acoes">
+            <button class="icone-bt" type="button" data-acao="term-novo" aria-label="Novo terminal"><svg class="ic" aria-hidden="true"><use href="#i-add"/></svg></button>
+            <button class="icone-bt" type="button" data-acao="term-limpar" aria-label="Limpar"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></button>
+            <button class="icone-bt" type="button" data-acao="painel-max" aria-label="Maximizar painel"><svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg></button>
+            <button class="icone-bt" type="button" data-acao="painel-fechar" aria-label="Fechar painel"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
+          </div>
+        </div>
+        <div class="term-chips" id="term-chips" aria-label="Comandos rápidos">
+          <button class="chip" type="button" data-cmd="help">help</button>
+          <button class="chip" type="button" data-cmd="whoami">whoami</button>
+          <button class="chip" type="button" data-cmd="projetos">projetos</button>
+          <button class="chip" type="button" data-cmd="stack">stack</button>
+          <button class="chip" type="button" data-cmd="contato">contato</button>
+          <button class="chip" type="button" data-cmd="clear">clear</button>
+        </div>
+        <div class="painel-corpo" id="painel-corpo" role="tabpanel" aria-labelledby="pa-terminal">
+          <div id="term-saida" role="log" aria-live="polite"></div>
+          <form class="term-form" id="term-form">
+            <label for="term-in"><span class="term-prompt">ana@dev</span> <span class="term-cam">~/portfolio</span> $ </label>
+            <input id="term-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="send" aria-describedby="term-dica">
+            <span class="sr" id="term-dica">Digite help para ver os comandos. Tab completa, setas navegam no histórico.</span>
+          </form>
+        </div>
+        <div class="painel-corpo ui" id="painel-outro" hidden></div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="status" id="status" aria-label="Barra de status">
+    <button class="st st-remoto" type="button" id="st-remoto" aria-label="ana@dev: abrir a paleta de comandos"><svg class="ic" aria-hidden="true"><use href="#i-remote"/></svg>ana@dev</button>
+    <button class="st" type="button" id="st-branch" aria-label="Branch main: ver repositórios"><svg class="ic" aria-hidden="true"><use href="#i-git-branch"/></svg>main<svg class="ic" aria-hidden="true"><use href="#i-sync"/></svg></button>
+    <button class="st" type="button" id="st-problemas" aria-label="Nenhum problema: abrir o painel de problemas"><svg class="ic" aria-hidden="true"><use href="#i-error"/></svg>0<svg class="ic" aria-hidden="true"><use href="#i-warning"/></svg>0</button>
+    <span class="st-esp"></span>
+    <span class="st st-ocultar" id="st-pos">Ln 1, Col 1</span>
+    <span class="st st-ocultar" id="st-esp">Espaços: 2</span>
+    <span class="st st-ocultar">UTF-8</span>
+    <span class="st st-ocultar">LF</span>
+    <span class="st" id="st-ling"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg>Markdown</span>
+    <button class="st" type="button" id="st-sino" aria-label="Notificações"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg></button>
+  </footer>
+</div>
+
+<div class="fundo" id="fundo" hidden></div>
+<div class="menu" id="menu" role="menu" hidden></div>
+<div class="paleta" id="paleta" role="dialog" aria-modal="true" aria-label="Paleta de comandos" hidden>
+  <input class="campo" id="pal-in" type="text" role="combobox" aria-expanded="true" aria-controls="pal-lista" aria-autocomplete="list" autocomplete="off" spellcheck="false" aria-label="Digite o nome de um arquivo, ou > para comandos">
+  <ul class="pal-lista" id="pal-lista" role="listbox" aria-label="Resultados"></ul>
+</div>
+<div class="dica" id="dica" role="tooltip" hidden></div>
+<div class="notificacoes" id="notificacoes" role="region" aria-label="Notificações" aria-live="polite"></div>
+<div class="barra-depuracao" id="barra-depuracao" hidden>
+  <span class="icone-bt" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg></span>
+  <span class="icone-bt" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-refresh"/></svg></span>
+  <button class="icone-bt" type="button" data-acao="depurar-parar" aria-label="Parar depuração"><svg class="ic" aria-hidden="true"><use href="#i-debug-stop"/></svg></button>
+</div>
+
+<!-- ===================== visualizações das abas ===================== -->
+
+<template id="tpl-extensao">
+  <div class="ext">
+    <header class="ext-cabecalho">
+      <div class="ext-avatar">
+        <span class="ext-avatar-iniciais" aria-hidden="true">AN</span>
+        <picture>
+          <source media="(prefers-reduced-motion: reduce)" srcset="assets/ana-acenando.webp">
+          <img class="ext-foto" src="assets/ana-programando.webp" width="256" height="256" alt="Ilustração em pixel art da Ana programando e acenando">
+        </picture>
+      </div>
+      <div class="ext-info">
+        <h1 class="ext-titulo">Ana Neves</h1>
+        <div class="ext-subtitulo">
+          <span class="ext-sub-item ext-publisher">
+            <span class="ext-publisher-nome">ana@dev</span>
+            <svg class="ic ext-verificado" role="img" aria-label="verificado"><use href="#i-verified-filled"/></svg>
+            <a class="ext-sub-link" href="https://github.com/An4D3v" target="_blank" rel="noopener">github.com/An4D3v<span class="ext-sr"> (abre em nova aba)</span></a>
+          </span>
+          <span class="ext-sub-item" title="registros processados pelos pipelines que ela mantém">
+            <svg class="ic" aria-hidden="true"><use href="#i-cloud-download"/></svg>
+            <span>4,5M+ registros</span>
+          </span>
+          <span class="ext-sub-item" title="pessoas usando os apps que ela criou e opera">
+            <svg class="ic" aria-hidden="true"><use href="#i-person"/></svg>
+            <span>40+ usuários</span>
+          </span>
+        </div>
+        <p class="ext-descricao">Software Developer — backend .NET e Azure, com produto próprio em produção.</p>
+        <div class="ext-acoes">
+          <a class="ext-btn ext-btn-primario" href="mailto:ana-neves98@outlook.com">Entrar em contato</a>
+          <a class="ext-btn ext-btn-secundario" href="https://github.com/An4D3v" target="_blank" rel="noopener">
+            <span class="ext-btn-rotulo"><svg class="ic" aria-hidden="true"><use href="#i-github"/></svg>GitHub</span>
+            <span class="ext-btn-extra" aria-hidden="true"><svg class="ic"><use href="#i-link-external"/></svg></span>
+            <span class="ext-sr"> (abre em nova aba)</span>
+          </a>
+          <a class="ext-btn ext-btn-secundario" href="https://www.linkedin.com/in/anad3v/" target="_blank" rel="noopener">
+            <span class="ext-btn-rotulo"><svg class="ic" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</span>
+            <span class="ext-btn-extra" aria-hidden="true"><svg class="ic"><use href="#i-link-external"/></svg></span>
+            <span class="ext-sr"> (abre em nova aba)</span>
+          </a>
+          <span class="ext-status"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Aberta a oportunidades</span>
+          <button type="button" class="ext-btn-icone" data-acao="tema" aria-label="Trocar tema de cores" title="Trocar tema de cores"><svg class="ic" aria-hidden="true"><use href="#i-settings-gear"/></svg></button>
+        </div>
+      </div>
+    </header>
+
+    <div class="ext-navbar">
+      <div class="ext-abas" role="tablist" aria-label="Seções">
+        <button type="button" class="ext-aba" role="tab" id="ext-aba-detalhes" aria-selected="true" aria-controls="ext-painel-detalhes">Detalhes</button>
+        <button type="button" class="ext-aba" role="tab" id="ext-aba-recursos" aria-selected="false" aria-controls="ext-painel-recursos" tabindex="-1">Recursos</button>
+        <button type="button" class="ext-aba" role="tab" id="ext-aba-changelog" aria-selected="false" aria-controls="ext-painel-changelog" tabindex="-1">Changelog</button>
+      </div>
+    </div>
+
+    <div class="ext-painel" role="tabpanel" id="ext-painel-detalhes" aria-labelledby="ext-aba-detalhes" tabindex="0">
+      <div class="ext-detalhes">
+        <article class="ext-md">
+          <h2 class="ext-md-h1">Ana Neves para o seu <span class="ext-md-link">backend .NET</span></h2>
+
+          <blockquote class="ext-md-citacao">
+            <p>Construo pipelines que movem milhões de registros, bots com IA que respondem no Teams e apps que pessoas de verdade usam todo dia.</p>
+          </blockquote>
+
+          <p>Gosto de sistema que se explica: idempotente, medido e com teste que sabe falhar. São Paulo, Brasil.</p>
+
+          <h3 class="ext-md-h2">Números</h3>
+          <ul class="ext-numeros" role="list">
+            <li class="ext-num">
+              <span class="ext-num-valor" aria-hidden="true" data-ext-contar data-ext-alvo="4.5" data-ext-casas="1" data-ext-depois="M+">4,5M+</span>
+              <span class="ext-sr">4,5M+</span>
+              <span class="ext-num-rotulo">registros processados pelos pipelines que mantenho</span>
+            </li>
+            <li class="ext-num">
+              <span class="ext-num-valor" aria-hidden="true" data-ext-contar data-ext-alvo="40" data-ext-depois="+">40+</span>
+              <span class="ext-sr">40+</span>
+              <span class="ext-num-rotulo">pessoas usando os apps que criei e opero</span>
+            </li>
+            <li class="ext-num">
+              <span class="ext-num-valor" aria-hidden="true" data-ext-contar data-ext-alvo="28">28</span>
+              <span class="ext-sr">28</span>
+              <span class="ext-num-rotulo">testes de integração num único take-home de microsserviços</span>
+            </li>
+            <li class="ext-num">
+              <span class="ext-num-valor" aria-hidden="true" data-ext-contar data-ext-alvo="91" data-ext-antes="−" data-ext-depois="%">−91%</span>
+              <span class="ext-sr">−91%</span>
+              <span class="ext-num-rotulo">de erros de cota de API com orquestração inteligente de cargas</span>
+            </li>
+          </ul>
+
+          <h3 class="ext-md-h2">Produtos no ar</h3>
+          <ul class="ext-produtos" role="list">
+            <li class="ext-produto">
+              <strong class="ext-produto-nome">Rumo</strong>
+              <span class="ext-produto-desc">orientador pessoal de rotinas (PWA, Web Push, MFA, 40+ usuários)</span>
+              <a class="ext-produto-link" href="https://rumo-amber.vercel.app" target="_blank" rel="noopener">abrir o app<span class="ext-sr"> Rumo (abre em nova aba)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
+            </li>
+            <li class="ext-produto">
+              <strong class="ext-produto-nome">AlienFinanças</strong>
+              <span class="ext-produto-desc">finanças pessoais com leitura de nota fiscal por IA</span>
+              <a class="ext-produto-link" href="https://financas-app-ruby.vercel.app" target="_blank" rel="noopener">abrir o app<span class="ext-sr"> AlienFinanças (abre em nova aba)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
+            </li>
+            <li class="ext-produto">
+              <strong class="ext-produto-nome">Notas Fiscais</strong>
+              <span class="ext-produto-desc">dois microsserviços .NET com 28 testes de integração</span>
+              <a class="ext-produto-link" href="https://github.com/An4D3v/Korp_Teste_AnaNeves" target="_blank" rel="noopener">ver o código<span class="ext-sr"> de Notas Fiscais (abre em nova aba)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
+            </li>
+            <li class="ext-produto">
+              <strong class="ext-produto-nome">Vale do Trevo</strong>
+              <span class="ext-produto-desc">jogo 2D em canvas puro, capítulo 1 jogável</span>
+              <a class="ext-produto-link" href="https://vale-do-trevo.vercel.app" target="_blank" rel="noopener">jogar<span class="ext-sr"> Vale do Trevo (abre em nova aba)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
+            </li>
+          </ul>
+          <p class="ext-ver-todos">
+            <button type="button" class="ext-link-botao" data-abrir="projetos">ver todos em <span class="ext-mono">projetos.tsx</span></button>
+          </p>
+
+          <figure class="ext-codigo">
+            <div class="ext-codigo-barra" aria-hidden="true">
+              <span class="ext-codigo-pontos"><span></span><span></span><span></span></span>
+              <span class="ext-codigo-arquivo">rotina.cs</span>
+            </div>
+            <div class="ext-codigo-corpo">
+              <span class="ext-codigo-numeros" aria-hidden="true">1<br>2<br>3</span>
+              <pre class="ext-codigo-pre"><code><span class="ext-sx-k">while</span> <span class="ext-sx-p">(</span><span class="ext-sx-n">true</span><span class="ext-sx-p">)</span> <span class="ext-sx-p">{</span>
+    <span class="ext-sx-f">learn</span><span class="ext-sx-p">();</span> <span class="ext-sx-f">build</span><span class="ext-sx-p">();</span> <span class="ext-sx-f">ship</span><span class="ext-sx-p">();</span>
+  <span class="ext-sx-p">}</span></code></pre>
+            </div>
+          </figure>
+
+          <h3 class="ext-md-h2">Como navegar</h3>
+          <ul class="ext-md-lista">
+            <li>As abas lá em cima são as seções: <button type="button" class="ext-arquivo" data-abrir="projetos">projetos.tsx</button>, <button type="button" class="ext-arquivo" data-abrir="experiencia">experiencia.cs</button>, <button type="button" class="ext-arquivo" data-abrir="stack">stack.json</button> e <button type="button" class="ext-arquivo" data-abrir="contato">contato.ts</button>.</li>
+            <li>Cada aba tem visualização e código-fonte: o botão no canto superior direito alterna.</li>
+            <li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> abre a paleta de comandos e <kbd>Ctrl</kbd>+<kbd>J</kbd> abre o terminal — como no VS Code de verdade.</li>
+          </ul>
+        </article>
+
+        <aside class="ext-lateral" aria-label="Mais informações">
+          <section class="ext-lat-secao">
+            <h2 class="ext-lat-titulo">Instalação</h2>
+            <table class="ext-tabela">
+              <tbody>
+                <tr><th scope="row">Identificador</th><td>ana-neves.software-developer</td></tr>
+                <tr><th scope="row">Versão</th><td>2026.10</td></tr>
+                <tr><th scope="row">Base</th><td>São Paulo, Brasil</td></tr>
+                <tr><th scope="row">Atualizado</th><td>out/2026</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="ext-lat-secao">
+            <h2 class="ext-lat-titulo">Disponibilidade</h2>
+            <p class="ext-lat-texto"><svg class="ic" aria-hidden="true"><use href="#i-pass"/></svg><span>Aberta a oportunidades em backend .NET, dados e IA aplicada.</span></p>
+          </section>
+          <section class="ext-lat-secao">
+            <h2 class="ext-lat-titulo">Categorias</h2>
+            <ul class="ext-chips" role="list">
+              <li class="ext-chip">Backend</li>
+              <li class="ext-chip">.NET</li>
+              <li class="ext-chip">Azure</li>
+              <li class="ext-chip">Dados</li>
+              <li class="ext-chip">IA</li>
+              <li class="ext-chip">Automação</li>
+            </ul>
+          </section>
+          <section class="ext-lat-secao">
+            <h2 class="ext-lat-titulo">Recursos</h2>
+            <ul class="ext-lat-links" role="list">
+              <li><a class="ext-lat-link" href="https://github.com/An4D3v" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-github"/></svg>Repositórios<span class="ext-sr"> no GitHub (abre em nova aba)</span></a></li>
+              <li><a class="ext-lat-link" href="https://www.linkedin.com/in/anad3v/" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn<span class="ext-sr"> (abre em nova aba)</span></a></li>
+              <li><a class="ext-lat-link" href="mailto:ana-neves98@outlook.com"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg>E-mail</a></li>
+              <li><button type="button" class="ext-lat-link" data-abrir="projetos"><svg class="ic" aria-hidden="true"><use href="#i-rocket"/></svg>Projetos</button></li>
+              <li><button type="button" class="ext-lat-link" data-abrir="stack"><svg class="ic" aria-hidden="true"><use href="#i-server"/></svg>Stack</button></li>
+            </ul>
+          </section>
+        </aside>
+      </div>
+    </div>
+
+    <div class="ext-painel" role="tabpanel" id="ext-painel-recursos" aria-labelledby="ext-aba-recursos" tabindex="0" hidden>
+      <div class="ext-md ext-md-largo">
+        <h2 class="ext-sr">Recursos</h2>
+        <ul class="ext-recursos" role="list">
+          <li class="ext-recurso">
+            <span class="ext-recurso-icone" aria-hidden="true"><svg class="ic"><use href="#i-database"/></svg></span>
+            <div class="ext-recurso-texto">
+              <h3 class="ext-recurso-titulo">Pipelines de integração</h3>
+              <p class="ext-recurso-prova">7+ cargas incrementais de um ERP jurídico para Azure SQL: 4,5M+ registros, MERGE idempotente, watermark e CI/CD com OIDC.</p>
+            </div>
+          </li>
+          <li class="ext-recurso">
+            <span class="ext-recurso-icone" aria-hidden="true"><svg class="ic"><use href="#i-history"/></svg></span>
+            <div class="ext-recurso-texto">
+              <h3 class="ext-recurso-titulo">Orquestração inteligente de cargas</h3>
+              <p class="ext-recurso-prova">Agendador que decide o que reler e quando, no lugar de janelas fixas: −66% de chamadas à API e −91% de erros de cota.</p>
+            </div>
+          </li>
+          <li class="ext-recurso">
+            <span class="ext-recurso-icone" aria-hidden="true"><svg class="ic"><use href="#i-comment-discussion"/></svg></span>
+            <div class="ext-recurso-texto">
+              <h3 class="ext-recurso-titulo">Bots com IA no Teams</h3>
+              <p class="ext-recurso-prova">Central de IA corporativa com SSO (Entra ID) e consulta processual com Adaptive Cards, em produção com usuários reais.</p>
+            </div>
+          </li>
+          <li class="ext-recurso">
+            <span class="ext-recurso-icone" aria-hidden="true"><svg class="ic"><use href="#i-sparkle"/></svg></span>
+            <div class="ext-recurso-texto">
+              <h3 class="ext-recurso-titulo">Classificação de publicações com IA</h3>
+              <p class="ext-recurso-prova">Classificador LLM em produção com acurácia medida contra gabarito humano e execução sombra antes de promover modelo novo.</p>
+            </div>
+          </li>
+          <li class="ext-recurso">
+            <span class="ext-recurso-icone" aria-hidden="true"><svg class="ic"><use href="#i-server"/></svg></span>
+            <div class="ext-recurso-texto">
+              <h3 class="ext-recurso-titulo">Migração para Azure SQL</h3>
+              <p class="ext-recurso-prova">~292 mil registros migrados com reconciliação origem = destino: zero divergência, autenticação sem senha via Entra ID.</p>
+            </div>
+          </li>
+          <li class="ext-recurso">
+            <span class="ext-recurso-icone" aria-hidden="true"><svg class="ic"><use href="#i-sync"/></svg></span>
+            <div class="ext-recurso-texto">
+              <h3 class="ext-recurso-titulo">Automação &amp; RPA</h3>
+              <p class="ext-recurso-prova">Robôs Python + Selenium coletando relatórios regulatórios para múltiplos clientes: −65% de esforço manual.</p>
+            </div>
+          </li>
+        </ul>
+        <p class="ext-nota"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg><span>Código privado, resultados públicos — detalhes em <button type="button" class="ext-arquivo" data-abrir="experiencia">experiencia.cs</button></span></p>
+      </div>
+    </div>
+
+    <div class="ext-painel" role="tabpanel" id="ext-painel-changelog" aria-labelledby="ext-aba-changelog" tabindex="0" hidden>
+      <div class="ext-md ext-md-largo">
+        <h2 class="ext-md-h1">Changelog</h2>
+        <section class="ext-versao">
+          <h3 class="ext-md-h2"><span class="ext-versao-tag">[atual]</span> — primeira e única dev · escritório jurídico, São Paulo</h3>
+          <ul class="ext-md-lista">
+            <li>Construí do zero a plataforma que integra o ERP jurídico, os robôs de coleta e os bots com IA.</li>
+            <li>Oriento tecnicamente um estagiário.</li>
+          </ul>
+        </section>
+        <section class="ext-versao">
+          <h3 class="ext-md-h2"><span class="ext-versao-tag">[paralelo]</span> — produtos próprios</h3>
+          <ul class="ext-md-lista">
+            <li>Mantenho três produtos próprios no ar; é onde experimento primeiro o que depois aplico no trabalho: PWA, Web Push, MFA, RLS, leitura de documento por IA.</li>
+          </ul>
+        </section>
+        <section class="ext-versao">
+          <h3 class="ext-md-h2"><span class="ext-versao-tag">[início]</span> — dados · Jusbrasil</h3>
+          <ul class="ext-md-lista">
+            <li>Operação de coleta de dados em escala com crawlers.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-projetos">
+  <article class="md">
+    <h1>Projetos</h1>
+    <p class="md-sub">Criados, publicados e operados por mim — do banco ao deploy.</p>
+    <p>O selo de cada app é medido agora, do seu navegador: se ele responder, aparece <strong>no ar</strong> com o tempo de resposta.</p>
+    <div class="cartoes">
+      <section class="cartao" aria-labelledby="pj-rumo">
+        <div class="cartao-topo">
+          <h2 id="pj-rumo">Rumo</h2>
+          <span class="vivo" data-status="rumo"><span class="vivo-ponto"></span><span class="vivo-txt">verificando…</span></span>
+        </div>
+        <p class="cartao-tipo">PWA · em produção</p>
+        <p>Orientador pessoal de rotinas com lembretes por Web Push, login com MFA (TOTP) e painel administrativo próprio. <strong>40+ usuários cadastrados.</strong></p>
+        <p class="cartao-stack"><code>React</code> <code>TypeScript</code> <code>Supabase</code> <code>Vercel</code></p>
+        <p class="cartao-links"><a href="https://rumo-amber.vercel.app" target="_blank" rel="noopener">Abrir o app<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a></p>
+      </section>
+      <section class="cartao" aria-labelledby="pj-alien">
+        <div class="cartao-topo">
+          <h2 id="pj-alien">AlienFinanças</h2>
+          <span class="vivo" data-status="alien"><span class="vivo-ponto"></span><span class="vivo-txt">verificando…</span></span>
+        </div>
+        <p class="cartao-tipo">full-stack · em produção</p>
+        <p>Dashboard de finanças pessoais com leitura de nota fiscal por IA: a foto do cupom vira itens categorizados. Row Level Security e deploy automático.</p>
+        <p class="cartao-stack"><code>React</code> <code>TypeScript</code> <code>Supabase</code> <code>IA (LLM)</code></p>
+        <p class="cartao-links"><a href="https://financas-app-ruby.vercel.app" target="_blank" rel="noopener">Abrir o app<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a></p>
+      </section>
+      <section class="cartao" aria-labelledby="pj-notas">
+        <div class="cartao-topo">
+          <h2 id="pj-notas">Notas Fiscais — microsserviços</h2>
+          <span class="vivo"><span class="vivo-ponto"></span><span class="vivo-txt">código aberto</span></span>
+        </div>
+        <p class="cartao-tipo">C# / .NET 8 · Angular</p>
+        <p>Dois microsserviços .NET que não deixam saldo ficar negativo nem sob disputa: concorrência no UPDATE atômico, idempotência e recuperação de falha. <strong>28 testes de integração</strong> contra SQL Server real.</p>
+        <p class="cartao-stack"><code>C#</code> <code>.NET 8</code> <code>Angular</code> <code>EF Core</code></p>
+        <p class="cartao-links"><a href="https://github.com/An4D3v/Korp_Teste_AnaNeves" target="_blank" rel="noopener">Ver o código<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a></p>
+      </section>
+      <section class="cartao" aria-labelledby="pj-trevo">
+        <div class="cartao-topo">
+          <h2 id="pj-trevo">Vale do Trevo</h2>
+          <span class="vivo" data-status="trevo"><span class="vivo-ponto"></span><span class="vivo-txt">verificando…</span></span>
+        </div>
+        <p class="cartao-tipo">jogo · no navegador</p>
+        <p>Jogo 2D top-down desenhado à mão, em canvas puro e sem engine — capítulo 1 jogável. Arte da minha amiga, código meu.</p>
+        <p class="cartao-stack"><code>TypeScript</code> <code>Vite</code> <code>Canvas</code></p>
+        <p class="cartao-links">
+          <a href="https://vale-do-trevo.vercel.app" target="_blank" rel="noopener">Jogar<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
+          <a href="https://github.com/An4D3v/vale-do-trevo" target="_blank" rel="noopener">Código<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
+        </p>
+      </section>
+    </div>
+    <blockquote><p>Os sistemas do trabalho são privados — os resultados deles estão em <a href="#experiencia" data-abrir="experiencia">experiencia.cs</a>.</p></blockquote>
+  </article>
+</template>
+
+<template id="tpl-experiencia">
+  <article class="md">
+    <h1>Experiência</h1>
+    <p class="md-sub">De coleta de dados a dona da plataforma.</p>
+    <h2>Trajetória</h2>
+    <ol class="trilha">
+      <li class="agora">
+        <h3>Primeira e única dev · escritório jurídico, São Paulo</h3>
+        <p class="trilha-quando">hoje</p>
+        <p>Construí do zero a plataforma que integra o ERP jurídico, os robôs de coleta e os bots com IA — e oriento tecnicamente um estagiário.</p>
+      </li>
+      <li>
+        <h3>Produtos próprios</h3>
+        <p class="trilha-quando">em paralelo</p>
+        <p>Três produtos no ar fora do expediente. É onde experimento primeiro o que depois aplico no trabalho: PWA, Web Push, MFA, RLS, leitura de documento por IA.</p>
+      </li>
+      <li>
+        <h3>Dados · Jusbrasil</h3>
+        <p class="trilha-quando">início</p>
+        <p>Operação de coleta de dados em escala com crawlers.</p>
+      </li>
+    </ol>
+    <h2>Nos bastidores</h2>
+    <p>Código privado, resultados públicos.</p>
+    <ul class="entregas">
+      <li><h3>Pipelines de integração</h3><p>7+ cargas incrementais de um ERP jurídico para Azure SQL: <strong>4,5M+ registros</strong>, MERGE idempotente, watermark e CI/CD com OIDC.</p></li>
+      <li><h3>Orquestração inteligente de cargas</h3><p>Agendador que decide o que reler e quando, no lugar de janelas fixas: <strong>−66% de chamadas à API</strong> e <strong>−91% de erros de cota</strong>.</p></li>
+      <li><h3>Bots com IA no Teams</h3><p>Central de IA corporativa com SSO (Entra ID) e consulta processual com Adaptive Cards — em produção, com usuários reais.</p></li>
+      <li><h3>Classificação de publicações com IA</h3><p>Classificador LLM em produção com acurácia medida contra gabarito humano e execução sombra antes de promover modelo novo.</p></li>
+      <li><h3>Migração para Azure SQL</h3><p>~292 mil registros migrados com reconciliação origem = destino: <strong>zero divergência</strong>, autenticação sem senha via Entra ID.</p></li>
+      <li><h3>Automação &amp; RPA</h3><p>Robôs Python + Selenium coletando relatórios regulatórios para múltiplos clientes: <strong>−65% de esforço manual</strong>.</p></li>
+    </ul>
+  </article>
+</template>
+
+<template id="tpl-stack">
+  <article class="md">
+    <h1>Stack</h1>
+    <p class="md-sub">Com o que eu trabalho no dia a dia.</p>
+    <div class="md-tabela">
+      <table>
+        <thead><tr><th scope="col">área</th><th scope="col">ferramentas</th></tr></thead>
+        <tbody>
+          <tr><td>backend</td><td>C# · .NET 8 · Python · APIs REST · OAuth2 · EF Core</td></tr>
+          <tr><td>cloud</td><td>Azure App Service · Azure SQL · Azure Automation · Key Vault · Application Insights · Entra ID · Microsoft Graph</td></tr>
+          <tr><td>dados</td><td>SQL Server · T-SQL · PostgreSQL · Supabase · ETL incremental · reconciliação</td></tr>
+          <tr><td>front</td><td>Angular · React · TypeScript · Vite · PWA</td></tr>
+          <tr><td>ia</td><td>LLMs em produção · Bot Framework · prompt engineering · medição de acurácia</td></tr>
+          <tr><td>automação</td><td>Python · Selenium · runbooks</td></tr>
+          <tr><td>devops</td><td>GitHub Actions · OIDC · CI/CD com gate de testes · Vercel · observabilidade</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Cada item também aparece como extensão instalada na barra lateral — o ícone de quadradinhos, à esquerda.</p>
+  </article>
+</template>
+
+<template id="tpl-contato">
+  <article class="md">
+    <h1>Vamos conversar?</h1>
+    <p class="md-sub">Aberta a oportunidades em <strong>backend .NET</strong>, <strong>dados</strong> e <strong>IA aplicada</strong>. São Paulo, Brasil.</p>
+    <div class="email-caixa">
+      <svg class="ic ic-20" aria-hidden="true"><use href="#i-mail"/></svg>
+      <a class="email" href="mailto:ana-neves98@outlook.com">ana-neves98@outlook.com</a>
+      <button class="botao sec" type="button" data-copiar="email"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copiar</span></button>
+    </div>
+    <p class="botoes">
+      <a class="botao marca" href="mailto:ana-neves98@outlook.com"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg>Enviar e-mail</a>
+      <a class="botao sec" href="https://github.com/An4D3v" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
+      <a class="botao sec" href="https://www.linkedin.com/in/anad3v/" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
+    </p>
+    <h2>Outros jeitos</h2>
+    <ul>
+      <li>Na barra da esquerda, o ícone de <strong>Source Control</strong>: escreva a mensagem e dê <em>commit</em> — abre seu e-mail já preenchido.</li>
+      <li>No terminal (<kbd>Ctrl</kbd>+<kbd>J</kbd>), digite <code>contato</code>.</li>
+    </ul>
+    <pre><code><span class="t-ctl">while</span> (<span class="t-const">true</span>) { <span class="t-fn">learn</span>(); <span class="t-fn">build</span>(); <span class="t-fn">ship</span>(); }</code></pre>
+    <p class="md-rodape">© 2026 Ana Flávia Oliveira das Neves · feito à mão com HTML, CSS e JavaScript puros — sem framework, sem dependências.</p>
+  </article>
+</template>
+
+</body>
+</html>

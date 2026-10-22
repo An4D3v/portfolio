@@ -1,0 +1,1013 @@
+/* ==========================================================================
+   Aba "Extension: Ana Neves" — página de extensão do VS Code (nova UI)
+   - Tudo escopado em .ext / classes ext-*; sem reset global.
+   - Cores só pelos tokens --vsc-*, --marca, --marca-fg e --sx-*.
+   - Layout por container query (o .ext é o container), não pela janela.
+   - Gancho opcional: --ext-btn-borda (borda dos botões; padrão transparente,
+     útil no Alto Contraste).
+   ========================================================================== */
+
+.ext {
+  container-type: inline-size;
+  container-name: ext;
+  min-width: 0;
+  font-family: var(--vsc-font-ui);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--vsc-fg);
+  background: var(--vsc-editor-bg);
+  overflow-wrap: break-word;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.ext *,
+.ext *::before,
+.ext *::after {
+  box-sizing: border-box;
+}
+
+.ext [hidden] {
+  display: none !important;
+}
+
+/* texto só para leitor de tela */
+.ext-sr {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ícones do sprite */
+.ext .ic {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  fill: currentColor;
+  vertical-align: -3px;
+}
+
+.ext-mono {
+  font-family: var(--vsc-font-mono);
+  font-size: 0.93em;
+}
+
+/* foco visível (2px na cor de foco do tema) */
+.ext a:focus-visible,
+.ext button:focus-visible {
+  outline: 2px solid var(--vsc-focus);
+  outline-offset: 2px;
+}
+
+/* ---------- Cabeçalho ---------------------------------------------------- */
+
+.ext-cabecalho {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px 20px 14px;
+  font-size: 14px;
+}
+
+.ext-avatar {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 128px;
+  height: 128px;
+  overflow: hidden;
+  border: 2px solid var(--marca);
+  border-radius: 50%;
+  background: var(--vsc-button-bg);
+}
+
+.ext-avatar-iniciais {
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--vsc-button-fg);
+  user-select: none;
+}
+
+.ext-foto {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.ext-foto[hidden],
+.ext-foto:not([src]),
+.ext-foto[src=""] {
+  display: none;
+}
+
+.ext-info {
+  flex: 1;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.ext-titulo {
+  margin: 0;
+  font-size: 26px;
+  line-height: 30px;
+  font-weight: 600;
+  color: var(--vsc-fg-strong);
+}
+
+.ext-subtitulo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 4px;
+  margin-top: 6px;
+  line-height: 20px;
+}
+
+.ext-sub-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.ext-sub-item + .ext-sub-item {
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid var(--vsc-border-strong);
+}
+
+.ext-publisher {
+  gap: 4px;
+}
+
+.ext-verificado {
+  color: var(--vsc-accent);
+}
+
+.ext-sub-link {
+  margin-left: 4px;
+  color: var(--vsc-link);
+}
+
+.ext-descricao {
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* ---------- Botões ------------------------------------------------------- */
+
+.ext-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.ext-btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  margin: 0;
+  padding: 0 10px;
+  border: 1px solid var(--ext-btn-borda, transparent);
+  border-radius: 2px;
+  font: inherit;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.ext-btn-primario {
+  background: var(--marca);
+  color: var(--marca-fg);
+}
+
+.ext-btn-secundario {
+  padding-right: 0;
+  background: var(--vsc-button2-bg);
+  color: var(--vsc-button2-fg);
+}
+
+.ext-btn-secundario:hover {
+  background: var(--vsc-button2-hover-bg);
+}
+
+.ext-btn-rotulo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* segmento da direita, como o chevron dos botões divididos do VS Code */
+.ext-btn-extra {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+  margin-left: 8px;
+  padding: 0 6px 0 7px;
+}
+
+.ext-btn-extra::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 0;
+  width: 1px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.ext-btn-extra .ic {
+  width: 14px;
+  height: 14px;
+}
+
+/* rótulo de status: não é botão nem checkbox */
+.ext-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 26px;
+  padding: 0 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.ext-btn-icone {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--ext-btn-borda, transparent);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--vsc-fg);
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.ext-btn-icone:hover {
+  background: var(--vsc-hover-bg);
+}
+
+/* ---------- Abas internas ------------------------------------------------ */
+
+.ext-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--vsc-border-strong);
+  background: var(--vsc-editor-bg);
+}
+
+.ext-abas {
+  display: flex;
+  gap: 8px;
+}
+
+.ext-aba {
+  flex: none;
+  height: 36px;
+  margin: 0 0 -1px;
+  padding: 0 6px;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  font: inherit;
+  font-size: 11px;
+  line-height: 36px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--vsc-fg-muted);
+  cursor: pointer;
+  transition: color 0.1s ease;
+}
+
+.ext-aba:hover {
+  color: var(--vsc-fg);
+}
+
+.ext-aba[aria-selected="true"] {
+  color: var(--vsc-fg-strong);
+  border-bottom-color: var(--vsc-accent);
+}
+
+.ext .ext-aba:focus-visible {
+  outline-offset: -2px;
+}
+
+.ext-painel {
+  scroll-margin-top: 37px;
+}
+
+.ext-painel:focus-visible {
+  outline: 1px solid var(--vsc-focus);
+  outline-offset: -1px;
+}
+
+/* ---------- Corpo de DETALHES: README + coluna lateral ------------------- */
+
+.ext-detalhes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 270px;
+  align-items: start;
+  max-width: 1220px; /* linha do README legível em editor largo */
+}
+
+/* README renderizado */
+.ext-md {
+  container-type: inline-size;
+  container-name: md;
+  min-width: 0;
+  padding: 16px 20px 32px;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.ext-md-largo {
+  max-width: 920px;
+}
+
+.ext-md > :first-child {
+  margin-top: 0;
+}
+
+.ext-md p {
+  margin: 0 0 12px;
+}
+
+.ext-md-h1 {
+  margin: 4px 0 16px;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--vsc-border-strong);
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 600;
+  color: var(--vsc-fg-strong);
+}
+
+.ext-md-link {
+  color: var(--vsc-link);
+}
+
+.ext-md-h2 {
+  margin: 28px 0 12px;
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--vsc-fg-strong);
+}
+
+.ext-md-citacao {
+  margin: 0 0 16px;
+  padding: 10px 16px 10px 12px;
+  border-left: 5px solid var(--vsc-textblock-border);
+  background: var(--vsc-textblock-bg);
+}
+
+.ext-md-citacao p {
+  margin: 0;
+}
+
+.ext-md-lista {
+  margin: 0 0 12px;
+  padding-left: 24px;
+}
+
+.ext-md-lista li {
+  margin: 4px 0;
+}
+
+.ext-md-lista li::marker {
+  color: var(--vsc-fg-muted);
+}
+
+.ext-md kbd {
+  display: inline-block;
+  min-width: 1.7em;
+  padding: 0 5px;
+  border: 1px solid var(--vsc-border-strong);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  background: var(--vsc-widget-bg);
+  font-family: var(--vsc-font-mono);
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  color: var(--vsc-fg);
+  vertical-align: 1px;
+}
+
+/* links e "botões-link" dentro de texto: sublinhados (cor sozinha não basta) */
+.ext-sub-link,
+.ext-produto-link,
+.ext-arquivo,
+.ext-link-botao {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.ext-sub-link:hover,
+.ext-produto-link:hover,
+.ext-arquivo:hover,
+.ext-link-botao:hover {
+  color: var(--vsc-link-hover);
+}
+
+.ext-arquivo,
+.ext-link-botao {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--vsc-link);
+  cursor: pointer;
+}
+
+.ext-arquivo {
+  font-family: var(--vsc-font-mono);
+  font-size: 0.93em;
+}
+
+/* Números */
+.ext-numeros {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.ext-num {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--vsc-border-strong);
+  border-radius: 4px;
+  background: var(--vsc-widget-bg);
+}
+
+.ext-num-valor {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--sx-number);
+}
+
+.ext-num-rotulo {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--vsc-fg-muted);
+}
+
+/* Produtos no ar */
+.ext-produtos {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--vsc-border-strong);
+}
+
+.ext-produto {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: 16px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--vsc-border-strong);
+}
+
+.ext-produto-nome {
+  font-weight: 600;
+  color: var(--vsc-fg-strong);
+}
+
+.ext-produto-desc {
+  color: var(--vsc-fg-muted);
+}
+
+.ext-produto-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  justify-self: end;
+  white-space: nowrap;
+  color: var(--vsc-link);
+}
+
+.ext-produto-link .ic {
+  width: 14px;
+  height: 14px;
+}
+
+.ext .ext-ver-todos {
+  margin: 10px 0 0;
+}
+
+.ext-link-botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 26px;
+}
+
+/* Mini-editor de código */
+.ext-codigo {
+  margin: 28px 0 4px;
+  overflow: hidden;
+  border: 1px solid var(--vsc-border-strong);
+  border-radius: 4px;
+  background: var(--vsc-codeblock-bg);
+}
+
+.ext-codigo-barra {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 30px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--vsc-border);
+  background: var(--vsc-sidebar-bg);
+}
+
+.ext-codigo-pontos {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.ext-codigo-pontos > span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--sx-keyword);
+}
+
+.ext-codigo-pontos > span:nth-child(2) {
+  background: var(--sx-string);
+}
+
+.ext-codigo-pontos > span:nth-child(3) {
+  background: var(--sx-function);
+}
+
+.ext-codigo-arquivo {
+  font-size: 12px;
+  color: var(--vsc-fg-muted);
+}
+
+.ext-codigo-corpo {
+  display: flex;
+  padding: 12px 0;
+  font-family: var(--vsc-font-mono);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.ext-codigo-numeros {
+  display: block;
+  flex: none;
+  min-width: 3.5ch;
+  padding: 0 16px 0 12px;
+  text-align: right;
+  color: var(--vsc-fg-faint);
+  user-select: none;
+}
+
+.ext-codigo-pre {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: 0 16px 0 0;
+  overflow-x: auto;
+  background: transparent;
+  font: inherit;
+  color: var(--sx-variable);
+  tab-size: 2;
+}
+
+.ext-codigo-pre code {
+  font: inherit;
+}
+
+.ext-sx-k { color: var(--sx-keyword); }
+.ext-sx-n { color: var(--sx-number); }
+.ext-sx-f { color: var(--sx-function); }
+.ext-sx-p { color: var(--sx-punct); }
+
+/* Coluna lateral */
+.ext-lateral {
+  min-width: 0;
+  padding: 16px 20px 32px 4px;
+  font-size: 13px;
+}
+
+.ext-lat-secao {
+  padding: 14px 0;
+}
+
+.ext-lat-secao:first-child {
+  padding-top: 4px;
+}
+
+.ext-lat-secao + .ext-lat-secao {
+  border-top: 1px solid var(--vsc-border-strong);
+}
+
+.ext-lat-titulo {
+  margin: 0 0 10px;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--vsc-fg-strong);
+}
+
+.ext-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.ext-tabela th,
+.ext-tabela td {
+  padding: 4px 8px;
+  line-height: 18px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.ext-tabela th {
+  width: 104px;
+  font-weight: 400;
+  color: var(--vsc-fg-muted);
+}
+
+.ext-tabela td {
+  overflow-wrap: anywhere;
+}
+
+.ext-tabela tr:nth-child(odd) {
+  background: var(--vsc-widget-bg);
+}
+
+.ext-lat-texto {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  line-height: 20px;
+}
+
+.ext-lat-texto .ic {
+  margin-top: 2px;
+  color: var(--vsc-accent);
+}
+
+.ext-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ext-chip {
+  padding: 1px 6px;
+  border: 1px solid var(--vsc-border-strong);
+  border-radius: 2px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.ext-lat-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ext-lat-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 26px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--vsc-link);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ext-lat-link:hover {
+  color: var(--vsc-link-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- RECURSOS ----------------------------------------------------- */
+
+.ext-recursos {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ext-recurso {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--vsc-border-strong);
+}
+
+.ext-recurso:first-child {
+  padding-top: 4px;
+}
+
+.ext-recurso-icone {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--vsc-border-strong);
+  border-radius: 4px;
+  background: var(--vsc-widget-bg);
+  color: var(--vsc-accent);
+}
+
+.ext-recurso-texto {
+  min-width: 0;
+}
+
+.ext-recurso-titulo {
+  margin: 0 0 2px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--vsc-fg-strong);
+}
+
+.ext .ext-recurso-prova {
+  margin: 0;
+  color: var(--vsc-fg-muted);
+}
+
+.ext .ext-nota {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 16px 0 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--vsc-fg-muted);
+}
+
+.ext-nota .ic {
+  margin-top: 2px;
+}
+
+/* ---------- CHANGELOG ---------------------------------------------------- */
+
+.ext-versao .ext-md-h2 {
+  margin: 24px 0 8px;
+  font-size: 18px;
+}
+
+.ext-md-h1 + .ext-versao .ext-md-h2 {
+  margin-top: 8px;
+}
+
+.ext-versao-tag {
+  font-family: var(--vsc-font-mono);
+  font-size: 0.9em;
+  font-weight: 400;
+  color: var(--sx-number);
+}
+
+/* ---------- Refinos com color-mix (quando o navegador suporta) ----------- */
+
+@supports (color: color-mix(in srgb, currentColor 50%, transparent)) {
+  .ext-sub-item + .ext-sub-item {
+    border-left-color: color-mix(in srgb, var(--vsc-fg-faint) 55%, transparent);
+  }
+
+  .ext-btn-primario:hover {
+    background: color-mix(in srgb, var(--marca) 86%, var(--vsc-fg-strong));
+  }
+
+  .ext-tabela tr:nth-child(odd) {
+    background: color-mix(in srgb, var(--vsc-fg) 4%, transparent);
+  }
+
+  .ext-sub-link,
+  .ext-produto-link,
+  .ext-arquivo,
+  .ext-link-botao {
+    text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  }
+
+  .ext-sub-link:hover,
+  .ext-produto-link:hover,
+  .ext-arquivo:hover,
+  .ext-link-botao:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+/* ---------- Responsivo (pelo container, não pela janela) ----------------- */
+
+@container md (width < 640px) {
+  .ext-numeros {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container md (width < 560px) {
+  .ext-produto {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 2px;
+    padding: 9px 0;
+  }
+
+  .ext-produto-link {
+    justify-self: start;
+  }
+}
+
+/* abaixo de ~860px a coluna lateral desce para baixo do README */
+@container ext (width < 860px) {
+  .ext-detalhes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ext-lateral {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    column-gap: 32px;
+    padding: 8px 20px 32px;
+    border-top: 1px solid var(--vsc-border-strong);
+  }
+
+  .ext-lat-secao,
+  .ext-lat-secao:first-child {
+    padding: 14px 0;
+  }
+
+  .ext-lat-secao + .ext-lat-secao {
+    border-top: 0;
+  }
+}
+
+@container ext (width < 560px) {
+  .ext-lateral {
+    display: block;
+  }
+
+  .ext-lat-secao + .ext-lat-secao {
+    border-top: 1px solid var(--vsc-border-strong);
+  }
+}
+
+/* abaixo de ~520px o cabeçalho empilha */
+@container ext (width < 520px) {
+  .ext-cabecalho {
+    flex-direction: column;
+    gap: 14px;
+    padding: 16px 16px 12px;
+  }
+
+  .ext-avatar {
+    width: 88px;
+    height: 88px;
+  }
+
+  .ext-avatar-iniciais {
+    font-size: 32px;
+  }
+
+  .ext-titulo {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .ext-subtitulo {
+    column-gap: 14px;
+  }
+
+  .ext-sub-item + .ext-sub-item {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .ext-navbar {
+    padding: 0 10px;
+  }
+
+  .ext-md {
+    padding: 16px 16px 28px;
+  }
+
+  .ext-lateral {
+    padding: 8px 16px 28px;
+  }
+}
+
+/* ---------- Toque: alvos de 44px ----------------------------------------- */
+
+@media (pointer: coarse) {
+  .ext-btn,
+  .ext-status {
+    min-height: 44px;
+  }
+
+  .ext-btn-icone {
+    width: 44px;
+    height: 44px;
+  }
+
+  .ext-aba {
+    height: 44px;
+    line-height: 44px;
+  }
+
+  .ext-painel {
+    scroll-margin-top: 45px;
+  }
+
+  .ext-sub-link,
+  .ext-produto-link,
+  .ext-link-botao,
+  .ext-lat-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+/* ---------- Movimento reduzido ------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .ext *,
+  .ext *::before,
+  .ext *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Cores forçadas (alto contraste do sistema) ------------------- */
+
+@media (forced-colors: active) {
+  .ext-btn,
+  .ext-btn-icone {
+    border-color: ButtonText;
+  }
+
+  .ext-aba[aria-selected="true"] {
+    border-bottom: 2px solid Highlight;
+  }
+
+  .ext-avatar,
+  .ext-num,
+  .ext-chip,
+  .ext-recurso-icone,
+  .ext-codigo {
+    border-color: CanvasText;
+  }
+}
