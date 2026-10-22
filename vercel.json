@@ -4,7 +4,7 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://rumo-amber.vercel.app https://financas-app-ruby.vercel.app https://vale-do-trevo.vercel.app; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://rumo-amber.vercel.app https://financas-app-ruby.vercel.app https://vale-do-trevo.vercel.app https://notas-fiscais-ana.vercel.app; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }

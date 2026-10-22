@@ -90,6 +90,7 @@
     rumo: 'https://rumo-amber.vercel.app',
     alien: 'https://financas-app-ruby.vercel.app',
     trevo: 'https://vale-do-trevo.vercel.app',
+    notas: 'https://notas-fiscais-ana.vercel.app',
   };
 
   const TEMAS = {
@@ -142,7 +143,7 @@ que sabe falhar.
 
 - **Rumo** — orientador de rotinas (PWA, 40+ usuários): https://rumo-amber.vercel.app
 - **AlienFinanças** — finanças com leitura de nota fiscal por IA (20+ usuários): https://financas-app-ruby.vercel.app
-- **Notas Fiscais** — microsserviços .NET, 28 testes: https://github.com/An4D3v/notas-fiscais-microsservicos
+- **Notas Fiscais** — microsserviços .NET no Azure, 28 testes: https://notas-fiscais-ana.vercel.app
 - **Vale do Trevo** — jogo 2D em canvas puro: https://vale-do-trevo.vercel.app
 
 ## Abas deste editor
@@ -187,11 +188,11 @@ export const projetos: Projeto[] = [
   },
   {
     nome: 'Notas Fiscais — microsserviços',
-    status: 'código aberto',
+    status: 'em produção',
     resumo: 'Dois serviços .NET: UPDATE atômico, idempotência e recuperação de falha.',
     testes: 28,
     stack: ['C# / .NET 8', 'Angular', 'EF Core', 'SQL Server'],
-    links: { codigo: 'https://github.com/An4D3v/notas-fiscais-microsservicos' },
+    links: { app: 'https://notas-fiscais-ana.vercel.app', codigo: 'https://github.com/An4D3v/notas-fiscais-microsservicos' },
   },
   {
     nome: 'Vale do Trevo',
@@ -1578,14 +1579,15 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
   // Portas: cada app roda numa porta no computador da Ana e está "encaminhado"
   // para o endereço público; o ponto mostra se ele respondeu agora há pouco.
   const PORTAS = [
-    { porta: 5176, app: 'rumo', nome: 'Rumo' },
-    { porta: 5173, app: 'alien', nome: 'AlienFinanças' },
-    { porta: 5175, app: 'trevo', nome: 'Vale do Trevo' },
+    { porta: 5176, app: 'rumo', nome: 'Rumo', cmd: 'npm run dev' },
+    { porta: 5173, app: 'alien', nome: 'AlienFinanças', cmd: 'npm run dev' },
+    { porta: 5175, app: 'trevo', nome: 'Vale do Trevo', cmd: 'npm run dev' },
+    { porta: 4200, app: 'notas', nome: 'Notas Fiscais', cmd: 'npm start' },
   ];
   function htmlPortas() {
     return '<table class="portas"><thead><tr><th>Porta</th><th>Endereço Encaminhado</th><th>Processo em Execução</th><th>Visibilidade</th><th>Origem</th></tr></thead><tbody>'
       + PORTAS.map((p) => `<tr><td>${p.porta}</td><td>${linkar(esc(APPS[p.app]))}</td>`
-        + `<td>${esc(p.nome)} (npm run dev)<span class="vivo" data-status="${p.app}"><span class="vivo-ponto"></span><span class="vivo-txt">verificando…</span></span></td>`
+        + `<td>${esc(p.nome)} (${p.cmd})<span class="vivo" data-status="${p.app}"><span class="vivo-ponto"></span><span class="vivo-txt">verificando…</span></span></td>`
         + '<td>Pública</td><td>Vercel</td></tr>').join('')
       + '</tbody></table>';
   }
@@ -1717,7 +1719,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       fn: () => linhaTerm([
         ['Rumo', 'orientador de rotinas · PWA · 40+ usuários', APPS.rumo],
         ['AlienFinanças', 'finanças com leitura de nota fiscal por IA · 20+ usuários', APPS.alien],
-        ['Notas Fiscais', 'microsserviços .NET · 28 testes de integração', 'https://github.com/An4D3v/notas-fiscais-microsservicos'],
+        ['Notas Fiscais', 'microsserviços .NET no Azure · 28 testes de integração', APPS.notas],
         ['Vale do Trevo', 'jogo 2D em canvas puro', APPS.trevo],
       ].map(([n, dsc, url]) => (estreito()
         ? `<span class="term-dest">${esc(n)}</span>\n  ${esc(dsc)}\n  ${linkar(esc(url))}`

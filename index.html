@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://rumo-amber.vercel.app https://financas-app-ruby.vercel.app https://vale-do-trevo.vercel.app; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://rumo-amber.vercel.app https://financas-app-ruby.vercel.app https://vale-do-trevo.vercel.app https://notas-fiscais-ana.vercel.app; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>Ana Neves · Software Developer</title>
 <meta name="description" content="Ana Neves — desenvolvedora de software em São Paulo: backend, dados e IA em produção. Um portfólio que é um editor de código: abra as abas para ver projetos no ar, experiência, stack e contato.">
 <meta name="author" content="Ana Neves">
@@ -301,7 +301,7 @@
             <button class="painel-aba" type="button" role="tab" id="pa-saida" data-painel="saida" aria-selected="false" aria-controls="painel-corpo">Saída</button>
             <button class="painel-aba" type="button" role="tab" id="pa-depuracao" data-painel="depuracao" aria-selected="false" aria-controls="painel-corpo">Console de Depuração</button>
             <button class="painel-aba" type="button" role="tab" id="pa-terminal" data-painel="terminal" aria-selected="true" aria-controls="painel-corpo">Terminal</button>
-            <button class="painel-aba" type="button" role="tab" id="pa-portas" data-painel="portas" aria-selected="false" aria-controls="painel-outro">Portas<span class="painel-selo" aria-label="3 portas encaminhadas">3</span></button>
+            <button class="painel-aba" type="button" role="tab" id="pa-portas" data-painel="portas" aria-selected="false" aria-controls="painel-outro">Portas<span class="painel-selo" aria-label="4 portas encaminhadas">4</span></button>
           </div>
           <div class="painel-acoes">
             <span class="term-perfil so-terminal" title="pwsh"><svg class="ic" aria-hidden="true"><use href="#i-terminal"/></svg>pwsh</span>
@@ -475,7 +475,7 @@
             <li class="ext-produto">
               <strong class="ext-produto-nome">Notas Fiscais</strong>
               <span class="ext-produto-desc">dois microsserviços .NET com 28 testes de integração</span>
-              <a class="ext-produto-link" href="https://github.com/An4D3v/notas-fiscais-microsservicos" target="_blank" rel="noopener">ver o código<span class="ext-sr"> de Notas Fiscais (abre em nova aba)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
+              <a class="ext-produto-link" href="https://notas-fiscais-ana.vercel.app" target="_blank" rel="noopener">abrir o app<span class="ext-sr"> Notas Fiscais (abre em nova aba)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
             </li>
             <li class="ext-produto">
               <strong class="ext-produto-nome">Vale do Trevo</strong>
@@ -652,12 +652,12 @@
       <section class="cartao" aria-labelledby="pj-notas">
         <div class="cartao-topo">
           <h2 id="pj-notas">Notas Fiscais — microsserviços</h2>
-          <span class="vivo"><span class="vivo-ponto"></span><span class="vivo-txt">código aberto</span></span>
+          <span class="vivo" data-status="notas"><span class="vivo-ponto"></span><span class="vivo-txt">verificando…</span></span>
         </div>
         <p class="cartao-tipo">C# / .NET 8 · Angular</p>
         <p>Dois microsserviços .NET que não deixam saldo ficar negativo nem sob disputa: concorrência no UPDATE atômico, idempotência e recuperação de falha. <strong>28 testes de integração</strong> contra SQL Server real.</p>
         <p class="cartao-stack"><code>C#</code> <code>.NET 8</code> <code>Angular</code> <code>EF Core</code></p>
-        <p class="cartao-links"><a href="https://github.com/An4D3v/notas-fiscais-microsservicos" target="_blank" rel="noopener">Ver o código<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a></p>
+        <p class="cartao-links"><a href="https://notas-fiscais-ana.vercel.app" target="_blank" rel="noopener">Abrir o app<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a> <a href="https://github.com/An4D3v/notas-fiscais-microsservicos" target="_blank" rel="noopener">Ver o código<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a></p>
       </section>
       <section class="cartao" aria-labelledby="pj-trevo">
         <div class="cartao-topo">
