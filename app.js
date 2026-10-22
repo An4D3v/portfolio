@@ -79,7 +79,7 @@ que sabe falhar.
 ## Produtos no ar
 
 - **Rumo** — orientador de rotinas (PWA, 40+ usuários): https://rumo-amber.vercel.app
-- **AlienFinanças** — finanças com leitura de nota fiscal por IA: https://financas-app-ruby.vercel.app
+- **AlienFinanças** — finanças com leitura de nota fiscal por IA (20+ usuários): https://financas-app-ruby.vercel.app
 - **Notas Fiscais** — microsserviços .NET, 28 testes: https://github.com/An4D3v/Korp_Teste_AnaNeves
 - **Vale do Trevo** — jogo 2D em canvas puro: https://vale-do-trevo.vercel.app
 
@@ -119,6 +119,7 @@ export const projetos: Projeto[] = [
     nome: 'AlienFinanças',
     status: 'em produção',
     resumo: 'Finanças pessoais: a foto do cupom fiscal vira itens categorizados por IA.',
+    usuarios: '20+',
     stack: ['React', 'TypeScript', 'Supabase', 'IA (LLM)'],
     links: { app: 'https://financas-app-ruby.vercel.app' },
   },
@@ -264,7 +265,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
 
   const DICAS = {
     projetos: {
-      usuarios: 'Contas reais cadastradas no Rumo.',
+      usuarios: 'Contas reais cadastradas no app.',
       testes: 'Testes de integração que rodam contra SQL Server real.',
     },
     experiencia: {
@@ -1436,7 +1437,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
       desc: 'os produtos, com links',
       fn: () => linhaTerm([
         ['Rumo', 'orientador de rotinas · PWA · 40+ usuários', APPS.rumo],
-        ['AlienFinanças', 'finanças com leitura de nota fiscal por IA', APPS.alien],
+        ['AlienFinanças', 'finanças com leitura de nota fiscal por IA · 20+ usuários', APPS.alien],
         ['Notas Fiscais', 'microsserviços .NET · 28 testes de integração', 'https://github.com/An4D3v/Korp_Teste_AnaNeves'],
         ['Vale do Trevo', 'jogo 2D em canvas puro', APPS.trevo],
       ].map(([n, dsc, url]) => `<span class="term-dest">${esc(n.padEnd(15))}</span>${esc(dsc)}\n${' '.repeat(15)}${linkar(esc(url))}`).join('\n')),
