@@ -26,4 +26,7 @@
   if (idioma !== 'en' && idioma !== 'pt') idioma = /^pt\b/i.test(navigator.language || '') ? 'pt' : 'en';
   document.documentElement.setAttribute('data-idioma', idioma);
   document.documentElement.setAttribute('lang', idioma === 'en' ? 'en' : 'pt-BR');
+  // app instalado (PWA) com nome, descrição e atalhos no mesmo idioma
+  var manifesto = document.querySelector('link[rel="manifest"]');
+  if (manifesto && idioma === 'en') manifesto.setAttribute('href', 'manifest-en.webmanifest');
 })();

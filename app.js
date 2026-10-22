@@ -3163,6 +3163,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     '-',
     { rotulo: L('Enviar E-mail', 'Send Email'), fn: () => { location.href = `mailto:${EMAIL}`; } },
     { rotulo: L('Copiar E-mail', 'Copy Email'), fn: copiarEmail },
+    ...(convite ? ['-', { rotulo: L('Instalar como App', 'Install as App'), fn: instalarApp }] : []),
   ], e.currentTarget, { lado: celular() ? 'cima' : 'direita', focar: e.detail === 0 }));
   $('#bt-gerenciar').addEventListener('click', (e) => alternarMenu([
     { rotulo: L('Paleta de Comandos…', 'Command Palette…'), tecla: 'Ctrl+Shift+P', fn: () => abrirPaleta('>') },
@@ -3236,6 +3237,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     { rotulo: L('Ajuda: Atalhos de Teclado', 'Help: Keyboard Shortcuts'), fn: () => abrir('atalhos') },
     { rotulo: L('Depurar: Iniciar Depuração', 'Debug: Start Debugging'), tecla: 'F5', fn: depurar },
     { rotulo: L('Ana: Abrir a Extensão', 'Ana: Open the Extension'), fn: () => abrir('sobre') },
+    { rotulo: L('Ana: Instalar como App', 'Ana: Install as App'), fn: instalarApp, off: !convite },
     { rotulo: L('Ana: Copiar E-mail', 'Ana: Copy Email'), fn: copiarEmail },
     { rotulo: L('Ana: Enviar E-mail', 'Ana: Send Email'), fn: () => { location.href = `mailto:${EMAIL}`; } },
     { rotulo: L('Ana: Abrir GitHub', 'Ana: Open GitHub'), fn: () => abrirFora(GITHUB) },
@@ -3548,6 +3550,31 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     html.style.setProperty('--h-painel', `${h}px`);
     sincronizarMinimapa();
   });
+
+  /* ======================================================================
+     App instalável (PWA)
+     ====================================================================== */
+  // O service worker guarda o essencial para abrir sem internet. O convite de instalação
+  // do navegador fica guardado e vira "Instalar como App" (paleta e menu de links).
+  let convite = null;
+  addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    convite = e;
+  });
+  addEventListener('appinstalled', () => {
+    convite = null;
+    registrar(L('app instalado', 'app installed'));
+  });
+  async function instalarApp() {
+    if (!convite) return;
+    convite.prompt();
+    const { outcome } = await convite.userChoice;
+    convite = null;
+    registrar(`${L('instalação', 'install')}: ${outcome}`);
+  }
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+  }
 
   /* ======================================================================
      Início
