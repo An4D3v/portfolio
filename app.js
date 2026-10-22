@@ -376,7 +376,7 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     abertas: [...SECOES],
     ativa: 'sobre',
     modos: {},
-    tema: TEMAS[html.dataset.tema] ? html.dataset.tema : 'dracula',
+    tema: TEMAS[html.dataset.tema] ? html.dataset.tema : 'dark-modern',
     minimapa: guarda.ler('ana-minimapa') !== 'off',
     quebra: null,
     vista: 'explorer',
