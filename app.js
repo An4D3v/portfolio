@@ -1457,7 +1457,65 @@ Funcionam como no VS Code. No Mac, troque \`Ctrl\` por \`Cmd\`.
     if ((id === 'sobre' || ARQUIVOS[id].tecnologia) && typeof window.iniciarExtensao === 'function') {
       try { window.iniciarExtensao($('.ext', raiz) || raiz); } catch (erro) { registrar(`extensão: ${erro.message}`); }
     }
-    if (id === 'projetos') checarApps(raiz);
+    if (id === 'projetos') {
+      checarApps(raiz);
+      ligarPrevias(raiz);
+    }
+  }
+
+  // Prévia dos projetos: ao passar o mouse (ou segurar o dedo, no celular), a descrição
+  // desce e some, o app aparece rodando no fundo e ficam só o nome e o status embaixo.
+  function ligarPrevias(raiz) {
+    $$('.cartao', raiz).forEach((c) => {
+      const video = $('.cartao-previa', c);
+      if (!video) return;
+      const topo = $('.cartao-topo', c);
+      const ligar = () => {
+        c.style.setProperty('--desce', `${c.clientHeight - topo.offsetTop - topo.offsetHeight - 14}px`);
+        c.classList.add('vendo');
+        if (!mq.calmo.matches) video.play().catch(() => {});
+      };
+      const desligar = () => {
+        c.classList.remove('vendo');
+        video.pause();
+      };
+      // só o mouse: no celular o toque também gera eventos de ponteiro
+      c.addEventListener('pointerenter', (e) => e.pointerType === 'mouse' && ligar());
+      c.addEventListener('pointerleave', (e) => e.pointerType === 'mouse' && desligar());
+      // no celular: segurar o dedo liga; arrastar (rolar a página) antes disso cancela
+      let espera = 0;
+      let origem = null;
+      let porToque = false;
+      c.addEventListener('touchstart', (e) => {
+        origem = e.touches[0];
+        porToque = false;
+        espera = setTimeout(() => {
+          porToque = true;
+          ligar();
+        }, 180);
+      }, { passive: true });
+      c.addEventListener('touchmove', (e) => {
+        const t = e.touches[0];
+        if (!porToque && Math.hypot(t.clientX - origem.clientX, t.clientY - origem.clientY) > 10) clearTimeout(espera);
+      }, { passive: true });
+      const soltar = (e) => {
+        clearTimeout(espera);
+        if (!porToque) return;
+        // soltar o dedo depois da prévia não pode virar clique em link
+        if (e.cancelable) e.preventDefault();
+        porToque = false;
+        desligar();
+      };
+      c.addEventListener('touchend', soltar);
+      c.addEventListener('touchcancel', soltar);
+      c.addEventListener('contextmenu', (e) => porToque && e.preventDefault());
+      // na prévia os links somem: clicar no cartão abre o app
+      c.addEventListener('click', (e) => {
+        if (!c.classList.contains('vendo') || e.target.closest('a')) return;
+        const link = $('.cartao-links a', c);
+        if (link) window.open(link.href, '_blank', 'noopener');
+      });
+    });
   }
 
   /* ---------- página de extensão de cada tecnologia ---------- */

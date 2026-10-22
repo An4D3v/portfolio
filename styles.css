@@ -1292,6 +1292,40 @@ textarea.campo { height: auto; min-height: 60px; resize: vertical; line-height: 
 .cartao-links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: auto !important; padding-top: 4px; }
 .cartao-links a { display: inline-flex; align-items: center; gap: 4px; }
 .cartao-links .ic { width: 14px; height: 14px; }
+
+/* prévia do app no cartão: o vídeo fica atrás do conteúdo, com uma sombra que sobe de baixo */
+.cartao { position: relative; overflow: hidden; isolation: isolate; }
+.cartao-previa {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--curva);
+}
+.cartao::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 35%, rgba(0, 0, 0, 0.55) 70%, rgba(0, 0, 0, 0.9));
+  opacity: 0;
+  transition: opacity 0.3s var(--curva);
+}
+.cartao > :not(.cartao-previa):not(.cartao-topo) { transition: opacity 0.22s var(--curva), transform 0.3s var(--curva); }
+.cartao-topo { transition: transform 0.35s var(--curva); }
+.cartao.vendo { cursor: pointer; -webkit-touch-callout: none; user-select: none; }
+.cartao.vendo .cartao-previa,
+.cartao.vendo::after { opacity: 1; }
+.cartao.vendo > :not(.cartao-previa):not(.cartao-topo) { opacity: 0; transform: translateY(28px); pointer-events: none; }
+.cartao.vendo .cartao-topo { transform: translateY(var(--desce, 0px)); }
+.cartao.vendo .cartao-topo h2 { color: #ffffff; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); }
+.cartao.vendo .vivo { color: rgba(255, 255, 255, 0.88); }
 .vivo { display: inline-flex; align-items: center; gap: 6px; font: 11.5px var(--vsc-font-mono); color: var(--vsc-fg-faint); }
 .vivo-ponto { width: 8px; height: 8px; border-radius: 50%; background: var(--vsc-fg-faint); }
 .vivo.no-ar .vivo-ponto { background: var(--vsc-ok); animation: pulso 2s ease-out infinite; }
