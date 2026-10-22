@@ -20,6 +20,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://ana-neves.vercel.app/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="assets/ana-programando.webp" imagesrcset="assets/ana-programando-128.webp 128w, assets/ana-programando.webp 256w" imagesizes="(max-width: 760px) 104px, 128px" fetchpriority="high">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="extensao.css">
 <script src="tema.js"></script>
@@ -157,7 +158,7 @@
     <div class="centro-titulo">
       <button class="nav-bt" id="bt-voltar" type="button" aria-label="Voltar para a aba anterior" aria-disabled="true"><svg class="ic" aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
       <button class="nav-bt" id="bt-avancar" type="button" aria-label="Avançar para a próxima aba" aria-disabled="true"><svg class="ic" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
-      <button class="comando-central" id="bt-central" type="button" aria-label="Pesquisar arquivos e comandos (Ctrl+P)">
+      <button class="comando-central" id="bt-central" type="button" aria-label="portfolio-ana-neves: pesquisar arquivos e comandos (Ctrl+P)">
         <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg><span>portfolio-ana-neves</span>
       </button>
     </div>
@@ -180,7 +181,7 @@
       <button class="at-bt" type="button" data-vista="busca" aria-pressed="false" aria-label="Pesquisa em todos os arquivos (Ctrl+Shift+F)" title="Pesquisar (Ctrl+Shift+F)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-search"/></svg><span class="at-rot" aria-hidden="true">Pesquisa</span></button>
       <button class="at-bt" type="button" data-vista="scm" aria-pressed="false" aria-label="Git: repositórios e recado (Ctrl+Shift+G)" title="Controle do Código-Fonte (Ctrl+Shift+G)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-source-control"/></svg><span class="at-rot" aria-hidden="true">Git</span></button>
       <button class="at-bt so-desktop" type="button" data-vista="depurar" aria-pressed="false" aria-label="Executar e depurar (Ctrl+Shift+D)" title="Executar e Depurar (Ctrl+Shift+D)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-debug-alt"/></svg><span class="at-rot" aria-hidden="true">Executar</span></button>
-      <button class="at-bt" type="button" data-vista="extensoes" aria-pressed="false" aria-label="Stack: extensões instaladas (Ctrl+Shift+X)" title="Extensões (Ctrl+Shift+X)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-extensions"/></svg><span class="at-rot" aria-hidden="true">Stack</span><span class="at-selo" aria-hidden="true">1</span></button>
+      <button class="at-bt" type="button" data-vista="extensoes" aria-pressed="false" aria-label="Stack: extensões instaladas (Ctrl+Shift+X)" title="Extensões (Ctrl+Shift+X)"><svg class="ic ic-24" aria-hidden="true"><use href="#i-extensions"/></svg><span class="at-rot" aria-hidden="true">Stack</span></button>
       <button class="at-bt so-celular" type="button" id="bt-at-terminal" aria-label="Terminal" title="Terminal"><svg class="ic ic-24" aria-hidden="true"><use href="#i-terminal"/></svg><span class="at-rot" aria-hidden="true">Terminal</span></button>
       <span class="at-espaco"></span>
       <button class="at-bt" type="button" id="bt-conta" aria-label="Links da Ana: GitHub, LinkedIn e e-mail" title="Contas"><svg class="ic ic-24" aria-hidden="true"><use href="#i-account"/></svg><span class="at-rot" aria-hidden="true">Links</span></button>
@@ -280,7 +281,7 @@
         </section>
       </div>
 
-      <div class="sash" id="sash-lateral" role="separator" aria-orientation="vertical" aria-label="Redimensionar painel lateral" tabindex="-1"></div>
+      <div class="sash" id="sash-lateral" role="separator" aria-orientation="vertical" aria-label="Redimensionar painel lateral"></div>
     </aside>
 
     <main class="area" id="area">
@@ -304,7 +305,7 @@
       </div>
 
       <section class="painel" id="painel" aria-label="Painel" hidden>
-        <div class="sash-h" id="sash-painel" role="separator" aria-orientation="horizontal" aria-label="Redimensionar painel" tabindex="-1"></div>
+        <div class="sash-h" id="sash-painel" role="separator" aria-orientation="horizontal" aria-label="Redimensionar painel"></div>
         <div class="painel-cab">
           <div class="painel-abas" role="tablist" aria-label="Painel">
             <button class="painel-aba" type="button" role="tab" id="pa-problemas" data-painel="problemas" aria-selected="false" aria-controls="painel-corpo">Problemas</button>
@@ -355,7 +356,7 @@
   <footer class="status" id="status" aria-label="Barra de status">
     <button class="st st-remoto" type="button" id="st-remoto" aria-label="ana@dev: abrir a paleta de comandos"><svg class="ic" aria-hidden="true"><use href="#i-remote"/></svg>ana@dev</button>
     <button class="st" type="button" id="st-branch" aria-label="Branch main: ver repositórios"><svg class="ic" aria-hidden="true"><use href="#i-git-branch"/></svg>main<svg class="ic" aria-hidden="true"><use href="#i-sync"/></svg></button>
-    <button class="st" type="button" id="st-problemas" aria-label="Nenhum problema: abrir o painel de problemas"><svg class="ic" aria-hidden="true"><use href="#i-error"/></svg>0<svg class="ic" aria-hidden="true"><use href="#i-warning"/></svg>0</button>
+    <button class="st" type="button" id="st-problemas"><svg class="ic" aria-hidden="true"><use href="#i-error"/></svg>0<span class="sr"> erros, </span><svg class="ic" aria-hidden="true"><use href="#i-warning"/></svg>0<span class="sr"> avisos: abrir o painel de problemas</span></button>
     <span class="st-esp"></span>
     <span class="st st-ocultar" id="st-pos">Ln 1, Col 1</span>
     <span class="st st-ocultar st-codigo" id="st-esp">Espaços: 2</span>
@@ -389,7 +390,7 @@
         <span class="ext-avatar-iniciais" aria-hidden="true">AN</span>
         <picture>
           <source media="(prefers-reduced-motion: reduce)" srcset="assets/ana-acenando.webp">
-          <img class="ext-foto" src="assets/ana-programando.webp" width="256" height="256" alt="Ilustração em pixel art da Ana programando e acenando">
+          <img class="ext-foto" src="assets/ana-programando.webp" srcset="assets/ana-programando-128.webp 128w, assets/ana-programando.webp 256w" sizes="(max-width: 760px) 104px, 128px" fetchpriority="high" width="256" height="256" alt="Ilustração em pixel art da Ana programando e acenando">
         </picture>
       </div>
       <div class="ext-info">

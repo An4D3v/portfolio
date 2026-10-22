@@ -12,7 +12,7 @@
   --vsc-font-ui: "Segoe WPC", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Ubuntu", "Droid Sans", sans-serif;
   --vsc-font-mono: "Cascadia Code", Consolas, "SF Mono", Menlo, Monaco, "Ubuntu Mono", "Liberation Mono", monospace;
   --h-titulo: 35px;
-  --h-status: 22px;
+  --h-status: 24px;
   --w-atividade: 48px;
   --w-lateral: 260px;
   --h-painel: 260px;
@@ -667,19 +667,6 @@ kbd {
 }
 .at-bt[aria-pressed="true"]::before { transform: none; }
 .at-bt:focus-visible { outline-offset: -2px; }
-.at-selo {
-  position: absolute;
-  right: 7px;
-  bottom: 8px;
-  min-width: 16px;
-  height: 16px;
-  padding: 0 4px;
-  border-radius: 8px;
-  background: var(--vsc-activity-badge-bg);
-  color: var(--vsc-activity-badge-fg);
-  font: 600 9px/16px var(--vsc-font-ui);
-  text-align: center;
-}
 .at-espaco { flex: 1; }
 .at-bt.so-celular { display: none; }
 .at-rot { display: none; }
@@ -736,7 +723,7 @@ kbd {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 22px;
+  height: 24px;
   padding: 0 8px 0 2px;
   flex: 0 0 auto;
   font-size: 11px;
@@ -782,7 +769,7 @@ kbd {
   align-items: center;
   gap: 6px;
   width: 100%;
-  height: 22px;
+  height: 24px;
   padding: 0 8px 0 calc(var(--nivel, 0) * 8px + 8px);
   font-size: 13px;
   color: var(--vsc-sidebar-fg);
@@ -834,7 +821,7 @@ textarea.campo { height: auto; min-height: 60px; resize: vertical; line-height: 
   align-items: center;
   gap: 6px;
   width: 100%;
-  height: 22px;
+  height: 24px;
   padding: 0 8px 0 8px;
   text-align: left;
   font-size: 13px;
@@ -856,7 +843,7 @@ textarea.campo { height: auto; min-height: 60px; resize: vertical; line-height: 
 .res-linha {
   display: block;
   width: 100%;
-  height: 22px;
+  height: 24px;
   padding: 0 8px 0 46px;
   text-align: left;
   font-size: 13px;
@@ -1048,7 +1035,7 @@ textarea.campo { height: auto; min-height: 60px; resize: vertical; line-height: 
   display: flex;
   align-items: center;
   gap: 2px;
-  height: 22px;
+  height: 24px;
   padding: 0 12px;
   flex: 0 0 auto;
   font-size: 13px;
@@ -1062,7 +1049,7 @@ textarea.campo { height: auto; min-height: 60px; resize: vertical; line-height: 
 .mg-bt {
   display: inline-flex;
   align-items: center;
-  height: 20px;
+  height: 24px;
   padding: 0 3px;
   border-radius: 3px;
   white-space: nowrap;
@@ -1910,7 +1897,6 @@ button.st-remoto:hover { background: var(--marca-hover); }
   }
   .at-bt .ic-24 { width: 22px; height: 22px; }
   .at-rot { display: block; font-size: 10.5px; line-height: 1; }
-  .at-selo { display: none; }
   .at-bt::before { left: 22%; right: 22%; top: 0; bottom: auto; width: auto; height: 2px; transform: scaleX(0); }
   .at-bt[aria-pressed="true"]::before { transform: none; }
   .at-espaco,
