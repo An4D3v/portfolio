@@ -1536,11 +1536,54 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
 
   // Cada aba aberta conta como uma página na análise da Vercel (/sobre, /projetos,
   // /ext-cs...): o site troca de aba pelo #, que a Vercel não acompanha sozinha.
+  // Desde 23/10/2026, também no contador do Mirante (o painel da Ana).
   let ultimaContada = '';
   function contarVisita(id) {
-    if (!id || id === ultimaContada || typeof window.va !== 'function') return;
+    if (!id || id === ultimaContada) return;
     ultimaContada = id;
-    window.va('pageview', { route: `/${id}`, path: `/${id}` });
+    if (typeof window.va === 'function') window.va('pageview', { route: `/${id}`, path: `/${id}` });
+    avisarMirante(id);
+  }
+
+  // O contador do Mirante recebe só a aba, a origem da visita (LinkedIn, GitHub, Google...), o idioma e
+  // se é a 1ª visita do navegador no dia. Sem cookie e sem identificador: o navegador guarda só a data
+  // da última visita (ana-visitou). Vale só no endereço publicado (servidor local e prévias não contam)
+  // e não conta o aparelho que abriu uma vez com ?nao-contar (?contar desfaz).
+  const CONTADOR = 'https://cqmyktazswdwimuivgyp.supabase.co/functions/v1/portfolio-visita';
+  const ORIGENS = [
+    [/(^|\.)linkedin\.com$|^lnkd\.in$/, 'linkedin'],
+    [/(^|\.)github\.com$/, 'github'],
+    [/(^|\.)google\.[a-z.]+$/, 'google'],
+    [/(^|\.)(bing\.com|duckduckgo\.com|yahoo\.com|ecosia\.org|search\.brave\.com)$/, 'busca'],
+    [/(^|\.)(whatsapp\.com|wa\.me)$/, 'whatsapp'],
+  ];
+  let primeiraDaPagina = true;
+
+  function origemDaVisita() {
+    const pedido = new URLSearchParams(location.search);
+    const marcada = (pedido.get('ref') || pedido.get('utm_source') || '').toLowerCase();
+    if (ORIGENS.some(([, nome]) => nome === marcada)) return marcada;
+    let host = '';
+    try { host = d.referrer ? new URL(d.referrer).hostname : ''; } catch { host = ''; }
+    if (!host || host === location.hostname) return 'direto';
+    const achou = ORIGENS.find(([re]) => re.test(host));
+    return achou ? achou[1] : 'outros';
+  }
+
+  function avisarMirante(id) {
+    const pedido = new URLSearchParams(location.search);
+    if (pedido.has('nao-contar')) guarda.gravar('ana-nao-contar', '1');
+    if (pedido.has('contar')) guarda.gravar('ana-nao-contar', '0');
+    if (location.hostname !== 'ana-neves.vercel.app' || guarda.ler('ana-nao-contar') === '1') return;
+    if (typeof navigator.sendBeacon !== 'function') return;
+    const entrada = primeiraDaPagina;
+    primeiraDaPagina = false;
+    const hoje = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(new Date());
+    const nova = entrada && guarda.ler('ana-visitou') !== hoje;
+    if (nova) guarda.gravar('ana-visitou', hoje);
+    const corpo = { aba: id, entrada, nova, idioma: EN ? 'en' : 'pt' };
+    if (entrada) corpo.origem = origemDaVisita();
+    try { navigator.sendBeacon(CONTADOR, JSON.stringify(corpo)); } catch { /* sem o contador, o site segue igual */ }
   }
 
   function atualizarNavegacao() {
