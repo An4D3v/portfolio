@@ -147,7 +147,7 @@ que sabe falhar.
 ## Produtos no ar
 
 - **Rumo** — orientador de rotinas (PWA, 40+ usuários): https://rumo-amber.vercel.app
-- **AlienFinanças** — finanças com leitura de nota fiscal por IA (40+ usuários): https://financas-app-ruby.vercel.app
+- **Alien** — finanças com leitura de nota fiscal por IA (40+ usuários): https://financas-app-ruby.vercel.app
 - **Notas Fiscais** — microsserviços .NET no Azure, 28 testes: https://notas-fiscais-ana.vercel.app
 - **Vale do Trevo** — jogo 2D em canvas puro: https://vale-do-trevo.vercel.app
 
@@ -184,7 +184,7 @@ export const projetos: Projeto[] = [
     links: { app: 'https://rumo-amber.vercel.app' },
   },
   {
-    nome: 'AlienFinanças',
+    nome: 'Alien',
     status: 'em produção',
     resumo: 'Finanças pessoais: a foto do cupom fiscal vira itens categorizados por IA.',
     usuarios: '40+',
@@ -381,7 +381,7 @@ with tests that know how to fail.
 ## Live products
 
 - **Rumo** — routine companion (PWA, 40+ users): https://rumo-amber.vercel.app
-- **AlienFinanças** — personal finance with AI receipt reading (40+ users): https://financas-app-ruby.vercel.app
+- **Alien** — personal finance with AI receipt reading (40+ users): https://financas-app-ruby.vercel.app
 - **Notas Fiscais** — .NET microservices on Azure, 28 tests: https://notas-fiscais-ana.vercel.app
 - **Vale do Trevo** — 2D game in plain canvas: https://vale-do-trevo.vercel.app
 
@@ -418,7 +418,7 @@ export const projects: Project[] = [
     links: { app: 'https://rumo-amber.vercel.app' },
   },
   {
-    name: 'AlienFinanças',
+    name: 'Alien',
     status: 'in production',
     summary: 'Personal finance: a photo of the receipt becomes AI-categorized items.',
     users: '40+',
@@ -609,7 +609,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     { ic: 'ia', nome: 'LLMs em produção', desc: 'Classificador de publicações e leitura de nota fiscal.' },
     { ic: 'id', nome: 'Entra ID · Microsoft Graph', desc: 'SSO nos bots e autenticação sem senha.' },
     { ic: 'ng', nome: 'Angular', desc: 'Front do sistema de notas fiscais.' },
-    { ic: 're', nome: 'React + TypeScript', desc: 'Rumo e AlienFinanças.' },
+    { ic: 're', nome: 'React + TypeScript', desc: 'Rumo e Alien.' },
     { ic: 'sb', nome: 'Supabase · PostgreSQL', desc: 'Auth com MFA e Row Level Security nos apps próprios.' },
     { ic: 'gh', nome: 'GitHub Actions', desc: 'CI/CD com OIDC e gate de testes.' },
   ];
@@ -684,12 +684,12 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       uso: [
         ['sparkle', 'Classificação de publicações', 'Classificador LLM em produção, com acurácia medida contra gabarito humano e execução sombra antes de promover modelo novo.', 'experiencia|Classificação de publicações'],
         ['comment-discussion', 'Bots com IA no Teams', 'Central de IA corporativa com SSO (Entra ID) e consulta processual com Adaptive Cards, com usuários reais.', 'experiencia|Bots com IA no Teams'],
-        ['rocket', 'AlienFinanças', 'A foto do cupom fiscal vira itens categorizados por IA.', 'projetos#pj-alien'],
+        ['rocket', 'Alien', 'A foto do cupom fiscal vira itens categorizados por IA.', 'projetos#pj-alien'],
         ['server', 'Notas Fiscais', 'Montar nota por texto: a IA sugere itens do catálogo, o servidor confere cada código e a pessoa decide. Sem chave de API, entra um modo offline.', 'projetos#pj-notas'],
       ],
       numeros: [],
       recursos: ['LLMs em produção', 'Bot Framework', 'Adaptive Cards', 'prompt engineering', 'saída estruturada (JSON)', 'medição de acurácia', 'execução sombra', 'Gemini'],
-      links: [['Abrir AlienFinanças', 'https://financas-app-ruby.vercel.app'], ['Abrir Notas Fiscais', 'https://notas-fiscais-ana.vercel.app']],
+      links: [['Abrir o Alien', 'https://financas-app-ruby.vercel.app'], ['Abrir Notas Fiscais', 'https://notas-fiscais-ana.vercel.app']],
       privado: true,
     },
     id: {
@@ -725,15 +725,15 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       categorias: ['Front-end'],
       uso: [
         ['rocket', 'Rumo', 'Orientador de rotinas: PWA com Web Push, MFA (TOTP) e painel admin próprio. 40+ usuários.', 'projetos#pj-rumo'],
-        ['rocket', 'AlienFinanças', 'Finanças pessoais com leitura de cupom fiscal por IA. 40+ usuários.', 'projetos#pj-alien'],
+        ['rocket', 'Alien', 'Finanças pessoais com leitura de cupom fiscal por IA. 40+ usuários.', 'projetos#pj-alien'],
         ['play', 'Vale do Trevo', 'Jogo 2D em TypeScript e canvas puro, sem engine.', 'projetos#pj-trevo'],
       ],
       numeros: [
-        { alvo: 70, depois: '+', final: '70+', texto: 'pessoas usando o Rumo e o AlienFinanças', ir: 'projetos#pj-rumo, #pj-alien' },
+        { alvo: 70, depois: '+', final: '70+', texto: 'pessoas usando o Rumo e o Alien', ir: 'projetos#pj-rumo, #pj-alien' },
         { alvo: 3, final: '3', texto: 'apps em TypeScript no ar', ir: 'projetos#pj-rumo, #pj-alien, #pj-trevo' },
       ],
       recursos: ['React', 'TypeScript', 'Vite', 'PWA', 'Web Push', 'Canvas'],
-      links: [['Abrir o Rumo', 'https://rumo-amber.vercel.app'], ['Abrir AlienFinanças', 'https://financas-app-ruby.vercel.app'], ['Jogar o Vale do Trevo', 'https://vale-do-trevo.vercel.app']],
+      links: [['Abrir o Rumo', 'https://rumo-amber.vercel.app'], ['Abrir o Alien', 'https://financas-app-ruby.vercel.app'], ['Jogar o Vale do Trevo', 'https://vale-do-trevo.vercel.app']],
       privado: false,
     },
     sb: {
@@ -741,13 +741,13 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       categorias: ['Dados', 'Auth'],
       uso: [
         ['rocket', 'Rumo', 'Login com MFA (TOTP) pelo Supabase Auth.', 'projetos#pj-rumo'],
-        ['rocket', 'AlienFinanças', 'Row Level Security: cada pessoa só enxerga os próprios dados.', 'projetos#pj-alien'],
+        ['rocket', 'Alien', 'Row Level Security: cada pessoa só enxerga os próprios dados.', 'projetos#pj-alien'],
       ],
       numeros: [
         { alvo: 70, depois: '+', final: '70+', texto: 'pessoas com conta nos dois apps', ir: 'projetos#pj-rumo, #pj-alien' },
       ],
       recursos: ['Supabase Auth', 'MFA (TOTP)', 'Row Level Security', 'PostgreSQL'],
-      links: [['Abrir o Rumo', 'https://rumo-amber.vercel.app'], ['Abrir AlienFinanças', 'https://financas-app-ruby.vercel.app']],
+      links: [['Abrir o Rumo', 'https://rumo-amber.vercel.app'], ['Abrir o Alien', 'https://financas-app-ruby.vercel.app']],
       privado: false,
     },
     gh: {
@@ -824,11 +824,11 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       uso: [
         ['sparkle', 'Legal notice classification', 'LLM classifier in production, with accuracy measured against a human answer key and shadow runs before promoting a new model.', 'experiencia|AI classification'],
         ['comment-discussion', 'AI bots in Teams', 'Company-wide AI hub with SSO (Entra ID) and legal case lookup with Adaptive Cards, with real users.', 'experiencia|AI bots in Teams'],
-        ['rocket', 'AlienFinanças', 'A photo of the receipt becomes AI-categorized items.', 'projetos#pj-alien'],
+        ['rocket', 'Alien', 'A photo of the receipt becomes AI-categorized items.', 'projetos#pj-alien'],
         ['server', 'Notas Fiscais', 'Build an invoice from text: the AI suggests catalog items, the server checks every code and the person decides. Without an API key, an offline mode kicks in.', 'projetos#pj-notas'],
       ],
       recursos: ['LLMs in production', 'Bot Framework', 'Adaptive Cards', 'prompt engineering', 'structured output (JSON)', 'accuracy measurement', 'shadow runs', 'Gemini'],
-      links: [['Open AlienFinanças', APPS.alien], ['Open Notas Fiscais', APPS.notas]],
+      links: [['Open Alien', APPS.alien], ['Open Notas Fiscais', APPS.notas]],
     },
     id: {
       desc: 'SSO in the bots and passwordless authentication.',
@@ -856,30 +856,30 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       links: [['Open Notas Fiscais', APPS.notas], ['Code on GitHub', REPO_NOTAS]],
     },
     re: {
-      desc: 'Rumo and AlienFinanças.',
+      desc: 'Rumo and Alien.',
       categorias: ['Front end'],
       uso: [
         ['rocket', 'Rumo', 'Routine companion: PWA with Web Push, MFA (TOTP) and its own admin panel. 40+ users.', 'projetos#pj-rumo'],
-        ['rocket', 'AlienFinanças', 'Personal finance with AI receipt reading. 40+ users.', 'projetos#pj-alien'],
+        ['rocket', 'Alien', 'Personal finance with AI receipt reading. 40+ users.', 'projetos#pj-alien'],
         ['play', 'Vale do Trevo', '2D game in TypeScript and plain canvas, no engine.', 'projetos#pj-trevo'],
       ],
       numeros: [
-        { alvo: 70, depois: '+', final: '70+', texto: 'people using Rumo and AlienFinanças', ir: 'projetos#pj-rumo, #pj-alien' },
+        { alvo: 70, depois: '+', final: '70+', texto: 'people using Rumo and Alien', ir: 'projetos#pj-rumo, #pj-alien' },
         { alvo: 3, final: '3', texto: 'TypeScript apps live', ir: 'projetos#pj-rumo, #pj-alien, #pj-trevo' },
       ],
-      links: [['Open Rumo', APPS.rumo], ['Open AlienFinanças', APPS.alien], ['Play Vale do Trevo', APPS.trevo]],
+      links: [['Open Rumo', APPS.rumo], ['Open Alien', APPS.alien], ['Play Vale do Trevo', APPS.trevo]],
     },
     sb: {
       desc: 'Auth with MFA and Row Level Security in my own apps.',
       categorias: ['Data', 'Auth'],
       uso: [
         ['rocket', 'Rumo', 'Sign-in with MFA (TOTP) through Supabase Auth.', 'projetos#pj-rumo'],
-        ['rocket', 'AlienFinanças', 'Row Level Security: each person only sees their own data.', 'projetos#pj-alien'],
+        ['rocket', 'Alien', 'Row Level Security: each person only sees their own data.', 'projetos#pj-alien'],
       ],
       numeros: [
         { alvo: 70, depois: '+', final: '70+', texto: 'people with accounts in the two apps', ir: 'projetos#pj-rumo, #pj-alien' },
       ],
-      links: [['Open Rumo', APPS.rumo], ['Open AlienFinanças', APPS.alien]],
+      links: [['Open Rumo', APPS.rumo], ['Open Alien', APPS.alien]],
     },
     gh: {
       desc: 'CI/CD with OIDC and a test gate.',
@@ -2556,7 +2556,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
   // para o endereço público; o ponto mostra se ele respondeu agora há pouco.
   const PORTAS = [
     { porta: 5176, app: 'rumo', nome: 'Rumo', cmd: 'npm run dev' },
-    { porta: 5173, app: 'alien', nome: 'AlienFinanças', cmd: 'npm run dev' },
+    { porta: 5173, app: 'alien', nome: 'Alien', cmd: 'npm run dev' },
     { porta: 5175, app: 'trevo', nome: 'Vale do Trevo', cmd: 'npm run dev' },
     { porta: 4200, app: 'notas', nome: 'Notas Fiscais', cmd: 'npm start' },
   ];
@@ -2707,7 +2707,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       desc: L('os produtos, com links', 'the products, with links'),
       fn: () => linhaTerm([
         ['Rumo', L('orientador de rotinas · PWA · 40+ usuários', 'routine companion · PWA · 40+ users'), APPS.rumo],
-        ['AlienFinanças', L('finanças com leitura de nota fiscal por IA · 40+ usuários', 'personal finance with AI receipt reading · 40+ users'), APPS.alien],
+        ['Alien', L('finanças com leitura de nota fiscal por IA · 40+ usuários', 'personal finance with AI receipt reading · 40+ users'), APPS.alien],
         ['Notas Fiscais', L('microsserviços .NET no Azure · 28 testes de integração', '.NET microservices on Azure · 28 integration tests'), APPS.notas],
         ['Vale do Trevo', L('jogo 2D em canvas puro', '2D game in plain canvas'), APPS.trevo],
       ].map(([n, dsc, url]) => (estreito()
