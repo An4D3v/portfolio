@@ -20,6 +20,7 @@ const ESSENCIAL = [
   '/assets/previas/alien.webp',
   '/assets/previas/notas.webp',
   '/assets/previas/trevo.webp',
+  '/assets/previas/zootropo.webp',
   '/assets/icones/icone-192.png',
 ];
 

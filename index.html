@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://rumo-amber.vercel.app https://financas-app-ruby.vercel.app https://vale-do-trevo.vercel.app https://notas-fiscais-ana.vercel.app https://cqmyktazswdwimuivgyp.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://rumo-amber.vercel.app https://financas-app-ruby.vercel.app https://vale-do-trevo.vercel.app https://notas-fiscais-ana.vercel.app https://zootropo.vercel.app https://cqmyktazswdwimuivgyp.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>Ana Neves · Software Developer</title>
 <meta name="description" data-en-content="Ana Neves — software developer in São Paulo: backend, data and AI in production. A portfolio that is a code editor: open the tabs to see live projects, experience, stack and contact." content="Ana Neves — desenvolvedora de software em São Paulo: backend, dados e IA em produção. Um portfólio que é um editor de código: abra as abas para ver projetos no ar, experiência, stack e contato.">
 <meta name="author" content="Ana Neves">
@@ -322,7 +322,7 @@
             <button class="painel-aba" type="button" role="tab" id="pa-saida" data-painel="saida" aria-selected="false" aria-controls="painel-corpo" data-en="Output">Saída</button>
             <button class="painel-aba" type="button" role="tab" id="pa-depuracao" data-painel="depuracao" aria-selected="false" aria-controls="painel-corpo" data-en="Debug Console">Console de Depuração</button>
             <button class="painel-aba" type="button" role="tab" id="pa-terminal" data-painel="terminal" aria-selected="true" aria-controls="painel-corpo">Terminal</button>
-            <button class="painel-aba" type="button" role="tab" id="pa-portas" data-painel="portas" aria-selected="false" aria-controls="painel-outro"><span data-en="Ports">Portas</span><span class="painel-selo" aria-label="4 portas encaminhadas" data-en-aria-label="4 forwarded ports">4</span></button>
+            <button class="painel-aba" type="button" role="tab" id="pa-portas" data-painel="portas" aria-selected="false" aria-controls="painel-outro"><span data-en="Ports">Portas</span><span class="painel-selo" aria-label="5 portas encaminhadas" data-en-aria-label="5 forwarded ports">5</span></button>
           </div>
           <div class="painel-acoes">
             <span class="term-perfil so-terminal" title="pwsh"><svg class="ic" aria-hidden="true"><use href="#i-terminal"/></svg>pwsh</span>
@@ -504,6 +504,11 @@
               <a class="ext-produto-link" href="https://notas-fiscais-ana.vercel.app" target="_blank" rel="noopener">abrir o app<span class="ext-sr"> Notas Fiscais (abre em nova aba)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
             </li>
             <li class="ext-produto">
+              <strong class="ext-produto-nome">Zootropo</strong>
+              <span class="ext-produto-desc">papel de parede animado no Android (vídeo ou GIF em loop)</span>
+              <a class="ext-produto-link" href="https://zootropo.vercel.app" target="_blank" rel="noopener">abrir o site<span class="ext-sr"> do Zootropo (abre em nova aba)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
+            </li>
+            <li class="ext-produto">
               <strong class="ext-produto-nome">Vale do Trevo</strong>
               <span class="ext-produto-desc">jogo 2D em canvas puro, capítulo 1 jogável</span>
               <a class="ext-produto-link" href="https://vale-do-trevo.vercel.app" target="_blank" rel="noopener">jogar<span class="ext-sr"> Vale do Trevo (abre em nova aba)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
@@ -641,7 +646,7 @@
         <section class="ext-versao">
           <h3 class="ext-md-h2"><span class="ext-versao-tag">[paralelo]</span> — produtos próprios</h3>
           <ul class="ext-md-lista">
-            <li>Mantenho três produtos próprios no ar; é onde experimento primeiro o que depois aplico no trabalho: PWA, Web Push, MFA, RLS, leitura de documento por IA.</li>
+            <li>Mantenho quatro produtos próprios no ar; é onde experimento primeiro o que depois aplico no trabalho: PWA, Web Push, MFA, RLS, leitura de documento por IA e app Android nativo.</li>
           </ul>
         </section>
         <section class="ext-versao">
@@ -694,6 +699,17 @@
         <p class="cartao-stack"><code>C#</code> <code>.NET 8</code> <code>Angular</code> <code>EF Core</code></p>
         <p class="cartao-links"><a href="https://notas-fiscais-ana.vercel.app" target="_blank" rel="noopener">Abrir o app<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a> <a href="https://github.com/An4D3v/notas-fiscais-microsservicos" target="_blank" rel="noopener">Ver o código<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a></p>
       </section>
+      <section class="cartao" aria-labelledby="pj-zootropo">
+        <video class="cartao-previa" src="assets/previas/zootropo.mp4" poster="assets/previas/zootropo.webp" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
+        <div class="cartao-topo">
+          <h2 id="pj-zootropo">Zootropo</h2>
+          <span class="vivo" data-status="zootropo"><span class="vivo-ponto"></span><span class="vivo-txt">verificando…</span></span>
+        </div>
+        <p class="cartao-tipo">app Android · em produção</p>
+        <p>App Android nativo que transforma um vídeo ou GIF da galeria em papel de parede animado, em loop. Tem mini editor, e o APK assinado sai pelo próprio site, verificado no VirusTotal.</p>
+        <p class="cartao-stack"><code>Kotlin</code> <code>Jetpack Compose</code> <code>Media3</code> <code>Vercel</code></p>
+        <p class="cartao-links"><a href="https://zootropo.vercel.app" target="_blank" rel="noopener">Abrir o site<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a></p>
+      </section>
       <section class="cartao" aria-labelledby="pj-trevo">
         <video class="cartao-previa" src="assets/previas/trevo.mp4" poster="assets/previas/trevo.webp" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
         <div class="cartao-topo">
@@ -727,7 +743,7 @@
       <li>
         <h3>Produtos próprios</h3>
         <p class="trilha-quando">em paralelo</p>
-        <p>Três produtos no ar fora do expediente. É onde experimento primeiro o que depois aplico no trabalho: PWA, Web Push, MFA, RLS, leitura de documento por IA.</p>
+        <p>Quatro produtos no ar fora do expediente. É onde experimento primeiro o que depois aplico no trabalho: PWA, Web Push, MFA, RLS, leitura de documento por IA e app Android nativo.</p>
       </li>
       <li>
         <h3>Dados · Jusbrasil</h3>
@@ -760,6 +776,7 @@
           <tr><td>cloud</td><td>Azure App Service · Azure SQL · Azure Automation · Key Vault · Application Insights · Entra ID · Microsoft Graph</td></tr>
           <tr><td>dados</td><td>SQL Server · T-SQL · PostgreSQL · Supabase · ETL incremental · reconciliação</td></tr>
           <tr><td>front</td><td>Angular · React · TypeScript · Vite · PWA</td></tr>
+          <tr><td>mobile</td><td>Kotlin · Jetpack Compose · Android (Media3)</td></tr>
           <tr><td>ia</td><td>LLMs em produção · Bot Framework · prompt engineering · medição de acurácia</td></tr>
           <tr><td>automação</td><td>Python · Selenium · runbooks</td></tr>
           <tr><td>devops</td><td>GitHub Actions · OIDC · CI/CD com gate de testes · Vercel · observabilidade</td></tr>
@@ -905,6 +922,11 @@
               <a class="ext-produto-link" href="https://notas-fiscais-ana.vercel.app" target="_blank" rel="noopener">open the app<span class="ext-sr"> Notas Fiscais (opens in a new tab)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
             </li>
             <li class="ext-produto">
+              <strong class="ext-produto-nome">Zootropo</strong>
+              <span class="ext-produto-desc">live wallpaper for Android (video or GIF on loop)</span>
+              <a class="ext-produto-link" href="https://zootropo.vercel.app" target="_blank" rel="noopener">open the site<span class="ext-sr"> of Zootropo (opens in a new tab)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
+            </li>
+            <li class="ext-produto">
               <strong class="ext-produto-nome">Vale do Trevo</strong>
               <span class="ext-produto-desc">2D game in plain canvas, chapter 1 playable</span>
               <a class="ext-produto-link" href="https://vale-do-trevo.vercel.app" target="_blank" rel="noopener">play<span class="ext-sr"> Vale do Trevo (opens in a new tab)</span><svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a>
@@ -1042,7 +1064,7 @@
         <section class="ext-versao">
           <h3 class="ext-md-h2"><span class="ext-versao-tag">[parallel]</span> — own products</h3>
           <ul class="ext-md-lista">
-            <li>I keep three products of my own live; it's where I first try what I later bring to work: PWA, Web Push, MFA, RLS, AI document reading.</li>
+            <li>I keep four products of my own live; it's where I first try what I later bring to work: PWA, Web Push, MFA, RLS, AI document reading and a native Android app.</li>
           </ul>
         </section>
         <section class="ext-versao">
@@ -1095,6 +1117,17 @@
         <p class="cartao-stack"><code>C#</code> <code>.NET 8</code> <code>Angular</code> <code>EF Core</code></p>
         <p class="cartao-links"><a href="https://notas-fiscais-ana.vercel.app" target="_blank" rel="noopener">Open the app<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a> <a href="https://github.com/An4D3v/notas-fiscais-microsservicos" target="_blank" rel="noopener">View the code<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a></p>
       </section>
+      <section class="cartao" aria-labelledby="pj-zootropo">
+        <video class="cartao-previa" src="assets/previas/zootropo.mp4" poster="assets/previas/zootropo.webp" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
+        <div class="cartao-topo">
+          <h2 id="pj-zootropo">Zootropo</h2>
+          <span class="vivo" data-status="zootropo"><span class="vivo-ponto"></span><span class="vivo-txt">checking…</span></span>
+        </div>
+        <p class="cartao-tipo">Android app · in production</p>
+        <p>Native Android app that turns a video or GIF from your gallery into a looping live wallpaper. It has a mini editor, and the signed APK ships from its own site, checked on VirusTotal.</p>
+        <p class="cartao-stack"><code>Kotlin</code> <code>Jetpack Compose</code> <code>Media3</code> <code>Vercel</code></p>
+        <p class="cartao-links"><a href="https://zootropo.vercel.app" target="_blank" rel="noopener">Open the site<svg class="ic" aria-hidden="true"><use href="#i-link-external"/></svg></a></p>
+      </section>
       <section class="cartao" aria-labelledby="pj-trevo">
         <video class="cartao-previa" src="assets/previas/trevo.mp4" poster="assets/previas/trevo.webp" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
         <div class="cartao-topo">
@@ -1128,7 +1161,7 @@
       <li>
         <h3>Own products</h3>
         <p class="trilha-quando">in parallel</p>
-        <p>Three products live, built after hours. It's where I first try what I later bring to work: PWA, Web Push, MFA, RLS, AI document reading.</p>
+        <p>Four products live, built after hours. It's where I first try what I later bring to work: PWA, Web Push, MFA, RLS, AI document reading and a native Android app.</p>
       </li>
       <li>
         <h3>Data · Jusbrasil</h3>
@@ -1161,6 +1194,7 @@
           <tr><td>cloud</td><td>Azure App Service · Azure SQL · Azure Automation · Key Vault · Application Insights · Entra ID · Microsoft Graph</td></tr>
           <tr><td>data</td><td>SQL Server · T-SQL · PostgreSQL · Supabase · incremental ETL · reconciliation</td></tr>
           <tr><td>front</td><td>Angular · React · TypeScript · Vite · PWA</td></tr>
+          <tr><td>mobile</td><td>Kotlin · Jetpack Compose · Android (Media3)</td></tr>
           <tr><td>ai</td><td>LLMs in production · Bot Framework · prompt engineering · accuracy measurement</td></tr>
           <tr><td>automation</td><td>Python · Selenium · runbooks</td></tr>
           <tr><td>devops</td><td>GitHub Actions · OIDC · CI/CD with test gates · Vercel · observability</td></tr>

@@ -94,7 +94,11 @@
     alien: 'https://financas-app-ruby.vercel.app',
     trevo: 'https://vale-do-trevo.vercel.app',
     notas: 'https://notas-fiscais-ana.vercel.app',
+    zootropo: 'https://zootropo.vercel.app',
   };
+  // O site do Zootropo manda Cross-Origin-Resource-Policy: same-origin, que derruba o pedido
+  // no-cors; em modo cors ele responde (Access-Control-Allow-Origin: *).
+  const APPS_CORS = new Set(['zootropo']);
 
   const TEMAS = {
     dracula: { nome: 'Dracula', fundo: '#282a36' },
@@ -149,6 +153,7 @@ que sabe falhar.
 - **Rumo** — orientador de rotinas (PWA, 40+ usuários): https://rumo-amber.vercel.app
 - **Alien** — finanças com leitura de nota fiscal por IA (40+ usuários): https://financas-app-ruby.vercel.app
 - **Notas Fiscais** — microsserviços .NET no Azure, 28 testes: https://notas-fiscais-ana.vercel.app
+- **Zootropo** — papel de parede animado no Android, com o APK pelo próprio site: https://zootropo.vercel.app
 - **Vale do Trevo** — jogo 2D em canvas puro: https://vale-do-trevo.vercel.app
 
 ## Abas deste editor
@@ -200,6 +205,13 @@ export const projetos: Projeto[] = [
     links: { app: 'https://notas-fiscais-ana.vercel.app', codigo: 'https://github.com/An4D3v/notas-fiscais-microsservicos' },
   },
   {
+    nome: 'Zootropo',
+    status: 'em produção',
+    resumo: 'Papel de parede animado no Android: vídeo ou GIF da galeria em loop, com mini editor.',
+    stack: ['Kotlin', 'Jetpack Compose', 'Media3', 'Vercel'],
+    links: { site: 'https://zootropo.vercel.app' },
+  },
+  {
     nome: 'Vale do Trevo',
     status: 'jogável',
     resumo: 'Jogo 2D top-down em canvas puro, sem engine. Arte da minha amiga, código meu.',
@@ -235,7 +247,7 @@ public static class Experiencia
         new("Escritório jurídico, São Paulo", "primeira e única dev",
             "Plataforma do zero: ERP jurídico, robôs de coleta e bots com IA."),
         new("Produtos próprios", "em paralelo",
-            "Três apps no ar: PWA, Web Push, MFA, RLS, leitura de documento por IA."),
+            "Quatro apps no ar: PWA, Web Push, MFA, RLS, leitura de documento por IA e app Android nativo."),
         new("Jusbrasil", "dados",
             "Coleta de dados em escala com crawlers."),
     };
@@ -262,6 +274,7 @@ public static class Experiencia
   ],
   "dados": ["SQL Server", "T-SQL", "PostgreSQL", "Supabase", "ETL incremental", "reconciliação"],
   "front": ["Angular", "React", "TypeScript", "Vite", "PWA"],
+  "mobile": ["Kotlin", "Jetpack Compose", "Media3"],
   "ia": ["LLMs em produção", "Bot Framework", "prompt engineering", "medição de acurácia"],
   "automacao": ["Python", "Selenium", "runbooks"],
   "devops": ["GitHub Actions", "OIDC", "CI/CD com gate de testes", "Vercel", "observabilidade"]
@@ -383,6 +396,7 @@ with tests that know how to fail.
 - **Rumo** — routine companion (PWA, 40+ users): https://rumo-amber.vercel.app
 - **Alien** — personal finance with AI receipt reading (40+ users): https://financas-app-ruby.vercel.app
 - **Notas Fiscais** — .NET microservices on Azure, 28 tests: https://notas-fiscais-ana.vercel.app
+- **Zootropo** — live wallpaper for Android, with the APK on its own site: https://zootropo.vercel.app
 - **Vale do Trevo** — 2D game in plain canvas: https://vale-do-trevo.vercel.app
 
 ## Tabs in this editor
@@ -434,6 +448,13 @@ export const projects: Project[] = [
     links: { app: 'https://notas-fiscais-ana.vercel.app', code: 'https://github.com/An4D3v/notas-fiscais-microsservicos' },
   },
   {
+    name: 'Zootropo',
+    status: 'in production',
+    summary: 'Live wallpaper for Android: a video or GIF from the gallery on loop, with a mini editor.',
+    stack: ['Kotlin', 'Jetpack Compose', 'Media3', 'Vercel'],
+    links: { site: 'https://zootropo.vercel.app' },
+  },
+  {
     name: 'Vale do Trevo',
     status: 'playable',
     summary: 'Top-down 2D game in plain canvas, no engine. Art by my friend, code by me.',
@@ -469,7 +490,7 @@ public static class Experience
         new("Law firm, São Paulo", "first and only developer",
             "Platform built from scratch: legal ERP integration, data-collection robots and AI bots."),
         new("Own products", "in parallel",
-            "Three apps live: PWA, Web Push, MFA, RLS, AI document reading."),
+            "Four apps live: PWA, Web Push, MFA, RLS, AI document reading and a native Android app."),
         new("Jusbrasil", "data",
             "Large-scale data collection with crawlers."),
     };
@@ -496,6 +517,7 @@ public static class Experience
   ],
   "data": ["SQL Server", "T-SQL", "PostgreSQL", "Supabase", "incremental ETL", "reconciliation"],
   "front": ["Angular", "React", "TypeScript", "Vite", "PWA"],
+  "mobile": ["Kotlin", "Jetpack Compose", "Media3"],
   "ai": ["LLMs in production", "Bot Framework", "prompt engineering", "accuracy measurement"],
   "automation": ["Python", "Selenium", "runbooks"],
   "devops": ["GitHub Actions", "OIDC", "CI/CD with test gates", "Vercel", "observability"]
@@ -2232,7 +2254,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       const ctl = 'AbortController' in window ? new AbortController() : null;
       const limite = setTimeout(() => ctl && ctl.abort(), 7000);
       const ini = performance.now();
-      fetch(APPS[chave], { mode: 'no-cors', cache: 'no-store', signal: ctl ? ctl.signal : undefined })
+      fetch(APPS[chave], { mode: APPS_CORS.has(chave) ? 'cors' : 'no-cors', cache: 'no-store', signal: ctl ? ctl.signal : undefined })
         .then(() => {
           estado.statusApps[chave] = { estado: 'no-ar', ms: Math.round(performance.now() - ini) };
           registrar(`${APPS[chave].replace('https://', '')} ${L('respondeu em', 'responded in')} ${estado.statusApps[chave].ms} ms`);
@@ -2510,7 +2532,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     if (depurando) return;
     const passos = [
       ['learn()', L('C#, .NET 8, Azure, LLMs em produção', 'C#, .NET 8, Azure, LLMs in production')],
-      ['build()', L('3 apps no ar · 7+ cargas incrementais · bots com IA', '3 apps live · 7+ incremental loads · AI bots')],
+      ['build()', L('4 apps no ar · 7+ cargas incrementais · bots com IA', '4 apps live · 7+ incremental loads · AI bots')],
       ['ship()', L('em produção, com usuários reais', 'in production, with real users')],
     ];
     logDepuracao.length = 0;
@@ -2559,6 +2581,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     { porta: 5173, app: 'alien', nome: 'Alien', cmd: 'npm run dev' },
     { porta: 5175, app: 'trevo', nome: 'Vale do Trevo', cmd: 'npm run dev' },
     { porta: 4200, app: 'notas', nome: 'Notas Fiscais', cmd: 'npm start' },
+    { porta: 5199, app: 'zootropo', nome: 'Zootropo', cmd: 'node servidor-site.mjs' },
   ];
   function htmlPortas() {
     return `<table class="portas"><thead><tr><th>${L('Porta', 'Port')}</th><th>${L('Endereço Encaminhado', 'Forwarded Address')}</th><th>${L('Processo em Execução', 'Running Process')}</th><th>${L('Visibilidade', 'Visibility')}</th><th>${L('Origem', 'Origin')}</th></tr></thead><tbody>`
@@ -2699,8 +2722,8 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     [CMD.sobre]: {
       desc: L('resumo em três linhas', 'summary in three lines'),
       fn: () => linhaTerm(L(
-        'Primeira e única dev de um escritório jurídico: pipelines com 4,5M+ registros,\nbots com IA no Teams e classificador LLM em produção.\nFora do expediente: 3 apps próprios no ar, com 70+ pessoas usando.',
-        'First and only developer at a law firm: pipelines with 4.5M+ records,\nAI bots in Teams and an LLM classifier in production.\nAfter hours: 3 apps of my own live, with 70+ people using them.',
+        'Primeira e única dev de um escritório jurídico: pipelines com 4,5M+ registros,\nbots com IA no Teams e classificador LLM em produção.\nFora do expediente: 4 apps próprios no ar, com 70+ pessoas usando.',
+        'First and only developer at a law firm: pipelines with 4.5M+ records,\nAI bots in Teams and an LLM classifier in production.\nAfter hours: 4 apps of my own live, with 70+ people using them.',
       )),
     },
     [CMD.projetos]: {
@@ -2709,6 +2732,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
         ['Rumo', L('orientador de rotinas · PWA · 40+ usuários', 'routine companion · PWA · 40+ users'), APPS.rumo],
         ['Alien', L('finanças com leitura de nota fiscal por IA · 40+ usuários', 'personal finance with AI receipt reading · 40+ users'), APPS.alien],
         ['Notas Fiscais', L('microsserviços .NET no Azure · 28 testes de integração', '.NET microservices on Azure · 28 integration tests'), APPS.notas],
+        ['Zootropo', L('papel de parede animado no Android · APK pelo site', 'live wallpaper for Android · APK from its own site'), APPS.zootropo],
         ['Vale do Trevo', L('jogo 2D em canvas puro', '2D game in plain canvas'), APPS.trevo],
       ].map(([n, dsc, url]) => (estreito()
         ? `<span class="term-dest">${esc(n)}</span>\n  ${esc(dsc)}\n  ${linkar(esc(url))}`
@@ -2718,10 +2742,10 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       desc: L('trajetória e bastidores', 'career path and behind the scenes'),
       fn: () => {
         linhaTerm(estreito()
-          ? L('hoje: primeira e única dev · escritório jurídico, São Paulo\nem paralelo: 3 produtos próprios no ar\ninício: dados · Jusbrasil',
-            'today: first and only developer · law firm, São Paulo\nin parallel: 3 products of my own live\nstart: data · Jusbrasil')
-          : L('hoje      primeira e única dev · escritório jurídico, São Paulo\nparalelo  3 produtos próprios no ar\ninício    dados · Jusbrasil',
-            'today     first and only developer · law firm, São Paulo\nparallel  3 products of my own live\nstart     data · Jusbrasil'));
+          ? L('hoje: primeira e única dev · escritório jurídico, São Paulo\nem paralelo: 4 produtos próprios no ar\ninício: dados · Jusbrasil',
+            'today: first and only developer · law firm, São Paulo\nin parallel: 4 products of my own live\nstart: data · Jusbrasil')
+          : L('hoje      primeira e única dev · escritório jurídico, São Paulo\nparalelo  4 produtos próprios no ar\ninício    dados · Jusbrasil',
+            'today     first and only developer · law firm, São Paulo\nparallel  4 products of my own live\nstart     data · Jusbrasil'));
         linhaTerm(`${L('detalhes', 'details')}: ${linkArq('experiencia')}`, 'term-dim');
       },
     },
