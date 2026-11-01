@@ -144,7 +144,7 @@ que sabe falhar.
 ## Números
 
 - **4,5M+** registros processados pelos pipelines que mantenho
-- **70+** pessoas usando os apps que criei e opero
+- **100+** pessoas usando os apps que criei e opero
 - **28** testes de integração contra SQL Server real, em microsserviços .NET
 - **−91%** de erros de cota de API com orquestração inteligente de cargas
 
@@ -387,7 +387,7 @@ with tests that know how to fail.
 ## Numbers
 
 - **4.5M+** records processed by the pipelines I maintain
-- **70+** people using the apps I built and run
+- **100+** people using the apps I built and run
 - **28** integration tests against a real SQL Server, in .NET microservices
 - **−91%** API quota errors with smart load orchestration
 
@@ -751,7 +751,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
         ['play', 'Vale do Trevo', 'Jogo 2D em TypeScript e canvas puro, sem engine.', 'projetos#pj-trevo'],
       ],
       numeros: [
-        { alvo: 70, depois: '+', final: '70+', texto: 'pessoas usando o Rumo e o Alien', ir: 'projetos#pj-rumo, #pj-alien' },
+        { alvo: 100, depois: '+', final: '100+', texto: 'pessoas usando o Rumo e o Alien', ir: 'projetos#pj-rumo, #pj-alien' },
         { alvo: 3, final: '3', texto: 'apps em TypeScript no ar', ir: 'projetos#pj-rumo, #pj-alien, #pj-trevo' },
       ],
       recursos: ['React', 'TypeScript', 'Vite', 'PWA', 'Web Push', 'Canvas'],
@@ -766,7 +766,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
         ['rocket', 'Alien', 'Row Level Security: cada pessoa só enxerga os próprios dados.', 'projetos#pj-alien'],
       ],
       numeros: [
-        { alvo: 70, depois: '+', final: '70+', texto: 'pessoas com conta nos dois apps', ir: 'projetos#pj-rumo, #pj-alien' },
+        { alvo: 100, depois: '+', final: '100+', texto: 'pessoas com conta nos dois apps', ir: 'projetos#pj-rumo, #pj-alien' },
       ],
       recursos: ['Supabase Auth', 'MFA (TOTP)', 'Row Level Security', 'PostgreSQL'],
       links: [['Abrir o Rumo', 'https://rumo-amber.vercel.app'], ['Abrir o Alien', 'https://financas-app-ruby.vercel.app']],
@@ -886,7 +886,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
         ['play', 'Vale do Trevo', '2D game in TypeScript and plain canvas, no engine.', 'projetos#pj-trevo'],
       ],
       numeros: [
-        { alvo: 70, depois: '+', final: '70+', texto: 'people using Rumo and Alien', ir: 'projetos#pj-rumo, #pj-alien' },
+        { alvo: 100, depois: '+', final: '100+', texto: 'people using Rumo and Alien', ir: 'projetos#pj-rumo, #pj-alien' },
         { alvo: 3, final: '3', texto: 'TypeScript apps live', ir: 'projetos#pj-rumo, #pj-alien, #pj-trevo' },
       ],
       links: [['Open Rumo', APPS.rumo], ['Open Alien', APPS.alien], ['Play Vale do Trevo', APPS.trevo]],
@@ -899,7 +899,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
         ['rocket', 'Alien', 'Row Level Security: each person only sees their own data.', 'projetos#pj-alien'],
       ],
       numeros: [
-        { alvo: 70, depois: '+', final: '70+', texto: 'people with accounts in the two apps', ir: 'projetos#pj-rumo, #pj-alien' },
+        { alvo: 100, depois: '+', final: '100+', texto: 'people with accounts in the two apps', ir: 'projetos#pj-rumo, #pj-alien' },
       ],
       links: [['Open Rumo', APPS.rumo], ['Open Alien', APPS.alien]],
     },
@@ -2722,8 +2722,8 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
     [CMD.sobre]: {
       desc: L('resumo em três linhas', 'summary in three lines'),
       fn: () => linhaTerm(L(
-        'Primeira e única dev de um escritório jurídico: pipelines com 4,5M+ registros,\nbots com IA no Teams e classificador LLM em produção.\nFora do expediente: 4 apps próprios no ar, com 70+ pessoas usando.',
-        'First and only developer at a law firm: pipelines with 4.5M+ records,\nAI bots in Teams and an LLM classifier in production.\nAfter hours: 4 apps of my own live, with 70+ people using them.',
+        'Primeira e única dev de um escritório jurídico: pipelines com 4,5M+ registros,\nbots com IA no Teams e classificador LLM em produção.\nFora do expediente: 4 apps próprios no ar, com 100+ pessoas usando.',
+        'First and only developer at a law firm: pipelines with 4.5M+ records,\nAI bots in Teams and an LLM classifier in production.\nAfter hours: 4 apps of my own live, with 100+ people using them.',
       )),
     },
     [CMD.projetos]: {
