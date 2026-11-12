@@ -151,7 +151,7 @@ que sabe falhar.
 ## Produtos no ar
 
 - **Rumo** — orientador de rotinas (PWA, 60+ usuários): https://rumo-amber.vercel.app
-- **Alien** — finanças com leitura de nota fiscal por IA (80+ usuários): https://financas-app-ruby.vercel.app
+- **Alien** — finanças com leitura de nota fiscal por IA (90+ usuários): https://financas-app-ruby.vercel.app
 - **Notas Fiscais** — microsserviços .NET no Azure, 28 testes: https://notas-fiscais-ana.vercel.app
 - **Zootropo** — papel de parede animado no Android, com o APK pelo próprio site: https://zootropo.vercel.app
 - **Vale do Trevo** — jogo 2D em canvas puro: https://vale-do-trevo.vercel.app
@@ -192,7 +192,7 @@ export const projetos: Projeto[] = [
     nome: 'Alien',
     status: 'em produção',
     resumo: 'Finanças pessoais: a foto do cupom fiscal vira itens categorizados por IA.',
-    usuarios: '80+',
+    usuarios: '90+',
     stack: ['React', 'TypeScript', 'Supabase', 'IA (LLM)'],
     links: { app: 'https://financas-app-ruby.vercel.app' },
   },
@@ -299,7 +299,7 @@ export function conversar(): void {
   "name": "software-developer",
   "displayName": "Ana Neves",
   "description": "Software Developer com produtos próprios no ar.",
-  "version": "2026.10.0",
+  "version": "2026.11.0",
   "publisher": "ana-neves",
   "author": "Ana Neves <ana-neves98@outlook.com>",
   "homepage": "https://github.com/An4D3v",
@@ -394,7 +394,7 @@ with tests that know how to fail.
 ## Live products
 
 - **Rumo** — routine companion (PWA, 60+ users): https://rumo-amber.vercel.app
-- **Alien** — personal finance with AI receipt reading (80+ users): https://financas-app-ruby.vercel.app
+- **Alien** — personal finance with AI receipt reading (90+ users): https://financas-app-ruby.vercel.app
 - **Notas Fiscais** — .NET microservices on Azure, 28 tests: https://notas-fiscais-ana.vercel.app
 - **Zootropo** — live wallpaper for Android, with the APK on its own site: https://zootropo.vercel.app
 - **Vale do Trevo** — 2D game in plain canvas: https://vale-do-trevo.vercel.app
@@ -435,7 +435,7 @@ export const projects: Project[] = [
     name: 'Alien',
     status: 'in production',
     summary: 'Personal finance: a photo of the receipt becomes AI-categorized items.',
-    users: '80+',
+    users: '90+',
     stack: ['React', 'TypeScript', 'Supabase', 'AI (LLM)'],
     links: { app: 'https://financas-app-ruby.vercel.app' },
   },
@@ -542,7 +542,7 @@ export function talk(): void {
   "name": "software-developer",
   "displayName": "Ana Neves",
   "description": "Software Developer with her own products live.",
-  "version": "2026.10.0",
+  "version": "2026.11.0",
   "publisher": "ana-neves",
   "author": "Ana Neves <ana-neves98@outlook.com>",
   "homepage": "https://github.com/An4D3v",
@@ -747,7 +747,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       categorias: ['Front-end'],
       uso: [
         ['rocket', 'Rumo', 'Orientador de rotinas: PWA com Web Push, MFA (TOTP) e painel admin próprio. 60+ usuários.', 'projetos#pj-rumo'],
-        ['rocket', 'Alien', 'Finanças pessoais com leitura de cupom fiscal por IA. 80+ usuários.', 'projetos#pj-alien'],
+        ['rocket', 'Alien', 'Finanças pessoais com leitura de cupom fiscal por IA. 90+ usuários.', 'projetos#pj-alien'],
         ['play', 'Vale do Trevo', 'Jogo 2D em TypeScript e canvas puro, sem engine.', 'projetos#pj-trevo'],
       ],
       numeros: [
@@ -882,7 +882,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       categorias: ['Front end'],
       uso: [
         ['rocket', 'Rumo', 'Routine companion: PWA with Web Push, MFA (TOTP) and its own admin panel. 60+ users.', 'projetos#pj-rumo'],
-        ['rocket', 'Alien', 'Personal finance with AI receipt reading. 80+ users.', 'projetos#pj-alien'],
+        ['rocket', 'Alien', 'Personal finance with AI receipt reading. 90+ users.', 'projetos#pj-alien'],
         ['play', 'Vale do Trevo', '2D game in TypeScript and plain canvas, no engine.', 'projetos#pj-trevo'],
       ],
       numeros: [
@@ -2730,7 +2730,7 @@ They work like in VS Code. On a Mac, swap \`Ctrl\` for \`Cmd\`.
       desc: L('os produtos, com links', 'the products, with links'),
       fn: () => linhaTerm([
         ['Rumo', L('orientador de rotinas · PWA · 60+ usuários', 'routine companion · PWA · 60+ users'), APPS.rumo],
-        ['Alien', L('finanças com leitura de nota fiscal por IA · 80+ usuários', 'personal finance with AI receipt reading · 80+ users'), APPS.alien],
+        ['Alien', L('finanças com leitura de nota fiscal por IA · 90+ usuários', 'personal finance with AI receipt reading · 90+ users'), APPS.alien],
         ['Notas Fiscais', L('microsserviços .NET no Azure · 28 testes de integração', '.NET microservices on Azure · 28 integration tests'), APPS.notas],
         ['Zootropo', L('papel de parede animado no Android · APK pelo site', 'live wallpaper for Android · APK from its own site'), APPS.zootropo],
         ['Vale do Trevo', L('jogo 2D em canvas puro', '2D game in plain canvas'), APPS.trevo],
